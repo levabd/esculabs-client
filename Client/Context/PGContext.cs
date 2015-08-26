@@ -5,19 +5,19 @@ namespace Client
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
 
-    public partial class PatientContext : DbContext
+    public partial class PgContext : DbContext
     {
-        public PatientContext()
-            : base("name=PatientContext")
+        public PgContext()
+            : base("name=pgContext")
         {
         }
 
-        public virtual DbSet<Patient> patients { get; set; }
+        public virtual DbSet<Patient> Patients { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Patient>()
-                .Property(e => e.iin)
+                .Property(e => e.IIN)
                 .IsFixedLength();
         }
     }

@@ -9,6 +9,7 @@ namespace Client
     using MongoDB.Bson;
     using MongoDB.Bson.Serialization.Attributes;
     using MongoDB.Driver;
+    using MongoRepository;
 
     public enum ExamineType
     {
@@ -17,11 +18,12 @@ namespace Client
     };
 
     [BsonIgnoreExtraElements]
-    public partial class Examine : MongoEntity
+    [CollectionName("examines")]
+    public partial class Examine : Entity
     {
         public Examine()
         {
-           // Params = new List<string>();
+            Params = new List<string>();
         }
 
         [BsonElement("patient_id")]
@@ -35,6 +37,9 @@ namespace Client
 
         [BsonElement("is_opened")]
         public bool Opened { get; set; }
+
+        [BsonElement("phibrosis_stage")]
+        public string PhibrosisStage { get; set; }
 
         [BsonElement("created_at")]
         public DateTime CreatedAt { get; set; }

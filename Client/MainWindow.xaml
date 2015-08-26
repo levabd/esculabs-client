@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Client"
         mc:Ignorable="d"
         Title="MainWindow" Height="424.853" Width="900.49" Loaded="Window_Loaded">
-    <Grid>
+    <Grid Margin="0">
         <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="350"/>
         <TextBox x:Name="textBox_Copy" HorizontalAlignment="Left" Height="23" Margin="10,38,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="350"/>
         <Button x:Name="button1" Content="Button" HorizontalAlignment="Left" Margin="365,10,0,0" VerticalAlignment="Top" Width="33" Height="23"/>
@@ -16,5 +16,10 @@
             <Button x:Name="button_Copy" Content="Button" HorizontalAlignment="Center" Margin="90,0,0,0" VerticalAlignment="Top" Width="88" Height="51"/>
             <Button x:Name="button_Copy1" Content="Button" HorizontalAlignment="Center" Margin="180,0,0,0" VerticalAlignment="Top" Width="88" Height="51"/>
         </Canvas>
+        <DataGrid x:Name="patientsGrid" Margin="0,68,0,0">
+            <DataGrid.BindingGroup>
+                <BindingGroup/>
+            </DataGrid.BindingGroup>
+        </DataGrid>
     </Grid>
 </Window>

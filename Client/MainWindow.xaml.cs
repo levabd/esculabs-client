@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace Client
 {
     using MongoDB.Bson;
@@ -20,6 +21,8 @@ namespace Client
     using MongoDB.Driver.Builders;
     using MongoDB.Driver.GridFS;
     using MongoDB.Driver.Linq;
+    using MongoRepository;
+    using System.Data.Entity;
 
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -33,27 +36,27 @@ namespace Client
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            //// Warning: The following code is an example without the appropriate
-            //// Exception handling
-            var connectionString = "mongodb://localhost";
+            MongoRepository<Examine> examines = new MongoRepository<Examine>();
 
-            //// Get a thread-safe client object by using a connection string
-            var mongoClient = new MongoClient(connectionString);
+            List<Patient> patients = new PgContext().Patients.OrderByDescending(p => p.Id).ToList();       
+            List<int> patientsIds = patients.Select(p => p.Id).ToList();                        
+            List<Examine> examinesPool = examines.Where(ex => patientsIds.Contains(ex.PatientId))
+                .OrderByDescending(ex => ex.CreatedAt)
+                .ToList();
 
-            //// Get a reference to a server object from the Mongo client object
-            var mongoServer = mongoClient.GetServer();
+            List<TablePatient> tablePatients = new List<TablePatient>();
+            foreach (Patient patient in patients)
+            {
+                var patientExamines = examinesPool.Where(ex => ex.PatientId == patient.Id).ToList();
 
-            //// Get a reference to the "retrogames" database object from the Mongo server object
-            var databaseName = "balder";
-            var db = mongoServer.GetDatabase(databaseName);
+                if (patientExamines.Any())
+                {
+                    var examine = patientExamines.First();
+                    var tp = new TablePatient(patient, examine);
 
-            //// Get a reference to the "games" collection object from the Mongo database object
-            var games = db.GetCollection<Examine>("examines");
-
-            var all = games.FindAll();
-            Examine examine = all.First();
-            
-            MessageBox.Show(examine.CreatedAt.ToString());
+                    tablePatients.Add(tp);
+                }
+            }
         }
     }
 }
