@@ -41,6 +41,12 @@ namespace Client
         [BsonElement("phibrosis_stage")]
         public string PhibrosisStage { get; set; }
 
+        [BsonElement("local_status")]
+        public string LocalStatus { get; set; }
+
+        [BsonElement("expert_status")]
+        public string ExpertStatus { get; set; }
+
         [BsonElement("created_at")]
         public DateTime CreatedAt { get; set; }
 

@@ -117,6 +117,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\TablePatient.cs" />
+    <Compile Include="Repo\IRepository.cs" />
+    <Compile Include="Repo\PatientsRepo.cs" />
+    <Compile Include="StatusBackgroundConverter.cs" />
+    <Compile Include="StatusTextConverter.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
