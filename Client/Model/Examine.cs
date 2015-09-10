@@ -23,7 +23,7 @@ namespace Client
     {
         public Examine()
         {
-            Params = new List<string>();
+            Params = new List<object>();
         }
 
         [BsonElement("patient_id")]
@@ -33,7 +33,7 @@ namespace Client
         public int PhysicianId { get; set; }
 
         [BsonElement("type")]
-        public ExamineType ReleaseDate { get; set; }
+        public ExamineType Type { get; set; }
 
         [BsonElement("is_opened")]
         public bool Opened { get; set; }
@@ -48,9 +48,9 @@ namespace Client
         public string ExpertStatus { get; set; }
 
         [BsonElement("created_at")]
-        public DateTime CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; }
 
         [BsonElement("params")]
-        public List<string> Params { get; set; }
+        public List<object> Params { get; set; }
     }
 }

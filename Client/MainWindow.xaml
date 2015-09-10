@@ -5,23 +5,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Client"
         mc:Ignorable="d"
-        Title="Balder" Height="768" Width="1024" Loaded="Window_Loaded" HorizontalAlignment="Center" VerticalAlignment="Center" WindowStartupLocation="CenterScreen">
+        Title="Balder" Height="768" Width="1024" Loaded="Window_Loaded" HorizontalAlignment="Center" VerticalAlignment="Center" WindowStartupLocation="CenterScreen" MinWidth="1024">
     <Window.Resources>
         <local:StatusBackgroundConverter x:Key="StatusBackgroundConverter" />
         <local:StatusTextConverter x:Key="StatusTextConverter" />
     </Window.Resources>
     <Grid Margin="0">
-        <TextBox x:Name="nameFilterTextBox" GotFocus="nameFilterTextBox_GotFocus" LostFocus="nameFilterTextBox_LostFocus" TextChanged="nameFilterTextBox_TextChanged" HorizontalAlignment="Left" Height="26" Margin="10,8,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="350" IsEnabled="False"/>
-        <DatePicker x:Name="dateFilterDatePicker" Loaded="dateFilterDatePicker_Loaded"  SelectedDateChanged="dateFilterDatePicker_SelectedDateChanged" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top" Width="350" Height="26" FirstDayOfWeek="Monday" IsEnabled="False">
-        </DatePicker>        
-        <Button x:Name="clearNameFilterButton" Click="clearNameFilterButton_Click" Content="Очистить" HorizontalAlignment="Left" Margin="365,8,0,0" VerticalAlignment="Top" Width="74" Height="26" IsEnabled="False"/>
-        <Button x:Name="clearDateFilterButton" Click="clearDateFilterButton_Click" Content="Очистить" HorizontalAlignment="Left" Margin="365,38,0,0" VerticalAlignment="Top" Width="74" Height="26" IsEnabled="False"/>
-        <Canvas HorizontalAlignment="Right" Height="51" Margin="442,8,2,0" VerticalAlignment="Top" Width="268">
-            <Button x:Name="button" Content="Button" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" Width="88" Height="51"/>
-            <Button x:Name="button_Copy" Content="Button" HorizontalAlignment="Center" Margin="90,0,0,0" VerticalAlignment="Top" Width="88" Height="51"/>
-            <Button x:Name="button_Copy1" Content="Button" HorizontalAlignment="Center" Margin="180,0,0,0" VerticalAlignment="Top" Width="88" Height="51"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="89*"/>
+            <ColumnDefinition Width="38*"/>
+        </Grid.ColumnDefinitions>
+        <TextBox x:Name="nameFilter" TextChanged="nameFilter_TextChanged" HorizontalAlignment="Left" Height="26" Margin="260,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="350" IsEnabled="False"/>
+        <Button x:Name="clearNameFilterButton" Click="clearNameFilterButton_Click" Content="Очистить" HorizontalAlignment="Left" Margin="615,10,0,0" VerticalAlignment="Top" Width="74" Height="26" IsEnabled="False"/>
+        <local:BDatePicker x:Name="fromDateFilter" SelectedDateChanged="dateFilter_SelectedDateChanged" HorizontalAlignment="Left" Margin="292,41,0,0" VerticalAlignment="Top" Width="130" Height="26" FirstDayOfWeek="Monday" IsEnabled="False" />
+        <local:BDatePicker x:Name="toDateFilter" SelectedDateChanged="dateFilter_SelectedDateChanged" HorizontalAlignment="Left" Margin="480,41,0,0" VerticalAlignment="Top" Width="130" Height="26" FirstDayOfWeek="Monday" IsEnabled="False"/>
+        <Button x:Name="clearDateFilterButton" Click="clearDateFilterButton_Click" Content="Очистить" HorizontalAlignment="Left" Margin="615,41,0,0" VerticalAlignment="Top" Width="74" Height="26" IsEnabled="False"/>
+        <Canvas HorizontalAlignment="Right" Height="56" Margin="0,10,2,0" VerticalAlignment="Top" Width="300" Grid.Column="1">
+            <Button x:Name="newPatientBtn" Content="Новый пациент" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" Width="120" Height="56" Click="newPatientBtn_Click"/>
+            <Button x:Name="button_Copy" Content="Button" HorizontalAlignment="Center" Width="88" VerticalAlignment="Top" Height="56" Canvas.Left="122"/>
+            <Button x:Name="button_Copy1" Content="Button" HorizontalAlignment="Center" VerticalAlignment="Top" Width="88" Height="56" Canvas.Left="212"/>
         </Canvas>
-        <DataGrid x:Name="patientsGrid" Loaded="patientsGrid_Loaded" Margin="0,68,0,0" AutoGenerateColumns="False" HorizontalAlignment="Stretch" HorizontalGridLinesBrush="Gray" VerticalGridLinesBrush="Gray" RowHeight="25" IsReadOnly="True">
+        <DataGrid x:Name="patientsGrid" Loaded="patientsGrid_Loaded" Margin="0,70,0,0" AutoGenerateColumns="False" HorizontalAlignment="Stretch" HorizontalGridLinesBrush="Gray" VerticalGridLinesBrush="Gray" RowHeight="25" IsReadOnly="True" Grid.ColumnSpan="2">
             <DataGrid.DataContext>
                 <local:TablePatient/>
             </DataGrid.DataContext>
@@ -29,7 +33,7 @@
                 <DataGridTextColumn Binding="{Binding Id}" FontWeight="Bold" Header="#" Width="80"/>
                 <DataGridTextColumn Binding="{Binding Name}" Header="Ф. И. О." MinWidth="200" Width="*"/>
                 <DataGridTextColumn Binding="{Binding PhibrosisStage}" Header="Стадия фиброза" CanUserResize="False" Width="100"/>
-                <DataGridTextColumn Binding="{Binding LastExamineDate}" Header="Последнее сканирование" Width="155"/>
+                <DataGridTextColumn Binding="{Binding LastExamineDate}" Header="Последнее сканирование"  Width="155"/>
                 <DataGridTextColumn Header="Проверка системой" Width="140">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="{x:Type TextBlock}">
@@ -60,6 +64,10 @@
                 <BindingGroup/>
             </DataGrid.BindingGroup>
         </DataGrid>
+        <Label x:Name="label" Content="Поиск по Ф.И.О.:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.184,0.269" Height="26" Width="102"/>
+        <Label x:Name="label_Copy" Content="Поиск по дате последнего сканирования:" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.184,0.269" Height="26" Width="239"/>
+        <Label x:Name="label_Copy1" Content="От:" HorizontalAlignment="Left" Margin="260,41,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.184,0.269" Height="26" Width="27"/>
+        <Label x:Name="label_Copy2" Content="До:" HorizontalAlignment="Left" Margin="447,41,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.184,0.269" Height="26" Width="28"/>
 
     </Grid>
 </Window>

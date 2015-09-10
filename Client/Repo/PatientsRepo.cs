@@ -43,13 +43,13 @@ namespace Client.Repo
             {
                 var patientExamines = examinesPool.Where(ex => ex.PatientId == patient.Id).ToList();
 
+                Examine examine = null;
                 if (patientExamines.Any())
                 {
-                    var examine = patientExamines.First();
-                    var tp = new TablePatient(patient, examine);
-
-                    tablePatients.Add(tp);
+                    examine = patientExamines.First();                    
                 }
+
+                tablePatients.Add(new TablePatient(patient, examine));
             }
 
             return tablePatients;

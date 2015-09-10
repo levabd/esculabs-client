@@ -48,7 +48,7 @@ namespace Client
         [Column("iin")]
         public string IIN { get; set; }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Required]
         [Column("gender")]
         public Gender Gender { get; set; }
     }

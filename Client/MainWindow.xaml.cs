@@ -25,14 +25,14 @@ namespace Client
     using System.Data.Entity;
     using System.Windows.Controls.Primitives;
     using Repo;
+    using System.Globalization;
 
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
-        private const string NameSearchText = "Поиск по ФИО...";
-        private const string DateSearchText = "Поиск по дате последнего сканирования...";
+        private const string DatePickerWatermark = "Выберите дату";
 
         private List<TablePatient> patients = new List<TablePatient> { };
 
@@ -44,43 +44,13 @@ namespace Client
         private void RefreshFilter()
         {
             IEnumerable<TablePatient> list = patients;
-            string name = nameFilterTextBox.Text;
-            DateTime? date = dateFilterDatePicker.SelectedDate;
+            string name = nameFilter.Text;
+            DateTime? dateFrom = fromDateFilter.SelectedDate;
+            DateTime? dateTo = toDateFilter.SelectedDate;
 
-            bool applyNameFilter = !string.IsNullOrWhiteSpace(name) && !name.Equals(NameSearchText);
-            bool applyDateFilter = (date != null);
-
-            if (applyNameFilter || applyDateFilter)
-            {
-                list = list.Where(x => (applyNameFilter ? x.Name.Contains(name) : true) &&
-                    (applyDateFilter ? (DateTime.Compare(x.LastExamineDate.Date, date.Value.Date) == 0) : true));
-            }
-
-            /*if (!string.IsNullOrWhiteSpace(name) && !name.Equals(NameSearchText))
-            {
-                list = list.Where(x => x.Name.Contains(name));
-            }*/
-
-            //if (date != null)
-            //{
-            //    list = list.Where(x => x.LastExamineDate.Date == ((DateTime)date).Date) as List<TablePatient>;
-            //}
+            list = list.Where(x => (x.Filter(name, dateFrom, dateTo)));
 
             patientsGrid.ItemsSource = list;
-            //MessageBox.Show('')
-        }
-
-        private void SetDatePickerText(DatePicker dp, string text = null)
-        {
-            DatePickerTextBox datePickerTextBox = FindVisualChild<DatePickerTextBox>(dp);
-            if (datePickerTextBox != null)
-            {
-                ContentControl watermark = datePickerTextBox.Template.FindName("PART_Watermark", datePickerTextBox) as ContentControl;
-                if (watermark != null)
-                {
-                    watermark.Content = text == null ? DateSearchText : text;
-                }
-            }
         }
 
         private void ShowHideDetails(object sender, RoutedEventArgs e)
@@ -97,8 +67,8 @@ namespace Client
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            nameFilterTextBox.Text = NameSearchText;
-            
+            ResetDatePickersWatermark();
+
             patients = PatientsRepo.GridList();
 
             if (patients == null || !patients.Any())
@@ -109,74 +79,46 @@ namespace Client
             patientsGrid.ItemsSource = patients;
         }
 
-        private void nameFilterTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void nameFilter_TextChanged(object sender, TextChangedEventArgs e)
         {
             RefreshFilter();
         }
 
-        private void clearNameFilterButton_Click(object sender, RoutedEventArgs e)
-        {
-            nameFilterTextBox.Text = NameSearchText;
-        }
-
-        private void nameFilterTextBox_GotFocus(object sender, RoutedEventArgs e)
-        {
-            if (nameFilterTextBox.Text.Equals(NameSearchText))
-            { 
-                nameFilterTextBox.Text = "";
-            }
-        }
-
-        private void nameFilterTextBox_LostFocus(object sender, RoutedEventArgs e)
-        {
-            if (nameFilterTextBox.Text.Length == 0)
-            {
-                nameFilterTextBox.Text = NameSearchText;
-            }
-        }
-
-        private void dateFilterDatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        private void dateFilter_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             RefreshFilter();
         }
 
         private void clearDateFilterButton_Click(object sender, RoutedEventArgs e)
         {
-            dateFilterDatePicker.SelectedDate = null;
-            SetDatePickerText(dateFilterDatePicker);
+            fromDateFilter.SelectedDate = null;
+            toDateFilter.SelectedDate = null;
+        }
+
+        private void clearNameFilterButton_Click(object sender, RoutedEventArgs e)
+        {
+            nameFilter.Text = "";
         }
 
         private void patientsGrid_Loaded(object sender, RoutedEventArgs e)
         {
-            nameFilterTextBox.IsEnabled = true;
-            dateFilterDatePicker.IsEnabled = true;
+            nameFilter.IsEnabled = true;
+            fromDateFilter.IsEnabled = true;
+            toDateFilter.IsEnabled = true;
             clearNameFilterButton.IsEnabled = true;
             clearDateFilterButton.IsEnabled = true;
         }
 
-        private void dateFilterDatePicker_Loaded(object sender, RoutedEventArgs e)
+        private void ResetDatePickersWatermark()
         {
-            DatePicker datePicker = sender as DatePicker;
-            if (datePicker != null)
-            {
-                SetDatePickerText(datePicker);
-            }
+            fromDateFilter.SetWatermarkText(DatePickerWatermark);
+            toDateFilter.SetWatermarkText(DatePickerWatermark);
         }
 
-        private T FindVisualChild<T>(DependencyObject depencencyObject) where T : DependencyObject
+        private void newPatientBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (depencencyObject != null)
-            {
-                for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depencencyObject); ++i)
-                {
-                    DependencyObject child = VisualTreeHelper.GetChild(depencencyObject, i);
-                    T result = (child as T) ?? FindVisualChild<T>(child);
-                    if (result != null)
-                        return result;
-                }
-            }
-
-            return null;
+            NewPatientWindow window = new NewPatientWindow();
+            window.ShowDialog();
         }
     }
 }
