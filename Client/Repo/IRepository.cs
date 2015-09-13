@@ -4,12 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Client
+namespace Client.Repo
 {
-    using MongoDB.Bson;
-
-    public interface IMongoEntity
+    interface IRepository
     {
-        ObjectId Id { get; set; }
     }
 }

@@ -1,0 +1,82 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+
+namespace Client
+{
+    using MongoRepository;
+
+    /// <summary>
+    /// Interaction logic for ExaminesWindow.xaml
+    /// </summary>
+    public partial class ExaminesWindow : Window
+    {
+        private Patient patient = null;
+        private List<TableExamine> examines = new List<TableExamine>();
+
+        public ExaminesWindow()
+        {
+            InitializeComponent();
+        }
+
+        public ExaminesWindow(Patient Patient) : this()
+        {
+            patient = Patient;
+
+            if (patient != null)
+            {
+                RefreshExaminesList();
+            }
+        }
+
+        private void RefreshExaminesList()
+        {
+            MongoRepository<Examine> examinesRepo = new MongoRepository<Examine>();
+
+            var patientExamines = examinesRepo.Where(ex => ex.PatientId == patient.Id)
+                .OrderByDescending(ex => ex.CreatedAt).ToList();
+
+            if (examines != null && examines.Any())
+            {
+                examines.Clear();
+            }
+
+            var i = patientExamines.Count;
+            foreach (Examine examine in patientExamines)
+            {
+                examines.Add(new TableExamine(examine, i));
+                --i;
+            }
+        }
+
+        private void newMeasureBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ExamineWindow window = new ExamineWindow();
+            window.ShowDialog();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (patient != null)
+            {
+                nameLabel.Content = string.Format("{0} {1} {2}", patient.LastName, patient.FirstName, patient.MiddleName);
+                examinesGrid.ItemsSource = examines;
+            }
+        }
+
+        private void backBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+    }
+}
