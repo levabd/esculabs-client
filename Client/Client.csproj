@@ -131,6 +131,7 @@
     <Compile Include="MeasurePreview.xaml.cs">
       <DependentUpon>MeasurePreview.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\TableExamine.cs" />
     <Compile Include="Model\TablePatient.cs" />
     <Compile Include="NewPatientWindow.xaml.cs">
       <DependentUpon>NewPatientWindow.xaml</DependentUpon>
@@ -147,7 +148,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="PatientsWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -156,8 +157,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Model\Examine.cs" />
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="PatientsWindow.xaml.cs">
+      <DependentUpon>PatientsWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="MeasurePreview.xaml">

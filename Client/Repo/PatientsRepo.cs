@@ -11,26 +11,74 @@ namespace Client.Repo
 
     class PatientsRepo : IRepository
     {
-        private static ILog log;
+        private static volatile PatientsRepo instance;
+        private static object syncRoot = new Object();
+
+        private ILog log;
+        private PgContext context = null;
+
+        public static PatientsRepo Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    lock (syncRoot)
+                    {
+                        if (instance == null)
+                            instance = new PatientsRepo();
+                    }
+                }
+
+                return instance;
+            }
+        }
 
         public PatientsRepo()
         {
             log = LogManager.GetLogger("PatientsRepo");
+
+            if (context == null)
+            {
+                context = new PgContext();
+            }
         }
 
-        public static List<TablePatient> GridList()
+        public Patient Find(int id)
+        {
+            return context.Patients.Find(id);
+        }
+
+        public Patient Add(Patient patient)
+        {
+            Patient result = null;
+
+            try
+            {
+                result = context.Patients.Add(patient);
+                context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                log.Error(string.Format("Can't insert data to db. Reason: {0}", e.Message));
+                result = null;
+            }
+
+            return result;
+        }
+
+        public List<TablePatient> GetGridList()
         {
             List<Patient> patients = null;
-            List<Examine> examinesPool = null;
+            IOrderedQueryable<Examine> examinesPool = null;
 
             try {
                 MongoRepository<Examine> examines = new MongoRepository<Examine>();
 
-                patients = new PgContext().Patients.OrderByDescending(p => p.Id).ToList();
+                patients = context.Patients.OrderByDescending(p => p.Id).ToList();
                 var patientsIds = patients.Select(p => p.Id).ToList();
                 examinesPool = examines.Where(ex => patientsIds.Contains(ex.PatientId))
-                    .OrderByDescending(ex => ex.CreatedAt)
-                    .ToList();
+                    .OrderByDescending(ex => ex.CreatedAt);
             }
             catch (Exception e)
             {
@@ -41,15 +89,15 @@ namespace Client.Repo
             List<TablePatient> tablePatients = new List<TablePatient>();
             foreach (Patient patient in patients)
             {
-                var patientExamines = examinesPool.Where(ex => ex.PatientId == patient.Id).ToList();
+                Examine examine = examinesPool.Where(ex => ex.PatientId == patient.Id).ToList().FirstOrDefault();
 
-                Examine examine = null;
-                if (patientExamines.Any())
+                ElastoExam lastExamine = null;
+                if (examine != null)
                 {
-                    examine = patientExamines.First();                    
+                    lastExamine = examine.ElastoExams.Last();
                 }
 
-                tablePatients.Add(new TablePatient(patient, examine));
+                tablePatients.Add(new TablePatient(patient, examine, lastExamine));
             }
 
             return tablePatients;

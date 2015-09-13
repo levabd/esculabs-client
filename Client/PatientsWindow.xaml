@@ -1,4 +1,4 @@
-﻿<Window x:Class="Client.MainWindow"
+﻿<Window x:Class="Client.PatientsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -55,7 +55,7 @@
                 <DataGridTemplateColumn Width="120">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Click="ShowHideDetails">Просмотр</Button>
+                            <Button Click="ShowPatientExamines">Просмотр</Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

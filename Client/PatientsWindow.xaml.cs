@@ -28,17 +28,27 @@ namespace Client
     using System.Globalization;
 
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for PatientsWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class PatientsWindow : Window
     {
         private const string DatePickerWatermark = "Выберите дату";
 
         private List<TablePatient> patients = new List<TablePatient> { };
 
-        public MainWindow()
+        public PatientsWindow()
         {
             InitializeComponent();
+        }
+
+        public void RefreshPatientsList()
+        {
+            nameFilter.Text = "";
+            fromDateFilter.SelectedDate = null;
+            toDateFilter.SelectedDate = null;
+
+            patients = PatientsRepo.Instance.GetGridList();
+            patientsGrid.ItemsSource = patients;
         }
 
         private void RefreshFilter()
@@ -52,24 +62,20 @@ namespace Client
 
             patientsGrid.ItemsSource = list;
         }
-
-        private void ShowHideDetails(object sender, RoutedEventArgs e)
+        
+        private void ShowPatientExamines(object sender, RoutedEventArgs e)
         {
-            for (var vis = sender as Visual; vis != null; vis = VisualTreeHelper.GetParent(vis) as Visual)
-                if (vis is DataGridRow)
-                {
-                    var row = (DataGridRow)vis;
-                    row.DetailsVisibility =
-                      row.DetailsVisibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
-                    break;
-                }
+            TablePatient tablePatient = ((FrameworkElement)sender).DataContext as TablePatient;
+
+            ExaminesWindow window = new ExaminesWindow(PatientsRepo.Instance.Find(tablePatient.Id));
+            window.ShowDialog();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             ResetDatePickersWatermark();
 
-            patients = PatientsRepo.GridList();
+            patients = PatientsRepo.Instance.GetGridList();
 
             if (patients == null || !patients.Any())
             {
@@ -117,7 +123,7 @@ namespace Client
 
         private void newPatientBtn_Click(object sender, RoutedEventArgs e)
         {
-            NewPatientWindow window = new NewPatientWindow();
+            NewPatientWindow window = new NewPatientWindow(this);
             window.ShowDialog();
         }
     }

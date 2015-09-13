@@ -11,18 +11,33 @@ namespace Client
     {
         public TablePatient() { }
 
-        public TablePatient(Patient Patient, Examine LastExamine = null)
+        public TablePatient(Patient Patient, Examine LastExamine, ElastoExam LastElastoExamine = null)
         {
             Id = Patient.Id;
             Name = string.Format("{0} {1} {2}", Patient.LastName, Patient.FirstName, Patient.MiddleName);
 
             if (LastExamine != null)
             {
-                PhibrosisStage = LastExamine.PhibrosisStage;
+                PhibrosisStage = LastElastoExamine.PhibrosisStage;
                 LastExamineDate = LastExamine.CreatedAt;
 
-                LocalStatus = LastExamine.LocalStatus;
-                ExpertStatus = LastExamine.ExpertStatus;
+                switch (LastElastoExamine.ExpertStatus)
+                {
+                    case (Client.ExpertStatus.Pending):
+                        ExpertStatus = "pending";
+                        break;
+                    case (Client.ExpertStatus.Confirmed):
+                        ExpertStatus = "confirmed";
+                        break;
+                    case (Client.ExpertStatus.Unconfirmed):
+                        ExpertStatus = "unconfirmed";
+                        break;
+                    default:
+                        ExpertStatus = "pending";
+                        break;
+                }
+
+                LocalStatus = LastElastoExamine.Valid ? "correct" : "incorrect";
             }
         }
 
