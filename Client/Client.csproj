@@ -101,6 +101,9 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
@@ -128,8 +131,12 @@
     <Compile Include="ExamineWindow.xaml.cs">
       <DependentUpon>ExamineWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FIBXParser.cs" />
     <Compile Include="MeasurePreview.xaml.cs">
       <DependentUpon>MeasurePreview.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewImageWindow.xaml.cs">
+      <DependentUpon>ViewImageWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\TableExamine.cs" />
     <Compile Include="Model\TablePatient.cs" />
@@ -145,6 +152,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ExamineWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ViewImageWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

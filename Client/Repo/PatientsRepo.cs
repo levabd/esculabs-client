@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Client.Repo
 {
+    using Model;
     using MongoRepository;
     using Common.Logging;
 
@@ -91,13 +92,7 @@ namespace Client.Repo
             {
                 Examine examine = examinesPool.Where(ex => ex.PatientId == patient.Id).ToList().FirstOrDefault();
 
-                ElastoExam lastExamine = null;
-                if (examine != null)
-                {
-                    lastExamine = examine.ElastoExams.Last();
-                }
-
-                tablePatients.Add(new TablePatient(patient, examine, lastExamine));
+                tablePatients.Add(new TablePatient(patient, examine));
             }
 
             return tablePatients;

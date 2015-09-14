@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Client
+namespace Model
 {
     using MongoDB.Bson;
     using MongoDB.Bson.Serialization.Attributes;
@@ -21,10 +21,10 @@ namespace Client
 
     public enum VerificationStatus
     {
-        Correct,
+        NotCalculated,
         Incorrect,
         Uncertain,
-        NotCalculated
+        Correct
     }
 
     public enum ExpertStatus
@@ -40,7 +40,7 @@ namespace Client
     {
         public Examine()
         {
-            ElastoExams = new List<ElastoExam>();
+            ElastoExam = null;
         }
 
         [BsonElement("patient_id")]
@@ -52,11 +52,11 @@ namespace Client
         [BsonElement("created_at")]
         public DateTime? CreatedAt { get; set; }
 
-        [BsonElement("elasto_exams")]
-        public List<ElastoExam> ElastoExams { get; set; }
+        [BsonElement("elasto_exam")]
+        public ElastoExam ElastoExam { get; set; }
     }
 
-    public partial class ElastoExam : Entity
+    public partial class ElastoExam
     {
         public ElastoExam()
         {
@@ -113,6 +113,9 @@ namespace Client
         [BsonElement("duration")]
         public int Duration { get; set; }
 
+        [BsonElement("whisker_plot")]
+        public string WhiskerPlot { get; set; }
+
         [BsonElement("measures")]
         public List<Measure> Measures { get; set; }
 
@@ -123,31 +126,30 @@ namespace Client
         public ExpertStatus ExpertStatus { get; set; }
     }
 
-    public partial class Measure : Entity
+    public partial class Measure
     {
-        public Measure()
+        public bool IsCorrect
         {
-            Source = new Image();
-            ResultMerged = new Image();
-            ResultModeA = new Image();
-            ResultModeM = new Image();
-            ResultElasto = new Image();
+            get
+            {
+                return (ValidationModeA & ValidationModeM & ValidationElasto) == 0;
+            }
         }
 
         [BsonElement("source")]
-        public Image Source { get; set; }
-
+        public string Source { get; set; }
+                
         [BsonElement("result_merged")]
-        public Image ResultMerged { get; set; }
+        public string ResultMerged { get; set; }
 
         [BsonElement("result_mode_a")]
-        public Image ResultModeA { get; set; }
+        public string ResultModeA { get; set; }
 
         [BsonElement("result_mode_m")]
-        public Image ResultModeM { get; set; }
+        public string ResultModeM { get; set; }
 
         [BsonElement("result_elasto")]
-        public Image ResultElasto { get; set; }
+        public string ResultElasto { get; set; }
 
         [BsonElement("validation_mode_a")]
         public VerificationStatus ValidationModeA { get; set; }
@@ -159,6 +161,6 @@ namespace Client
         public VerificationStatus ValidationElasto { get; set; }
 
         [BsonElement("stiffness")]
-        public double stiffness { get; set; }
+        public double Stiffness { get; set; }
     }
 }

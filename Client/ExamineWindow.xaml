@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:l="clr-namespace:Client"
         mc:Ignorable="d"
-        Title="Окно исследования" Height="630" Width="1110" MinWidth="1105">
+        Title="Окно исследования" Height="630" Width="1110" MinWidth="1105" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" WindowState="Maximized">
     <Grid>
-        <Button x:Name="backBtn" Content="Список обследований" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="159" Height="44"/>
+        <Button x:Name="backBtn" Content="Список обследований" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="159" Height="44" Click="backBtn_Click"/>
         <ScrollViewer Margin="250,65,10,4">
-            <WrapPanel Height="Auto" Width="Auto">
+            <WrapPanel x:Name="measuresPanel" Height="Auto" Width="Auto">
                 <WrapPanel.Resources>
                     <Style TargetType="{x:Type l:MeasurePreview}">
                         <Setter Property="Margin" Value="4,0,0,4" />
@@ -35,37 +35,37 @@
         <WrapPanel Margin="10,65,10,10" Width="235" HorizontalAlignment="Left" VerticalAlignment="Top">
             <Canvas Width="235" Height="30">
                 <TextBlock x:Name="label" Text="Датчик:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Grid.Column="0"/>
-                <TextBlock x:Name="sensorLabel" Text="XL (некорректно)" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Foreground="#FFF54B4B" Grid.Column="0" Height="30" Grid.ColumnSpan="2" Canvas.Left="60" Width="165"/>
+                <TextBlock x:Name="sensorLabel" Text="XL (некорректно)" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Foreground="#FFF54B4B" Grid.Column="0" Height="30" Grid.ColumnSpan="2" Canvas.Left="85" Width="150"/>
             </Canvas>
 
             <Canvas Width="235" Height="30">
                 <TextBlock x:Name="label2" Text="IQR:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Grid.Column="2"/>
-                <TextBlock x:Name="iqrLabel" Text="NaN" HorizontalAlignment="Left"  Margin="40,0,0,0" VerticalAlignment="Top" FontSize="16" Grid.Column="2"/>
+                <TextBlock x:Name="iqrLabel" Text="NaN" HorizontalAlignment="Left"  Margin="0" VerticalAlignment="Top" FontSize="16" Grid.Column="2" Width="150" Canvas.Left="85"/>
             </Canvas>
 
             <Canvas Width="235" Height="30">
                 <TextBlock x:Name="label3" Text="MED:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Grid.Column="3"/>
-                <TextBlock x:Name="medLabel" Text="NaN" HorizontalAlignment="Left" Margin="50,0,0,0" VerticalAlignment="Top" FontSize="16" Grid.Column="3"/>
+                <TextBlock x:Name="medLabel" Text="NaN" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Top" FontSize="16" Grid.Column="3" Width="150" Canvas.Left="85"/>
             </Canvas>
 
             <Canvas Width="235" Height="30">
                 <TextBlock x:Name="label4" Text="IQR/MED:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Grid.Column="4"/>
-                <TextBlock x:Name="iqrMedLabel" Text="50% (некорректно)" HorizontalAlignment="Left" Margin="80,0,0,0" VerticalAlignment="Top" FontSize="16" Foreground="#FFF54B4B" Grid.Column="4"/>
+                <TextBlock x:Name="iqrMedLabel" Text="50% (некорректно)" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Top" FontSize="16" Foreground="#FFF54B4B" Grid.Column="4" Width="150" Canvas.Left="85"/>
             </Canvas>
 
-            <Canvas Width="235" Height="30">
-                <TextBlock x:Name="label5" Text="Кол-во сканирований:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Grid.Column="5"/>
+            <Canvas Width="235" Height="30" Margin="0,20,0,0">
+                <TextBlock x:Name="label5" Text="Всего сканирований:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Grid.Column="5"/>
                 <TextBlock x:Name="scansLabel" Text="NaN" HorizontalAlignment="Left" Margin="170,0,0,0" VerticalAlignment="Top" FontSize="16" Grid.Column="5"/>
             </Canvas>
 
             <Canvas Width="235" Height="30">
-                <TextBlock x:Name="label6" Text="из них корректно:" HorizontalAlignment="Left" Margin="30,0,0,0" VerticalAlignment="Top" FontSize="16" Grid.Column="6"/>
+                <TextBlock x:Name="label6" Text="из них корректных:" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Top" FontSize="16" Grid.Column="6" Canvas.Left="12" Height="21"/>
                 <TextBlock x:Name="correctScansLabel" Text="NaN" HorizontalAlignment="Left" Margin="170,0,0,0" VerticalAlignment="Top" FontSize="16" Grid.Column="6"/>
             </Canvas>
         </WrapPanel>
         <TextBlock x:Name="nameLabel" Text="Фамилия Имя Отчество" HorizontalAlignment="Center" Margin="0,20,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
         <TextBlock x:Name="dateLabel" Text="10.09.2015 11:07" HorizontalAlignment="Right" Margin="-2,20,10,0" VerticalAlignment="Top" FontSize="16"/>
-        <Button x:Name="dispersionBtn" Content="Дисперсия" HorizontalAlignment="Left" Margin="10,0,6,10" VerticalAlignment="Bottom" Width="235" Height="50"/>
+        <Button x:Name="dispersionBtn" Content="Дисперсия" HorizontalAlignment="Left" Margin="10,0,6,10" VerticalAlignment="Bottom" Width="235" Height="50" Click="dispersionBtn_Click"/>
 
     </Grid>
 </Window>

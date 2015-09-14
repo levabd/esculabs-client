@@ -15,11 +15,15 @@ using System.Windows.Shapes;
 
 namespace Client
 {
+    using Model;
+
     /// <summary>
     /// Interaction logic for MeasurePreview.xaml
     /// </summary>
     public partial class MeasurePreview : UserControl
     {
+        public Measure measure;
+
         public MeasurePreview()
         {
             InitializeComponent();
@@ -48,12 +52,14 @@ namespace Client
         {          
             BorderBrush = new SolidColorBrush(Colors.Orange);
             Cursor = Cursors.Hand;
+            CaptureMouse();
         }
 
         private void Grid_MouseLeave(object sender, MouseEventArgs e)
         {
             BorderBrush = new SolidColorBrush(Colors.Gray);
             Cursor = Cursors.Arrow;
+            ReleaseMouseCapture();
         }
 
         private void UserControl_GotFocus(object sender, RoutedEventArgs e)

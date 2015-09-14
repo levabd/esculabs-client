@@ -19,6 +19,7 @@ using System.Windows.Shapes;
 
 namespace Client
 {
+    using Model;
     using Repo;
     using System.Globalization;
 
@@ -29,14 +30,11 @@ namespace Client
     {
         private const string DatePickerWatermark = "Выберите дату";
 
-        private PatientsWindow patientsWindow = null;
         private SerialPort serial;
         private ILog log;
 
-        public NewPatientWindow(PatientsWindow patientsWindow)
+        public NewPatientWindow()
         {
-            this.patientsWindow = patientsWindow;
-
             log = LogManager.GetLogger("NewPatientWindow");
 
             InitializeComponent();
@@ -180,13 +178,8 @@ namespace Client
                 return;
             }
 
-            ExaminesWindow window = new ExaminesWindow(PatientsRepo.Instance.Find(p.Id));
+            ExaminesWindow window = new ExaminesWindow(p);
             window.ShowDialog();
-
-            if (patientsWindow != null)
-            {
-                patientsWindow.RefreshPatientsList();
-            }
 
             Close();
         }

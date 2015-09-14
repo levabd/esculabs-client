@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Client
+namespace Model
 {
     public partial class TableExamine
     {
@@ -15,28 +15,12 @@ namespace Client
         {
             if (examine != null)
             {
-                ElastoExam elastoExam = examine.ElastoExams.ToList().FirstOrDefault();
-
-                PhibrosisStage = elastoExam.PhibrosisStage;
+                Guid = examine.Id;
+                PhibrosisStage = examine.ElastoExam.PhibrosisStage;
                 CreatedAt = examine.CreatedAt;
+                ExpertStatus = examine.ElastoExam.ExpertStatus.ToString().ToLower();
 
-                switch (elastoExam.ExpertStatus)
-                {
-                    case (Client.ExpertStatus.Pending):
-                        ExpertStatus = "pending";
-                        break;
-                    case (Client.ExpertStatus.Confirmed):
-                        ExpertStatus = "confirmed";
-                        break;
-                    case (Client.ExpertStatus.Unconfirmed):
-                        ExpertStatus = "unconfirmed";
-                        break;
-                    default:
-                        ExpertStatus = "pending";
-                        break;
-                }
-
-                LocalStatus = elastoExam.Valid ? "correct" : "incorrect";
+                LocalStatus = examine.ElastoExam.Valid ? "correct" : "incorrect";
 
                 if (id == 0)
                 {
@@ -47,12 +31,12 @@ namespace Client
                     Id = id.ToString();
                 }
 
-                MeasuresCount = elastoExam.Measures.Count();
-                MED = elastoExam.MED;
+                MeasuresCount = examine.ElastoExam.Measures.Count();
+                MED = examine.ElastoExam.MED;
 
-                if (MED != 0 && elastoExam.IQR != 0)
+                if (MED != 0 && examine.ElastoExam.IQR != 0)
                 {
-                    IqrMed = Math.Round((elastoExam.IQR / MED) * 100).ToString() + "%";
+                    IqrMed = Math.Round((examine.ElastoExam.IQR / MED) * 100).ToString() + "%";
                 }
                 else
                 {
@@ -61,8 +45,10 @@ namespace Client
             }
         }
 
+        public string Guid { get; set; }
+        
         public string Id { get; set; }
-
+        
         public int MeasuresCount { get; set; }
 
         public string IqrMed { get; set; }

@@ -5,39 +5,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Client
+namespace Model
 {
     public partial class TablePatient
     {
         public TablePatient() { }
 
-        public TablePatient(Patient Patient, Examine LastExamine, ElastoExam LastElastoExamine = null)
+        public TablePatient(Patient Patient, Examine LastExamine)
         {
             Id = Patient.Id;
             Name = string.Format("{0} {1} {2}", Patient.LastName, Patient.FirstName, Patient.MiddleName);
 
             if (LastExamine != null)
             {
-                PhibrosisStage = LastElastoExamine.PhibrosisStage;
+                PhibrosisStage = LastExamine.ElastoExam.PhibrosisStage;
                 LastExamineDate = LastExamine.CreatedAt;
+                ExpertStatus = LastExamine.ElastoExam.ExpertStatus.ToString().ToLower();
 
-                switch (LastElastoExamine.ExpertStatus)
-                {
-                    case (Client.ExpertStatus.Pending):
-                        ExpertStatus = "pending";
-                        break;
-                    case (Client.ExpertStatus.Confirmed):
-                        ExpertStatus = "confirmed";
-                        break;
-                    case (Client.ExpertStatus.Unconfirmed):
-                        ExpertStatus = "unconfirmed";
-                        break;
-                    default:
-                        ExpertStatus = "pending";
-                        break;
-                }
-
-                LocalStatus = LastElastoExamine.Valid ? "correct" : "incorrect";
+                LocalStatus = LastExamine.ElastoExam.Valid ? "correct" : "incorrect";
             }
         }
 

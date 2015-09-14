@@ -1,9 +1,7 @@
 namespace Client
 {
-    using System;
+    using Model;
     using System.Data.Entity;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Linq;
 
     public partial class PgContext : DbContext
     {

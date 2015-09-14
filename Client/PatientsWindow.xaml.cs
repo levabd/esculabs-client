@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 
 namespace Client
 {
+    using Model;
     using MongoDB.Bson;
     using MongoDB.Driver;
     using MongoDB.Driver.Builders;
@@ -69,6 +70,14 @@ namespace Client
 
             ExaminesWindow window = new ExaminesWindow(PatientsRepo.Instance.Find(tablePatient.Id));
             window.ShowDialog();
+            RefreshPatientsList();
+        }
+
+        private void newPatientBtn_Click(object sender, RoutedEventArgs e)
+        {
+            NewPatientWindow window = new NewPatientWindow();
+            window.ShowDialog();
+            RefreshPatientsList();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -121,10 +130,9 @@ namespace Client
             toDateFilter.SetWatermarkText(DatePickerWatermark);
         }
 
-        private void newPatientBtn_Click(object sender, RoutedEventArgs e)
+        private void logoutBtn_Click(object sender, RoutedEventArgs e)
         {
-            NewPatientWindow window = new NewPatientWindow(this);
-            window.ShowDialog();
+            Close();
         }
     }
 }

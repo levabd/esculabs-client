@@ -14,7 +14,10 @@ using System.Windows.Shapes;
 
 namespace Client
 {
+    using Microsoft.Win32;
+    using Model;
     using MongoRepository;
+    using System.IO;
 
     /// <summary>
     /// Interaction logic for ExaminesWindow.xaml
@@ -51,6 +54,8 @@ namespace Client
                 examines.Clear();
             }
 
+            examines = new List<TableExamine>();
+
             var i = patientExamines.Count;
             foreach (Examine examine in patientExamines)
             {
@@ -61,8 +66,27 @@ namespace Client
 
         private void newMeasureBtn_Click(object sender, RoutedEventArgs e)
         {
-            ExamineWindow window = new ExamineWindow();
-            window.ShowDialog();
+            //ExamineWindow window = new ExamineWindow();
+            //window.ShowDialog();
+        }
+
+        private void ShowExamine(object sender, RoutedEventArgs e)
+        {
+            TableExamine tableExamine = ((FrameworkElement)sender).DataContext as TableExamine;
+
+            MongoRepository<Examine> examinesRepo = new MongoRepository<Examine>();
+            var examine = examinesRepo.Where(x => x.Id == tableExamine.Guid).FirstOrDefault() as Examine;
+
+            if (examine != null)
+            {
+                ExamineWindow window = new ExamineWindow(patient, examine);
+                window.ShowDialog();
+                RefreshExaminesList();
+            }
+            else
+            {
+                MessageBox.Show("Не удалось найти обследование");
+            }
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -77,6 +101,22 @@ namespace Client
         private void backBtn_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void importFbixBtn_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                var examine = FIBXParser.Instance.Import(openFileDialog.FileName, patient.Id);
+
+                if (examine != null && IsLoaded)
+                {
+                    RefreshExaminesList();
+                    examinesGrid.ItemsSource = examines;
+                }
+            }
         }
     }
 }
