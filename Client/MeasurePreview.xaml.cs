@@ -52,14 +52,14 @@ namespace Client
         {          
             BorderBrush = new SolidColorBrush(Colors.Orange);
             Cursor = Cursors.Hand;
-            CaptureMouse();
+            //CaptureMouse();
         }
 
         private void Grid_MouseLeave(object sender, MouseEventArgs e)
         {
             BorderBrush = new SolidColorBrush(Colors.Gray);
             Cursor = Cursors.Arrow;
-            ReleaseMouseCapture();
+            //ReleaseMouseCapture();
         }
 
         private void UserControl_GotFocus(object sender, RoutedEventArgs e)

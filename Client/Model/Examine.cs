@@ -101,6 +101,11 @@ namespace Model
             }
         }
 
+        public bool CheckIqrMed()
+        {
+            return Math.Round((IQR / MED) * 100) >= 30.0;
+        }
+
         [BsonElement("sensor_type")]
         public SensorType SensorType { get; set; }
 

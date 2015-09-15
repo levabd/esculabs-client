@@ -103,8 +103,19 @@ namespace Client
         {
             if (med != 0 && iqr != 0)
             {
-                label.Text = Math.Round((iqr / med) * 100).ToString() + "%";
-                label.Foreground = new SolidColorBrush(Colors.Black);
+                double medIqr = Math.Round((iqr / med) * 100);
+                label.Text = medIqr.ToString() + "%";
+
+                if (medIqr < 30.0)
+                {
+                    label.Text += " (некорректно)";
+                    label.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFFF2323"));
+                }
+                else
+                {
+                    label.Foreground = new SolidColorBrush(Colors.Black);
+                }
+
             }
         }
 

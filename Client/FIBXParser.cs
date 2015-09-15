@@ -62,6 +62,7 @@ namespace Client
 
             ZipFile.ExtractToDirectory(fileName, tempPath);
 
+            MongoRepository<Examine> examines = new MongoRepository<Examine>();
             var examReportFile = tempPath + slash + "ExamReport.xml";
             if (File.Exists(examReportFile))
             {
@@ -99,7 +100,6 @@ namespace Client
                         examine.ElastoExam.Duration = int.Parse(result.Descendants("ExamDuration").FirstOrDefault().Value);
                         examine.ElastoExam.WhiskerPlot = ImageToBase64(tempPath + slash + result.Descendants("WhiskerPlotImageLink").FirstOrDefault().Value);
                         examine.ElastoExam.ExpertStatus = ExpertStatus.Pending;
-                        examine.ElastoExam.Valid = true;
 
                         examine.ElastoExam.Measures = new List<Measure>();
                         foreach (var measure in exam.Descendants("Measurements").FirstOrDefault().Descendants("Measure"))
@@ -111,7 +111,9 @@ namespace Client
                             examine.ElastoExam.Measures.Add(m);
                         }
 
-                        MongoRepository<Examine> examines = new MongoRepository<Examine>();
+                        // TODO: Validation check
+                        examine.ElastoExam.Valid = examine.ElastoExam.CheckIqrMed();
+
                         examines.Add(examine);                        
                     }
                     catch (Exception e)
