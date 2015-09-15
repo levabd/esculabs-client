@@ -69,6 +69,7 @@ namespace Client
             TablePatient tablePatient = ((FrameworkElement)sender).DataContext as TablePatient;
 
             ExaminesWindow window = new ExaminesWindow(PatientsRepo.Instance.Find(tablePatient.Id));
+            window.Owner = this;
             window.ShowDialog();
             RefreshPatientsList();
         }
@@ -76,6 +77,7 @@ namespace Client
         private void newPatientBtn_Click(object sender, RoutedEventArgs e)
         {
             NewPatientWindow window = new NewPatientWindow();
+            window.Owner = this;
             window.ShowDialog();
             RefreshPatientsList();
         }

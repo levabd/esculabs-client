@@ -18,6 +18,7 @@ namespace Client
     using Model;
     using MongoRepository;
     using System.IO;
+    using System.Windows.Media.Effects;
 
     /// <summary>
     /// Interaction logic for ExaminesWindow.xaml
@@ -80,6 +81,7 @@ namespace Client
             if (examine != null)
             {
                 ExamineWindow window = new ExamineWindow(patient, examine);
+                window.Owner = this;
                 window.ShowDialog();
                 RefreshExaminesList();
             }
@@ -109,6 +111,13 @@ namespace Client
 
             if (openFileDialog.ShowDialog() == true)
             {
+                var blur = new BlurEffect();
+                blur.Radius = 4;
+                Effect = blur;
+                var loader = new LoaderWindow();
+                loader.Owner = this;
+                loader.Show();
+
                 var examine = FIBXParser.Instance.Import(openFileDialog.FileName, patient.Id);
 
                 if (examine != null && IsLoaded)
@@ -116,6 +125,9 @@ namespace Client
                     RefreshExaminesList();
                     examinesGrid.ItemsSource = examines;
                 }
+
+                loader.Close();
+                Effect = null;
             }
         }
     }

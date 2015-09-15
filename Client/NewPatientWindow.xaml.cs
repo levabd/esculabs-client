@@ -179,8 +179,8 @@ namespace Client
             }
 
             ExaminesWindow window = new ExaminesWindow(p);
-            window.ShowDialog();
-
+            window.Owner = Owner;
+            window.Show();
             Close();
         }
     }

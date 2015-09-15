@@ -81,6 +81,7 @@ namespace Client
             var preview = sender as MeasurePreview;
 
             ViewImageWindow window = new ViewImageWindow("Просмотр сканирования", ImageFromBase64(preview.measure.Source), 512, 384);
+            window.Owner = this;
             window.ShowDialog();
         }
 
@@ -154,6 +155,7 @@ namespace Client
         private void dispersionBtn_Click(object sender, RoutedEventArgs e)
         {
             ViewImageWindow window = new ViewImageWindow("Просмотр дисперсии", ImageFromBase64(examine.ElastoExam.WhiskerPlot), 832, 320);
+            window.Owner = this;
             window.ShowDialog();
         }
     }

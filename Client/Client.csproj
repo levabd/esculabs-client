@@ -132,6 +132,9 @@
       <DependentUpon>ExamineWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="FIBXParser.cs" />
+    <Compile Include="LoaderWindow.xaml.cs">
+      <DependentUpon>LoaderWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MeasurePreview.xaml.cs">
       <DependentUpon>MeasurePreview.xaml</DependentUpon>
     </Compile>
@@ -152,6 +155,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ExamineWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LoaderWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
