@@ -71,6 +71,7 @@ namespace Client
             ExaminesWindow window = new ExaminesWindow(PatientsRepo.Instance.Find(tablePatient.Id));
             window.Owner = this;
             window.ShowDialog();
+
             RefreshPatientsList();
         }
 
@@ -84,7 +85,8 @@ namespace Client
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            ResetDatePickersWatermark();
+            fromDateFilter.SetWatermarkText(DatePickerWatermark);
+            toDateFilter.SetWatermarkText(DatePickerWatermark);
 
             patients = PatientsRepo.Instance.GetGridList();
 
@@ -124,12 +126,6 @@ namespace Client
             toDateFilter.IsEnabled = true;
             clearNameFilterButton.IsEnabled = true;
             clearDateFilterButton.IsEnabled = true;
-        }
-
-        private void ResetDatePickersWatermark()
-        {
-            fromDateFilter.SetWatermarkText(DatePickerWatermark);
-            toDateFilter.SetWatermarkText(DatePickerWatermark);
         }
 
         private void logoutBtn_Click(object sender, RoutedEventArgs e)

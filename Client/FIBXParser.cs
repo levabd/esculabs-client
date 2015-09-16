@@ -9,6 +9,7 @@ using System.Drawing;
 
 namespace Client
 {
+    using FibroscanProcessor;
     using Model;
     using MongoRepository;
     using System.Globalization;
@@ -70,7 +71,7 @@ namespace Client
 
                 if (xml != null)
                 {
-                    try {
+                    /*try*/ {
                         examine = new Examine();
 
                         var exam = xml.Descendants("Exam").FirstOrDefault();
@@ -98,15 +99,25 @@ namespace Client
                         examine.ElastoExam.IQR = double.Parse(result.Descendants("StiffnessIQR").FirstOrDefault().Value, CultureInfo.InvariantCulture);
                         examine.ElastoExam.MED = double.Parse(result.Descendants("StiffnessMedian").FirstOrDefault().Value, CultureInfo.InvariantCulture);
                         examine.ElastoExam.Duration = int.Parse(result.Descendants("ExamDuration").FirstOrDefault().Value);
-                        examine.ElastoExam.WhiskerPlot = ImageToBase64(tempPath + slash + result.Descendants("WhiskerPlotImageLink").FirstOrDefault().Value);
+                        examine.ElastoExam.WhiskerPlot = ImageFileToBase64(tempPath + slash + result.Descendants("WhiskerPlotImageLink").FirstOrDefault().Value);
                         examine.ElastoExam.ExpertStatus = ExpertStatus.Pending;
-
+                        
                         examine.ElastoExam.Measures = new List<Measure>();
                         foreach (var measure in exam.Descendants("Measurements").FirstOrDefault().Descendants("Measure"))
                         {
                             Measure m = new Measure();
                             m.Stiffness = double.Parse(measure.Descendants("Stiffness").FirstOrDefault().Value, CultureInfo.InvariantCulture);
-                            m.Source = ImageToBase64(tempPath + slash + measure.Descendants("ImageLink").FirstOrDefault().Value);
+
+                            var sourceFile = tempPath + slash + measure.Descendants("ImageLink").FirstOrDefault().Value;
+
+                            Image image = Image.FromFile(sourceFile);
+                            Image source = Image.FromFile(sourceFile);
+
+                            m.Source = ImageToBase64(image);
+
+                            FibroscanImage prod = new FibroscanImage(source);
+                            Image mergedRes = prod.MergedResult;
+                            m.ResultMerged = ImageToBase64(prod.MergedResult);
 
                             examine.ElastoExam.Measures.Add(m);
                         }
@@ -116,11 +127,11 @@ namespace Client
 
                         examines.Add(examine);                        
                     }
-                    catch (Exception e)
-                    {
-                        MessageBox.Show("Не удалось распознать FIBX-файл");
-                        examine = null;
-                    }
+                    //catch (Exception e)
+                    //{
+                    //    MessageBox.Show("Не удалось распознать FIBX-файл");
+                    //    examine = null;
+                    //}
                 }
                 else
                 {
@@ -137,7 +148,7 @@ namespace Client
             return examine;
         }
 
-        private string ImageToBase64(string fileName)
+        private string ImageFileToBase64(string fileName)
         {
             using (Image image = Image.FromFile(fileName))
             {
@@ -145,6 +156,26 @@ namespace Client
                 {
                     image.Save(m, image.RawFormat);
                     byte[] imageBytes = m.ToArray();
+
+                    m.Close();
+
+                    // Convert byte[] to Base64 String
+                    string base64String = Convert.ToBase64String(imageBytes);
+                    return base64String;
+                }
+            }
+        }
+
+        private string ImageToBase64(Image image)
+        {
+            using (image)
+            {
+                using (MemoryStream m = new MemoryStream())
+                {
+                    image.Save(m, image.RawFormat);
+                    byte[] imageBytes = m.ToArray();
+
+                    m.Close();
 
                     // Convert byte[] to Base64 String
                     string base64String = Convert.ToBase64String(imageBytes);

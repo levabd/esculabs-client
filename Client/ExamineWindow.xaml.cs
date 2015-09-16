@@ -80,7 +80,7 @@ namespace Client
         {
             var preview = sender as MeasurePreview;
 
-            ViewImageWindow window = new ViewImageWindow("Просмотр сканирования", ImageFromBase64(preview.measure.Source), 512, 384);
+            ViewImageWindow window = new ViewImageWindow("Просмотр сканирования", ImageFromBase64(preview.measure.ResultMerged), 512, 384);
             window.Owner = this;
             window.ShowDialog();
         }
