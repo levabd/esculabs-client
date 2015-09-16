@@ -130,5 +130,12 @@ namespace Client
                 Effect = null;
             }
         }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            var window = Application.Current.MainWindow as PatientsWindow;
+            window.RefreshPatientsList();
+            window.Activate();
+        }
     }
 }
