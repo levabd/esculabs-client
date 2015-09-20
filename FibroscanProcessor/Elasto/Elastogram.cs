@@ -153,13 +153,11 @@ namespace FibroscanProcessor.Elasto
 
                     syncTask.RunSynchronously();
             }
-
-            Image = new SimpleGrayImage(Image.Bitmap.Invert());
         }
 
         public void ChooseContour(double areaProportion, double heightPropotion)
         {
-            Bitmap result = Image.Bitmap.Invert();
+            Bitmap result = Image.Bitmap;
             List<BlobEntity> objects = result.FindBlobs();
 
             int maxArea = 0;
@@ -197,7 +195,8 @@ namespace FibroscanProcessor.Elasto
                     }
                 }
             }
-            if (minDistanceToCenterObjectIndex > -1)
+
+            if (minDistanceToCenterObjectIndex < 0)
                 for (int i = 0; i < objects.Count; i++)
                     if (objects[i].Blob.Area == maxArea)
                         minDistanceToCenterObjectIndex = i;

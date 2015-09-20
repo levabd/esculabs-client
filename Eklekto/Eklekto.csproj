@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{56299F06-7B5A-400D-A41F-A93A956A09F7}</ProjectGuid>
+    <ProjectGuid>{EAB1EB1A-E757-4F23-9BEE-FB145A1F7792}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FibroscanProcessor</RootNamespace>
-    <AssemblyName>FibroscanProcessor</AssemblyName>
+    <RootNamespace>Eklekto</RootNamespace>
+    <AssemblyName>Eklekto</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -17,11 +17,10 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\bin\</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -34,35 +33,42 @@
   <ItemGroup>
     <Reference Include="Accord, Version=3.0.2.0, Culture=neutral, PublicKeyToken=fa1a88e29555ccf7, processorArchitecture=MSIL" />
     <Reference Include="Accord.Imaging, Version=3.0.2.0, Culture=neutral, PublicKeyToken=fa1a88e29555ccf7, processorArchitecture=MSIL" />
+    <Reference Include="Accord.Math, Version=3.0.2.0, Culture=neutral, PublicKeyToken=fa1a88e29555ccf7, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Elasto\ElastogramClassification.cs" />
-    <Compile Include="Elasto\ElastoBlob.cs" />
-    <Compile Include="Elasto\Elastogram.cs" />
-    <Compile Include="FibroscanImage.cs" />
+    <Compile Include="Approximators\LinearLeastSquares.cs" />
+    <Compile Include="Approximators\Ransac.cs" />
+    <Compile Include="Geometry\RayCasting.cs" />
+    <Compile Include="Geometry\ReflectionedLine.cs" />
+    <Compile Include="Geometry\Segment.cs" />
+    <Compile Include="Helpers\ArrayHelper.cs" />
+    <Compile Include="Imaging\Binarization\BinarizationHelper.cs" />
+    <Compile Include="Imaging\Binarization\Lgbt\LgbtBinarization.cs" />
+    <Compile Include="Imaging\Binarization\Lgbt\LgbtPixelProcessing.cs" />
+    <Compile Include="Imaging\Binarization\Lgbt\LgbtRegion.cs" />
+    <Compile Include="Imaging\Blobs\Blob.cs" />
+    <Compile Include="Imaging\Blobs\BlobCounter.cs" />
+    <Compile Include="Imaging\Blobs\BlobEntity.cs" />
+    <Compile Include="Imaging\Blobs\BlobHelper.cs" />
+    <Compile Include="Imaging\Contours\ConnectedSqareTracer.cs" />
+    <Compile Include="Imaging\Contours\Contour.cs" />
+    <Compile Include="Imaging\Contours\ContourHelper.cs" />
+    <Compile Include="Imaging\Contours\IContourTracer.cs" />
+    <Compile Include="Imaging\Contours\MooreNeighborTracer.cs" />
+    <Compile Include="Imaging\Contours\RadialSweepTacer.cs" />
+    <Compile Include="Imaging\Contours\SmartMooreNeighborTracer.cs" />
+    <Compile Include="Imaging\Contours\SqareTracer.cs" />
+    <Compile Include="Imaging\Contours\TheoPavlidisTracer.cs" />
+    <Compile Include="Imaging\Filters\FilterHelper.cs" />
+    <Compile Include="Imaging\Filters\kuwahara\KuwaharaFilter.cs" />
+    <Compile Include="Imaging\Filters\kuwahara\KuwaharaPixelProcessing.cs" />
+    <Compile Include="Imaging\Filters\kuwahara\KuwaharaRegion.cs" />
+    <Compile Include="Imaging\ImageHelper.cs" />
+    <Compile Include="Imaging\Morfology\MorfologyHelper.cs" />
+    <Compile Include="Imaging\SimpleGrayImage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <DependentUpon>Settings.settings</DependentUpon>
-    </Compile>
-    <Compile Include="Ultrasound\UltrasoundModA.cs" />
-    <Compile Include="Ultrasound\UltrasoundModM.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Eklekto\Eklekto.csproj">
-      <Project>{eab1eb1a-e757-4f23-9bee-fb145a1f7792}</Project>
-      <Name>Eklekto</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

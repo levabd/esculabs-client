@@ -116,8 +116,8 @@ namespace Client
                             m.Source = ImageToBase64(image);
 
                             FibroscanImage prod = new FibroscanImage(source);
-                            Image mergedRes = prod.MergedResult;
-                            m.ResultMerged = ImageToBase64(prod.MergedResult);
+                            Image mergedRes = prod.Merged;
+                            m.ResultMerged = ImageToBase64(mergedRes);
 
                             examine.ElastoExam.Measures.Add(m);
                         }

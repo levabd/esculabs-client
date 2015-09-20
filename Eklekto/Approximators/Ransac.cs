@@ -6,7 +6,7 @@ using Eklekto.Geometry;
 
 namespace Eklekto.Approximators
 {
-    class Ransac
+    public class Ransac
     {
         public ReflectionedLine Line;
 
