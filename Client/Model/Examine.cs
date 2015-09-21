@@ -67,32 +67,32 @@ namespace Model
         {
             get
             {
-                if (MED == 0)
+                if (Med == 0)
                 {
                     return "Нет данных";
                 }
 
-                if (MED > 12.5f)
+                if (Med > 12.5f)
                 {
                     return "F4";
                 }
 
-                if (MED >= 9.6f)
+                if (Med >= 9.6f)
                 {
                     return "F3";
                 }
 
-                if (MED >= 7.3f)
+                if (Med >= 7.3f)
                 {
                     return "F2";
                 }
 
-                if (MED >= 5.9f)
+                if (Med >= 5.9f)
                 {
                     return "F1";
                 }
 
-                if (MED >= 1.5f)
+                if (Med >= 1.5f)
                 {
                     return "F0";
                 }
@@ -101,16 +101,26 @@ namespace Model
             }
         }
 
-        public bool CheckIqrMed()
+        public int? IQRMed
         {
-            return Math.Round((IQR / MED) * 100) >= 30.0;
+            get
+            {
+                try
+                {
+                    return Convert.ToInt32(Math.Round((IQR / Med) * 100));
+                }
+                catch (Exception)
+                {
+                    return null;
+                }
+            }
         }
 
         [BsonElement("sensor_type")]
         public SensorType SensorType { get; set; }
 
         [BsonElement("e_med")]
-        public double MED { get; set; }
+        public double Med { get; set; }
 
         [BsonElement("e_iqr")]
         public double IQR { get; set; }
@@ -129,6 +139,16 @@ namespace Model
 
         [BsonElement("expert_status")]
         public ExpertStatus ExpertStatus { get; set; }
+
+        public bool Validate()
+        {
+            if (IQRMed.HasValue)
+            {
+                return IQRMed < 30;
+            }
+
+            return false;
+        }
     }
 
     public partial class Measure
@@ -167,5 +187,8 @@ namespace Model
 
         [BsonElement("stiffness")]
         public double Stiffness { get; set; }
+
+        [BsonElement("created_at")]
+        public DateTime? CreatedAt { get; set; }
     }
 }

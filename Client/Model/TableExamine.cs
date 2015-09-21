@@ -16,32 +16,18 @@ namespace Model
             if (examine != null)
             {
                 Guid = examine.Id;
+                Id = id == 0 ? examine.Id : id.ToString();
+
                 PhibrosisStage = examine.ElastoExam.PhibrosisStage;
                 CreatedAt = examine.CreatedAt;
                 ExpertStatus = examine.ElastoExam.ExpertStatus.ToString().ToLower();
-
                 LocalStatus = examine.ElastoExam.Valid ? "correct" : "incorrect";
-
-                if (id == 0)
-                {
-                    Id = examine.Id;
-                }
-                else
-                {
-                    Id = id.ToString();
-                }
-
+                
                 MeasuresCount = examine.ElastoExam.Measures.Count();
-                MED = examine.ElastoExam.MED;
+                Med = examine.ElastoExam.Med;
 
-                if (MED != 0 && examine.ElastoExam.IQR != 0)
-                {
-                    IqrMed = Math.Round((examine.ElastoExam.IQR / MED) * 100).ToString() + "%";
-                }
-                else
-                {
-                    IqrMed = "Нет данных";
-                }
+                var iqrMed = examine.ElastoExam.IQRMed;
+                IQRMed = iqrMed > 0 ? iqrMed.ToString() + "%" : "Нет данных";
             }
         }
 
@@ -51,9 +37,9 @@ namespace Model
         
         public int MeasuresCount { get; set; }
 
-        public string IqrMed { get; set; }
+        public string IQRMed { get; set; }
 
-        public double MED { get; set; }
+        public double Med { get; set; }
 
         public string PhibrosisStage { get; set; }
 
