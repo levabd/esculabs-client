@@ -25,13 +25,27 @@ namespace FibroscanProcessor
 
     public class FibroscanImage
     {
+        #region Const
+
+        // ReSharper disable InconsistentNaming
+        // Const
+        private Rectangle ElastogramRect = new Rectangle(242, 33, 253, 194);
+        private Rectangle UltrasoundModMRect = new Rectangle(50, 33, 92, 254);
+        private Rectangle UltrasoundModARect = new Rectangle(160, 33, 60, 254);
+
+        private const int MinUltrasoundModARelativeEstimation = 90;
+        // ReSharper restore InconsistentNaming
+
+        #endregion
+
         #region Private variables
 
-        private readonly Image _source;
+        private Elastogram _workingElasto;
+        private ElastoBlob _workingBlob;
+        private UltrasoundModM _workingUltrasoundModM;
+        private UltrasoundModA _workingUltrasoundModA;
 
-        private Bitmap _ultrasoundModeM;
-        private Bitmap _ultrasoundModeA;
-        private Bitmap _resultElasto;
+        private readonly Image _source;
 
         private VerificationStatus _elastoStatus = VerificationStatus.NotCalculated;
         private VerificationStatus _ultrasoundModeMStatus = VerificationStatus.NotCalculated;
@@ -54,63 +68,43 @@ namespace FibroscanProcessor
 
         #region Properties
 
-        public Image MergedResult
+        public Image Merged
         {
             get
             {
-                if ((_ultrasoundModeA == null) ||
-                    (_ultrasoundModeM == null) ||
-                    (_resultElasto == null))
+                if ((_workingElasto == null) ||
+                    (_workingBlob == null) ||
+                    (_workingUltrasoundModM == null) ||
+                    (_workingUltrasoundModA == null))
                 {
                     Proceed();
                 }
+
+                // Already checked by null
+                // ReSharper disable PossibleNullReferenceException
+                Point p1 = new Point(_workingBlob.LeftApproximation.GetX(0) + ElastogramRect.X, 0 + ElastogramRect.Y);
+                Point p2 = new Point(_workingBlob.LeftApproximation.GetX(_workingElasto.Image.Cols - 1) + ElastogramRect.X, _workingElasto.Image.Cols - 1 + ElastogramRect.Y);
+                Point p3 = new Point(_workingBlob.RightApproximation.GetX(0) + ElastogramRect.X, 0 + ElastogramRect.Y);
+                Point p4 = new Point(_workingBlob.RightApproximation.GetX(_workingElasto.Image.Cols - 1) + ElastogramRect.X, _workingElasto.Image.Cols - 1 + ElastogramRect.Y);
+
+                Point[] pContour = new Point[_workingBlob.Contour.Points.Count];
+                for (int i = 0; i < _workingBlob.Contour.Points.Count; i++)
+                    pContour[i] = new Point(_workingBlob.Contour.Points[i].X + ElastogramRect.X, _workingBlob.Contour.Points[i].Y + ElastogramRect.Y);
+
+                using (Graphics g = Graphics.FromImage(_source))
+                {
+                    g.DrawPolygon(new Pen(Color.GreenYellow), pContour);
+                    g.DrawLine(new Pen(Color.Red), p1, p2);
+                    g.DrawLine(new Pen(Color.Blue), p3, p4);
+                    _workingUltrasoundModM.DeviationStreakLines.ForEach(point => g.DrawLine(new Pen(Color.Blue), 
+                        new Point(0 + UltrasoundModMRect.X, point + UltrasoundModMRect.Y), 
+                        new Point(UltrasoundModMRect.Width + UltrasoundModMRect.X, point + UltrasoundModMRect.Y)));
+                    g.DrawLine(new Pen(Color.Blue), new Point(_workingUltrasoundModA.ApproxLine.GetX(0) + UltrasoundModARect.X, 0 + UltrasoundModARect.Y),
+                        new Point(_workingUltrasoundModA.ApproxLine.GetX(UltrasoundModARect.Height) + UltrasoundModARect.X, UltrasoundModARect.Height + UltrasoundModARect.Y));
+                }
+                // ReSharper restore PossibleNullReferenceException
                 
-                Bitmap merged = new Bitmap(_source);
-
-                using (Graphics g = Graphics.FromImage(merged))
-                {
-                    g.DrawImage(_resultElasto, new Rectangle(241, 33, _resultElasto.Width, _resultElasto.Height),
-                        new Rectangle(0, 0, _resultElasto.Width, _resultElasto.Height), GraphicsUnit.Pixel);
-
-                    g.DrawImage(_ultrasoundModeM, new Rectangle(50, 33, _ultrasoundModeM.Width, _ultrasoundModeM.Height),
-                        new Rectangle(0, 0, _ultrasoundModeM.Width, _ultrasoundModeM.Height), GraphicsUnit.Pixel);
-
-                    g.DrawImage(_ultrasoundModeA, new Rectangle(160, 33, _ultrasoundModeA.Width, _ultrasoundModeA.Height),
-                        new Rectangle(0, 0, _ultrasoundModeA.Width, _ultrasoundModeA.Height), GraphicsUnit.Pixel);
-                }
-                // merge source ultrasoundModeA ultrasoundModeM and elasto here
-                //TODO: Implement merging
-                return merged;
-            }
-        }
-
-        public Image ResultUltrasoundModeM
-        {
-            get
-            {
-                if (_ultrasoundModeM == null)
-                    Proceed();
-                return _ultrasoundModeM;
-            }
-        }
-
-        public Image ResultUltrasoundModeA
-        {
-            get
-            {
-                if (_ultrasoundModeA == null)
-                    Proceed();
-                return _ultrasoundModeA;
-            }
-        }
-
-        public Image ResultElasto
-        {
-            get
-            {
-                if (_resultElasto == null)
-                    Proceed();
-                return _resultElasto;
+                return _source;
             }
         }
 
@@ -158,8 +152,6 @@ namespace FibroscanProcessor
 
         #region DebugElastogram
 
-        private ElastoBlob _debugElastoBlob;
-        private Elastogram _debugElasto;
         private Segment _fibroline;
 
         public Image Step1LoadElastogram(ref long timer)
@@ -168,12 +160,12 @@ namespace FibroscanProcessor
                 throw new AccessViolationException("Can`t use this method in production mode");
             Stopwatch watch = Stopwatch.StartNew();
 
-            _debugElasto = LoadGrayElstogram();
+            _workingElasto = LoadGrayElstogram();
 
             watch.Stop();
             timer = watch.ElapsedMilliseconds;
 
-            return _debugElasto.Image.Bitmap;
+            return _workingElasto.Image.Bitmap;
         }
 
         public Image Step2ElastoWithoutLine(ref long timer)
@@ -182,14 +174,14 @@ namespace FibroscanProcessor
                 throw new AccessViolationException("Can`t use this method in production mode");
             Stopwatch watch = Stopwatch.StartNew();
 
-            _debugElasto.GetFibroLine();
-            _fibroline = _debugElasto.Fibroline;
-            _debugElasto.PaintOverFibroline();
+            _workingElasto.GetFibroLine();
+            _fibroline = _workingElasto.Fibroline;
+            _workingElasto.PaintOverFibroline();
             
             watch.Stop();
             timer = watch.ElapsedMilliseconds;
 
-            return _debugElasto.Image.Bitmap;
+            return _workingElasto.Image.Bitmap;
         }
 
         public Image Step3KuwaharaElasto(ref long timer, int kernel)
@@ -198,8 +190,8 @@ namespace FibroscanProcessor
                 throw new AccessViolationException("Can`t use this method in production mode");
             Stopwatch watch = Stopwatch.StartNew();
 
-            Bitmap result = _debugElasto.Image.Bitmap.GrayscaleKuwahara(kernel);
-            _debugElasto = new Elastogram(new SimpleGrayImage(result));
+            Bitmap result = _workingElasto.Image.Bitmap.GrayscaleKuwahara(kernel);
+            _workingElasto = new Elastogram(new SimpleGrayImage(result));
 
             watch.Stop();
             timer = watch.ElapsedMilliseconds;
@@ -207,19 +199,19 @@ namespace FibroscanProcessor
             return result;
         }
 
-        public Image Step4SimpleBinarization(ref long timer, byte thresholdBin=105 )
+        public Image Step4SimpleBinarization(ref long timer, byte thresholdBin)
         {
             if (!_debugMode)
                 throw new AccessViolationException("Can`t use this method in production mode");
 
             Stopwatch watch = Stopwatch.StartNew();
 
-            _debugElasto.Image.ApplyBinarization(thresholdBin);
+            _workingElasto.Image.ApplyBinarization(thresholdBin);
 
             watch.Stop();
             timer = watch.ElapsedMilliseconds;
 
-            return _debugElasto.Image.Bitmap;
+            return _workingElasto.Image.Bitmap;
         }
         
         public Image Step4NiblackBinarization(ref long timer, double k=0.2, int radius = 20)
@@ -229,8 +221,8 @@ namespace FibroscanProcessor
 
             Stopwatch watch = Stopwatch.StartNew();
 
-            Bitmap result = _debugElasto.Image.Bitmap.NiblackBinarization(k, radius);
-            _debugElasto = new Elastogram(new SimpleGrayImage(result));
+            Bitmap result = _workingElasto.Image.Bitmap.NiblackBinarization(k, radius);
+            _workingElasto = new Elastogram(new SimpleGrayImage(result));
 
             watch.Stop();
             timer = watch.ElapsedMilliseconds;
@@ -245,8 +237,8 @@ namespace FibroscanProcessor
 
             Stopwatch watch = Stopwatch.StartNew();
 
-            Bitmap result = _debugElasto.Image.Bitmap.SauvolaBinarization(k, radius);
-            _debugElasto = new Elastogram(new SimpleGrayImage(result));
+            Bitmap result = _workingElasto.Image.Bitmap.SauvolaBinarization(k, radius);
+            _workingElasto = new Elastogram(new SimpleGrayImage(result));
 
             watch.Stop();
             timer = watch.ElapsedMilliseconds;
@@ -262,31 +254,30 @@ namespace FibroscanProcessor
 
             Stopwatch watch = Stopwatch.StartNew();
 
-            Bitmap result = _debugElasto.Image.Bitmap.WolfJoulionBinarization(k, radius);
-            _debugElasto = new Elastogram(new SimpleGrayImage(result));
+            Bitmap result = _workingElasto.Image.Bitmap.WolfJoulionBinarization(k, radius);
+            _workingElasto = new Elastogram(new SimpleGrayImage(result));
 
             watch.Stop();
             timer = watch.ElapsedMilliseconds;
 
-            return _debugElasto.Image.Bitmap;
+            return _workingElasto.Image.Bitmap;
         }
 
-        public Image Step4LgbtBinarization(ref long timer, double k = 0.2, int localRadius = 20, int globalRadius = 2, byte globalThreshold = 65)
+        public Image Step4LgbtBinarization(ref long timer, double k, int localRadius, int globalRadius, byte globalThreshold)
         {
             if (!_debugMode)
                 throw new AccessViolationException("Can`t use this method in production mode");
 
             Stopwatch watch = Stopwatch.StartNew();
 
-            _debugElasto.Image.ApplyLgbtBinarization(k, localRadius, globalRadius, globalThreshold);
+            _workingElasto.Image.ApplyLgbtBinarization(k, localRadius, globalRadius, globalThreshold);
 
             watch.Stop();
             timer = watch.ElapsedMilliseconds;
 
-            return _debugElasto.Image.Bitmap;
+            return _workingElasto.Image.Bitmap;
         }
 
-       
         public Image Step5EdgeRemoving(ref long timer, int leftDist1, int leftCentralDist1, int leftDist2, int leftCentralDist2, int rightDist, int rightCentralDist)
         {
             if (!_debugMode)
@@ -294,41 +285,43 @@ namespace FibroscanProcessor
 
             Stopwatch watch = Stopwatch.StartNew();
 
-            _debugElasto.RemoveEdgeObjects(leftDist1, leftCentralDist1, leftDist2, leftCentralDist2, rightDist, rightCentralDist);
+            _workingElasto.RemoveEdgeObjects(leftDist1, leftCentralDist1, leftDist2, leftCentralDist2, rightDist, rightCentralDist);
 
             watch.Stop();
             timer = watch.ElapsedMilliseconds;
 
-            return _debugElasto.Image.Bitmap;
+            return _workingElasto.Image.Bitmap;
         }
-        public Image Step6Morphology(ref long timer, int morphologyTimes = 4)
+
+        public Image Step6Morphology(ref long timer, int morphologyTimes)
         {
             if (!_debugMode)
                 throw new AccessViolationException("Can`t use this method in production mode");
 
             Stopwatch watch = Stopwatch.StartNew();
 
-            Bitmap result = _debugElasto.Image.Bitmap.MorphologyOpening(morphologyTimes);
-            _debugElasto = new Elastogram(new SimpleGrayImage(result));
+            Bitmap result = _workingElasto.Image.Bitmap.MorphologyOpening(morphologyTimes);
+            _workingElasto = new Elastogram(new SimpleGrayImage(result));
 
             watch.Stop();
             timer = watch.ElapsedMilliseconds;
 
-            return _debugElasto.Image.Bitmap;
+            return _workingElasto.Image.Bitmap;
         }
-        public Image Step7CropObjects(ref long timer, int step=24, int distance=16)
+
+        public Image Step7CropObjects(ref long timer, int step, int distance)
         {
             if (!_debugMode)
                 throw new AccessViolationException("Can`t use this method in production mode");
 
             Stopwatch watch = Stopwatch.StartNew();
 
-            _debugElasto.CropObjects(step, distance);
+            _workingElasto.CropObjects(step, distance);
 
             watch.Stop();
             timer = watch.ElapsedMilliseconds;
 
-            return _debugElasto.Image.Bitmap;
+            return _workingElasto.Image.Bitmap;
         }
 
         public Image Step8ChooseOneObject(ref long timer, double areaProportion, double heightProportion)
@@ -338,15 +331,15 @@ namespace FibroscanProcessor
 
             Stopwatch watch = Stopwatch.StartNew();
 
-            _debugElasto.ChooseContour(0.6, 0.65);
-            _debugElastoBlob = _debugElasto.TargetObject;
-            if (_debugElastoBlob == null)
+            _workingElasto.ChooseContour(0.6, 0.65);
+            _workingBlob = _workingElasto.TargetObject;
+            if (_workingBlob == null)
                 _elastoStatus = VerificationStatus.NotCalculated;
 
             watch.Stop();
             timer = watch.ElapsedMilliseconds;
 
-            return _debugElasto.Image.Bitmap;
+            return _workingElasto.Image.Bitmap;
         }
 
         public Image Step9Approximation(ref long timer)
@@ -356,20 +349,20 @@ namespace FibroscanProcessor
 
             Stopwatch watch = Stopwatch.StartNew();
 
-            _debugElastoBlob.Approximate(0.3, 0.35, 5000);
+            _workingBlob.Approximate(0.3, 0.35, 5000);
 
-            IntPoint p1 = new IntPoint(_debugElastoBlob.LeftApproximation.GetX(0), 0);
-            IntPoint p2 = new IntPoint(_debugElastoBlob.LeftApproximation.GetX(_debugElasto.Image.Cols - 1), _debugElasto.Image.Cols - 1);
-            _debugElasto.Image.DrawGrayLine(p1, p2, 128);
+            IntPoint p1 = new IntPoint(_workingBlob.LeftApproximation.GetX(0), 0);
+            IntPoint p2 = new IntPoint(_workingBlob.LeftApproximation.GetX(_workingElasto.Image.Cols - 1), _workingElasto.Image.Cols - 1);
+            _workingElasto.Image.DrawGrayLine(p1, p2, 128);
 
-            p1 = new IntPoint(_debugElastoBlob.RightApproximation.GetX(0), 0);
-            p2 = new IntPoint(_debugElastoBlob.RightApproximation.GetX(_debugElasto.Image.Cols - 1), _debugElasto.Image.Cols - 1);
-            _debugElasto.Image.DrawGrayLine(p1, p2, 128);
+            p1 = new IntPoint(_workingBlob.RightApproximation.GetX(0), 0);
+            p2 = new IntPoint(_workingBlob.RightApproximation.GetX(_workingElasto.Image.Cols - 1), _workingElasto.Image.Cols - 1);
+            _workingElasto.Image.DrawGrayLine(p1, p2, 128);
 
             watch.Stop();
             timer = watch.ElapsedMilliseconds;
 
-            return _debugElasto.Image.Bitmap;
+            return _workingElasto.Image.Bitmap;
         }
 
         public VerificationStatus Step10Classify()
@@ -379,31 +372,14 @@ namespace FibroscanProcessor
 
             ElastogramClassification rElasto = new ElastogramClassification();
 
-            _elastoStatus = rElasto.Classiffy(_debugElastoBlob, _fibroline);
+            _elastoStatus = rElasto.Classiffy(_workingBlob, _fibroline);
 
             return _elastoStatus;
-        }
-
-        public long DebugProceed()
-        {
-            if (!_debugMode)
-                throw new AccessViolationException("Can`t use this method in production mode");
-
-            Stopwatch watch = Stopwatch.StartNew();
-
-            Elastogram workingElasto = LoadGrayElstogram();
-            workingElasto.GetFibroLine();
-            workingElasto.PaintOverFibroline();
-
-            watch.Stop();
-            return watch.ElapsedMilliseconds;
         }
 
         #endregion
 
         #region DebugUltrasoundM
-        private UltrasoundModM _debugUsm;
-        private UltrasoundModA _debugUsa;
 
         public Image Step11LoadUltrasoundM(ref long timer)
         {
@@ -411,12 +387,12 @@ namespace FibroscanProcessor
                 throw new AccessViolationException("Can`t use this method in production mode");
             Stopwatch watch = Stopwatch.StartNew();
 
-            _debugUsm = LoadGrayUltrasoundModM();
+            _workingUltrasoundModM = LoadGrayUltrasoundModM();
 
             watch.Stop();
             timer = watch.ElapsedMilliseconds;
 
-            return _debugUsm.Image.Bitmap;
+            return _workingUltrasoundModM.Image.Bitmap;
         }
 
         public Image Step12DrawBadLines(ref long timer, ref VerificationStatus result)
@@ -424,9 +400,9 @@ namespace FibroscanProcessor
             if (!_debugMode)
                 throw new AccessViolationException("Can`t use this method in production mode");
             Stopwatch watch = Stopwatch.StartNew();
-            List<int> badLines = _debugUsm.FindDeviationStreakLines(30,3);
-            SimpleGrayImage rez = new SimpleGrayImage(_debugUsm.Image.Data);
-            badLines.ForEach(line => rez.DrawHorisontalGrayLine(0, _debugUsm.Image.Cols - 1, line, 0));
+            List<int> badLines = _workingUltrasoundModM.DeviationStreakLines;
+            SimpleGrayImage rez = new SimpleGrayImage(_workingUltrasoundModM.Image.Data);
+            badLines.ForEach(line => rez.DrawHorisontalGrayLine(0, _workingUltrasoundModM.Image.Cols - 1, line, 0));
 
             watch.Stop();
             timer = watch.ElapsedMilliseconds;
@@ -443,11 +419,11 @@ namespace FibroscanProcessor
                 throw new AccessViolationException("Can`t use this method in production mode");
             Stopwatch watch = Stopwatch.StartNew();
 
-            _debugUsa = LoadGrayUltrasoundModA();
+            _workingUltrasoundModA = LoadGrayUltrasoundModA();
             watch.Stop();
             timer = watch.ElapsedMilliseconds;
 
-            return _debugUsa.Image.Bitmap;
+            return _workingUltrasoundModA.Image.Bitmap;
         }
 
         public Image Step14DrawUltraSoundApproximation(ref long timer, ref VerificationStatus result)
@@ -456,17 +432,17 @@ namespace FibroscanProcessor
                 throw new AccessViolationException("Can`t use this method in production mode");
             Stopwatch watch = Stopwatch.StartNew();
 
-            ReflectionedLine drawingLine = _debugUsa.ApproxLine;
-            SimpleGrayImage approxImage = new SimpleGrayImage(_debugUsa.Image.Data);
+            ReflectionedLine drawingLine = _workingUltrasoundModA.ApproxLine;
+            SimpleGrayImage approxImage = new SimpleGrayImage(_workingUltrasoundModA.Image.Data);
 
             IntPoint startPoint = new IntPoint(drawingLine.GetX(0), 0);
-            IntPoint endPoint = new IntPoint(drawingLine.GetX(_debugUsa.Image.Rows), _debugUsa.Image.Rows);
+            IntPoint endPoint = new IntPoint(drawingLine.GetX(_workingUltrasoundModA.Image.Rows), _workingUltrasoundModA.Image.Rows);
             approxImage.DrawGrayLine(startPoint, endPoint, 128);
 
             watch.Stop();
             timer = watch.ElapsedMilliseconds;
 
-            _ultrasoundModeAStatus = _debugUsa.RelativeEstimation > 90 ? VerificationStatus.Correct : VerificationStatus.Incorrect;
+            _ultrasoundModeAStatus = _workingUltrasoundModA.RelativeEstimation > MinUltrasoundModARelativeEstimation ? VerificationStatus.Correct : VerificationStatus.Incorrect;
             result = _ultrasoundModeAStatus;
 
             return approxImage.Bitmap;
@@ -477,62 +453,14 @@ namespace FibroscanProcessor
 
         private void Proceed()
         {
-            Elastogram workingElasto = LoadGrayElstogram();
-            _resultElasto = LoadRGBElstogram();
-            _ultrasoundModeM = LoadRGBUltrasoundModM();
-            _ultrasoundModeA = LoadRGBUltrasoundModA();
-            ElastoBlob workingBlob;
-            _elastoStatus = VerifyElasto(ref workingElasto, out workingBlob);
+            _workingElasto = LoadGrayElstogram();
+            _elastoStatus = VerifyElasto(ref _workingElasto, out _workingBlob);
 
-            DrawElasto(workingBlob, workingElasto);
-
-            UltrasoundModM workingUltrasoundModM = LoadGrayUltrasoundModM();
-            List<int> badLines = new List<int>();
-            _ultrasoundModeMStatus = VerifyUltrasoundModM(workingUltrasoundModM, ref badLines);
-
-            using (Graphics g = Graphics.FromImage(_ultrasoundModeM))
-            {
-                badLines.ForEach(point => g.DrawLine(new Pen(Color.Blue), new Point(0, point), new Point(_ultrasoundModeM.Width, point)));
-            }
-
-            UltrasoundModA workingUltrasoundModA = LoadGrayUltrasoundModA();
-            _ultrasoundModeAStatus = workingUltrasoundModA.RelativeEstimation > 90 ? VerificationStatus.Correct : VerificationStatus.Incorrect;
-
-            using (Graphics g = Graphics.FromImage(_ultrasoundModeA))
-            {
-                g.DrawLine(new Pen(Color.Blue), new Point(workingUltrasoundModA.ApproxLine.GetX(0), 0), 
-                    new Point(workingUltrasoundModA.ApproxLine.GetX(_ultrasoundModeA.Height), _ultrasoundModeA.Height));
-            }
-
-            //throw new ArithmeticException("stifness not calculated"); //TODO example of exception
-            //return;
-        }
-
-        private void DrawElasto(ElastoBlob workingBlob, Elastogram workingElasto)
-        {
-            Point p1 = new Point(workingBlob.LeftApproximation.GetX(0), 0);
-            Point p2 = new Point(workingBlob.LeftApproximation.GetX(workingElasto.Image.Cols - 1), workingElasto.Image.Cols - 1);
-            Point p3 = new Point(workingBlob.RightApproximation.GetX(0), 0);
-            Point p4 = new Point(workingBlob.RightApproximation.GetX(workingElasto.Image.Cols - 1), workingElasto.Image.Cols - 1);
-
-            Point[] pContour = new Point[workingBlob.Contour.Points.Count];
-            for (int i = 0; i < workingBlob.Contour.Points.Count; i++)
-                pContour[i] = new Point(workingBlob.Contour.Points[i].X, workingBlob.Contour.Points[i].Y);
-
-            using (Graphics g = Graphics.FromImage(_resultElasto))
-            {
-                g.DrawPolygon(new Pen(Color.GreenYellow), pContour);
-                g.DrawLine(new Pen(Color.White), _fibroline.Top, _fibroline.Bottom);
-                g.DrawLine(new Pen(Color.Red), p1, p2);
-                g.DrawLine(new Pen(Color.Blue), p3, p4);
-            }
-        }
-
-        private VerificationStatus VerifyUltrasoundModM(UltrasoundModM workingUltrasoundModM, ref List<int> badLines)
-        {
-            if (badLines == null) throw new ArgumentNullException(nameof(badLines));
-            badLines = workingUltrasoundModM.FindDeviationStreakLines(30, 3);
-            return badLines.Count < 15 ? VerificationStatus.Correct : VerificationStatus.Incorrect;
+            _workingUltrasoundModM = LoadGrayUltrasoundModM();
+            _ultrasoundModeMStatus = _workingUltrasoundModM.DeviationStreakLines.Count < 15 ? VerificationStatus.Correct : VerificationStatus.Incorrect;
+            
+            _workingUltrasoundModA = LoadGrayUltrasoundModA();
+            _ultrasoundModeAStatus = _workingUltrasoundModA.RelativeEstimation > MinUltrasoundModARelativeEstimation ? VerificationStatus.Correct : VerificationStatus.Incorrect;
         }
 
         private VerificationStatus VerifyElasto(ref Elastogram workingElasto, out ElastoBlob workingBlob)
@@ -545,7 +473,7 @@ namespace FibroscanProcessor
             workingElasto.RemoveEdgeObjects(25, 85, 100, 100, 50, 80);
             workingElasto = new Elastogram(new SimpleGrayImage(workingElasto.Image.Bitmap.MorphologyOpening(4)));
             workingElasto.CropObjects(24, 10);
-            workingElasto.ChooseContour(0.6, 0.65);
+            workingElasto.ChooseContour(0.55, 0.65);
             workingBlob = workingElasto.TargetObject;
             if (workingBlob == null)
                 return VerificationStatus.NotCalculated;
@@ -559,74 +487,38 @@ namespace FibroscanProcessor
 
         private Elastogram LoadGrayElstogram()
         {
-            Bitmap target = new Bitmap(254, 254 - 60);
+            Bitmap target = new Bitmap(ElastogramRect.Width, ElastogramRect.Height);
             using (Graphics g = Graphics.FromImage(target))
             {
                 g.DrawImage(_source, new Rectangle(0, 0, target.Width, target.Height),
-                                 new Rectangle(241, 33, target.Width, target.Height), GraphicsUnit.Pixel);
+                                 ElastogramRect, GraphicsUnit.Pixel);
             }
 
             return new Elastogram(new SimpleGrayImage(Grayscale.CommonAlgorithms.RMY.Apply(target)));
         }
 
-        private Bitmap LoadRGBElstogram()
-        {
-            Bitmap target = new Bitmap(254, 254 - 60);
-            using (Graphics g = Graphics.FromImage(target))
-            {
-                g.DrawImage(_source, new Rectangle(0, 0, target.Width, target.Height),
-                                 new Rectangle(241, 33, target.Width, target.Height), GraphicsUnit.Pixel);
-            }
-
-            return target;
-        }
-
         private UltrasoundModM LoadGrayUltrasoundModM()
         {
-            Bitmap target = new Bitmap(92, 254);
+            Bitmap target = new Bitmap(UltrasoundModMRect.Width, UltrasoundModMRect.Height);
             using (Graphics g = Graphics.FromImage(target))
             {
                 g.DrawImage(_source, new Rectangle(0, 0, target.Width, target.Height),
-                                 new Rectangle(50, 33, target.Width, target.Height), GraphicsUnit.Pixel);
+                                 UltrasoundModMRect, GraphicsUnit.Pixel);
             }
 
-            return new UltrasoundModM(new SimpleGrayImage(Grayscale.CommonAlgorithms.RMY.Apply(target)));
-        }
-
-        private Bitmap LoadRGBUltrasoundModM()
-        {
-            Bitmap target = new Bitmap(92, 254);
-            using (Graphics g = Graphics.FromImage(target))
-            {
-                g.DrawImage(_source, new Rectangle(0, 0, target.Width, target.Height),
-                                 new Rectangle(50, 33, target.Width, target.Height), GraphicsUnit.Pixel);
-            }
-
-            return target;
+            return new UltrasoundModM(30, 3, new SimpleGrayImage(Grayscale.CommonAlgorithms.RMY.Apply(target)));
         }
 
         private UltrasoundModA LoadGrayUltrasoundModA()
         {
-            Bitmap target = new Bitmap(60, 254);
+            Bitmap target = new Bitmap(UltrasoundModARect.Width, UltrasoundModARect.Height);
             using (Graphics g = Graphics.FromImage(target))
             {
                 g.DrawImage(_source, new Rectangle(0, 0, target.Width, target.Height),
-                                 new Rectangle(160, 33, target.Width, target.Height), GraphicsUnit.Pixel);
+                                 UltrasoundModARect, GraphicsUnit.Pixel);
             }
 
             return new UltrasoundModA(new SimpleGrayImage(Grayscale.CommonAlgorithms.RMY.Apply(target)));
-        }
-
-        private Bitmap LoadRGBUltrasoundModA()
-        {
-            Bitmap target = new Bitmap(60, 254);
-            using (Graphics g = Graphics.FromImage(target))
-            {
-                g.DrawImage(_source, new Rectangle(0, 0, target.Width, target.Height),
-                                 new Rectangle(160, 33, target.Width, target.Height), GraphicsUnit.Pixel);
-            }
-
-            return target;
         }
 
         #endregion

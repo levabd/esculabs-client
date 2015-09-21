@@ -10,14 +10,31 @@ namespace FibroscanProcessor.Ultrasound
 
         private readonly double[] _deviations;
         private readonly double[] _expectations;
+        private readonly double _deviationThreshold;
+        private readonly int _deviationStreakSize;
+        private readonly List<int> _deviationStreakLines;
 
-        public UltrasoundModM(SimpleGrayImage image)
+        public UltrasoundModM(double deviationThreshold, int deviationStreakSize, SimpleGrayImage image)
         {
             Image = image;
+            _deviationStreakLines = new List<int>();
             _deviations = new double[image.Rows];
             _expectations = new double[image.Rows];
+            _deviationStreakSize = deviationStreakSize;
+            _deviationThreshold = deviationThreshold;
             SetExpectations();
             SetDeviations();
+        }
+
+        public List<int> DeviationStreakLines
+        {
+            get
+            {
+                if (_deviationStreakLines.Count == 0)
+                    CalculateDeviationStreakLines();
+
+                return _deviationStreakLines;
+            }
         }
 
         private void SetExpectations()
@@ -42,30 +59,23 @@ namespace FibroscanProcessor.Ultrasound
                 _deviations[j] = Math.Sqrt(dev / Image.Cols);
             }
         }
-        /// <summary>
-        /// Find deviation
-        /// </summary>
-        /// <param name="deviationThreshold">Max normal deviation</param>
-        /// <param name="deviationStreakSize">Size of streak bad lines</param>
-        /// <returns></returns>
-        public List<int> FindDeviationStreakLines(double deviationThreshold, int deviationStreakSize)
+
+        public void CalculateDeviationStreakLines()
         {
-            List<int> deviationStreaks = new List<int>();
             int streakCounter = 0;
             for (int i = 0; i < Image.Rows; i++)
             {
-                if (_deviations[i] >= deviationThreshold)
+                if (_deviations[i] >= _deviationThreshold)
                     streakCounter++;
-                else if (streakCounter >= deviationStreakSize)
+                else if (streakCounter >= _deviationStreakSize)
                 {
                     for (int j = i - streakCounter; j < i; j++)
-                        deviationStreaks.Add(j);
+                        _deviationStreakLines.Add(j);
                     streakCounter = 0;
                 }
                 else
                     streakCounter = 0;
             }
-            return deviationStreaks;
         } 
     }
 }

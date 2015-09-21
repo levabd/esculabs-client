@@ -5,7 +5,7 @@ using Eklekto.Geometry;
 
 namespace Eklekto.Approximators
 {
-    class LinearLeastSquares
+    public class LinearLeastSquares
     {
         public ReflectionedLine Line;
 

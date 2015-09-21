@@ -25,6 +25,8 @@ namespace Eklekto.Geometry
 
         public ReflectionedLine(Point p1, Point p2)
         {
+            // ReSharper disable once CompareOfFloatsByEqualityOperator
+            // Divisioning by zero
             if (p1.Y == p2.Y)
                 _a = 0;
             else
