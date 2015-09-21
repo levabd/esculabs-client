@@ -6,7 +6,7 @@ using Eklekto.Imaging;
 
 namespace FibroscanProcessor.Ultrasound
 {
-    class UltrasoundModA
+    public class UltrasoundModA
     {
         public SimpleGrayImage Image;
         private double _rSquare = -1;

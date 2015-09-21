@@ -98,6 +98,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.groupBoxLog = new System.Windows.Forms.GroupBox();
             this.logBox = new System.Windows.Forms.ListBox();
+            this.radioButton6 = new System.Windows.Forms.RadioButton();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -316,6 +317,7 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.radioButton6);
             this.groupBox5.Controls.Add(this.label10);
             this.groupBox5.Controls.Add(this.label9);
             this.groupBox5.Controls.Add(this.numericUpDown7);
@@ -404,12 +406,12 @@
             // 
             this.radioButton5.AutoSize = true;
             this.radioButton5.Checked = true;
-            this.radioButton5.Location = new System.Drawing.Point(7, 113);
+            this.radioButton5.Location = new System.Drawing.Point(9, 100);
             this.radioButton5.Name = "radioButton5";
-            this.radioButton5.Size = new System.Drawing.Size(53, 17);
+            this.radioButton5.Size = new System.Drawing.Size(176, 17);
             this.radioButton5.TabIndex = 12;
             this.radioButton5.TabStop = true;
-            this.radioButton5.Text = "LGBT";
+            this.radioButton5.Text = "Niblack Morphology Binarization";
             this.radioButton5.UseVisualStyleBackColor = true;
             // 
             // radioButton4
@@ -425,7 +427,7 @@
             // radioButton3
             // 
             this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(9, 89);
+            this.radioButton3.Location = new System.Drawing.Point(125, 42);
             this.radioButton3.Name = "radioButton3";
             this.radioButton3.Size = new System.Drawing.Size(80, 17);
             this.radioButton3.TabIndex = 10;
@@ -436,7 +438,7 @@
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(9, 66);
+            this.radioButton2.Location = new System.Drawing.Point(9, 42);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(64, 17);
             this.radioButton2.TabIndex = 9;
@@ -447,7 +449,7 @@
             // radioButton1
             // 
             this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(9, 43);
+            this.radioButton1.Location = new System.Drawing.Point(125, 19);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(61, 17);
             this.radioButton1.TabIndex = 0;
@@ -825,7 +827,6 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(224, 766);
             this.tableLayoutPanel2.TabIndex = 19;
-            this.tableLayoutPanel2.Visible = false;
             // 
             // groupBox6
             // 
@@ -996,6 +997,17 @@
             this.logBox.Size = new System.Drawing.Size(238, 747);
             this.logBox.TabIndex = 0;
             // 
+            // radioButton6
+            // 
+            this.radioButton6.AutoSize = true;
+            this.radioButton6.Location = new System.Drawing.Point(9, 65);
+            this.radioButton6.Name = "radioButton6";
+            this.radioButton6.Size = new System.Drawing.Size(162, 17);
+            this.radioButton6.TabIndex = 19;
+            this.radioButton6.TabStop = true;
+            this.radioButton6.Text = "Otsu Morphology Binarization";
+            this.radioButton6.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1127,6 +1139,7 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.RadioButton radioButton6;
     }
 }
 

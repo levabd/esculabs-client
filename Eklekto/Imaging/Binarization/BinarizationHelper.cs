@@ -109,6 +109,57 @@ namespace Eklekto.Imaging.Binarization
             var threshold = new WolfJolionThreshold { K = k, Radius = radius };
             return threshold.Apply(image);
         }
+
+
         #endregion
+
+        #region Morphology Binarizations
+
+        public static Bitmap MorphologyNiblackBinarization(this Bitmap image, double k, int radius, int morphologyKernel, byte globalThreshold)
+        {
+            if (image.PixelFormat != PixelFormat.Format8bppIndexed)
+                throw new NotSupportedException("Filter can be applied to binary 8bpp images only");
+            Erosion morphologyErosion = new Erosion();
+            Bitmap tempMorphologyImage = morphologyErosion.Apply(image);
+            for (int i = 0; i < morphologyKernel - 1; i++)
+                tempMorphologyImage = morphologyErosion.Apply(tempMorphologyImage);
+            SimpleGrayImage morphologyImage = new SimpleGrayImage(tempMorphologyImage);
+
+            var threshold = new NiblackThreshold() { K = k, Radius = radius };
+            SimpleGrayImage localBinImage = new SimpleGrayImage(threshold.Apply(image));
+            for (int i = 0; i < morphologyImage.Cols; i++)
+                for (int j = 0; j < morphologyImage.Rows; j++)
+                {
+                    if (morphologyImage.Data[j, i] > globalThreshold)
+                        morphologyImage.Data[j, i] = 255;
+                    else morphologyImage.Data[j, i] = localBinImage.Data[j, i];
+                }
+            return morphologyImage.Bitmap;
+        }
+
+
+        public static Bitmap MorphologySimpleBinarization(this Bitmap image, int morphologyKernel, byte morphologyThreshold)
+        {
+            if (image.PixelFormat != PixelFormat.Format8bppIndexed)
+                throw new NotSupportedException("Filter can be applied to binary 8bpp images only");
+            Erosion morphologyErosion = new Erosion();
+            Bitmap tempMorphologyImage = morphologyErosion.Apply(image);
+            for (int i = 0; i < morphologyKernel - 1; i++)
+                tempMorphologyImage = morphologyErosion.Apply(tempMorphologyImage);
+            SimpleGrayImage morphologyImage = new SimpleGrayImage(tempMorphologyImage);
+
+            OtsuThreshold thresholdFilter = new OtsuThreshold();
+            SimpleGrayImage otcuImage = new SimpleGrayImage(thresholdFilter.Apply(image));
+
+            for (int i = 0; i < morphologyImage.Cols; i++)
+                for (int j = 0; j < morphologyImage.Rows; j++)
+                {
+                    if (morphologyImage.Data[j, i] > morphologyThreshold)
+                        morphologyImage.Data[j, i] = 255;
+                    else morphologyImage.Data[j, i] = otcuImage.Data[j, i];
+                }
+            return morphologyImage.Bitmap;
+        }
+#endregion
     }
 }

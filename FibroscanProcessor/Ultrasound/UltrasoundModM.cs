@@ -4,7 +4,7 @@ using Eklekto.Imaging;
 
 namespace FibroscanProcessor.Ultrasound
 {
-    class UltrasoundModM
+    public class UltrasoundModM
     {
         public SimpleGrayImage Image;
 

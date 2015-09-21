@@ -41,6 +41,7 @@
     <Compile Include="Elasto\ElastogramClassification.cs" />
     <Compile Include="Elasto\ElastoBlob.cs" />
     <Compile Include="Elasto\Elastogram.cs" />
+    <Compile Include="DebugFibroscanImage.cs" />
     <Compile Include="FibroscanImage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
