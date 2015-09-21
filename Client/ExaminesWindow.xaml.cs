@@ -138,5 +138,7 @@ namespace Client
             window.RefreshPatientsList();
             window.Activate();
         }
+
+ 
     }
 }

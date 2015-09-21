@@ -12,6 +12,7 @@ using Eklekto.Imaging.Morfology;
 using FibroscanProcessor.Elasto;
 using FibroscanProcessor.Ultrasound;
 using Point = System.Drawing.Point;
+using System.Drawing.Drawing2D;
 
 namespace FibroscanProcessor
 {

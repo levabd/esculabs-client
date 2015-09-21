@@ -70,8 +70,8 @@ namespace Client
 
                 if (xml != null)
                 {
-                    try
-                    {
+                    //try
+                    //{
                         e = new Examine();
                         e.ElastoExam = new ElastoExam();
 
@@ -82,7 +82,22 @@ namespace Client
                         e.PatientId = patientId;
 
                         var result = exam.Descendants("Result").FirstOrDefault();
-                        var sensorType = (SensorType)Enum.Parse(typeof(SensorType), exam.Descendants("ExamType").FirstOrDefault().Value);
+
+                        var sensorType = SensorType.Small;
+                        switch (exam.Descendants("ExamType").FirstOrDefault().Value)
+                        {
+                        case ("S"):
+                        case ("Small"):
+                            sensorType = SensorType.Small;
+                            break;
+                        case ("M"):
+                        case ("Medium"):
+                            sensorType = SensorType.Medium;
+                            break;
+                        case ("XL"):
+                            sensorType = SensorType.XL;
+                            break;
+                        }
 
                         e.ElastoExam.SensorType = sensorType;
                         e.ElastoExam.IQR = double.Parse(result.Descendants("StiffnessIQR").FirstOrDefault().Value, CultureInfo.InvariantCulture);
@@ -103,11 +118,9 @@ namespace Client
 
                             Image source = Image.FromFile(sourceFile);
 
-                            m.Source = ImageFileToBase64(sourceFile);
-
                             FibroscanImage prod = new FibroscanImage(source);
-                            Image mergedRes = prod.Merged;
-                            m.ResultMerged = ImageToBase64(mergedRes);
+                            m.ResultMerged = ImageToBase64(prod.Merged);
+                            m.Source = ImageFileToBase64(sourceFile);
 
                             e.ElastoExam.Measures.Add(m);
                         }
@@ -117,12 +130,12 @@ namespace Client
 
                         MongoRepository<Examine> examines = new MongoRepository<Examine>();
                         examines.Add(e);                        
-                    }
-                    catch (Exception)
-                    {
-                        MessageBox.Show("Не удалось распознать FIBX-файл");
-                        e = null;
-                    }
+                    //}
+                    //catch (Exception)
+                    //{
+                    //    MessageBox.Show("Не удалось распознать FIBX-файл");
+                    //    e = null;
+                    //}
                 }
                 else
                 {

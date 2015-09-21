@@ -42,7 +42,7 @@ namespace Client
                 text += ".";
             }
 
-            Dispatcher.Invoke(() => label.Content = text);
+            Dispatcher.Invoke(() => label.Content = (new Guid()).ToString());
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
