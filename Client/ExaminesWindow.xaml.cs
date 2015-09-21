@@ -114,6 +114,7 @@ namespace Client
                 var blur = new BlurEffect();
                 blur.Radius = 4;
                 Effect = blur;
+
                 var loader = new LoaderWindow();
                 loader.Owner = this;
                 loader.Show();

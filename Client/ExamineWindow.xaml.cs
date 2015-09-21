@@ -43,10 +43,10 @@ namespace Client
             nameLabel.Text = string.Format("{0} {1} {2}", patient.LastName, patient.FirstName, patient.MiddleName);
             dateLabel.Text = examine.CreatedAt.ToString();
             iqrLabel.Text = examine.ElastoExam.IQR.ToString();
-            medLabel.Text = examine.ElastoExam.MED.ToString();
+            medLabel.Text = examine.ElastoExam.Med.ToString();
 
             UpdateSensorLabel(sensorLabel, examine.ElastoExam.SensorType);
-            UpdateIqrMedLabel(iqrMedLabel, examine.ElastoExam.IQR, examine.ElastoExam.MED);
+            UpdateIqrMedLabel(iqrMedLabel, examine.ElastoExam.IQR, examine.ElastoExam.Med);
 
             scansLabel.Text = examine.ElastoExam.Measures.Count().ToString();
             correctScansLabel.Text = examine.ElastoExam.Measures.Where(x => x.IsCorrect).Count().ToString();
@@ -104,19 +104,27 @@ namespace Client
         {
             if (med != 0 && iqr != 0)
             {
-                double medIqr = Math.Round((iqr / med) * 100);
-                label.Text = medIqr.ToString() + "%";
+                var iqrMed = examine.ElastoExam.IQRMed;
 
-                if (medIqr < 30.0)
+                if (!iqrMed.HasValue)
                 {
-                    label.Text += " (некорректно)";
+                    label.Text += "Нет данных";
                     label.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFFF2323"));
                 }
                 else
                 {
-                    label.Foreground = new SolidColorBrush(Colors.Black);
-                }
+                    label.Text = iqrMed.ToString() + "%";
 
+                    if (iqrMed < 30)
+                    {
+                        label.Text += " (некорректно)";
+                        label.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFFF2323"));
+                    }
+                    else
+                    {
+                        label.Foreground = new SolidColorBrush(Colors.Black);
+                    }
+                }
             }
         }
 
