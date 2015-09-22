@@ -25,19 +25,19 @@ namespace Client
     /// </summary>
     public partial class ExaminesWindow : Window
     {
-        private Patient patient = null;
-        private List<TableExamine> examines = new List<TableExamine>();
+        private readonly Patient _patient;
+        private List<TableExamine> _examines = new List<TableExamine>();
 
         public ExaminesWindow()
         {
             InitializeComponent();
         }
 
-        public ExaminesWindow(Patient Patient) : this()
+        public ExaminesWindow(Patient patient) : this()
         {
-            patient = Patient;
+            _patient = patient;
 
-            if (patient != null)
+            if (_patient != null)
             {
                 RefreshExaminesList();
             }
@@ -45,22 +45,22 @@ namespace Client
 
         private void RefreshExaminesList()
         {
-            MongoRepository<Examine> examinesRepo = new MongoRepository<Examine>();
+            var examinesRepo = new MongoRepository<Examine>();
 
-            var patientExamines = examinesRepo.Where(ex => ex.PatientId == patient.Id)
+            var patientExamines = examinesRepo.Where(ex => ex.PatientId == _patient.Id)
                 .OrderByDescending(ex => ex.CreatedAt).ToList();
 
-            if (examines != null && examines.Any())
+            if (_examines != null && _examines.Any())
             {
-                examines.Clear();
+                _examines.Clear();
             }
 
-            examines = new List<TableExamine>();
+            _examines = new List<TableExamine>();
 
             var i = patientExamines.Count;
-            foreach (Examine examine in patientExamines)
+            foreach (var examine in patientExamines)
             {
-                examines.Add(new TableExamine(examine, i));
+                _examines.Add(new TableExamine(examine, i));
                 --i;
             }
         }
@@ -76,11 +76,11 @@ namespace Client
             TableExamine tableExamine = ((FrameworkElement)sender).DataContext as TableExamine;
 
             MongoRepository<Examine> examinesRepo = new MongoRepository<Examine>();
-            var examine = examinesRepo.Where(x => x.Id == tableExamine.Guid).FirstOrDefault() as Examine;
+            var examine = examinesRepo.FirstOrDefault(x => x.Id == tableExamine.Guid);
 
             if (examine != null)
             {
-                ExamineWindow window = new ExamineWindow(patient, examine);
+                var window = new ExamineWindow(_patient, examine);
                 window.Owner = this;
                 window.ShowDialog();
                 RefreshExaminesList();
@@ -93,10 +93,10 @@ namespace Client
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            if (patient != null)
+            if (_patient != null)
             {
-                nameLabel.Content = string.Format("{0} {1} {2}", patient.LastName, patient.FirstName, patient.MiddleName);
-                examinesGrid.ItemsSource = examines;
+                nameLabel.Content = $"{_patient.LastName} {_patient.FirstName} {_patient.MiddleName}";
+                examinesGrid.ItemsSource = _examines;
             }
         }
 
@@ -107,34 +107,40 @@ namespace Client
 
         private void importFbixBtn_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
+            var openFileDialog = new OpenFileDialog();
 
-            if (openFileDialog.ShowDialog() == true)
+            if (openFileDialog.ShowDialog() != true)
             {
-                var blur = new BlurEffect();
-                blur.Radius = 4;
-                Effect = blur;
-
-                var loader = new LoaderWindow();
-                loader.Owner = this;
-                loader.Show();
-
-                var examine = FIBXParser.Instance.Import(openFileDialog.FileName, patient.Id);
-
-                if (examine != null && IsLoaded)
-                {
-                    RefreshExaminesList();
-                    examinesGrid.ItemsSource = examines;
-                }
-
-                loader.Close();
-                Effect = null;
+                return;
             }
+
+            var blur = new BlurEffect { Radius = 4 };
+            Effect = blur;
+
+            var loader = new LoaderWindow { Owner = this };
+            loader.Show();
+
+            var examine = FibxParser.Instance.Import(openFileDialog.FileName, _patient.Id);
+
+            if (examine != null && IsLoaded)
+            {
+                RefreshExaminesList();
+                examinesGrid.ItemsSource = _examines;
+            }
+
+            loader.Close();
+            Effect = null;
         }
 
         private void Window_Closed(object sender, EventArgs e)
         {
             var window = Application.Current.MainWindow as PatientsWindow;
+
+            if (window == null)
+            {
+                return;
+            }
+
             window.RefreshPatientsList();
             window.Activate();
         }
