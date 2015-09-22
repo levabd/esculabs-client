@@ -87,11 +87,20 @@ namespace FibroscanProcessor.Elasto
         {
             int rotationCountDown = ContourRotationHeihgt;
             rightContourTopIndex = 0;
+            int maxVerticalIndex = 0;
+            int maxY = 0;
 
             for (int i = 1; i < contour.Points.Count; i++)
             {
                 if (contour.Points[i].Y < Blob.Rectangle.Y + ContourCromHeight)
                     continue;
+
+                //not found bottom exception handler
+                if (contour.Points[i].Y > maxY)
+                {
+                    maxVerticalIndex = i;
+                    maxY = contour.Points[i].Y;
+                }
 
                 if (rightContourTopIndex < 1)
                     rightContourTopIndex = i;
@@ -108,7 +117,7 @@ namespace FibroscanProcessor.Elasto
                 if (rotationCountDown == 0)
                     return i - ContourRotationHeihgt;
             }
-            return 0;
+            return maxVerticalIndex;
         }
     }
 }
