@@ -78,9 +78,12 @@ namespace ImageLoader
                 if (radioButton3.Checked)
                     pictureBox4.Image = image.Step4WolfJoulionBinarization(ref timer, (double)numericUpDown11.Value, (int)numericUpDown6.Value);
                 if (radioButton5.Checked)
-                    pictureBox4.Image = image.Step4LgbtBinarization(ref timer, (double)numericUpDown11.Value, (int)numericUpDown6.Value,
+                    pictureBox4.Image = image.Step4MorphologyNiblackBinarization(ref timer, (double)numericUpDown11.Value, (int)numericUpDown6.Value,
                                                                     (int)numericUpDown7.Value, (byte)numericUpDown10.Value);
-                //logBox.Items.Add("Binarization time: " + timer.ToString());
+                if (radioButton6.Checked)
+                    pictureBox4.Image = image.Step4SimpleMorphologyBinarization(ref timer, (int)numericUpDown7.Value, (byte)numericUpDown10.Value);
+
+                logBox.Items.Add("Binarization time: " + timer.ToString());
 
                 pictureBox5.Image = image.Step5EdgeRemoving(ref timer, (int)numericUpDown2.Value, (int)numericUpDown8.Value, (int)numericUpDown9.Value,
                     (int)numericUpDown12.Value, (int)numericUpDown13.Value, (int)numericUpDown14.Value);
@@ -97,6 +100,15 @@ namespace ImageLoader
 
                 pictureBox8.Image = image.Step9Approximation(ref timer);
                 //logBox.Items.Add("OLS time: " + timer.ToString());
+
+                logBox.Items.Add("Fibroline Angle: " + image.Fibroline.Equation.Angle);
+                logBox.Items.Add("Left Angle:      " + image.WorkingBlob.LeftApproximation.Angle);
+                logBox.Items.Add("Right Angle:     " + image.WorkingBlob.RightApproximation.Angle);
+                logBox.Items.Add("Left RSquare:    " + image.WorkingBlob.RSquareLeft);
+                logBox.Items.Add("Right RSquare:   " + image.WorkingBlob.RSquareRight);
+                logBox.Items.Add("Left Relative Est:  " + image.WorkingBlob.RelativeEstimationLeft);
+                logBox.Items.Add("Right Relative Est: " + image.WorkingBlob.RelativeEstimationRight);
+                //logBox.Items.Add("Area:            " + image.WorkingBlob.Blob.Area);
 
                 logBox.Items.Add("Elastogram is " + image.Step10Classify().ToString());
 
@@ -137,7 +149,7 @@ namespace ImageLoader
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DialogResult rsl = MessageBox.Show("Не смей уходить, когда я анализирую изображения!", "Одумайся!", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (rsl == DialogResult.Yes)
+            if (rsl == DialogResult.No)
                 Application.Exit();
         }
         #region Casual methods

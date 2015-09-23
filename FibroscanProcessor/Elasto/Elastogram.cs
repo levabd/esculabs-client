@@ -155,7 +155,7 @@ namespace FibroscanProcessor.Elasto
             }
         }
 
-        public void ChooseContour(double areaProportion, double heightPropotion)
+        public void ChooseContour(double areaProportion, int areaMinLimit, double heightPropotion)
         {
             Bitmap result = Image.Bitmap;
             List<BlobEntity> objects = result.FindBlobs();
@@ -175,7 +175,7 @@ namespace FibroscanProcessor.Elasto
                     maxHeight = currentHeight;
             });
 
-            int limitArea = (int) (maxArea*areaProportion);
+            int limitArea = Math.Min((int) (maxArea*areaProportion), areaMinLimit);
             int limitHeight = (int) (maxHeight*heightPropotion);
             double minDistanceToCenter = result.Height + result.Width; //Triangle inequality:)
             int minDistanceToCenterObjectIndex = -1; //
@@ -204,7 +204,7 @@ namespace FibroscanProcessor.Elasto
 
             for (int i = 0; i < objects.Count; i++)
                 if (i != minDistanceToCenterObjectIndex)
-                    Image.FillBlob(objects[i].Blob, SimpleGrayImage.WhiteBrightness);
+                    Image.FillBlob(objects[i].Blob, SimpleGrayImage.BlackBrightness);
         }
     }
 }
