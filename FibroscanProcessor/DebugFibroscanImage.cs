@@ -298,7 +298,7 @@ namespace FibroscanProcessor
             return _workingElasto.Image.Bitmap.Invert();
         }
 
-        public Image Step9Approximation(ref long timer)
+        public Image Step9Approximation(ref long timer, double sampleShare = SampleShare, double outliersShare = OutliersShare, int iterations = RansacIterations)
         {
             if (!_debugMode)
                 throw new AccessViolationException("Can`t use this method in production mode");
