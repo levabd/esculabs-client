@@ -27,7 +27,7 @@ namespace FibroscanProcessor.Elasto
 
         public Contour LeftContour { get; }
 
-        public Contour RigthContour { get; }
+        public Contour RightContour { get; }
 
         public ElastoBlob(Blob blob, Contour contour) : base(blob, contour)
         {
@@ -36,7 +36,7 @@ namespace FibroscanProcessor.Elasto
             int leftContoursBottomIndex = LeftContoursBottomIndexes(contour, out leftContoursTopIndex);
             int rightContoursBottomIndex = RightContoursBottomIndexes(contour, out rightContoursTopIndex);
             LeftContour = new Contour(contour.Points.GetRange(leftContoursBottomIndex, leftContoursTopIndex - leftContoursBottomIndex));
-            RigthContour = new Contour(contour.Points.GetRange(rightContoursTopIndex, rightContoursBottomIndex - rightContoursTopIndex));
+            RightContour = new Contour(contour.Points.GetRange(rightContoursTopIndex, rightContoursBottomIndex - rightContoursTopIndex));
         }
 
         public ElastoBlob(BlobEntity blob) : base(blob.Blob, blob.Contour)
@@ -46,14 +46,14 @@ namespace FibroscanProcessor.Elasto
             int leftContoursBottomIndex = LeftContoursBottomIndexes(blob.Contour, out leftContoursTopIndex);
             int rightContoursBottomIndex = RightContoursBottomIndexes(blob.Contour, out rightContoursTopIndex);
             LeftContour = new Contour(blob.Contour.Points.GetRange(leftContoursBottomIndex, leftContoursTopIndex - leftContoursBottomIndex));
-            RigthContour = new Contour(blob.Contour.Points.GetRange(rightContoursTopIndex, rightContoursBottomIndex - rightContoursTopIndex));
+            RightContour = new Contour(blob.Contour.Points.GetRange(rightContoursTopIndex, rightContoursBottomIndex - rightContoursTopIndex));
         }
 
         public void Approximate(double sampleShare, double outlierShare, int iterations)
         {
             Ransac linear = new Ransac(sampleShare, outlierShare, iterations);
-            _leftApproximation = linear.Approximate(LeftContour.Points, out _rSquareLeft, out _relativeEstimationLeft);
-            _rightApproximation = linear.Approximate(RigthContour.Points, out _rSquareRight, out _relativeEstimationRight);
+            _leftApproximation = linear.Approximate(LeftContour.Points, LeftContour.Points.Count, out _rSquareLeft, out _relativeEstimationLeft);
+            _rightApproximation = linear.Approximate(RightContour.Points, RightContour.Points.Count, out _rSquareRight, out _relativeEstimationRight);
         }
 
         private int LeftContoursBottomIndexes(Contour contour, out int leftContourTopIndex)
@@ -87,11 +87,21 @@ namespace FibroscanProcessor.Elasto
         {
             int rotationCountDown = ContourRotationHeihgt;
             rightContourTopIndex = 0;
+            int maxVerticalIndex = 0;
+            int maxY = 0;
 
             for (int i = 1; i < contour.Points.Count; i++)
             {
                 if (contour.Points[i].Y < Blob.Rectangle.Y + ContourCromHeight)
                     continue;
+
+                //not found bottom exception handler
+                if (contour.Points[i].Y > maxY)
+                {
+                    maxVerticalIndex = i;
+                    maxY = contour.Points[i].Y;
+                }
+
 
                 if (rightContourTopIndex < 1)
                     rightContourTopIndex = i;
@@ -108,7 +118,8 @@ namespace FibroscanProcessor.Elasto
                 if (rotationCountDown == 0)
                     return i - ContourRotationHeihgt;
             }
-            return 0;
+            return maxVerticalIndex;
+
         }
     }
 }

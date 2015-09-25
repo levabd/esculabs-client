@@ -54,6 +54,8 @@ namespace Eklekto.Approximators
         {
             get
             {
+                if (_n == 0)
+                    return -1 * Double.MaxValue;
                 // ReSharper disable once PossibleLossOfFraction
                 double xMean = _sumX/_n;
                 double numerator = 0;
@@ -63,7 +65,7 @@ namespace Eklekto.Approximators
                     numerator += Math.Pow(point.X - Line.GetX(point.Y), 2);
                     denominator += Math.Pow(point.X - xMean, 2);
                 });
-                return (1 - numerator / denominator) *100;
+                return Math.Max(0, 1 - numerator / denominator) *100;
             }
         }
     }

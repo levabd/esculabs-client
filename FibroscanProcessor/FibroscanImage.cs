@@ -14,7 +14,7 @@ using FibroscanProcessor.Ultrasound;
 using Point = System.Drawing.Point;
 
 namespace FibroscanProcessor
-{
+{ 
     public enum VerificationStatus
     {
         NotCalculated,
@@ -48,12 +48,12 @@ namespace FibroscanProcessor
         private const int MorphologyOpeningKernel = 4;
         private const int CropSteps = 24;
         private const int CropDistance = 10;
-        private const int AreaMinLimit = 6000;
+        private const int AreaMinLimit = 4000;
         private const double AreaProportion = 0.6;
         private const double HeightProportion = 0.65;
         private const double SampleShare = 0.3;
         private const double OutliersShare = 0.35;
-        private const int RansacIterations = 3000;
+        private const int RansacIterations = 6000;
         private int UsDeviationThreshold = 30;
         private int UsDeviationStreak = 3;
 

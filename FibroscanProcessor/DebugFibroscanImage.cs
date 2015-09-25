@@ -78,47 +78,35 @@ namespace FibroscanProcessor
 
         #region DebugElastogram
 
-        public Image Step1LoadElastogram(ref long timer)
+        public Image Step1LoadElastogram()
         {
             if (!_debugMode)
                 throw new AccessViolationException("Can`t use this method in production mode");
-            Stopwatch watch = Stopwatch.StartNew();
 
             _workingElasto = LoadGrayElstogram();
-
-            watch.Stop();
-            timer = watch.ElapsedMilliseconds;
 
             return _workingElasto.Image.Bitmap;
         }
 
-        public Image Step2ElastoWithoutLine(ref long timer)
+        public Image Step2ElastoWithoutLine()
         {
             if (!_debugMode)
                 throw new AccessViolationException("Can`t use this method in production mode");
-            Stopwatch watch = Stopwatch.StartNew();
 
             _workingElasto.GetFibroLine();
             _fibroline = _workingElasto.Fibroline;
             _workingElasto.PaintOverFibroline();
             
-            watch.Stop();
-            timer = watch.ElapsedMilliseconds;
-
             return _workingElasto.Image.Bitmap;
         }
 
-        public Image Step3KuwaharaElasto(ref long timer, int kernel)
+        public Image Step3KuwaharaElasto(int kernel)
         {
             if (!_debugMode)
                 throw new AccessViolationException("Can`t use this method in production mode");
-            Stopwatch watch = Stopwatch.StartNew();
 
             Bitmap result = _workingElasto.Image.Bitmap.GrayscaleKuwahara(kernel);
             _workingElasto = new Elastogram(new SimpleGrayImage(result));
-
-            watch.Stop();
-            timer = watch.ElapsedMilliseconds;
 
             return result;
         }
@@ -249,18 +237,13 @@ namespace FibroscanProcessor
             return _workingElasto.Image.Bitmap;
         }
 
-        public Image Step6Morphology(ref long timer, int morphologyTimes)
+        public Image Step6Morphology(int morphologyTimes)
         {
             if (!_debugMode)
                 throw new AccessViolationException("Can`t use this method in production mode");
 
-            Stopwatch watch = Stopwatch.StartNew();
-
             Bitmap result = _workingElasto.Image.Bitmap.MorphologyOpening(morphologyTimes);
             _workingElasto = new Elastogram(new SimpleGrayImage(result));
-
-            watch.Stop();
-            timer = watch.ElapsedMilliseconds;
 
             return _workingElasto.Image.Bitmap;
         }
@@ -270,12 +253,7 @@ namespace FibroscanProcessor
             if (!_debugMode)
                 throw new AccessViolationException("Can`t use this method in production mode");
 
-            Stopwatch watch = Stopwatch.StartNew();
-
             _workingElasto.CropObjects(step, distance);
-
-            watch.Stop();
-            timer = watch.ElapsedMilliseconds;
 
             return _workingElasto.Image.Bitmap.Invert();
         }
@@ -285,15 +263,10 @@ namespace FibroscanProcessor
             if (!_debugMode)
                 throw new AccessViolationException("Can`t use this method in production mode");
 
-            Stopwatch watch = Stopwatch.StartNew();
-
             _workingElasto.ChooseContour(0.55, AreaMinLimit, 0.65);
             _workingBlob = _workingElasto.TargetObject;
             if (_workingBlob == null)
                 _elastoStatus = VerificationStatus.NotCalculated;
-
-            watch.Stop();
-            timer = watch.ElapsedMilliseconds;
 
             return _workingElasto.Image.Bitmap.Invert();
         }
@@ -305,7 +278,7 @@ namespace FibroscanProcessor
 
             Stopwatch watch = Stopwatch.StartNew();
 
-            _workingBlob.Approximate(SampleShare, OutliersShare, RansacIterations);
+            _workingBlob.Approximate(sampleShare, outliersShare, iterations);
 
             IntPoint p1 = new IntPoint(_workingBlob.LeftApproximation.GetX(0), 0);
             IntPoint p2 = new IntPoint(_workingBlob.LeftApproximation.GetX(_workingElasto.Image.Cols - 1), _workingElasto.Image.Cols - 1);
