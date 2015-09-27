@@ -246,7 +246,7 @@ namespace Eklekto.Imaging
                     int x = (int)(a * y + b);
                     if ((x < Cols)&&(x>0))
                         Data[y, x] = brightness;
-                    if (x + 1 < Cols)
+                    if ((x + 1 < Cols) && (x > -1))
                         Data[y, x + 1] = brightness;
                 }
             }
