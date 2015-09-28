@@ -65,26 +65,22 @@ namespace Eklekto.Imaging.Blobs
 
             int label = blob.ID;
 
-            int startPointCounter = 0;
-
             IntPoint startPoint = new IntPoint();
+            List <IntPoint> lastStartPoint = new List<IntPoint>();
 
-            IntPoint lastStartPoint = new IntPoint();
-            //find start point on top line (last but one)
+            var random4PointIndex = new Random();
+            int randomIndex = random4PointIndex.Next(13) + 2;
 
+            //find start point on top line (last but Random(15))
             int ap = ymin * imageWidth + xmin;
             for (int x = xmin; x <= xmax; x++, ap++)
             {
                 if (objectLabels[ap] == label)
                 {
-                    startPoint = lastStartPoint;
-                    lastStartPoint = new IntPoint(x, ymin);
-                    startPointCounter++;
-
+                    lastStartPoint.Add(new IntPoint(x, ymin));
+                    startPoint = lastStartPoint[lastStartPoint.Count < randomIndex ? 0 : lastStartPoint.Count - randomIndex];
                 }
             }
-            if (startPointCounter < 2)
-                startPoint = lastStartPoint;
 
             TTracerMethod contourTracer = new TTracerMethod
             {

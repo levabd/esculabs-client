@@ -244,9 +244,9 @@ namespace Eklekto.Imaging
                 for (int y = minY; y <= maxY; y++)
                 {
                     int x = (int)(a * y + b);
-                    if ((x < Cols)&&(x>0))
+                    if ((x < Cols) && (x > 0))
                         Data[y, x] = brightness;
-                    if (x + 1 < Cols)
+                    if ((x + 1 < Cols) && (x > -1)) 
                         Data[y, x + 1] = brightness;
                 }
             }
@@ -262,6 +262,12 @@ namespace Eklekto.Imaging
         public void DrawHorisontalGrayLine(int startX, int endX, int y, byte brightness)
         {
             for (int x = startX; x <= endX; x++)
+                Data[y, x] = brightness;
+        }
+
+        public void DrawVerticalGrayLine(int startY, int endY, int x, byte brightness)
+        {
+            for (int y = startY; y <= endY; y++)
                 Data[y, x] = brightness;
         }
 

@@ -213,9 +213,9 @@ namespace FibroscanProcessor
 
             Stopwatch watch = Stopwatch.StartNew();
 
+            //WorkingElasto.Image.DrawVerticalGrayLine(0, 150, 85, 128);
             Bitmap result = _workingElasto.Image.Bitmap.MorphologyNiblackBinarization(k, localRadius, globalRadius, globalThreshold);
             _workingElasto = new Elastogram(new SimpleGrayImage(result));
-
             watch.Stop();
             timer = watch.ElapsedMilliseconds;
 

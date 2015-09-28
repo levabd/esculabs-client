@@ -47,7 +47,7 @@ namespace FibroscanProcessor
         private const int RightCentralEdgeDist = 85;
         private const int MorphologyOpeningKernel = 4;
         private const int CropSteps = 24;
-        private const int CropDistance = 10;
+        private const int CropDistance = 8;
         private const int AreaMinLimit = 4000;
         private const double AreaProportion = 0.6;
         private const double HeightProportion = 0.65;

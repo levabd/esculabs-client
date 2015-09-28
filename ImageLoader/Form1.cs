@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 using Eklekto.Helpers;
 using FibroscanProcessor;
@@ -20,8 +21,8 @@ namespace ImageLoader
             InitializeComponent();
             pictures = new List<PictureBox>
             {
-                sourcePicture, elastoPicture, kuwaharaPicture, binarizationPicture, edgePicture, morphologyPicture,
-                choosingPicture, approximationPicture, sourceModMPicture, outModMPicture, sourceModAPicture, outModAPicture, outputPicture
+                sourcePicture, elastoPicture, kuwaharaPicture, binarizationPicture, edgePicture, morphologyPicture,cropPicture,
+                choosingPicture, approximationPicture, sourceModMPicture, outModMPicture, sourceModAPicture, outModAPicture
             };
         }
 
@@ -105,7 +106,7 @@ namespace ImageLoader
 
             morphologyPicture.Image = image.Step6Morphology((int)numericUpDown3.Value);
 
-            image.Step7CropObjects(ref timer, (int)upDownCropStep.Value, (int)upDownCropDistance.Value);
+            cropPicture.Image = image.Step7CropObjects(ref timer, (int)upDownCropStep.Value, (int)upDownCropDistance.Value);
 
             choosingPicture.Image = image.Step8ChooseOneObject(ref timer, 0.55, 0.65);
 
@@ -121,6 +122,7 @@ namespace ImageLoader
             signatureBox.Items.Add("Right RSquare:        " + Math.Round(image.WorkingBlob.RSquareRight, 2));
             signatureBox.Items.Add("Left Relative Est:      " + Math.Round(image.WorkingBlob.RelativeEstimationLeft, 2));
             signatureBox.Items.Add("Right Relative Est:     " + Math.Round(image.WorkingBlob.RelativeEstimationRight, 2));
+            signatureBox.Items.Add("Blob Area:                " + image.WorkingBlob.Blob.Area);
 
             VerificationStatus elastoStatus = image.Step10Classify();
             resultBox.Items.Add("Elastogram is " + elastoStatus);
@@ -154,6 +156,10 @@ namespace ImageLoader
                 sourceImage = Image.FromFile(imagePath.Text);
                 sourcePicture.Image = sourceImage;
                 StartImageVerification();
+                commonStatBox.Items.Add(i + 1 + " files processed");
+
+
+
                 //System.Threading.Thread.Sleep(1000*(int) upDownTimeDelay.Value);
             }
         }
@@ -265,6 +271,10 @@ namespace ImageLoader
         {
             LoadImage();
         }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            LoadImage();
+        }
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
             StartImageVerification();
@@ -281,17 +291,16 @@ namespace ImageLoader
         {
             StartImageVerification();
         }
+        private void button2_Click(object sender, EventArgs e)
+        {
+            StartImageVerification();
+        }
 
         private void pictureBox_Click(object sender, EventArgs e)
         {
             BigImage fBigImage = new BigImage(((PictureBox)sender).Image);
             fBigImage.ShowDialog();
         }
-
-
-
         #endregion
-
-        
     }
 }
