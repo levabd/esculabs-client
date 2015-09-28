@@ -1,4 +1,6 @@
-﻿using Eklekto.Geometry;
+﻿using System.Collections.Generic;
+using AForge;
+using Eklekto.Geometry;
 using Eklekto.Imaging.Blobs;
 using Eklekto.Imaging.Contours;
 using Eklekto.Approximators;
@@ -60,7 +62,21 @@ namespace FibroscanProcessor.Elasto
         {
             int rotationCountDown = ContourRotationHeihgt;
             leftContourTopIndex = 0;
-            for (int i = contour.Points.Count - 1; i > 0; i--)
+            int startIndex = contour.Points.Count - 1;
+
+            HashSet<IntPoint> pointsHashSet = new HashSet<IntPoint>(contour.Points);
+            //find start point on top line (left point)
+            for (int x = Blob.Rectangle.X; x < Blob.Rectangle.Width; x++)
+            {
+                IntPoint point = new IntPoint(x, Blob.Rectangle.Y);
+                if (pointsHashSet.Contains(point))
+                {
+                    startIndex = contour.Points.FindIndex(a => a == point);
+                    break;
+                }
+            }
+
+            for (int i = startIndex; i > 0; i--)
             {
                 if (contour.Points[i].Y < Blob.Rectangle.Y + ContourCromHeight)
                     continue;
@@ -72,7 +88,7 @@ namespace FibroscanProcessor.Elasto
                     rotationCountDown--;
 
                 if (contour.Points[i].Y < contour.Points[i - 1].Y)
-                    rotationCountDown = (rotationCountDown < ContourRotationHeihgt) ? rotationCountDown + 1 : ContourRotationHeihgt; //Dump conuter
+                    rotationCountDown = (rotationCountDown < ContourRotationHeihgt) ? rotationCountDown + 1 : ContourRotationHeihgt; //Dump contour
 
                 if (contour.Points[i].Y > Blob.Rectangle.Y + Blob.Rectangle.Height - ContourCromHeight)
                     return i + ContourRotationHeihgt - rotationCountDown;
@@ -109,7 +125,7 @@ namespace FibroscanProcessor.Elasto
                     rotationCountDown--;
 
                 if (contour.Points[i].Y > contour.Points[i - 1].Y)
-                    rotationCountDown = (rotationCountDown < ContourRotationHeihgt) ? rotationCountDown + 1 : ContourRotationHeihgt; //Dump conuter
+                    rotationCountDown = (rotationCountDown < ContourRotationHeihgt) ? rotationCountDown + 1 : ContourRotationHeihgt; //Dump contour
 
                 if (contour.Points[i].Y > Blob.Rectangle.Y + Blob.Rectangle.Height - ContourCromHeight)
                     return i - ContourRotationHeihgt + rotationCountDown;
