@@ -153,15 +153,24 @@ namespace Eklekto.Imaging
             FillPolygon(points, new Rectangle(minx, miny, maxx - minx + 1, maxy - miny + 1), color);
         }
 
+
         //Simple Drawing on Bitmap
         //PointsMarker marker = new PointsMarker(contour, Color.DarkGray);
         //return marker.Apply(Bitmap);
-        public void DrawPolygon(List<IntPoint> points)
+        public void DrawPolygon(List<IntPoint> points, byte brightness = GrayBrightness, int weight = 3)
         {
-            points.ForEach(point => Data[point.Y, point.X] = GrayBrightness);
+            points.ForEach(point =>
+            {
+                for (int pointWeight = 0; pointWeight < weight; pointWeight++)
+                {
+                    int currentWeightIndex = pointWeight - weight/2;
+                    if ((point.X + currentWeightIndex > 0) && (point.X + currentWeightIndex < Cols))
+                        Data[point.Y, point.X + currentWeightIndex] = brightness;
+                }
+            });
         }
 
- 
+
 
         // ReSharper disable once RedundantAssignment
         // We create new Image every time
@@ -226,6 +235,8 @@ namespace Eklekto.Imaging
                 for (int x = minX; x <= maxX; x++)
                 {
                     int y = (int)(a * x + b);
+                    if ((y - 1 < Rows)&&(y > 0))
+                        Data[y - 1, x] = brightness;
                     if (y < Rows)
                         Data[y, x] = brightness;
                     if (y + 1 < Rows)
@@ -244,9 +255,13 @@ namespace Eklekto.Imaging
                 for (int y = minY; y <= maxY; y++)
                 {
                     int x = (int)(a * y + b);
-                    if ((x < Cols)&&(x>0))
+                    //new
+                    if ((x -1 < Cols) && (x - 1 >= 0))
+                        Data[y, x - 1] = brightness;
+                    //end new
+                    if ((x < Cols) && (x >= 0))
                         Data[y, x] = brightness;
-                    if ((x + 1 < Cols) && (x > -1))
+                    if ((x + 1 < Cols) && (x + 1 >= 0)) 
                         Data[y, x + 1] = brightness;
                 }
             }
@@ -262,6 +277,12 @@ namespace Eklekto.Imaging
         public void DrawHorisontalGrayLine(int startX, int endX, int y, byte brightness)
         {
             for (int x = startX; x <= endX; x++)
+                Data[y, x] = brightness;
+        }
+
+        public void DrawVerticalGrayLine(int startY, int endY, int x, byte brightness)
+        {
+            for (int y = startY; y <= endY; y++)
                 Data[y, x] = brightness;
         }
 

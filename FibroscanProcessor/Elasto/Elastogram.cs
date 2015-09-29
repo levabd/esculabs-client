@@ -7,6 +7,7 @@ using Eklekto.Imaging;
 using Eklekto.Imaging.Blobs;
 using Point = System.Drawing.Point;
 using System.Threading.Tasks;
+using AForge.Imaging.Filters;
 
 namespace FibroscanProcessor.Elasto
 {
@@ -111,6 +112,7 @@ namespace FibroscanProcessor.Elasto
                                   (!isRightObject || isCentralRightObject));
                 Image.FillBlob(currentObject.Blob,
                     isDrawing ? SimpleGrayImage.BlackBrightness : SimpleGrayImage.WhiteBrightness);
+                
             });
         }
 
@@ -119,66 +121,67 @@ namespace FibroscanProcessor.Elasto
             Bitmap result = Image.Bitmap.Invert();
             List<BlobEntity> objects = result.FindBlobs();
 
-            Image = new SimpleGrayImage(result);
-
             foreach (BlobEntity blob in objects)
             {
                 int objectSize = blob.Contour.Points.Count;
-                    if (objectSize < 2 * step)
-                        return;
+                if (objectSize < 2 * step)
+                    return;
 
-                    //fix one point
-                    var syncTask = new Task(() =>
+                //fix one point
+                var syncTask = new Task(() =>
+                {
+                    System.Threading.Tasks.Parallel.For(0, objectSize, i =>
                     {
-                        System.Threading.Tasks.Parallel.For(0, objectSize, i =>
+                        IntPoint startPoint = blob.Contour.Points[i];
+                            //for each check one other point
+                            for (int j = i; j < objectSize; j++)
                         {
-                            IntPoint startPoint = blob.Contour.Points[i];
-                                //for each check one other point
-                                for (int j = 0; j < objectSize; j++)
+                            int circleDist = Math.Min(j - i, objectSize - (j - i));
+                            if (circleDist >= step)
                             {
-                                int circleDist = Math.Min(Math.Abs(i - j), objectSize - Math.Abs(i - j));
-                                if (circleDist >= step)
-                                {
-                                    IntPoint endPoint = blob.Contour.Points[j];
-                                    int distance =
-                                        (int)
-                                            Math.Sqrt(Math.Pow((startPoint.X - endPoint.X), 2) +
-                                                      Math.Pow((startPoint.Y - endPoint.Y), 2));
-                                    if ((distance < cropDistance) && (i > j)) //optimisation equal
-                                        Image.DrawGrayLine(startPoint, endPoint, 0);
-                                }
+                                IntPoint endPoint = blob.Contour.Points[j];
+                                int distance =
+                                    (int)
+                                        Math.Sqrt(Math.Pow((startPoint.X - endPoint.X), 2) +
+                                                    Math.Pow((startPoint.Y - endPoint.Y), 2));
+                                if ((distance < cropDistance)) //optimisation equal
+                                    Image.DrawGrayLine(startPoint, endPoint, 255);
                             }
-                        });
+                        }
                     });
+                });
 
-                    syncTask.RunSynchronously();
+                syncTask.RunSynchronously();
             }
         }
 
         public void ChooseContour(double areaProportion, int areaMinLimit, double heightPropotion)
         {
-            Bitmap result = Image.Bitmap;
+            Bitmap result = Image.Bitmap.Invert();
             List<BlobEntity> objects = result.FindBlobs();
 
-            int maxArea = 0;
-            int maxHeight = 0;
+            int maxArea = -1;
+            int maxHeight = -1;
             // ReSharper disable PossibleLossOfFraction
             AForge.Point imageCenter = new AForge.Point(result.Width/2, result.Height/2);
+            int targetObjectIndex = -1; //
 
-            objects.ForEach(currentObject =>
+            for(int i =0; i<objects.Count;i++)
             {
-                int currentArea = currentObject.Blob.Area;
+                int currentArea = objects[i].Blob.Area;
                 if (currentArea > maxArea)
+                {
                     maxArea = currentArea;
-                int currentHeight = currentObject.Blob.Rectangle.Height;
+                    targetObjectIndex = i;
+                }
+                int currentHeight = objects[i].Blob.Rectangle.Height;
                 if (currentHeight > maxHeight)
                     maxHeight = currentHeight;
-            });
+            };
 
             int limitArea = Math.Min((int) (maxArea*areaProportion), areaMinLimit);
             int limitHeight = (int) (maxHeight*heightPropotion);
             double minDistanceToCenter = result.Height + result.Width; //Triangle inequality:)
-            int minDistanceToCenterObjectIndex = -1; //
 
             for (int i = 0; i < objects.Count; i++)
             {
@@ -191,20 +194,15 @@ namespace FibroscanProcessor.Elasto
                     if (distToCenter < minDistanceToCenter)
                     {
                         minDistanceToCenter = distToCenter;
-                        minDistanceToCenterObjectIndex = i;
+                        targetObjectIndex = i;
                     }
                 }
             }
-
-            if (minDistanceToCenterObjectIndex < 0)
-                for (int i = 0; i < objects.Count; i++)
-                    if (objects[i].Blob.Area == maxArea)
-                        minDistanceToCenterObjectIndex = i;
-            _targetObject = new ElastoBlob(objects[minDistanceToCenterObjectIndex]);
+            _targetObject = new ElastoBlob(objects[targetObjectIndex]);
 
             for (int i = 0; i < objects.Count; i++)
-                if (i != minDistanceToCenterObjectIndex)
-                    Image.FillBlob(objects[i].Blob, SimpleGrayImage.BlackBrightness);
+                if (i != targetObjectIndex)
+                    Image.FillBlob(objects[i].Blob, SimpleGrayImage.WhiteBrightness);
         }
     }
 }

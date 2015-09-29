@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Drawing.Imaging;
 using AForge;
 using Eklekto.Geometry;
 using Eklekto.Imaging.Blobs;
@@ -29,7 +30,7 @@ namespace FibroscanProcessor.Elasto
 
         public Contour LeftContour { get; }
 
-        public Contour RigthContour { get; }
+        public Contour RightContour { get; }
 
         public ElastoBlob(Blob blob, Contour contour) : base(blob, contour)
         {
@@ -38,7 +39,7 @@ namespace FibroscanProcessor.Elasto
             int leftContoursBottomIndex = LeftContoursBottomIndexes(contour, out leftContoursTopIndex);
             int rightContoursBottomIndex = RightContoursBottomIndexes(contour, out rightContoursTopIndex);
             LeftContour = new Contour(contour.Points.GetRange(leftContoursBottomIndex, leftContoursTopIndex - leftContoursBottomIndex));
-            RigthContour = new Contour(contour.Points.GetRange(rightContoursTopIndex, rightContoursBottomIndex - rightContoursTopIndex));
+            RightContour = new Contour(contour.Points.GetRange(rightContoursTopIndex, rightContoursBottomIndex - rightContoursTopIndex));
         }
 
         public ElastoBlob(BlobEntity blob) : base(blob.Blob, blob.Contour)
@@ -48,14 +49,26 @@ namespace FibroscanProcessor.Elasto
             int leftContoursBottomIndex = LeftContoursBottomIndexes(blob.Contour, out leftContoursTopIndex);
             int rightContoursBottomIndex = RightContoursBottomIndexes(blob.Contour, out rightContoursTopIndex);
             LeftContour = new Contour(blob.Contour.Points.GetRange(leftContoursBottomIndex, leftContoursTopIndex - leftContoursBottomIndex));
-            RigthContour = new Contour(blob.Contour.Points.GetRange(rightContoursTopIndex, rightContoursBottomIndex - rightContoursTopIndex));
+            RightContour = new Contour(blob.Contour.Points.GetRange(rightContoursTopIndex, rightContoursBottomIndex - rightContoursTopIndex));
         }
 
-        public void Approximate(double sampleShare, double outlierShare, int iterations)
+        public void Approximate(int topIndention, double sampleShare, double outlierShare, int iterations)
         {
             Ransac linear = new Ransac(sampleShare, outlierShare, iterations);
-            _leftApproximation = linear.Approximate(LeftContour.Points, out _rSquareLeft, out _relativeEstimationLeft);
-            _rightApproximation = linear.Approximate(RigthContour.Points, out _rSquareRight, out _relativeEstimationRight);
+            List<IntPoint> leftPoints = new List<IntPoint>();
+            LeftContour.Points.ForEach(point =>
+            {
+                if (point.Y>=topIndention)
+                    leftPoints.Add(point);
+            });
+            List<IntPoint> rightPoints = new List<IntPoint>();
+            RightContour.Points.ForEach(point =>
+            {
+                if (point.Y >= topIndention)
+                    rightPoints.Add(point);
+            });
+            _leftApproximation = linear.Approximate(leftPoints, leftPoints.Count, out _rSquareLeft, out _relativeEstimationLeft);
+            _rightApproximation = linear.Approximate(rightPoints, rightPoints.Count, out _rSquareRight, out _relativeEstimationRight);
         }
 
         private int LeftContoursBottomIndexes(Contour contour, out int leftContourTopIndex)
@@ -88,7 +101,7 @@ namespace FibroscanProcessor.Elasto
                     rotationCountDown--;
 
                 if (contour.Points[i].Y < contour.Points[i - 1].Y)
-                    rotationCountDown = (rotationCountDown < ContourRotationHeihgt) ? rotationCountDown + 1 : ContourRotationHeihgt; //Dump contour
+                    rotationCountDown = (rotationCountDown < ContourRotationHeihgt) ? rotationCountDown + 1 : ContourRotationHeihgt; //Dump conuter
 
                 if (contour.Points[i].Y > Blob.Rectangle.Y + Blob.Rectangle.Height - ContourCromHeight)
                     return i + ContourRotationHeihgt - rotationCountDown;
@@ -118,6 +131,7 @@ namespace FibroscanProcessor.Elasto
                     maxY = contour.Points[i].Y;
                 }
 
+
                 if (rightContourTopIndex < 1)
                     rightContourTopIndex = i;
 
@@ -134,6 +148,7 @@ namespace FibroscanProcessor.Elasto
                     return i - ContourRotationHeihgt;
             }
             return maxVerticalIndex;
+
         }
     }
 }

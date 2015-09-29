@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using AForge;
 using AForge.Imaging;
@@ -37,7 +38,7 @@ namespace Eklekto.Imaging.Contours
             IntPoint currentPoint = startPoint;
             List<IntPoint> contour = new List<IntPoint>();
             int startVisitingСountdown = StartVisitingCount;
-            
+
             //clockwise
             currentPoint += _direction[Move.Right];
             int move = Move.Right; // if we mowe left we`ll have trermination in first step
@@ -47,8 +48,8 @@ namespace Eklekto.Imaging.Contours
                 if (currentPoint == startPoint)
                     startVisitingСountdown--;
 
-                if ((currentPoint.Y >= 0) && (currentPoint.Y < ImageSize.Height) && 
-                    (currentPoint.X >= 0) && (currentPoint.X < ImageSize.Width) && 
+                if ((currentPoint.Y >= 0) && (currentPoint.Y < ImageSize.Height) &&
+                    (currentPoint.X >= 0) && (currentPoint.X < ImageSize.Width) &&
                     (ObjectLabels[currentPoint.Y * ImageSize.Width + currentPoint.X] == Blob.ID))
                 {
                     contour.Add(currentPoint);
@@ -60,10 +61,10 @@ namespace Eklekto.Imaging.Contours
                     move = TurnRight(move);
                     currentPoint += _direction[move];
                 }
-            } 
-
+            }
             return contour;
         }
+
         private static int TurnRight(int move)
         {
             switch (move)

@@ -41,7 +41,7 @@ namespace FibroscanProcessor.Elasto
                 return VerificationStatus.Uncertain;
             }
 
-            if (area < 12000)
+            if (area < 17500)
             {
                 if (!IsGoodApproximation(leftLine, rSquareLeft, aLeft) ||
                     !IsGoodApproximation(rightLine, rSquareRight, aRight))
