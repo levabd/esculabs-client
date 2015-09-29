@@ -20,34 +20,41 @@ namespace Client
     /// </summary>
     public partial class LoaderWindow : Window
     {
-        private int dotCount = 0;
+        private int _dotCount = 0;
 
         public LoaderWindow()
         {
             InitializeComponent();
         }
 
-        private void timerCallback(object state)
+        private void TimerCallback(object state)
         {
-            dotCount++;
-
-            if (dotCount > 3)
+            ThreadPool.QueueUserWorkItem(o =>
             {
-                dotCount = 0;
-            }
+                _dotCount++;
 
-            var text = "Пожалуйста, подождите";
-            for (int i = 0; i < dotCount; i++)
-            {
-                text += ".";
-            }
+                if (_dotCount > 3)
+                {
+                    _dotCount = 0;
+                }
 
-            Dispatcher.Invoke(() => label.Content = text);
+                var text = "Пожалуйста, подождите";
+                for (var i = 0; i < _dotCount; i++)
+                {
+                    text += ".";
+                }
+
+                Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    label.Content = text;
+                }));
+            });
+
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            var tmrShow = new Timer(timerCallback, null, 0, 1000);
+            new Timer(TimerCallback, null, 0, 1000);
         }
     }
 }

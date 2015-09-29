@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
+<<<<<<< HEAD
 using System.Drawing.Imaging;
+=======
+>>>>>>> 53192e79be217f2a962c9b4ab15f093d52c2bc22
 using AForge;
 using Eklekto.Geometry;
 using Eklekto.Imaging.Blobs;
@@ -101,7 +104,7 @@ namespace FibroscanProcessor.Elasto
                     rotationCountDown--;
 
                 if (contour.Points[i].Y < contour.Points[i - 1].Y)
-                    rotationCountDown = (rotationCountDown < ContourRotationHeihgt) ? rotationCountDown + 1 : ContourRotationHeihgt; //Dump conuter
+                    rotationCountDown = (rotationCountDown < ContourRotationHeihgt) ? rotationCountDown + 1 : ContourRotationHeihgt; //Dump contour
 
                 if (contour.Points[i].Y > Blob.Rectangle.Y + Blob.Rectangle.Height - ContourCromHeight)
                     return i + ContourRotationHeihgt - rotationCountDown;
@@ -131,7 +134,10 @@ namespace FibroscanProcessor.Elasto
                     maxY = contour.Points[i].Y;
                 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 53192e79be217f2a962c9b4ab15f093d52c2bc22
                 if (rightContourTopIndex < 1)
                     rightContourTopIndex = i;
 
@@ -148,7 +154,10 @@ namespace FibroscanProcessor.Elasto
                     return i - ContourRotationHeihgt;
             }
             return maxVerticalIndex;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 53192e79be217f2a962c9b4ab15f093d52c2bc22
         }
     }
 }

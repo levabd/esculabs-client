@@ -18,7 +18,7 @@
     </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -26,6 +26,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -107,7 +108,6 @@
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -131,7 +131,7 @@
     <Compile Include="ExamineWindow.xaml.cs">
       <DependentUpon>ExamineWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="FIBXParser.cs" />
+    <Compile Include="FibxParser.cs" />
     <Compile Include="LoaderWindow.xaml.cs">
       <DependentUpon>LoaderWindow.xaml</DependentUpon>
     </Compile>
@@ -221,11 +221,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\elasto.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-  <ItemGroup>
+    <ProjectReference Include="..\Eklekto\Eklekto.csproj">
+      <Project>{eab1eb1a-e757-4f23-9bee-fb145a1f7792}</Project>
+      <Name>Eklekto</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FibroscanProcessor\FibroscanProcessor.csproj">
       <Project>{56299f06-7b5a-400d-a41f-a93a956a09f7}</Project>
       <Name>FibroscanProcessor</Name>
