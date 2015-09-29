@@ -14,8 +14,8 @@
 
 ###Additional links
 - [MongoDB Windows Service configuration guide](http://docs.mongodb.org/manual/tutorial/install-mongodb-on-windows/#configure-a-windows-service-for-mongodb)
-- [MongoVUE](http://www.mongovue.com/) (MongoDB client)
-- [pgAdmin](http://www.pgadmin.org/index.php) (PostgreSQL client, could also be installed via PostgeSQL Server installer)
+- [MongoVUE](http://www.mongovue.com/) (MongoDB GUI client)
+- [pgAdmin](http://www.pgadmin.org/index.php) (PostgreSQL GUI client, could also be installed via PostgeSQL Server installer)
 
 ###Notes
 PostgeSQL default user password should be set to `password`. Otherwise, you can change connection string in `App.config` file:
