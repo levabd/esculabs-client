@@ -35,22 +35,6 @@ namespace Eklekto.Imaging.Contours
 
         public List<IntPoint> SelectContour(IntPoint startPoint)
         {
-            int maxIteration = 5;
-            var contour = new List<IntPoint>();
-
-            for (int i = 0; i < maxIteration; i++)
-            {
-                contour = CalculateContour(startPoint);
-                //circle has maximal area
-                if (Blob.Area < Math.Pow((double)contour.Count / 4, 2))
-                    break;
-            }
-
-            return contour;
-        }
-
-        private List<IntPoint> CalculateContour(IntPoint startPoint)
-        {
             IntPoint currentPoint = startPoint;
             List<IntPoint> contour = new List<IntPoint>();
             int startVisitingСountdown = StartVisitingCount;
@@ -66,7 +50,7 @@ namespace Eklekto.Imaging.Contours
 
                 if ((currentPoint.Y >= 0) && (currentPoint.Y < ImageSize.Height) &&
                     (currentPoint.X >= 0) && (currentPoint.X < ImageSize.Width) &&
-                    (ObjectLabels[currentPoint.Y*ImageSize.Width + currentPoint.X] == Blob.ID))
+                    (ObjectLabels[currentPoint.Y * ImageSize.Width + currentPoint.X] == Blob.ID))
                 {
                     contour.Add(currentPoint);
                     move = TurnLeft(move);

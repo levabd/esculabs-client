@@ -255,7 +255,7 @@ namespace FibroscanProcessor
 
             _workingElasto.CropObjects(step, distance);
 
-            return _workingElasto.Image.Bitmap.Invert();
+            return _workingElasto.Image.Bitmap;
         }
 
         public Image Step8ChooseOneObject(ref long timer, double areaProportion, double heightProportion)
@@ -265,10 +265,13 @@ namespace FibroscanProcessor
 
             _workingElasto.ChooseContour(0.55, AreaMinLimit, 0.65);
             _workingBlob = _workingElasto.TargetObject;
+
+            //_workingElasto.Image.DrawPolygon(_workingBlob.Contour.Points, 75, 4);
+
             if (_workingBlob == null)
                 _elastoStatus = VerificationStatus.NotCalculated;
 
-            return _workingElasto.Image.Bitmap.Invert();
+            return _workingElasto.Image.Bitmap;
         }
 
         public Image Step9Approximation(ref long timer, double sampleShare = SampleShare, double outliersShare = OutliersShare, int iterations = RansacIterations)
@@ -278,7 +281,7 @@ namespace FibroscanProcessor
 
             Stopwatch watch = Stopwatch.StartNew();
 
-            _workingBlob.Approximate(sampleShare, outliersShare, iterations);
+            _workingBlob.Approximate(TopIndention, sampleShare, outliersShare, iterations);
 
             IntPoint p1 = new IntPoint(_workingBlob.LeftApproximation.GetX(0), 0);
             IntPoint p2 = new IntPoint(_workingBlob.LeftApproximation.GetX(_workingElasto.Image.Cols - 1), _workingElasto.Image.Cols - 1);
@@ -291,7 +294,7 @@ namespace FibroscanProcessor
             watch.Stop();
             timer = watch.ElapsedMilliseconds;
 
-            return _workingElasto.Image.Bitmap.Invert();
+            return _workingElasto.Image.Bitmap;
         }
 
         public VerificationStatus Step10Classify()

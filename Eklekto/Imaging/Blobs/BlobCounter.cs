@@ -64,15 +64,32 @@ namespace Eklekto.Imaging.Blobs
             int ymin = blob.Rectangle.Top;
 
             int label = blob.ID;
-
-            IntPoint startPoint = new IntPoint();
-            List <IntPoint> lastStartPoint = new List<IntPoint>();
-
             var random4PointIndex = new Random();
             int randomIndex = random4PointIndex.Next(13) + 2;
 
+            int maxIteration = 5;
+            var contour = new List<IntPoint>();
+            
+            //Find best point to start
+            for (int i = 0; i < maxIteration; i++)
+            {
+                randomIndex = random4PointIndex.Next(13) + 2;
+                contour = CalculateContour<TTracerMethod>(blob, ymin, xmin, xmax, label, randomIndex);
+                //circle has maximal area
+                if (blob.Area < Math.Pow((double)contour.Count / 4, 2))
+                    break;
+            }
+
+            return contour;
+        }
+
+        private List<IntPoint> CalculateContour<TTracerMethod>(Blob blob, int ymin, int xmin, int xmax, int label, int randomIndex) where TTracerMethod : IContourTracer, new()
+        {
+            IntPoint startPoint = new IntPoint();
+            List<IntPoint> lastStartPoint = new List<IntPoint>();
+            
             //find start point on top line (last but Random(15))
-            int ap = ymin * imageWidth + xmin;
+            int ap = ymin*imageWidth + xmin;
             for (int x = xmin; x <= xmax; x++, ap++)
             {
                 if (objectLabels[ap] == label)
@@ -84,17 +101,21 @@ namespace Eklekto.Imaging.Blobs
 
             TTracerMethod contourTracer = new TTracerMethod
             {
-                Blob = blob, 
+                Blob = blob,
                 ObjectLabels = ObjectLabels,
                 ImageSize = new Size(imageWidth, imageHeight)
             };
-            return contourTracer.SelectContour(startPoint);
+            List<IntPoint> contour = contourTracer.SelectContour(startPoint);
+            return contour;
         }
 
         public Blob[] GetBlobs(Bitmap image, bool extractInOriginalSize)
         {
             AForge.Imaging.Blob[] blobsResult = GetObjects(image, extractInOriginalSize);
             Blob[] newBlobResult = new Blob[blobsResult.Length];
+
+            for (int row = 1; row < image.Height + 1; row++)
+                objectLabels[row*image.Width - 1] = 0;
 
             for (int blobCounter = 0; blobCounter < blobsResult.Length; blobCounter++)
             {

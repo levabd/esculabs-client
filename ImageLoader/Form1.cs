@@ -22,7 +22,7 @@ namespace ImageLoader
             pictures = new List<PictureBox>
             {
                 sourcePicture, elastoPicture, kuwaharaPicture, binarizationPicture, edgePicture, morphologyPicture,cropPicture,
-                choosingPicture, approximationPicture, sourceModMPicture, outModMPicture, sourceModAPicture, outModAPicture
+                choosingPicture, approximationPicture, sourceModMPicture, outModMPicture, sourceModAPicture, outModAPicture, productionPicture
             };
         }
 
@@ -66,9 +66,11 @@ namespace ImageLoader
                 FibroscanImage image = new FibroscanImage(sourceImage, true);
                 VerificationStatus elastoStatus = ElastogramVerification(image);
                 Ultrasoundverification(image);
+                
                 //Production code
-                //FibroscanImage prod = new FibroscanImage(sourceImage);
-                //outputPicture.Image = prod.Merged;
+                FibroscanImage prod = new FibroscanImage(sourceImage);
+                productionPicture.Image = prod.Merged;
+
                 if (savingStepsCheckBox.Checked)
                     SaveSteps();
                 if (saveClassificationCheckBox.Checked)

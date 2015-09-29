@@ -111,6 +111,7 @@
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.imagePath = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.loadButton = new System.Windows.Forms.Button();
             this.buttonNextImage = new System.Windows.Forms.Button();
             this.buttonPrevImage = new System.Windows.Forms.Button();
             this.groupBoxStat = new System.Windows.Forms.GroupBox();
@@ -125,15 +126,15 @@
             this.label20 = new System.Windows.Forms.Label();
             this.groupProcessingButton = new System.Windows.Forms.Button();
             this.teachFileLoadButton = new System.Windows.Forms.Button();
+            this.processingButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.sourceModMPicture = new System.Windows.Forms.PictureBox();
             this.outModMPicture = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.sourceModAPicture = new System.Windows.Forms.PictureBox();
             this.outModAPicture = new System.Windows.Forms.PictureBox();
-            this.loadButton = new System.Windows.Forms.Button();
-            this.processingButton = new System.Windows.Forms.Button();
             this.cropPicture = new System.Windows.Forms.PictureBox();
+            this.productionPicture = new System.Windows.Forms.PictureBox();
             this.menuStrip.SuspendLayout();
             this.leftToolStrip.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -189,6 +190,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.sourceModAPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.outModAPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cropPicture)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.productionPicture)).BeginInit();
             this.SuspendLayout();
             // 
             // openFileDialog
@@ -918,15 +920,16 @@
             this.tableLayoutPanel1.Controls.Add(this.binarizationPicture, 3, 1);
             this.tableLayoutPanel1.Controls.Add(this.edgePicture, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.morphologyPicture, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.choosingPicture, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.approximationPicture, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.choosingPicture, 3, 2);
+            this.tableLayoutPanel1.Controls.Add(this.approximationPicture, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 5, 0);
             this.tableLayoutPanel1.Controls.Add(this.groupBoxLog2, 4, 1);
             this.tableLayoutPanel1.Controls.Add(this.groupBoxLog1, 4, 0);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel3, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel4, 2, 3);
-            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel5, 3, 3);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel4, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel5, 2, 3);
             this.tableLayoutPanel1.Controls.Add(this.cropPicture, 2, 2);
+            this.tableLayoutPanel1.Controls.Add(this.productionPicture, 3, 3);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(46, 24);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -976,7 +979,7 @@
             // choosingPicture
             // 
             this.choosingPicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.choosingPicture.Location = new System.Drawing.Point(3, 495);
+            this.choosingPicture.Location = new System.Drawing.Point(513, 334);
             this.choosingPicture.Name = "choosingPicture";
             this.choosingPicture.Size = new System.Drawing.Size(164, 155);
             this.choosingPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -987,7 +990,7 @@
             // approximationPicture
             // 
             this.approximationPicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.approximationPicture.Location = new System.Drawing.Point(173, 495);
+            this.approximationPicture.Location = new System.Drawing.Point(3, 495);
             this.approximationPicture.Name = "approximationPicture";
             this.approximationPicture.Size = new System.Drawing.Size(164, 155);
             this.approximationPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -1101,7 +1104,7 @@
             this.upDownEdgeLeft2.Size = new System.Drawing.Size(57, 20);
             this.upDownEdgeLeft2.TabIndex = 5;
             this.upDownEdgeLeft2.Value = new decimal(new int[] {
-            100,
+            90,
             0,
             0,
             0});
@@ -1265,6 +1268,17 @@
             this.panel1.Size = new System.Drawing.Size(330, 30);
             this.panel1.TabIndex = 1;
             // 
+            // loadButton
+            // 
+            this.loadButton.Dock = System.Windows.Forms.DockStyle.Right;
+            this.loadButton.Location = new System.Drawing.Point(255, 0);
+            this.loadButton.Name = "loadButton";
+            this.loadButton.Size = new System.Drawing.Size(75, 30);
+            this.loadButton.TabIndex = 2;
+            this.loadButton.Text = "load";
+            this.loadButton.UseVisualStyleBackColor = true;
+            this.loadButton.Click += new System.EventHandler(this.button1_Click);
+            // 
             // buttonNextImage
             // 
             this.buttonNextImage.Dock = System.Windows.Forms.DockStyle.Left;
@@ -1418,6 +1432,17 @@
             this.teachFileLoadButton.Text = "Load TeachFile";
             this.teachFileLoadButton.UseVisualStyleBackColor = true;
             // 
+            // processingButton
+            // 
+            this.processingButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.processingButton.Location = new System.Drawing.Point(339, 39);
+            this.processingButton.Name = "processingButton";
+            this.processingButton.Size = new System.Drawing.Size(162, 30);
+            this.processingButton.TabIndex = 9;
+            this.processingButton.Text = "Processing";
+            this.processingButton.UseVisualStyleBackColor = true;
+            this.processingButton.Click += new System.EventHandler(this.button2_Click);
+            // 
             // tableLayoutPanel4
             // 
             this.tableLayoutPanel4.ColumnCount = 2;
@@ -1426,7 +1451,7 @@
             this.tableLayoutPanel4.Controls.Add(this.sourceModMPicture, 0, 0);
             this.tableLayoutPanel4.Controls.Add(this.outModMPicture, 1, 0);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(343, 495);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(173, 495);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 1;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -1463,7 +1488,7 @@
             this.tableLayoutPanel5.Controls.Add(this.sourceModAPicture, 0, 0);
             this.tableLayoutPanel5.Controls.Add(this.outModAPicture, 1, 0);
             this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel5.Location = new System.Drawing.Point(513, 495);
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(343, 495);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             this.tableLayoutPanel5.RowCount = 1;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -1492,28 +1517,6 @@
             this.outModAPicture.TabStop = false;
             this.outModAPicture.Click += new System.EventHandler(this.pictureBox_Click);
             // 
-            // loadButton
-            // 
-            this.loadButton.Dock = System.Windows.Forms.DockStyle.Right;
-            this.loadButton.Location = new System.Drawing.Point(255, 0);
-            this.loadButton.Name = "loadButton";
-            this.loadButton.Size = new System.Drawing.Size(75, 30);
-            this.loadButton.TabIndex = 2;
-            this.loadButton.Text = "load";
-            this.loadButton.UseVisualStyleBackColor = true;
-            this.loadButton.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // processingButton
-            // 
-            this.processingButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.processingButton.Location = new System.Drawing.Point(339, 39);
-            this.processingButton.Name = "processingButton";
-            this.processingButton.Size = new System.Drawing.Size(162, 30);
-            this.processingButton.TabIndex = 9;
-            this.processingButton.Text = "Processing";
-            this.processingButton.UseVisualStyleBackColor = true;
-            this.processingButton.Click += new System.EventHandler(this.button2_Click);
-            // 
             // cropPicture
             // 
             this.cropPicture.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -1524,6 +1527,17 @@
             this.cropPicture.TabIndex = 26;
             this.cropPicture.TabStop = false;
             this.cropPicture.Click += new System.EventHandler(this.pictureBox_Click);
+            // 
+            // productionPicture
+            // 
+            this.productionPicture.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.productionPicture.Location = new System.Drawing.Point(513, 495);
+            this.productionPicture.Name = "productionPicture";
+            this.productionPicture.Size = new System.Drawing.Size(164, 155);
+            this.productionPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.productionPicture.TabIndex = 27;
+            this.productionPicture.TabStop = false;
+            this.productionPicture.Click += new System.EventHandler(this.pictureBox_Click);
             // 
             // Form1
             // 
@@ -1602,6 +1616,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.sourceModAPicture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.outModAPicture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cropPicture)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.productionPicture)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1713,6 +1728,7 @@
         private System.Windows.Forms.Button loadButton;
         private System.Windows.Forms.Button processingButton;
         private System.Windows.Forms.PictureBox cropPicture;
+        private System.Windows.Forms.PictureBox productionPicture;
     }
 }
 

@@ -41,7 +41,7 @@ namespace FibroscanProcessor
         private const int MorphologyBinGlobalRadius = 8;
         private const int LeftEdgeDistance1 = 25;
         private const int LeftCentralEdgeDist1 = 85;
-        private const int LeftEdgeDistance2 = 100;
+        private const int LeftEdgeDistance2 = 90;
         private const int LeftCentralEdgeDist2 = 100;
         private const int RightEdgeDistance = 50;
         private const int RightCentralEdgeDist = 85;
@@ -56,6 +56,7 @@ namespace FibroscanProcessor
         private const int RansacIterations = 6000;
         private int UsDeviationThreshold = 30;
         private int UsDeviationStreak = 3;
+        private int TopIndention = 20;
 
         private const int MinUltrasoundModARelativeEstimation = 90;
         // ReSharper restore InconsistentNaming
@@ -196,20 +197,26 @@ namespace FibroscanProcessor
             _fibroline = workingElasto.Fibroline;
             workingElasto.PaintOverFibroline();
             workingElasto = new Elastogram(new SimpleGrayImage(workingElasto.Image.Bitmap.GrayscaleKuwahara(KuwaharaKernel)));
-            //workingElasto.Image.ApplyBinarization(GlobalThreshold);
+
             _workingElasto = new Elastogram(new SimpleGrayImage(_workingElasto.Image.Bitmap.MorphologyNiblackBinarization(
                 MorphologyBin_K, MorphologyBinLocalRadius, MorphologyBinGlobalRadius, MorphologyBinThreshold)));
 
             workingElasto.RemoveEdgeObjects(LeftEdgeDistance1, LeftCentralEdgeDist1,
                                             LeftEdgeDistance2, LeftCentralEdgeDist2, 
                                             RightEdgeDistance, RightCentralEdgeDist);
+
             workingElasto = new Elastogram(new SimpleGrayImage(workingElasto.Image.Bitmap.MorphologyOpening(MorphologyOpeningKernel)));
+
             workingElasto.CropObjects(CropSteps, CropDistance);
+
             workingElasto.ChooseContour(AreaProportion, AreaMinLimit, HeightProportion);
+
             workingBlob = workingElasto.TargetObject;
+
             if (workingBlob == null)
                 return VerificationStatus.NotCalculated;
-            workingBlob.Approximate(SampleShare, OutliersShare, RansacIterations);
+
+            workingBlob.Approximate(TopIndention, SampleShare, OutliersShare, RansacIterations);
                 return (new ElastogramClassification()).Classiffy(workingBlob, _fibroline);
         }
 

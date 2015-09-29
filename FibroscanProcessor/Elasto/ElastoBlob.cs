@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Drawing.Imaging;
 using AForge;
 using Eklekto.Geometry;
 using Eklekto.Imaging.Blobs;
@@ -51,11 +52,23 @@ namespace FibroscanProcessor.Elasto
             RightContour = new Contour(blob.Contour.Points.GetRange(rightContoursTopIndex, rightContoursBottomIndex - rightContoursTopIndex));
         }
 
-        public void Approximate(double sampleShare, double outlierShare, int iterations)
+        public void Approximate(int topIndention, double sampleShare, double outlierShare, int iterations)
         {
             Ransac linear = new Ransac(sampleShare, outlierShare, iterations);
-            _leftApproximation = linear.Approximate(LeftContour.Points, LeftContour.Points.Count, out _rSquareLeft, out _relativeEstimationLeft);
-            _rightApproximation = linear.Approximate(RightContour.Points, RightContour.Points.Count, out _rSquareRight, out _relativeEstimationRight);
+            List<IntPoint> leftPoints = new List<IntPoint>();
+            LeftContour.Points.ForEach(point =>
+            {
+                if (point.Y>=topIndention)
+                    leftPoints.Add(point);
+            });
+            List<IntPoint> rightPoints = new List<IntPoint>();
+            RightContour.Points.ForEach(point =>
+            {
+                if (point.Y >= topIndention)
+                    rightPoints.Add(point);
+            });
+            _leftApproximation = linear.Approximate(leftPoints, leftPoints.Count, out _rSquareLeft, out _relativeEstimationLeft);
+            _rightApproximation = linear.Approximate(rightPoints, rightPoints.Count, out _rSquareRight, out _relativeEstimationRight);
         }
 
         private int LeftContoursBottomIndexes(Contour contour, out int leftContourTopIndex)

@@ -7,6 +7,7 @@ using Eklekto.Imaging;
 using Eklekto.Imaging.Blobs;
 using Point = System.Drawing.Point;
 using System.Threading.Tasks;
+using AForge.Imaging.Filters;
 
 namespace FibroscanProcessor.Elasto
 {
@@ -120,45 +121,43 @@ namespace FibroscanProcessor.Elasto
             Bitmap result = Image.Bitmap.Invert();
             List<BlobEntity> objects = result.FindBlobs();
 
-            Image = new SimpleGrayImage(result);
-
             foreach (BlobEntity blob in objects)
             {
                 int objectSize = blob.Contour.Points.Count;
-                    if (objectSize < 2 * step)
-                        return;
+                if (objectSize < 2 * step)
+                    return;
 
-                    //fix one point
-                    var syncTask = new Task(() =>
+                //fix one point
+                var syncTask = new Task(() =>
+                {
+                    System.Threading.Tasks.Parallel.For(0, objectSize, i =>
                     {
-                        System.Threading.Tasks.Parallel.For(0, objectSize, i =>
+                        IntPoint startPoint = blob.Contour.Points[i];
+                            //for each check one other point
+                            for (int j = i; j < objectSize; j++)
                         {
-                            IntPoint startPoint = blob.Contour.Points[i];
-                                //for each check one other point
-                                for (int j = i; j < objectSize; j++)
+                            int circleDist = Math.Min(j - i, objectSize - (j - i));
+                            if (circleDist >= step)
                             {
-                                int circleDist = Math.Min(Math.Abs(i - j), objectSize - Math.Abs(i - j));
-                                if (circleDist >= step)
-                                {
-                                    IntPoint endPoint = blob.Contour.Points[j];
-                                    int distance =
-                                        (int)
-                                            Math.Sqrt(Math.Pow((startPoint.X - endPoint.X), 2) +
-                                                      Math.Pow((startPoint.Y - endPoint.Y), 2));
-                                    if ((distance < cropDistance)) //optimisation equal
-                                        Image.DrawGrayLine(startPoint, endPoint, 0);
-                                }
+                                IntPoint endPoint = blob.Contour.Points[j];
+                                int distance =
+                                    (int)
+                                        Math.Sqrt(Math.Pow((startPoint.X - endPoint.X), 2) +
+                                                    Math.Pow((startPoint.Y - endPoint.Y), 2));
+                                if ((distance < cropDistance)) //optimisation equal
+                                    Image.DrawGrayLine(startPoint, endPoint, 255);
                             }
-                        });
+                        }
                     });
+                });
 
-                    syncTask.RunSynchronously();
+                syncTask.RunSynchronously();
             }
         }
 
         public void ChooseContour(double areaProportion, int areaMinLimit, double heightPropotion)
         {
-            Bitmap result = Image.Bitmap;
+            Bitmap result = Image.Bitmap.Invert();
             List<BlobEntity> objects = result.FindBlobs();
 
             int maxArea = -1;
@@ -203,7 +202,7 @@ namespace FibroscanProcessor.Elasto
 
             for (int i = 0; i < objects.Count; i++)
                 if (i != targetObjectIndex)
-                    Image.FillBlob(objects[i].Blob, SimpleGrayImage.BlackBrightness);
+                    Image.FillBlob(objects[i].Blob, SimpleGrayImage.WhiteBrightness);
         }
     }
 }
