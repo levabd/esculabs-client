@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 namespace Model
 {
     using MongoDB.Bson;
-    using MongoDB.Bson.Serialization.Attributes;
-    using MongoDB.Driver;
-    using MongoRepository;
-    using System.Windows.Controls;
+    using MongoDB.Bson.Serialization.Attributes;    
+    using MongoRepository;    
+    using FibroscanProcessor;
 
     public enum SensorType
     {
@@ -19,13 +18,13 @@ namespace Model
         XL,
     }
 
-    public enum VerificationStatus
-    {
-        NotCalculated,
-        Incorrect,
-        Uncertain,
-        Correct
-    }
+    //public enum VerificationStatus
+    //{
+    //    NotCalculated,
+    //    Incorrect,
+    //    Uncertain,
+    //    Correct
+    //}
 
     public enum ExpertStatus
     {
@@ -144,7 +143,7 @@ namespace Model
         {
             if (IQRMed.HasValue)
             {
-                return IQRMed < 30;
+                return IQRMed > 30;
             }
 
             return false;
@@ -157,7 +156,9 @@ namespace Model
         {
             get
             {
-                return (ValidationModeA & ValidationModeM & ValidationElasto) == 0;
+                return ValidationModeA != VerificationStatus.Incorrect &&
+                    ValidationModeM != VerificationStatus.Incorrect &&
+                    ValidationElasto != VerificationStatus.Incorrect;
             }
         }
 

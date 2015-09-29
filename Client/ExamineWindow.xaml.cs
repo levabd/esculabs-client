@@ -1,21 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Client
 {
     using Model;
     using System.IO;
+    using FibroscanProcessor;
 
     /// <summary>
     /// Interaction logic for ExamineWindow.xaml
@@ -47,8 +43,8 @@ namespace Client
 
             UpdateSensorLabel(sensorLabel, examine.ElastoExam.SensorType);
             UpdateIqrMedLabel(iqrMedLabel, examine.ElastoExam.IQR, examine.ElastoExam.Med);
+            UpdateScansLabel(scansLabel, examine.ElastoExam.Measures);
 
-            scansLabel.Text = examine.ElastoExam.Measures.Count().ToString();
             correctScansLabel.Text = examine.ElastoExam.Measures.Where(x => x.IsCorrect).Count().ToString();
 
             measuresPanel.Children.Clear();
@@ -94,6 +90,22 @@ namespace Client
             return decoder.Frames[0];
         }
 
+        private void UpdateScansLabel(TextBlock label, List<Measure> measures)
+        {
+            var scansCount = examine.ElastoExam.Measures.Count();
+            scansLabel.Text = scansCount.ToString();
+
+            if (scansCount < 10)
+            {
+                label.Text += " (некорректно)";
+                label.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFFF2323"));
+            }
+            else
+            {
+                label.Foreground = new SolidColorBrush(Colors.Black);
+            }
+        }
+
         private void UpdateSensorLabel(TextBlock label, SensorType sensorType)
         {
             label.Text = sensorType.ToString();
@@ -115,7 +127,7 @@ namespace Client
                 {
                     label.Text = iqrMed.ToString() + "%";
 
-                    if (iqrMed < 30)
+                    if (iqrMed > 30)
                     {
                         label.Text += " (некорректно)";
                         label.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFFF2323"));

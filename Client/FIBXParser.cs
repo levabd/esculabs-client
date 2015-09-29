@@ -129,6 +129,8 @@ namespace Client
                     e.ElastoExam.ExpertStatus = ExpertStatus.Pending;
                         
                     e.ElastoExam.Measures = new List<Measure>();
+
+                    var measuresCorrect = true;
                     foreach (var measure in exam.Descendants("Measurements").FirstOrDefault().Descendants("Measure"))
                     {
                         Measure m = new Measure();
@@ -143,12 +145,19 @@ namespace Client
                         FibroscanImage prod = new FibroscanImage(source);
                         m.ResultMerged = ImageToBase64(prod.Merged);
                         m.Source = ImageFileToBase64(sourceFile);
+                        m.ValidationElasto = prod.ElastoStatus;
+                        m.ValidationModeA = prod.UltrasoundModeAStatus;
+                        m.ValidationModeM = prod.UltrasoundModeMStatus;
+
+                        if (measuresCorrect)
+                        {
+                            measuresCorrect = m.IsCorrect;
+                        }
 
                         e.ElastoExam.Measures.Add(m);
                     }
 
-                    // TODO: Validation check
-                    e.ElastoExam.Valid = e.ElastoExam.Validate();
+                    e.ElastoExam.Valid = e.ElastoExam.Validate() && measuresCorrect;
 
                     var examines = new MongoRepository<Examine>();
                     examines.Add(e);                        

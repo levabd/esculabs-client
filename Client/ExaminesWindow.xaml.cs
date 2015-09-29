@@ -17,6 +17,7 @@ namespace Client
     using Microsoft.Win32;
     using Model;
     using MongoRepository;
+    using System.Configuration;
     using System.IO;
     using System.Windows.Media.Effects;
 
@@ -93,6 +94,15 @@ namespace Client
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            var fibxEnabled = true;
+            try
+            {
+                fibxEnabled = bool.Parse(ConfigurationManager.AppSettings["enableFibxParser"]);
+            }
+            catch (Exception ex) { };
+
+            importFbixBtn.Visibility = fibxEnabled ? Visibility.Visible : Visibility.Hidden;
+
             if (_patient != null)
             {
                 nameLabel.Content = $"{_patient.LastName} {_patient.FirstName} {_patient.MiddleName}";
