@@ -1,5 +1,4 @@
-# balder-client
-Balder .NET Client application
+# Balder Client
 
 ## Solutions
 * **Client.sln** - Main client
