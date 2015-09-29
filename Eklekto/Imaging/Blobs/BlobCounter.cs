@@ -67,7 +67,6 @@ namespace Eklekto.Imaging.Blobs
             var random4PointIndex = new Random();
             int randomIndex = random4PointIndex.Next(13) + 2;
 
-<<<<<<< HEAD
             int maxIteration = 5;
             var contour = new List<IntPoint>();
             
@@ -91,30 +90,14 @@ namespace Eklekto.Imaging.Blobs
             
             //find start point on top line (last but Random(15))
             int ap = ymin*imageWidth + xmin;
-=======
-            int startPointCounter = 0;
-            IntPoint startPoint = new IntPoint();
-            IntPoint lastStartPoint = new IntPoint();
-
-            //find start point on top line (last but one)
-            int ap = ymin * imageWidth + xmin;
->>>>>>> 53192e79be217f2a962c9b4ab15f093d52c2bc22
             for (int x = xmin; x <= xmax; x++, ap++)
             {
                 if (objectLabels[ap] == label)
                 {
-<<<<<<< HEAD
                     lastStartPoint.Add(new IntPoint(x, ymin));
                     startPoint = lastStartPoint[lastStartPoint.Count < randomIndex ? 0 : lastStartPoint.Count - randomIndex];
-=======
-                    startPoint = lastStartPoint;
-                    lastStartPoint = new IntPoint(x, ymin);
-                    startPointCounter++;
->>>>>>> 53192e79be217f2a962c9b4ab15f093d52c2bc22
                 }
             }
-            if (startPointCounter < 2)
-                startPoint = lastStartPoint;
 
             TTracerMethod contourTracer = new TTracerMethod
             {
