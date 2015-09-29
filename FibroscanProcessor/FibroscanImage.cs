@@ -12,6 +12,8 @@ using Eklekto.Imaging.Morfology;
 using FibroscanProcessor.Elasto;
 using FibroscanProcessor.Ultrasound;
 using Point = System.Drawing.Point;
+using System.Drawing.Drawing2D;
+using System.Threading.Tasks;
 
 namespace FibroscanProcessor
 { 
@@ -72,6 +74,9 @@ namespace FibroscanProcessor
         private Segment _fibroline;
 
         private readonly Image _source;
+
+        // Lock object to prevent threads use a source image at the same time
+        private object sourceLock = new object();
 
         private VerificationStatus _elastoStatus = VerificationStatus.NotCalculated;
         private VerificationStatus _ultrasoundModeMStatus = VerificationStatus.NotCalculated;
@@ -180,14 +185,27 @@ namespace FibroscanProcessor
 
         private void Proceed()
         {
-            _workingElasto = LoadGrayElstogram();
-            _elastoStatus = VerifyElasto(ref _workingElasto, out _workingBlob);
+            var elastoTask = Task.Factory.StartNew(() => 
+            {
+                _workingElasto = LoadGrayElstogram();
+                _elastoStatus = VerifyElasto(ref _workingElasto, out _workingBlob);
+            });
 
-            _workingUltrasoundModM = LoadGrayUltrasoundModM();
-            _ultrasoundModeMStatus = _workingUltrasoundModM.DeviationStreakLines.Count < 15 ? VerificationStatus.Correct : VerificationStatus.Incorrect;
-            
-            _workingUltrasoundModA = LoadGrayUltrasoundModA();
-            _ultrasoundModeAStatus = _workingUltrasoundModA.RelativeEstimation > MinUltrasoundModARelativeEstimation ? VerificationStatus.Correct : VerificationStatus.Incorrect;
+            var modeMTask = Task.Factory.StartNew(() => 
+            {
+                _workingUltrasoundModM = LoadGrayUltrasoundModM();
+                _ultrasoundModeMStatus = _workingUltrasoundModM.DeviationStreakLines.Count < 15 ? VerificationStatus.Correct : VerificationStatus.Incorrect;
+            });
+
+            var modeATask = Task.Factory.StartNew(() =>
+            {
+                _workingUltrasoundModA = LoadGrayUltrasoundModA();
+                _ultrasoundModeAStatus = _workingUltrasoundModA.RelativeEstimation > MinUltrasoundModARelativeEstimation ? VerificationStatus.Correct : VerificationStatus.Incorrect;
+
+            }
+                );
+
+            Task.WaitAll(elastoTask, modeMTask, modeATask);           
         }
 
         private VerificationStatus VerifyElasto(ref Elastogram workingElasto, out ElastoBlob workingBlob)
@@ -229,8 +247,11 @@ namespace FibroscanProcessor
             Bitmap target = new Bitmap(ElastogramRect.Width, ElastogramRect.Height);
             using (Graphics g = Graphics.FromImage(target))
             {
-                g.DrawImage(_source, new Rectangle(0, 0, target.Width, target.Height),
-                                 ElastogramRect, GraphicsUnit.Pixel);
+                lock (sourceLock)
+                {
+                    g.DrawImage(_source, new Rectangle(0, 0, target.Width, target.Height),
+                                    ElastogramRect, GraphicsUnit.Pixel);
+                }
             }
 
             return new Elastogram(new SimpleGrayImage(Grayscale.CommonAlgorithms.RMY.Apply(target)));
@@ -241,8 +262,11 @@ namespace FibroscanProcessor
             Bitmap target = new Bitmap(UltrasoundModMRect.Width, UltrasoundModMRect.Height);
             using (Graphics g = Graphics.FromImage(target))
             {
-                g.DrawImage(_source, new Rectangle(0, 0, target.Width, target.Height),
-                                 UltrasoundModMRect, GraphicsUnit.Pixel);
+                lock (sourceLock)
+                {
+                    g.DrawImage(_source, new Rectangle(0, 0, target.Width, target.Height),
+                                    UltrasoundModMRect, GraphicsUnit.Pixel);
+                }
             }
 
             return new UltrasoundModM(UsDeviationThreshold, UsDeviationStreak, new SimpleGrayImage(Grayscale.CommonAlgorithms.RMY.Apply(target)));
@@ -253,8 +277,11 @@ namespace FibroscanProcessor
             Bitmap target = new Bitmap(UltrasoundModARect.Width, UltrasoundModARect.Height);
             using (Graphics g = Graphics.FromImage(target))
             {
-                g.DrawImage(_source, new Rectangle(0, 0, target.Width, target.Height),
-                                 UltrasoundModARect, GraphicsUnit.Pixel);
+                lock (sourceLock)
+                {
+                    g.DrawImage(_source, new Rectangle(0, 0, target.Width, target.Height),
+                                    UltrasoundModARect, GraphicsUnit.Pixel);
+                }
             }
 
             return new UltrasoundModA(new SimpleGrayImage(Grayscale.CommonAlgorithms.RMY.Apply(target)));

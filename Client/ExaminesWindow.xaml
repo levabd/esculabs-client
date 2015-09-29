@@ -19,8 +19,8 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Id}" FontWeight="Bold" Header="#" Width="50"/>
                 <DataGridTextColumn Binding="{Binding MeasuresCount}" Header="Кол-во сканирований" MinWidth="135" Width="*"/>
-                <DataGridTextColumn Binding="{Binding IqrMed}" Header="IQR/MED" MinWidth="80" Width="*"/>
-                <DataGridTextColumn Binding="{Binding MED}" Header="MED" MinWidth="80" Width="*"/>
+                <DataGridTextColumn Binding="{Binding IQRMed}" Header="IQR/MED" MinWidth="80" Width="*"/>
+                <DataGridTextColumn Binding="{Binding Med}" Header="MED" MinWidth="80" Width="*"/>
                 <DataGridTextColumn Binding="{Binding PhibrosisStage}" Header="Стадия фиброза" Width="100"/>
                 <DataGridTextColumn Binding="{Binding CreatedAt}" Header="Дата" MinWidth="130" Width="*"/>
                 <DataGridTextColumn Header="Проверка системой" Width="140">

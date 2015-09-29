@@ -16,6 +16,6 @@
         BorderBrush="Black"
         BorderThickness="1" Loaded="Window_Loaded">
     <Grid>
-        <Label x:Name="label" Content="Пожалуйста, подождите..." HorizontalAlignment="Left" Margin="111,0,0,0" VerticalAlignment="Center" FontSize="21.333"/>
+        <Label x:Name="label" Content="Пожаdлуйста, подождите..." HorizontalAlignment="Left" Margin="111,0,0,0" VerticalAlignment="Center" FontSize="21.333"/>
     </Grid>
 </Window>

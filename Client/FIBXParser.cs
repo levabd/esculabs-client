@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.IO;
 using System.IO.Compression;
 using System.Drawing;
+using System.Xml;
+using Common.Logging;
 
 namespace Client
 {
@@ -16,29 +18,36 @@ namespace Client
     using System.Windows;
     using System.Xml.Linq;
 
-    class FIBXParser
+    class FibxParser
     {
-        private static volatile FIBXParser instance;
-        private static object syncRoot = new Object();
+        private static volatile FibxParser _instance;
+        private static object _syncRoot = new object();
 
-        public static FIBXParser Instance
+        private readonly ILog _log;
+
+        public FibxParser()
+        {
+            _log = LogManager.GetLogger("FibxParser");
+        }
+
+        public static FibxParser Instance
         {
             get
             {
-                if (instance == null)
+                if (_instance == null)
                 {
-                    lock (syncRoot)
+                    lock (_syncRoot)
                     {
-                        if (instance == null)
-                            instance = new FIBXParser();
+                        if (_instance == null)
+                            _instance = new FibxParser();
                     }
                 }
 
-                return instance;
+                return _instance;
             }
         }
 
-        public Examine Import(string fileName, int patientId)
+        public Examine Import(string fileName, int patientId, int physicianId = 0)
         {
             if (string.IsNullOrEmpty(fileName) || patientId <= 0)
             {
@@ -53,7 +62,7 @@ namespace Client
                 return null;
             }
 
-            Examine examine = null;
+            Examine e = null;
 
             tempPath += slash + "Balder";
             Directory.CreateDirectory(tempPath);
@@ -63,79 +72,92 @@ namespace Client
 
             ZipFile.ExtractToDirectory(fileName, tempPath);
 
-            MongoRepository<Examine> examines = new MongoRepository<Examine>();
-            var examReportFile = tempPath + slash + "ExamReport.xml";
+            var examReportFile = $"{tempPath}{slash}ExamReport.xml";
             if (File.Exists(examReportFile))
             {
-                var xml = XDocument.Load(examReportFile);
-
-                if (xml != null)
+                XDocument xml;
+                try
                 {
-                    /*try*/ {
-                        examine = new Examine();
+                    xml = XDocument.Load(examReportFile);
 
-                        var exam = xml.Descendants("Exam").FirstOrDefault();
-                        examine.CreatedAt = DateTime.Parse(exam.Descendants("Date").FirstOrDefault().Value);
-                        examine.PhysicianId = 1;
-                        examine.PatientId = patientId;
-
-                        var result = exam.Descendants("Result").FirstOrDefault();
-                        var sensorType = SensorType.Small;
-                        switch (exam.Descendants("ExamType").FirstOrDefault().Value)
-                        {
-                            case ("Small"):
-                                sensorType = SensorType.Small;
-                                break;
-                            case ("Medium"):
-                                sensorType = SensorType.Medium;
-                                break;
-                            case ("XL"):
-                                sensorType = SensorType.XL;
-                                break;
-                        }
-
-                        examine.ElastoExam = new ElastoExam();
-                        examine.ElastoExam.SensorType = sensorType;
-                        examine.ElastoExam.IQR = double.Parse(result.Descendants("StiffnessIQR").FirstOrDefault().Value, CultureInfo.InvariantCulture);
-                        examine.ElastoExam.MED = double.Parse(result.Descendants("StiffnessMedian").FirstOrDefault().Value, CultureInfo.InvariantCulture);
-                        examine.ElastoExam.Duration = int.Parse(result.Descendants("ExamDuration").FirstOrDefault().Value);
-                        examine.ElastoExam.WhiskerPlot = ImageFileToBase64(tempPath + slash + result.Descendants("WhiskerPlotImageLink").FirstOrDefault().Value);
-                        examine.ElastoExam.ExpertStatus = ExpertStatus.Pending;
-                        
-                        examine.ElastoExam.Measures = new List<Measure>();
-                        foreach (var measure in exam.Descendants("Measurements").FirstOrDefault().Descendants("Measure"))
-                        {
-                            Measure m = new Measure();
-                            m.Stiffness = double.Parse(measure.Descendants("Stiffness").FirstOrDefault().Value, CultureInfo.InvariantCulture);
-
-                            var sourceFile = tempPath + slash + measure.Descendants("ImageLink").FirstOrDefault().Value;
-
-                            Image image = Image.FromFile(sourceFile);
-                            Image source = Image.FromFile(sourceFile);
-
-                            m.Source = ImageToBase64(image);
-
-                            FibroscanImage prod = new FibroscanImage(source);
-                            Image mergedRes = prod.Merged;
-                            m.ResultMerged = ImageToBase64(mergedRes);
-
-                            examine.ElastoExam.Measures.Add(m);
-                        }
-
-                        // TODO: Validation check
-                        examine.ElastoExam.Valid = examine.ElastoExam.CheckIqrMed();
-
-                        examines.Add(examine);                        
-                    }
-                    //catch (Exception e)
-                    //{
-                    //    MessageBox.Show("Не удалось распознать FIBX-файл");
-                    //    examine = null;
-                    //}
                 }
-                else
+                catch (XmlException exception)
                 {
-                    MessageBox.Show("Не удалось открыть ExamReport.xml. Файл повреждён или имеет неизвестный формат.");
+                    _log.ErrorFormat("Can't parse ExamReport.xml in \"{0}\": {1}", fileName, exception.Message);
+                    MessageBox.Show("FIBX-файл повреждён или имеет неизвестный формат");
+
+                    return null;
+                }
+
+                try
+                {
+                    e = new Examine();
+                    e.ElastoExam = new ElastoExam();
+
+                    var exam = xml.Descendants("Exam").FirstOrDefault();
+
+                    e.CreatedAt = DateTime.Parse(exam.Descendants("Date").FirstOrDefault().Value);
+                    e.PhysicianId = physicianId;
+                    e.PatientId = patientId;
+
+                    var result = exam.Descendants("Result").FirstOrDefault();
+
+                    var sensorType = SensorType.Small;
+                    switch (exam.Descendants("ExamType").FirstOrDefault().Value)
+                    {
+                    case ("S"):
+                    case ("Small"):
+                        sensorType = SensorType.Small;
+                        break;
+                    case ("M"):
+                    case ("Medium"):
+                        sensorType = SensorType.Medium;
+                        break;
+                    case ("XL"):
+                        sensorType = SensorType.XL;
+                        break;
+                    default:
+                        sensorType = SensorType.Small;
+                        break;
+                    }
+
+                    e.ElastoExam.SensorType = sensorType;
+                    e.ElastoExam.IQR = double.Parse(result.Descendants("StiffnessIQR").FirstOrDefault().Value, CultureInfo.InvariantCulture);
+                    e.ElastoExam.Med = double.Parse(result.Descendants("StiffnessMedian").FirstOrDefault().Value, CultureInfo.InvariantCulture);
+                    e.ElastoExam.Duration = int.Parse(result.Descendants("ExamDuration").FirstOrDefault().Value);
+                    e.ElastoExam.WhiskerPlot = ImageFileToBase64(tempPath + slash + result.Descendants("WhiskerPlotImageLink").FirstOrDefault().Value);
+                    e.ElastoExam.ExpertStatus = ExpertStatus.Pending;
+                        
+                    e.ElastoExam.Measures = new List<Measure>();
+                    foreach (var measure in exam.Descendants("Measurements").FirstOrDefault().Descendants("Measure"))
+                    {
+                        Measure m = new Measure();
+
+                        m.CreatedAt = DateTime.Parse(exam.Descendants("Time").FirstOrDefault().Value);
+                        m.Stiffness = double.Parse(measure.Descendants("Stiffness").FirstOrDefault().Value, CultureInfo.InvariantCulture);
+
+                        var sourceFile = tempPath + slash + measure.Descendants("ImageLink").FirstOrDefault().Value;
+
+                        Image source = Image.FromFile(sourceFile);
+
+                        FibroscanImage prod = new FibroscanImage(source);
+                        m.ResultMerged = ImageToBase64(prod.Merged);
+                        m.Source = ImageFileToBase64(sourceFile);
+
+                        e.ElastoExam.Measures.Add(m);
+                    }
+
+                    // TODO: Validation check
+                    e.ElastoExam.Valid = e.ElastoExam.Validate();
+
+                    var examines = new MongoRepository<Examine>();
+                    examines.Add(e);                        
+                }
+                catch (Exception exception)
+                {
+                    _log.ErrorFormat("Can't parse FIBX: {0}", fileName, exception.Message);
+                    MessageBox.Show("Не удалось распознать FIBX-файл");
+                    e = null;
                 }
             }
             else
@@ -145,7 +167,7 @@ namespace Client
 
             Directory.Delete(tempPath, true);
 
-            return examine;
+            return e;
         }
 
         private string ImageFileToBase64(string fileName)
@@ -159,9 +181,7 @@ namespace Client
 
                     m.Close();
 
-                    // Convert byte[] to Base64 String
-                    string base64String = Convert.ToBase64String(imageBytes);
-                    return base64String;
+                    return Convert.ToBase64String(imageBytes);
                 }
             }
         }
@@ -177,9 +197,7 @@ namespace Client
 
                     m.Close();
 
-                    // Convert byte[] to Base64 String
-                    string base64String = Convert.ToBase64String(imageBytes);
-                    return base64String;
+                    return Convert.ToBase64String(imageBytes);
                 }
             }
         }

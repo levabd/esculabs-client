@@ -261,7 +261,11 @@ namespace Eklekto.Imaging
                     //end new
                     if ((x < Cols) && (x >= 0))
                         Data[y, x] = brightness;
+<<<<<<< HEAD
                     if ((x + 1 < Cols) && (x + 1 >= 0)) 
+=======
+                    if ((x + 1 < Cols) && (x > -1))
+>>>>>>> 53192e79be217f2a962c9b4ab15f093d52c2bc22
                         Data[y, x + 1] = brightness;
                 }
             }
