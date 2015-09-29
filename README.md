@@ -12,7 +12,7 @@
 - PostgreSQL Server (>= v9.4) [ [Download](http://www.enterprisedb.com/postgresql-944-installers-win64?ls=Crossover&type=Crossover) ]
 - MongoDB Server (>= v3.0.6) [ [Download](https://www.mongodb.org/dr/fastdl.mongodb.org/win32/mongodb-win32-x86_64-2008plus-ssl-3.0.6-signed.msi/download) ]
 
-##Additional links
+###Additional links
 - [MongoDB Windows Service configuration guide](http://docs.mongodb.org/manual/tutorial/install-mongodb-on-windows/#configure-a-windows-service-for-mongodb)
 - [MongoVUE](http://www.mongovue.com/) (MongoDB client)
 - [pgAdmin](http://www.pgadmin.org/index.php) (PostgreSQL client, could also be installed via PostgeSQL Server installer)
