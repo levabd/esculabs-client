@@ -96,12 +96,12 @@ namespace Client
 
                 byte chr = byte.Parse(iin.Substring(6, 1));
 
-                Gender gender = (chr % 2 == 0) ? Gender.Female : Gender.Male;
+                PatientGender gender = (chr % 2 == 0) ? PatientGender.Female : PatientGender.Male;
                 year = (17 + (chr + 1) / 2).ToString() + year;
 
                 birthdateDatePicker.SelectedDate = new DateTime(int.Parse(year), int.Parse(month), int.Parse(day));
 
-                if (gender == Gender.Male)
+                if (gender == PatientGender.Male)
                 {
                     maleRadioButton.IsChecked = true;
                 }
@@ -128,60 +128,60 @@ namespace Client
 
         private void startExamineBtn_Click(object sender, RoutedEventArgs e)
         {
-            Patient p = new Patient();
-            p.FirstName = firstNameTextBox.Text;
-            p.MiddleName = middleNameTextBox.Text;
-            p.LastName = lastNameTextBox.Text;
-            p.IIN = iinTextBox.Text;
+            //Patient p = new Patient();
+            //p.FirstName = firstNameTextBox.Text;
+            //p.MiddleName = middleNameTextBox.Text;
+            //p.LastName = lastNameTextBox.Text;
+            //p.IIN = iinTextBox.Text;
 
-            // TODO: Нормальный вывод ошибок
-            try
-            {
-                p.TP = double.Parse(tpTextBox.Text, CultureInfo.InvariantCulture);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Проверьте формат записи поля \"TP\" на правильность. Ошибка:\n\n" + ex.Message);
-                return;
-            }
+            //// TODO: Нормальный вывод ошибок
+            //try
+            //{
+            //    p.TP = double.Parse(tpTextBox.Text, CultureInfo.InvariantCulture);
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show("Проверьте формат записи поля \"TP\" на правильность. Ошибка:\n\n" + ex.Message);
+            //    return;
+            //}
 
-            try
-            {
-                p.SCD = double.Parse(scdTextBox.Text, CultureInfo.InvariantCulture);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Проверьте формат записи поля \"SCD\" на правильность. Ошибка:\n\n" + ex.Message);
-                return;
-            }
+            //try
+            //{
+            //    p.SCD = double.Parse(scdTextBox.Text, CultureInfo.InvariantCulture);
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show("Проверьте формат записи поля \"SCD\" на правильность. Ошибка:\n\n" + ex.Message);
+            //    return;
+            //}
 
-            if (!maleRadioButton.IsChecked.Value && !femaleRadioButton.IsChecked.Value)
-            {
-                MessageBox.Show("Вы должны выбрать пол пациента!");
-                return;
-            }
+            //if (!maleRadioButton.IsChecked.Value && !femaleRadioButton.IsChecked.Value)
+            //{
+            //    MessageBox.Show("Вы должны выбрать пол пациента!");
+            //    return;
+            //}
 
-            p.Gender = maleRadioButton.IsChecked.Value ? Gender.Male : Gender.Female;
+            //p.Gender = maleRadioButton.IsChecked.Value ? PatientGender.Male : PatientGender.Female;
 
-            if (!birthdateDatePicker.SelectedDate.HasValue)
-            {
-                MessageBox.Show("Вы должны выбрать дату рождения пациента!");
-                return;
-            }
+            //if (!birthdateDatePicker.SelectedDate.HasValue)
+            //{
+            //    MessageBox.Show("Вы должны выбрать дату рождения пациента!");
+            //    return;
+            //}
 
-            p.Birthdate = birthdateDatePicker.SelectedDate.Value;
+            //p.Birthdate = birthdateDatePicker.SelectedDate.Value;
 
-            p = PatientsRepo.Instance.Add(p);
-            if (p == null)
-            {
-                MessageBox.Show("Не удалось сохранить пациента. Проверьте заполненные поля на наличие ошибок.");
-                return;
-            }
+            //p = PatientsRepo.Instance.Add(p);
+            //if (p == null)
+            //{
+            //    MessageBox.Show("Не удалось сохранить пациента. Проверьте заполненные поля на наличие ошибок.");
+            //    return;
+            //}
 
-            ExaminesWindow window = new ExaminesWindow(p);
-            window.Owner = Owner;
-            window.Show();
-            Close();
+            //ExaminesWindow window = new ExaminesWindow(p);
+            //window.Owner = Owner;
+            //window.Show();
+            //Close();
         }
     }
 }

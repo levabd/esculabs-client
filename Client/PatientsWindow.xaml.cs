@@ -48,7 +48,7 @@ namespace Client
             fromDateFilter.SelectedDate = null;
             toDateFilter.SelectedDate = null;
 
-            patients = PatientsRepo.Instance.GetGridList();
+           // patients = PatientsRepo.Instance.GetGridList();
             patientsGrid.ItemsSource = patients;
         }
 
@@ -68,7 +68,8 @@ namespace Client
         {
             TablePatient tablePatient = ((FrameworkElement)sender).DataContext as TablePatient;
 
-            ExaminesWindow window = new ExaminesWindow(PatientsRepo.Instance.Find(tablePatient.Id));
+           // ExaminesWindow window = new ExaminesWindow(PatientsRepo.Instance.Find(tablePatient.Id));
+            ExaminesWindow window = new ExaminesWindow(null);
             window.Owner = this;
             window.ShowDialog();
 
@@ -88,7 +89,7 @@ namespace Client
             fromDateFilter.SetWatermarkText(DatePickerWatermark);
             toDateFilter.SetWatermarkText(DatePickerWatermark);
 
-            patients = PatientsRepo.Instance.GetGridList();
+          //  patients = PatientsRepo.Instance.GetGridList();
 
             if (patients == null || !patients.Any())
             {

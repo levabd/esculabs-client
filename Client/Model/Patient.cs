@@ -6,7 +6,7 @@ namespace Model
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public enum Gender
+    public enum PatientGender
     {
         Male,
         Female
@@ -34,22 +34,24 @@ namespace Model
         [Column("last_name")]
         public string LastName { get; set; }
 
+        [Required]
         [Column("birthdate", TypeName = "date")]
         public DateTime Birthdate { get; set; }
-
-        [Column("tp")]
-        public double? TP { get; set; }
-
-        [Column("scd")]
-        public double? SCD { get; set; }
 
         [Required]
         [StringLength(12)]
         [Column("iin")]
-        public string IIN { get; set; }
+        public string Iin { get; set; }
 
         [Required]
         [Column("gender")]
-        public Gender Gender { get; set; }
+        public PatientGender Gender { get; set; }
+
+        [Column("blood_group")]
+        public int? BloodGroup { get; set; }
+
+        [Column("rh_factor")]
+        public bool? RhFactor { get; set; }
+
     }
 }
