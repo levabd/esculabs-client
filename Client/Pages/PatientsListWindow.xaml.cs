@@ -24,7 +24,7 @@ namespace Client.Pages
     public partial class PatientsListWindow : MetroWindow
     {
         private List<Patient> _patients = null;
-
+       
         public PatientsListWindow()
         {
             InitializeComponent();
@@ -40,6 +40,35 @@ namespace Client.Pages
             }
 
             patientsGrid.ItemsSource = _patients;
+        }
+
+        private void logoutBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void filterTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            FilterPatientsList(nameFilterTextBox.Text, iinFilterTextBox.Text);
+        }
+
+        private void FilterPatientsList(string nameFilter, string iinFilter)
+        {
+            IEnumerable<Patient> filteredList = _patients;
+
+            nameFilter = nameFilter.ToLower();
+            
+            if (!string.IsNullOrWhiteSpace(nameFilter))
+            {
+                filteredList = filteredList.Where(x => x.FullNameString.ToLower().Contains(nameFilter));
+            }
+
+            if (!string.IsNullOrWhiteSpace(iinFilter))
+            {
+                filteredList = filteredList.Where(x => x.Iin.Contains(iinFilter));
+            }
+
+            patientsGrid.ItemsSource = filteredList;
         }
     }
 }

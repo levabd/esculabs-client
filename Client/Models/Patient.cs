@@ -51,7 +51,7 @@
                         break;
                 }
 
-                var rh = RhFactor.Value ? "+" : "-";
+                var rh = RhFactor.HasValue && RhFactor.Value ? "+" : "-";
 
                 return $"{group} (Rh{rh})";
             }

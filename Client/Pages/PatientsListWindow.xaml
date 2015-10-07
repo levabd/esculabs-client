@@ -7,24 +7,31 @@
         xmlns:local="clr-namespace:Client.Pages"
         xmlns:h="clr-namespace:Client.Helpers"
         mc:Ignorable="d"
-        Title="Список пациентов" Height="768" Width="1024" 
-        BorderBrush="Black"
-        BorderThickness="1" WindowStartupLocation="CenterScreen" Loaded="MetroWindow_Loaded" FontSize="16">
+        Title="Список пациентов" Height="768" Width="1024" MinWidth="1024" MinHeight="768"
+        ShowIconOnTitleBar="True"
+        GlowBrush="{DynamicResource AccentColorBrush}"                      
+        WindowStartupLocation="CenterScreen" Loaded="MetroWindow_Loaded">
+    <Controls:MetroWindow.RightWindowCommands>
+        <Controls:WindowCommands>
+            <Button Content="Выйти из учётной записи" />
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.RightWindowCommands>
     <Window.Resources>
         <h:GenderConverter x:Key="GenderConverter"/>
-    </Window.Resources>    
+    </Window.Resources>
     <Grid>
-        <DataGrid x:Name="patientsGrid" Margin="0,100,0,0" AutoGenerateColumns="False" BorderBrush="LightGray" BorderThickness="1" CanUserAddRows="False">
+        <DataGrid x:Name="patientsGrid" Margin="0,100,0,0" AutoGenerateColumns="False" BorderBrush="LightGray" BorderThickness="1" CanUserAddRows="False" GridLinesVisibility="Horizontal">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Id}" FontWeight="Bold" Header="#" Width="80"/>
                 <DataGridTextColumn Binding="{Binding Iin}" Header="ИИН" Width="120"/>
                 <DataGridTextColumn Binding="{Binding FullNameString}" Header="Ф. И. О." MinWidth="200" Width="*"/>
+                <DataGridTextColumn Binding="{Binding Birthdate, StringFormat=\{0:dd.MM.yyyy\}}" Header="Дата рождения" Width="160"/>
                 <DataGridTextColumn Binding="{Binding Gender, Converter={StaticResource GenderConverter}}"  Header="Пол" Width="120"/>
                 <DataGridTextColumn Binding="{Binding BloodGroupString}" Header="Группа крови" Width="140"/>
                 <DataGridTemplateColumn Width="120">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button>Просмотр</Button>
+                            <Button Style="{DynamicResource SquareButtonStyle}">Просмотр</Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -33,11 +40,11 @@
                 <BindingGroup/>
             </DataGrid.BindingGroup>
         </DataGrid>
-        <Button x:Name="logoutBtn" Content="Выйти" HorizontalAlignment="Right" Margin="0,25,10,0" VerticalAlignment="Top" Width="140" Height="49" FontFamily="Segoe UI" FontSize="12" FontWeight="Bold"/>
-        <Button x:Name="syncBtn" Content="Синхронизировать" HorizontalAlignment="Right" Margin="0,25,172,0" VerticalAlignment="Top" Width="164" Height="49" FontFamily="Segoe UI" FontSize="12" FontWeight="Bold"/>
-        <Button x:Name="addPatientBtn" Content="Добавить пациента" HorizontalAlignment="Right" Margin="0,25,341,0" VerticalAlignment="Top" Width="161" Height="49" FontFamily="Segoe UI" FontSize="12" FontWeight="Bold"/>
-        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="19,10,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="441" RenderTransformOrigin="0,0.192"/>
-        <TextBox x:Name="textBox_Copy" HorizontalAlignment="Left" Height="23" Margin="19,48,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="441" RenderTransformOrigin="0,0.192"/>
+        <Button x:Name="logoutBtn" Style="{DynamicResource SquareButtonStyle}" Content="Выйти" HorizontalAlignment="Right" Margin="0,25,10,0" VerticalAlignment="Top" Width="140" Height="49" FontFamily="Segoe UI" FontSize="12" FontWeight="Bold" Click="logoutBtn_Click"/>
+        <Button x:Name="syncBtn" Style="{DynamicResource SquareButtonStyle}" Content="Синхронизировать" HorizontalAlignment="Right" Margin="0,25,172,0" VerticalAlignment="Top" Width="164" Height="49" FontFamily="Segoe UI" FontSize="12" FontWeight="Bold"/>
+        <Button x:Name="addPatientBtn" Style="{DynamicResource AccentedSquareButtonStyle}" Content="Добавить пациента" HorizontalAlignment="Right" Margin="0,25,341,0" VerticalAlignment="Top" Width="161" Height="49" FontFamily="Segoe UI" FontSize="12" FontWeight="Bold"/>
+        <TextBox x:Name="nameFilterTextBox" Controls:TextBoxHelper.Watermark="Поиск по ФИО..." Controls:TextBoxHelper.ClearTextButton="True" HorizontalAlignment="Left" Height="23" Margin="21,19,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="441" RenderTransformOrigin="0,0.192" TextChanged="filterTextBox_TextChanged"/>
+        <TextBox x:Name="iinFilterTextBox" Controls:TextBoxHelper.Watermark="Поиск по ИИН..." Controls:TextBoxHelper.ClearTextButton="True" HorizontalAlignment="Left" Height="23" Margin="21,57,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="441" RenderTransformOrigin="0,0.192" TextChanged="filterTextBox_TextChanged"/>
 
     </Grid>
 </Controls:MetroWindow>
