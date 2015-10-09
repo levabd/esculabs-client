@@ -114,9 +114,12 @@ namespace Eklekto.Imaging.Blobs
             AForge.Imaging.Blob[] blobsResult = GetObjects(image, extractInOriginalSize);
             Blob[] newBlobResult = new Blob[blobsResult.Length];
 
-            for (int row = 1; row < image.Height + 1; row++)
-                objectLabels[row*image.Width - 1] = 0;
-
+            //for (int row = 1; row < image.Height + 1; row++)
+            //    objectLabels[row*image.Width - 1] = 0;
+            //new!!!
+            //for (int column = 0; column < image.Width; column++)
+             //   objectLabels[column] = 0;
+            //end new
             for (int blobCounter = 0; blobCounter < blobsResult.Length; blobCounter++)
             {
                 newBlobResult[blobCounter] = new Blob(blobsResult[blobCounter]);

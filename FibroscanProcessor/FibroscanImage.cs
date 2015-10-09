@@ -44,21 +44,31 @@ namespace FibroscanProcessor
         private const int LeftEdgeDistance2 = 90;
         private const int LeftCentralEdgeDist2 = 100;
         private const int RightEdgeDistance = 50;
-        private const int RightCentralEdgeDist = 85;
+        private const int RightCentralEdgeDist = 80;
         private const int MorphologyOpeningKernel = 4;
-        private const int CropSteps = 24;
+        private const int CropSteps = 20;
         private const int CropDistance = 8;
         private const int AreaMinLimit = 4000;
         private const double AreaProportion = 0.6;
         private const double HeightProportion = 0.65;
-        private const double SampleShare = 0.3;
-        private const double OutliersShare = 0.35;
-        private const int RansacIterations = 6000;
-        private int UsDeviationThreshold = 30;
-        private int UsDeviationStreak = 3;
-        private int TopIndention = 20;
+        private const double SampleShare = 0.15;
+        private const double OutliersShare = 0.2;
+        private const int RansacIterations = 12000;
+        private const int ElastogramTopIndention = 20;
 
-        private const int MinUltrasoundModARelativeEstimation = 90;
+        private const int UsDeviationThreshold = 30;
+        private const int UsDeviationStreak = 3;
+        private const int BadLinesLimit = 50;
+        private const int ModMTopIndention = 20;
+        private const int ModMBottomIndention = 60;
+        //alternative mod m
+        private const int ModMBrightLinesLimit = 30;
+        private const int ModMThreshold = 246;
+        private const int ModMBrightPixelLimit = 30;
+
+        private const int ModARelativeEstimationLimit = 85;
+        private const int ModATopIndention = 20;
+        private const int ModABottomIndention = 20;
         // ReSharper restore InconsistentNaming
 
         #endregion
@@ -122,14 +132,21 @@ namespace FibroscanProcessor
                     g.DrawPolygon(new Pen(Color.GreenYellow), pContour);
                     g.DrawLine(new Pen(Color.Red), p1, p2);
                     g.DrawLine(new Pen(Color.Blue), p3, p4);
-                    _workingUltrasoundModM.DeviationStreakLines.ForEach(point => g.DrawLine(new Pen(Color.Blue), 
+                    /*_workingUltrasoundModM.DeviationStreakLines.ForEach(point => g.DrawLine(new Pen(Color.Blue), 
                         new Point(0 + UltrasoundModMRect.X, point + UltrasoundModMRect.Y), 
                         new Point(UltrasoundModMRect.Width + UltrasoundModMRect.X, point + UltrasoundModMRect.Y)));
                     g.DrawLine(new Pen(Color.Blue), new Point(_workingUltrasoundModA.ApproxLine.GetX(0) + UltrasoundModARect.X, 0 + UltrasoundModARect.Y),
                         new Point(_workingUltrasoundModA.ApproxLine.GetX(UltrasoundModARect.Height) + UltrasoundModARect.X, UltrasoundModARect.Height + UltrasoundModARect.Y));
+                    */
+                    _workingUltrasoundModM.getBrightLines(ModMThreshold, ModMBrightPixelLimit).ForEach(point => g.DrawLine(new Pen(Color.Blue), 
+                        new Point(0 + UltrasoundModMRect.X, point + UltrasoundModMRect.Y), 
+                        new Point(UltrasoundModMRect.Width + UltrasoundModMRect.X, point + UltrasoundModMRect.Y)));
+                    g.DrawLine(new Pen(Color.Blue), new Point(_workingUltrasoundModA.ApproxLine.GetX(0) + UltrasoundModARect.X, 0 + UltrasoundModARect.Y),
+                        new Point(_workingUltrasoundModA.ApproxLine.GetX(UltrasoundModARect.Height) + UltrasoundModARect.X, UltrasoundModARect.Height + UltrasoundModARect.Y));
+                    
                 }
                 // ReSharper restore PossibleNullReferenceException
-                
+
                 return _source;
             }
         }
@@ -183,11 +200,12 @@ namespace FibroscanProcessor
             _workingElasto = LoadGrayElstogram();
             _elastoStatus = VerifyElasto(ref _workingElasto, out _workingBlob);
 
-            _workingUltrasoundModM = LoadGrayUltrasoundModM();
-            _ultrasoundModeMStatus = _workingUltrasoundModM.DeviationStreakLines.Count < 15 ? VerificationStatus.Correct : VerificationStatus.Incorrect;
-            
+            _workingUltrasoundModM = LoadGrayUltrasoundModM(UsDeviationThreshold, UsDeviationStreak);
+            //_ultrasoundModeMStatus = _workingUltrasoundModM.DeviationStreakLines.Count < BadLinesLimit ? VerificationStatus.Correct : VerificationStatus.Incorrect;
+            _ultrasoundModeMStatus = _workingUltrasoundModM.getBrightLines(ModMThreshold,ModMBrightPixelLimit).Count < ModMBrightLinesLimit ? VerificationStatus.Correct : VerificationStatus.Incorrect;
+
             _workingUltrasoundModA = LoadGrayUltrasoundModA();
-            _ultrasoundModeAStatus = _workingUltrasoundModA.RelativeEstimation > MinUltrasoundModARelativeEstimation ? VerificationStatus.Correct : VerificationStatus.Incorrect;
+            _ultrasoundModeAStatus = _workingUltrasoundModA.RelativeEstimation > ModARelativeEstimationLimit ? VerificationStatus.Correct : VerificationStatus.Incorrect;
         }
 
         private VerificationStatus VerifyElasto(ref Elastogram workingElasto, out ElastoBlob workingBlob)
@@ -216,7 +234,7 @@ namespace FibroscanProcessor
             if (workingBlob == null)
                 return VerificationStatus.NotCalculated;
 
-            workingBlob.Approximate(TopIndention, SampleShare, OutliersShare, RansacIterations);
+            workingBlob.Approximate(ElastogramTopIndention, SampleShare, OutliersShare, RansacIterations);
                 return (new ElastogramClassification()).Classiffy(workingBlob, _fibroline);
         }
 
@@ -236,7 +254,7 @@ namespace FibroscanProcessor
             return new Elastogram(new SimpleGrayImage(Grayscale.CommonAlgorithms.RMY.Apply(target)));
         }
 
-        private UltrasoundModM LoadGrayUltrasoundModM()
+        private UltrasoundModM LoadGrayUltrasoundModM(double deviationThreshold, int deviationStreakSize)
         {
             Bitmap target = new Bitmap(UltrasoundModMRect.Width, UltrasoundModMRect.Height);
             using (Graphics g = Graphics.FromImage(target))
@@ -245,7 +263,8 @@ namespace FibroscanProcessor
                                  UltrasoundModMRect, GraphicsUnit.Pixel);
             }
 
-            return new UltrasoundModM(UsDeviationThreshold, UsDeviationStreak, new SimpleGrayImage(Grayscale.CommonAlgorithms.RMY.Apply(target)));
+            return new UltrasoundModM(deviationThreshold, deviationStreakSize, new SimpleGrayImage(Grayscale.CommonAlgorithms.RMY.Apply(target)),
+                                      ModMTopIndention, ModMBottomIndention);
         }
 
         private UltrasoundModA LoadGrayUltrasoundModA()
@@ -257,7 +276,7 @@ namespace FibroscanProcessor
                                  UltrasoundModARect, GraphicsUnit.Pixel);
             }
 
-            return new UltrasoundModA(new SimpleGrayImage(Grayscale.CommonAlgorithms.RMY.Apply(target)));
+            return new UltrasoundModA(new SimpleGrayImage(Grayscale.CommonAlgorithms.RMY.Apply(target)), ModATopIndention, ModABottomIndention);
         }
 
         #endregion
