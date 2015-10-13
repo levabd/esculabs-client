@@ -90,6 +90,16 @@
             this.sourcePicture = new System.Windows.Forms.PictureBox();
             this.elastoPicture = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.label32 = new System.Windows.Forms.Label();
+            this.label31 = new System.Windows.Forms.Label();
+            this.label30 = new System.Windows.Forms.Label();
+            this.label29 = new System.Windows.Forms.Label();
+            this.label28 = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
             this.binarizationPicture = new System.Windows.Forms.PictureBox();
             this.edgePicture = new System.Windows.Forms.PictureBox();
             this.morphologyPicture = new System.Windows.Forms.PictureBox();
@@ -111,25 +121,25 @@
             this.groupBoxLog1 = new System.Windows.Forms.GroupBox();
             this.resultBox = new System.Windows.Forms.ListBox();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.buttonNextImage = new System.Windows.Forms.Button();
             this.imagePath = new System.Windows.Forms.TextBox();
+            this.buttonPrevImage = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.loadButton = new System.Windows.Forms.Button();
-            this.buttonNextImage = new System.Windows.Forms.Button();
-            this.buttonPrevImage = new System.Windows.Forms.Button();
-            this.groupBoxStat = new System.Windows.Forms.GroupBox();
-            this.commonStatBox = new System.Windows.Forms.ListBox();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.savingStepsCheckBox = new System.Windows.Forms.CheckBox();
             this.saveClassificationCheckBox = new System.Windows.Forms.CheckBox();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.timeDelayCheckBox = new System.Windows.Forms.CheckBox();
-            this.upDownTimeDelay = new System.Windows.Forms.NumericUpDown();
             this.upDownFilesNumber = new System.Windows.Forms.NumericUpDown();
+            this.productionCheckBox = new System.Windows.Forms.CheckBox();
             this.label20 = new System.Windows.Forms.Label();
             this.groupProcessingButton = new System.Windows.Forms.Button();
-            this.teachFileLoadButton = new System.Windows.Forms.Button();
             this.processingButton = new System.Windows.Forms.Button();
-            this.productionCheckBox = new System.Windows.Forms.CheckBox();
+            this.groupBoxLog3 = new System.Windows.Forms.GroupBox();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.teachButton = new System.Windows.Forms.Button();
+            this.teachFileLoadButton = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.sourceModMPicture = new System.Windows.Forms.PictureBox();
             this.outModMPicture = new System.Windows.Forms.PictureBox();
@@ -138,7 +148,17 @@
             this.outModAPicture = new System.Windows.Forms.PictureBox();
             this.cropPicture = new System.Windows.Forms.PictureBox();
             this.productionPicture = new System.Windows.Forms.PictureBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.groupBoxStat = new System.Windows.Forms.GroupBox();
+            this.commonStatBox = new System.Windows.Forms.ListBox();
+            this.modMBox = new System.Windows.Forms.ComboBox();
+            this.modABox = new System.Windows.Forms.ComboBox();
+            this.elastoStatusBox = new System.Windows.Forms.ComboBox();
+            this.simpleElastoStatus = new System.Windows.Forms.Label();
+            this.simpleModMStatus = new System.Windows.Forms.Label();
+            this.simpleModAStatus = new System.Windows.Forms.Label();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip.SuspendLayout();
             this.leftToolStrip.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -183,11 +203,10 @@
             this.groupBoxLog1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.groupBoxStat.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.groupBox8.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.upDownTimeDelay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.upDownFilesNumber)).BeginInit();
+            this.groupBoxLog3.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sourceModMPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.outModMPicture)).BeginInit();
@@ -196,6 +215,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.outModAPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cropPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productionPicture)).BeginInit();
+            this.groupBoxStat.SuspendLayout();
             this.SuspendLayout();
             // 
             // openFileDialog
@@ -319,7 +339,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(218, 69);
+            this.groupBox1.Size = new System.Drawing.Size(233, 69);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Elastogram settings";
@@ -334,7 +354,7 @@
             0});
             this.numericUpDown3.Name = "numericUpDown3";
             this.numericUpDown3.ReadOnly = true;
-            this.numericUpDown3.Size = new System.Drawing.Size(78, 20);
+            this.numericUpDown3.Size = new System.Drawing.Size(78, 22);
             this.numericUpDown3.TabIndex = 5;
             this.numericUpDown3.Value = new decimal(new int[] {
             4,
@@ -347,7 +367,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(6, 44);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(62, 13);
+            this.label3.Size = new System.Drawing.Size(80, 16);
             this.label3.TabIndex = 4;
             this.label3.Text = "Morphology";
             // 
@@ -356,7 +376,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(6, 23);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(94, 13);
+            this.label1.Size = new System.Drawing.Size(117, 16);
             this.label1.TabIndex = 1;
             this.label1.Text = "Kuwahara\'s kernel";
             // 
@@ -375,7 +395,7 @@
             0});
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.ReadOnly = true;
-            this.numericUpDown1.Size = new System.Drawing.Size(78, 20);
+            this.numericUpDown1.Size = new System.Drawing.Size(78, 22);
             this.numericUpDown1.TabIndex = 0;
             this.numericUpDown1.Value = new decimal(new int[] {
             29,
@@ -403,7 +423,7 @@
             this.groupBox5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox5.Location = new System.Drawing.Point(3, 78);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(218, 214);
+            this.groupBox5.Size = new System.Drawing.Size(233, 214);
             this.groupBox5.TabIndex = 8;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Binarizations";
@@ -413,7 +433,7 @@
             this.morphOtsuRadioButton.AutoSize = true;
             this.morphOtsuRadioButton.Location = new System.Drawing.Point(9, 65);
             this.morphOtsuRadioButton.Name = "morphOtsuRadioButton";
-            this.morphOtsuRadioButton.Size = new System.Drawing.Size(162, 17);
+            this.morphOtsuRadioButton.Size = new System.Drawing.Size(200, 20);
             this.morphOtsuRadioButton.TabIndex = 19;
             this.morphOtsuRadioButton.TabStop = true;
             this.morphOtsuRadioButton.Text = "Otsu Morphology Binarization";
@@ -424,7 +444,7 @@
             this.label10.AutoSize = true;
             this.label10.Location = new System.Drawing.Point(32, 165);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(69, 13);
+            this.label10.Size = new System.Drawing.Size(87, 16);
             this.label10.TabIndex = 18;
             this.label10.Text = "Local Radius";
             // 
@@ -433,7 +453,7 @@
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(32, 189);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(73, 13);
+            this.label9.Size = new System.Drawing.Size(94, 16);
             this.label9.TabIndex = 17;
             this.label9.Text = "Global Radius";
             // 
@@ -442,7 +462,7 @@
             this.upDownBinarGlobalRadius.Location = new System.Drawing.Point(125, 189);
             this.upDownBinarGlobalRadius.Name = "upDownBinarGlobalRadius";
             this.upDownBinarGlobalRadius.ReadOnly = true;
-            this.upDownBinarGlobalRadius.Size = new System.Drawing.Size(53, 20);
+            this.upDownBinarGlobalRadius.Size = new System.Drawing.Size(53, 22);
             this.upDownBinarGlobalRadius.TabIndex = 16;
             this.upDownBinarGlobalRadius.Value = new decimal(new int[] {
             8,
@@ -455,7 +475,7 @@
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(32, 137);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(13, 13);
+            this.label8.Size = new System.Drawing.Size(15, 16);
             this.label8.TabIndex = 15;
             this.label8.Text = "k";
             // 
@@ -464,7 +484,7 @@
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(32, 113);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(83, 13);
+            this.label7.Size = new System.Drawing.Size(106, 16);
             this.label7.TabIndex = 14;
             this.label7.Text = "Global threshold";
             // 
@@ -473,7 +493,7 @@
             this.upDownBinarLocalRadius.Location = new System.Drawing.Point(125, 163);
             this.upDownBinarLocalRadius.Name = "upDownBinarLocalRadius";
             this.upDownBinarLocalRadius.ReadOnly = true;
-            this.upDownBinarLocalRadius.Size = new System.Drawing.Size(53, 20);
+            this.upDownBinarLocalRadius.Size = new System.Drawing.Size(53, 22);
             this.upDownBinarLocalRadius.TabIndex = 13;
             this.upDownBinarLocalRadius.Value = new decimal(new int[] {
             20,
@@ -487,7 +507,7 @@
             this.morphNiblackRadioButton.Checked = true;
             this.morphNiblackRadioButton.Location = new System.Drawing.Point(6, 88);
             this.morphNiblackRadioButton.Name = "morphNiblackRadioButton";
-            this.morphNiblackRadioButton.Size = new System.Drawing.Size(176, 17);
+            this.morphNiblackRadioButton.Size = new System.Drawing.Size(219, 20);
             this.morphNiblackRadioButton.TabIndex = 12;
             this.morphNiblackRadioButton.TabStop = true;
             this.morphNiblackRadioButton.Text = "Niblack Morphology Binarization";
@@ -498,7 +518,7 @@
             this.simpleBinRadioButton.AutoSize = true;
             this.simpleBinRadioButton.Location = new System.Drawing.Point(9, 19);
             this.simpleBinRadioButton.Name = "simpleBinRadioButton";
-            this.simpleBinRadioButton.Size = new System.Drawing.Size(112, 17);
+            this.simpleBinRadioButton.Size = new System.Drawing.Size(139, 20);
             this.simpleBinRadioButton.TabIndex = 11;
             this.simpleBinRadioButton.Text = "Simple binarization";
             this.simpleBinRadioButton.UseVisualStyleBackColor = true;
@@ -508,7 +528,7 @@
             this.wolfRadioButton.AutoSize = true;
             this.wolfRadioButton.Location = new System.Drawing.Point(125, 42);
             this.wolfRadioButton.Name = "wolfRadioButton";
-            this.wolfRadioButton.Size = new System.Drawing.Size(80, 17);
+            this.wolfRadioButton.Size = new System.Drawing.Size(96, 20);
             this.wolfRadioButton.TabIndex = 10;
             this.wolfRadioButton.TabStop = true;
             this.wolfRadioButton.Text = "WolfJoulion";
@@ -519,7 +539,7 @@
             this.sauvolaRadioButton.AutoSize = true;
             this.sauvolaRadioButton.Location = new System.Drawing.Point(9, 42);
             this.sauvolaRadioButton.Name = "sauvolaRadioButton";
-            this.sauvolaRadioButton.Size = new System.Drawing.Size(64, 17);
+            this.sauvolaRadioButton.Size = new System.Drawing.Size(76, 20);
             this.sauvolaRadioButton.TabIndex = 9;
             this.sauvolaRadioButton.TabStop = true;
             this.sauvolaRadioButton.Text = "Sauvola";
@@ -530,7 +550,7 @@
             this.niblackRadioButton.AutoSize = true;
             this.niblackRadioButton.Location = new System.Drawing.Point(125, 19);
             this.niblackRadioButton.Name = "niblackRadioButton";
-            this.niblackRadioButton.Size = new System.Drawing.Size(61, 17);
+            this.niblackRadioButton.Size = new System.Drawing.Size(72, 20);
             this.niblackRadioButton.TabIndex = 0;
             this.niblackRadioButton.TabStop = true;
             this.niblackRadioButton.Text = "Niblack";
@@ -557,7 +577,7 @@
             -2147483648});
             this.upDownBinarizationK.Name = "upDownBinarizationK";
             this.upDownBinarizationK.ReadOnly = true;
-            this.upDownBinarizationK.Size = new System.Drawing.Size(53, 20);
+            this.upDownBinarizationK.Size = new System.Drawing.Size(53, 22);
             this.upDownBinarizationK.TabIndex = 8;
             this.upDownBinarizationK.Value = new decimal(new int[] {
             2,
@@ -575,7 +595,7 @@
             0});
             this.upDownBinarThreshold.Name = "upDownBinarThreshold";
             this.upDownBinarThreshold.ReadOnly = true;
-            this.upDownBinarThreshold.Size = new System.Drawing.Size(53, 20);
+            this.upDownBinarThreshold.Size = new System.Drawing.Size(53, 22);
             this.upDownBinarThreshold.TabIndex = 7;
             this.upDownBinarThreshold.Value = new decimal(new int[] {
             65,
@@ -588,7 +608,7 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(6, 27);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(0, 13);
+            this.label6.Size = new System.Drawing.Size(0, 16);
             this.label6.TabIndex = 0;
             // 
             // groupBox4
@@ -602,7 +622,7 @@
             this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox4.Location = new System.Drawing.Point(3, 458);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(218, 74);
+            this.groupBox4.Size = new System.Drawing.Size(233, 74);
             this.groupBox4.TabIndex = 7;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Ransac";
@@ -626,7 +646,7 @@
             0,
             0});
             this.upDownRansacIterations.Name = "upDownRansacIterations";
-            this.upDownRansacIterations.Size = new System.Drawing.Size(70, 20);
+            this.upDownRansacIterations.Size = new System.Drawing.Size(70, 22);
             this.upDownRansacIterations.TabIndex = 9;
             this.upDownRansacIterations.Value = new decimal(new int[] {
             12000,
@@ -649,7 +669,7 @@
             0,
             0});
             this.upDownRansacOutliers.Name = "upDownRansacOutliers";
-            this.upDownRansacOutliers.Size = new System.Drawing.Size(46, 20);
+            this.upDownRansacOutliers.Size = new System.Drawing.Size(46, 22);
             this.upDownRansacOutliers.TabIndex = 10;
             this.upDownRansacOutliers.Value = new decimal(new int[] {
             2,
@@ -677,7 +697,7 @@
             0,
             131072});
             this.upDownRansacSample.Name = "upDownRansacSample";
-            this.upDownRansacSample.Size = new System.Drawing.Size(46, 20);
+            this.upDownRansacSample.Size = new System.Drawing.Size(46, 22);
             this.upDownRansacSample.TabIndex = 9;
             this.upDownRansacSample.Value = new decimal(new int[] {
             15,
@@ -690,7 +710,7 @@
             this.label15.AutoSize = true;
             this.label15.Location = new System.Drawing.Point(50, 49);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(50, 13);
+            this.label15.Size = new System.Drawing.Size(62, 16);
             this.label15.TabIndex = 2;
             this.label15.Text = "Iterations";
             // 
@@ -699,7 +719,7 @@
             this.label14.AutoSize = true;
             this.label14.Location = new System.Drawing.Point(117, 21);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(42, 13);
+            this.label14.Size = new System.Drawing.Size(53, 16);
             this.label14.TabIndex = 1;
             this.label14.Text = "Outliers";
             // 
@@ -708,7 +728,7 @@
             this.label13.AutoSize = true;
             this.label13.Location = new System.Drawing.Point(8, 22);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(42, 13);
+            this.label13.Size = new System.Drawing.Size(55, 16);
             this.label13.TabIndex = 0;
             this.label13.Text = "Sample";
             // 
@@ -721,7 +741,7 @@
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox3.Location = new System.Drawing.Point(3, 408);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(218, 44);
+            this.groupBox3.Size = new System.Drawing.Size(233, 44);
             this.groupBox3.TabIndex = 9;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Crop";
@@ -731,7 +751,7 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(109, 21);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(49, 13);
+            this.label5.Size = new System.Drawing.Size(61, 16);
             this.label5.TabIndex = 8;
             this.label5.Text = "Distance";
             // 
@@ -740,7 +760,7 @@
             this.upDownCropDistance.Location = new System.Drawing.Point(164, 19);
             this.upDownCropDistance.Name = "upDownCropDistance";
             this.upDownCropDistance.ReadOnly = true;
-            this.upDownCropDistance.Size = new System.Drawing.Size(49, 20);
+            this.upDownCropDistance.Size = new System.Drawing.Size(49, 22);
             this.upDownCropDistance.TabIndex = 7;
             this.upDownCropDistance.Value = new decimal(new int[] {
             8,
@@ -753,7 +773,7 @@
             this.upDownCropStep.Location = new System.Drawing.Point(42, 18);
             this.upDownCropStep.Name = "upDownCropStep";
             this.upDownCropStep.ReadOnly = true;
-            this.upDownCropStep.Size = new System.Drawing.Size(49, 20);
+            this.upDownCropStep.Size = new System.Drawing.Size(49, 22);
             this.upDownCropStep.TabIndex = 1;
             this.upDownCropStep.Value = new decimal(new int[] {
             20,
@@ -766,7 +786,7 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(7, 20);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(29, 13);
+            this.label4.Size = new System.Drawing.Size(36, 16);
             this.label4.TabIndex = 0;
             this.label4.Text = "Step";
             // 
@@ -785,7 +805,8 @@
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(3, 538);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(218, 141);
+            this.tableLayoutPanel2.SetRowSpan(this.groupBox2, 2);
+            this.groupBox2.Size = new System.Drawing.Size(233, 141);
             this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Ultrasound Settings";
@@ -799,7 +820,7 @@
             0,
             0});
             this.upDownLimitUsBrightness.Name = "upDownLimitUsBrightness";
-            this.upDownLimitUsBrightness.Size = new System.Drawing.Size(57, 20);
+            this.upDownLimitUsBrightness.Size = new System.Drawing.Size(57, 22);
             this.upDownLimitUsBrightness.TabIndex = 17;
             this.upDownLimitUsBrightness.Value = new decimal(new int[] {
             246,
@@ -812,7 +833,7 @@
             this.label21.AutoSize = true;
             this.label21.Location = new System.Drawing.Point(13, 111);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(79, 13);
+            this.label21.Size = new System.Drawing.Size(100, 16);
             this.label21.TabIndex = 16;
             this.label21.Text = "Limit brightness";
             // 
@@ -820,7 +841,7 @@
             // 
             this.upDownRelativeEstimationLimit.Location = new System.Drawing.Point(134, 88);
             this.upDownRelativeEstimationLimit.Name = "upDownRelativeEstimationLimit";
-            this.upDownRelativeEstimationLimit.Size = new System.Drawing.Size(57, 20);
+            this.upDownRelativeEstimationLimit.Size = new System.Drawing.Size(57, 22);
             this.upDownRelativeEstimationLimit.TabIndex = 15;
             this.upDownRelativeEstimationLimit.Value = new decimal(new int[] {
             85,
@@ -833,7 +854,7 @@
             this.label19.AutoSize = true;
             this.label19.Location = new System.Drawing.Point(12, 91);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(115, 13);
+            this.label19.Size = new System.Drawing.Size(147, 16);
             this.label19.TabIndex = 14;
             this.label19.Text = "LimitRelativeEstimation";
             // 
@@ -846,7 +867,7 @@
             0,
             0});
             this.upDownBrightLinesLimit.Name = "upDownBrightLinesLimit";
-            this.upDownBrightLinesLimit.Size = new System.Drawing.Size(57, 20);
+            this.upDownBrightLinesLimit.Size = new System.Drawing.Size(57, 22);
             this.upDownBrightLinesLimit.TabIndex = 13;
             this.upDownBrightLinesLimit.Value = new decimal(new int[] {
             30,
@@ -859,7 +880,7 @@
             this.label18.AutoSize = true;
             this.label18.Location = new System.Drawing.Point(11, 69);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(80, 13);
+            this.label18.Size = new System.Drawing.Size(101, 16);
             this.label18.TabIndex = 12;
             this.label18.Text = "LimitBrightLines";
             // 
@@ -872,7 +893,7 @@
             0,
             0});
             this.upDownUsDeviationStreak.Name = "upDownUsDeviationStreak";
-            this.upDownUsDeviationStreak.Size = new System.Drawing.Size(57, 20);
+            this.upDownUsDeviationStreak.Size = new System.Drawing.Size(57, 22);
             this.upDownUsDeviationStreak.TabIndex = 11;
             this.upDownUsDeviationStreak.Value = new decimal(new int[] {
             3,
@@ -885,7 +906,7 @@
             this.label17.AutoSize = true;
             this.label17.Location = new System.Drawing.Point(10, 45);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(87, 13);
+            this.label17.Size = new System.Drawing.Size(108, 16);
             this.label17.TabIndex = 10;
             this.label17.Text = "LimitStreakCount";
             // 
@@ -893,7 +914,7 @@
             // 
             this.upDownBrightPixelLimit.Location = new System.Drawing.Point(134, 19);
             this.upDownBrightPixelLimit.Name = "upDownBrightPixelLimit";
-            this.upDownBrightPixelLimit.Size = new System.Drawing.Size(57, 20);
+            this.upDownBrightPixelLimit.Size = new System.Drawing.Size(57, 22);
             this.upDownBrightPixelLimit.TabIndex = 9;
             this.upDownBrightPixelLimit.Value = new decimal(new int[] {
             30,
@@ -906,16 +927,16 @@
             this.label16.AutoSize = true;
             this.label16.Location = new System.Drawing.Point(11, 23);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(82, 13);
+            this.label16.Size = new System.Drawing.Size(105, 16);
             this.label16.TabIndex = 0;
             this.label16.Text = "LimitBrightPixels";
             // 
             // kuwaharaPicture
             // 
             this.kuwaharaPicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.kuwaharaPicture.Location = new System.Drawing.Point(349, 173);
+            this.kuwaharaPicture.Location = new System.Drawing.Point(340, 183);
             this.kuwaharaPicture.Name = "kuwaharaPicture";
-            this.kuwaharaPicture.Size = new System.Drawing.Size(167, 167);
+            this.kuwaharaPicture.Size = new System.Drawing.Size(165, 123);
             this.kuwaharaPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.kuwaharaPicture.TabIndex = 5;
             this.kuwaharaPicture.TabStop = false;
@@ -924,9 +945,9 @@
             // sourcePicture
             // 
             this.sourcePicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.sourcePicture.Location = new System.Drawing.Point(3, 173);
+            this.sourcePicture.Location = new System.Drawing.Point(3, 183);
             this.sourcePicture.Name = "sourcePicture";
-            this.sourcePicture.Size = new System.Drawing.Size(167, 167);
+            this.sourcePicture.Size = new System.Drawing.Size(163, 123);
             this.sourcePicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.sourcePicture.TabIndex = 3;
             this.sourcePicture.TabStop = false;
@@ -935,9 +956,9 @@
             // elastoPicture
             // 
             this.elastoPicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.elastoPicture.Location = new System.Drawing.Point(176, 173);
+            this.elastoPicture.Location = new System.Drawing.Point(172, 183);
             this.elastoPicture.Name = "elastoPicture";
-            this.elastoPicture.Size = new System.Drawing.Size(167, 167);
+            this.elastoPicture.Size = new System.Drawing.Size(162, 123);
             this.elastoPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.elastoPicture.TabIndex = 4;
             this.elastoPicture.TabStop = false;
@@ -946,47 +967,191 @@
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 6;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0181F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24.76466F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.19913F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0181F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 205F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 230F));
-            this.tableLayoutPanel1.Controls.Add(this.elastoPicture, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.sourcePicture, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.kuwaharaPicture, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.binarizationPicture, 3, 1);
-            this.tableLayoutPanel1.Controls.Add(this.edgePicture, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.morphologyPicture, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.choosingPicture, 3, 2);
-            this.tableLayoutPanel1.Controls.Add(this.approximationPicture, 0, 3);
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 243F));
+            this.tableLayoutPanel1.Controls.Add(this.label32, 2, 5);
+            this.tableLayoutPanel1.Controls.Add(this.label31, 1, 5);
+            this.tableLayoutPanel1.Controls.Add(this.label30, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.label29, 3, 3);
+            this.tableLayoutPanel1.Controls.Add(this.label28, 2, 3);
+            this.tableLayoutPanel1.Controls.Add(this.label27, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.label26, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.label25, 3, 1);
+            this.tableLayoutPanel1.Controls.Add(this.label24, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.label23, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.elastoPicture, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.sourcePicture, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.kuwaharaPicture, 2, 2);
+            this.tableLayoutPanel1.Controls.Add(this.binarizationPicture, 3, 2);
+            this.tableLayoutPanel1.Controls.Add(this.edgePicture, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.morphologyPicture, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.choosingPicture, 3, 4);
+            this.tableLayoutPanel1.Controls.Add(this.approximationPicture, 0, 6);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 5, 0);
             this.tableLayoutPanel1.Controls.Add(this.groupBoxLog2, 4, 1);
             this.tableLayoutPanel1.Controls.Add(this.groupBoxLog1, 4, 0);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel3, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel4, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel5, 2, 3);
-            this.tableLayoutPanel1.Controls.Add(this.cropPicture, 2, 2);
-            this.tableLayoutPanel1.Controls.Add(this.productionPicture, 3, 3);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel4, 1, 6);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel5, 2, 6);
+            this.tableLayoutPanel1.Controls.Add(this.cropPicture, 2, 4);
+            this.tableLayoutPanel1.Controls.Add(this.productionPicture, 3, 6);
+            this.tableLayoutPanel1.Controls.Add(this.label22, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.groupBoxStat, 4, 5);
+            this.tableLayoutPanel1.Controls.Add(this.modMBox, 1, 8);
+            this.tableLayoutPanel1.Controls.Add(this.modABox, 2, 8);
+            this.tableLayoutPanel1.Controls.Add(this.elastoStatusBox, 0, 8);
+            this.tableLayoutPanel1.Controls.Add(this.simpleElastoStatus, 0, 7);
+            this.tableLayoutPanel1.Controls.Add(this.simpleModMStatus, 1, 7);
+            this.tableLayoutPanel1.Controls.Add(this.simpleModAStatus, 2, 7);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tableLayoutPanel1.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(46, 24);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 4;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 170F));
+            this.tableLayoutPanel1.RowCount = 10;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 160F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.3996F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.3996F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.20079F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1127, 688);
             this.tableLayoutPanel1.TabIndex = 6;
-            this.tableLayoutPanel1.Click += new System.EventHandler(this.pictureBox_Click);
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label32.Location = new System.Drawing.Point(340, 458);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(165, 20);
+            this.label32.TabIndex = 38;
+            this.label32.Text = "Mod A";
+            this.label32.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label32.Visible = false;
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label31.Location = new System.Drawing.Point(172, 458);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(162, 20);
+            this.label31.TabIndex = 37;
+            this.label31.Text = "Mod M";
+            this.label31.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label31.Visible = false;
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label30.Location = new System.Drawing.Point(3, 458);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(163, 20);
+            this.label30.TabIndex = 36;
+            this.label30.Text = "Final Elasto";
+            this.label30.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label30.Visible = false;
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label29.Location = new System.Drawing.Point(511, 309);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(163, 20);
+            this.label29.TabIndex = 35;
+            this.label29.Text = "Choosing";
+            this.label29.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label29.Visible = false;
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label28.Location = new System.Drawing.Point(340, 309);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(165, 20);
+            this.label28.TabIndex = 34;
+            this.label28.Text = "Crop";
+            this.label28.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label28.Visible = false;
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label27.Location = new System.Drawing.Point(172, 309);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(162, 20);
+            this.label27.TabIndex = 33;
+            this.label27.Text = "Morphology";
+            this.label27.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label27.Visible = false;
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label26.Location = new System.Drawing.Point(3, 309);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(163, 20);
+            this.label26.TabIndex = 32;
+            this.label26.Text = "Edge Removing";
+            this.label26.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label26.Visible = false;
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label25.Location = new System.Drawing.Point(511, 160);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(163, 20);
+            this.label25.TabIndex = 31;
+            this.label25.Text = "Binarization";
+            this.label25.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label25.Visible = false;
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label24.Location = new System.Drawing.Point(340, 160);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(165, 20);
+            this.label24.TabIndex = 30;
+            this.label24.Text = "Kuwahara";
+            this.label24.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label24.Visible = false;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label23.Location = new System.Drawing.Point(172, 160);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(162, 20);
+            this.label23.TabIndex = 29;
+            this.label23.Text = "Source Elasto";
+            this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label23.Visible = false;
             // 
             // binarizationPicture
             // 
             this.binarizationPicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.binarizationPicture.Location = new System.Drawing.Point(522, 173);
+            this.binarizationPicture.Location = new System.Drawing.Point(511, 183);
             this.binarizationPicture.Name = "binarizationPicture";
-            this.binarizationPicture.Size = new System.Drawing.Size(167, 167);
+            this.binarizationPicture.Size = new System.Drawing.Size(163, 123);
             this.binarizationPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.binarizationPicture.TabIndex = 6;
             this.binarizationPicture.TabStop = false;
@@ -995,9 +1160,9 @@
             // edgePicture
             // 
             this.edgePicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.edgePicture.Location = new System.Drawing.Point(3, 346);
+            this.edgePicture.Location = new System.Drawing.Point(3, 332);
             this.edgePicture.Name = "edgePicture";
-            this.edgePicture.Size = new System.Drawing.Size(167, 167);
+            this.edgePicture.Size = new System.Drawing.Size(163, 123);
             this.edgePicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.edgePicture.TabIndex = 7;
             this.edgePicture.TabStop = false;
@@ -1006,9 +1171,9 @@
             // morphologyPicture
             // 
             this.morphologyPicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.morphologyPicture.Location = new System.Drawing.Point(176, 346);
+            this.morphologyPicture.Location = new System.Drawing.Point(172, 332);
             this.morphologyPicture.Name = "morphologyPicture";
-            this.morphologyPicture.Size = new System.Drawing.Size(167, 167);
+            this.morphologyPicture.Size = new System.Drawing.Size(162, 123);
             this.morphologyPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.morphologyPicture.TabIndex = 8;
             this.morphologyPicture.TabStop = false;
@@ -1017,9 +1182,9 @@
             // choosingPicture
             // 
             this.choosingPicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.choosingPicture.Location = new System.Drawing.Point(522, 346);
+            this.choosingPicture.Location = new System.Drawing.Point(511, 332);
             this.choosingPicture.Name = "choosingPicture";
-            this.choosingPicture.Size = new System.Drawing.Size(167, 167);
+            this.choosingPicture.Size = new System.Drawing.Size(163, 123);
             this.choosingPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.choosingPicture.TabIndex = 9;
             this.choosingPicture.TabStop = false;
@@ -1028,9 +1193,9 @@
             // approximationPicture
             // 
             this.approximationPicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.approximationPicture.Location = new System.Drawing.Point(3, 519);
+            this.approximationPicture.Location = new System.Drawing.Point(3, 481);
             this.approximationPicture.Name = "approximationPicture";
-            this.approximationPicture.Size = new System.Drawing.Size(167, 166);
+            this.approximationPicture.Size = new System.Drawing.Size(163, 122);
             this.approximationPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.approximationPicture.TabIndex = 10;
             this.approximationPicture.TabStop = false;
@@ -1047,17 +1212,18 @@
             this.tableLayoutPanel2.Controls.Add(this.groupBox3, 0, 3);
             this.tableLayoutPanel2.Controls.Add(this.groupBox6, 0, 2);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(900, 3);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(885, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 6;
-            this.tableLayoutPanel1.SetRowSpan(this.tableLayoutPanel2, 4);
+            this.tableLayoutPanel2.RowCount = 7;
+            this.tableLayoutPanel1.SetRowSpan(this.tableLayoutPanel2, 10);
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 75F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 220F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 110F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(224, 682);
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(239, 682);
             this.tableLayoutPanel2.TabIndex = 19;
             // 
             // groupBox6
@@ -1074,7 +1240,7 @@
             this.groupBox6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox6.Location = new System.Drawing.Point(3, 298);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(218, 104);
+            this.groupBox6.Size = new System.Drawing.Size(233, 104);
             this.groupBox6.TabIndex = 10;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "EdgeObjects";
@@ -1088,7 +1254,7 @@
             0,
             0});
             this.upDownEdgeRightCentral.Name = "upDownEdgeRightCentral";
-            this.upDownEdgeRightCentral.Size = new System.Drawing.Size(57, 20);
+            this.upDownEdgeRightCentral.Size = new System.Drawing.Size(57, 22);
             this.upDownEdgeRightCentral.TabIndex = 8;
             this.upDownEdgeRightCentral.Value = new decimal(new int[] {
             80,
@@ -1105,7 +1271,7 @@
             0,
             0});
             this.upDownEdgeRight.Name = "upDownEdgeRight";
-            this.upDownEdgeRight.Size = new System.Drawing.Size(57, 20);
+            this.upDownEdgeRight.Size = new System.Drawing.Size(57, 22);
             this.upDownEdgeRight.TabIndex = 7;
             this.upDownEdgeRight.Value = new decimal(new int[] {
             50,
@@ -1122,7 +1288,7 @@
             0,
             0});
             this.upDownEdgeLeft2Central.Name = "upDownEdgeLeft2Central";
-            this.upDownEdgeLeft2Central.Size = new System.Drawing.Size(57, 20);
+            this.upDownEdgeLeft2Central.Size = new System.Drawing.Size(57, 22);
             this.upDownEdgeLeft2Central.TabIndex = 6;
             this.upDownEdgeLeft2Central.Value = new decimal(new int[] {
             100,
@@ -1139,7 +1305,7 @@
             0,
             0});
             this.upDownEdgeLeft2.Name = "upDownEdgeLeft2";
-            this.upDownEdgeLeft2.Size = new System.Drawing.Size(57, 20);
+            this.upDownEdgeLeft2.Size = new System.Drawing.Size(57, 22);
             this.upDownEdgeLeft2.TabIndex = 5;
             this.upDownEdgeLeft2.Value = new decimal(new int[] {
             90,
@@ -1156,7 +1322,7 @@
             0,
             0});
             this.upDownEdgeLeft1Central.Name = "upDownEdgeLeft1Central";
-            this.upDownEdgeLeft1Central.Size = new System.Drawing.Size(57, 20);
+            this.upDownEdgeLeft1Central.Size = new System.Drawing.Size(57, 22);
             this.upDownEdgeLeft1Central.TabIndex = 4;
             this.upDownEdgeLeft1Central.Value = new decimal(new int[] {
             85,
@@ -1173,7 +1339,7 @@
             0,
             0});
             this.upDownEdgeLeft1.Name = "upDownEdgeLeft1";
-            this.upDownEdgeLeft1.Size = new System.Drawing.Size(57, 20);
+            this.upDownEdgeLeft1.Size = new System.Drawing.Size(57, 22);
             this.upDownEdgeLeft1.TabIndex = 3;
             this.upDownEdgeLeft1.Value = new decimal(new int[] {
             25,
@@ -1186,7 +1352,7 @@
             this.label12.AutoSize = true;
             this.label12.Location = new System.Drawing.Point(6, 78);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(32, 13);
+            this.label12.Size = new System.Drawing.Size(39, 16);
             this.label12.TabIndex = 2;
             this.label12.Text = "Right";
             // 
@@ -1195,7 +1361,7 @@
             this.label11.AutoSize = true;
             this.label11.Location = new System.Drawing.Point(6, 52);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(31, 13);
+            this.label11.Size = new System.Drawing.Size(36, 16);
             this.label11.TabIndex = 1;
             this.label11.Text = "Left2";
             // 
@@ -1204,7 +1370,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(7, 23);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(31, 13);
+            this.label2.Size = new System.Drawing.Size(36, 16);
             this.label2.TabIndex = 0;
             this.label2.Text = "Left1";
             // 
@@ -1212,10 +1378,10 @@
             // 
             this.groupBoxLog2.Controls.Add(this.signatureBox);
             this.groupBoxLog2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBoxLog2.Location = new System.Drawing.Point(695, 173);
+            this.groupBoxLog2.Location = new System.Drawing.Point(680, 163);
             this.groupBoxLog2.Name = "groupBoxLog2";
-            this.tableLayoutPanel1.SetRowSpan(this.groupBoxLog2, 3);
-            this.groupBoxLog2.Size = new System.Drawing.Size(199, 512);
+            this.tableLayoutPanel1.SetRowSpan(this.groupBoxLog2, 4);
+            this.groupBoxLog2.Size = new System.Drawing.Size(199, 292);
             this.groupBoxLog2.TabIndex = 20;
             this.groupBoxLog2.TabStop = false;
             this.groupBoxLog2.Text = "Signatura";
@@ -1226,18 +1392,18 @@
             this.signatureBox.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.signatureBox.FormattingEnabled = true;
             this.signatureBox.ItemHeight = 19;
-            this.signatureBox.Location = new System.Drawing.Point(3, 16);
+            this.signatureBox.Location = new System.Drawing.Point(3, 18);
             this.signatureBox.Name = "signatureBox";
-            this.signatureBox.Size = new System.Drawing.Size(193, 493);
+            this.signatureBox.Size = new System.Drawing.Size(193, 271);
             this.signatureBox.TabIndex = 0;
             // 
             // groupBoxLog1
             // 
             this.groupBoxLog1.Controls.Add(this.resultBox);
             this.groupBoxLog1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBoxLog1.Location = new System.Drawing.Point(695, 3);
+            this.groupBoxLog1.Location = new System.Drawing.Point(680, 3);
             this.groupBoxLog1.Name = "groupBoxLog1";
-            this.groupBoxLog1.Size = new System.Drawing.Size(199, 164);
+            this.groupBoxLog1.Size = new System.Drawing.Size(199, 154);
             this.groupBoxLog1.TabIndex = 21;
             this.groupBoxLog1.TabStop = false;
             this.groupBoxLog1.Text = "Verification Result";
@@ -1249,127 +1415,105 @@
             this.resultBox.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.resultBox.FormattingEnabled = true;
             this.resultBox.ItemHeight = 19;
-            this.resultBox.Location = new System.Drawing.Point(3, 16);
+            this.resultBox.Location = new System.Drawing.Point(3, 18);
             this.resultBox.Name = "resultBox";
-            this.resultBox.Size = new System.Drawing.Size(193, 145);
+            this.resultBox.Size = new System.Drawing.Size(193, 133);
             this.resultBox.TabIndex = 0;
             // 
             // tableLayoutPanel3
             // 
-            this.tableLayoutPanel3.ColumnCount = 4;
+            this.tableLayoutPanel3.ColumnCount = 5;
             this.tableLayoutPanel1.SetColumnSpan(this.tableLayoutPanel3, 4);
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.91988F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28.93175F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.03715F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.03715F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.4132F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 18.37188F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 18.37188F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17.18796F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.65508F));
+            this.tableLayoutPanel3.Controls.Add(this.buttonNextImage, 2, 1);
             this.tableLayoutPanel3.Controls.Add(this.imagePath, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.buttonPrevImage, 1, 1);
             this.tableLayoutPanel3.Controls.Add(this.panel1, 0, 1);
-            this.tableLayoutPanel3.Controls.Add(this.groupBoxStat, 3, 0);
             this.tableLayoutPanel3.Controls.Add(this.groupBox7, 0, 3);
             this.tableLayoutPanel3.Controls.Add(this.groupBox8, 1, 3);
-            this.tableLayoutPanel3.Controls.Add(this.groupProcessingButton, 2, 3);
+            this.tableLayoutPanel3.Controls.Add(this.groupProcessingButton, 3, 3);
+            this.tableLayoutPanel3.Controls.Add(this.processingButton, 3, 1);
+            this.tableLayoutPanel3.Controls.Add(this.groupBoxLog3, 4, 0);
+            this.tableLayoutPanel3.Controls.Add(this.teachButton, 3, 2);
             this.tableLayoutPanel3.Controls.Add(this.teachFileLoadButton, 0, 2);
-            this.tableLayoutPanel3.Controls.Add(this.processingButton, 2, 1);
-            this.tableLayoutPanel3.Controls.Add(this.productionCheckBox, 1, 2);
+            this.tableLayoutPanel3.Controls.Add(this.textBox1, 1, 2);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 5;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33332F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 36F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 19F));
+            this.tableLayoutPanel3.RowCount = 4;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 35.21127F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.98058F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 31.06796F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(686, 164);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(671, 154);
             this.tableLayoutPanel3.TabIndex = 22;
-            // 
-            // imagePath
-            // 
-            this.tableLayoutPanel3.SetColumnSpan(this.imagePath, 3);
-            this.imagePath.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.imagePath.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.imagePath.Location = new System.Drawing.Point(3, 3);
-            this.imagePath.Multiline = true;
-            this.imagePath.Name = "imagePath";
-            this.imagePath.Size = new System.Drawing.Size(506, 30);
-            this.imagePath.TabIndex = 0;
-            // 
-            // panel1
-            // 
-            this.tableLayoutPanel3.SetColumnSpan(this.panel1, 2);
-            this.panel1.Controls.Add(this.loadButton);
-            this.panel1.Controls.Add(this.buttonNextImage);
-            this.panel1.Controls.Add(this.buttonPrevImage);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(3, 39);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(335, 30);
-            this.panel1.TabIndex = 1;
-            // 
-            // loadButton
-            // 
-            this.loadButton.Dock = System.Windows.Forms.DockStyle.Right;
-            this.loadButton.Location = new System.Drawing.Point(260, 0);
-            this.loadButton.Name = "loadButton";
-            this.loadButton.Size = new System.Drawing.Size(75, 30);
-            this.loadButton.TabIndex = 2;
-            this.loadButton.Text = "load";
-            this.loadButton.UseVisualStyleBackColor = true;
-            this.loadButton.Click += new System.EventHandler(this.button1_Click);
             // 
             // buttonNextImage
             // 
-            this.buttonNextImage.Dock = System.Windows.Forms.DockStyle.Left;
-            this.buttonNextImage.Location = new System.Drawing.Point(75, 0);
+            this.buttonNextImage.Dock = System.Windows.Forms.DockStyle.Right;
+            this.buttonNextImage.Location = new System.Drawing.Point(266, 39);
             this.buttonNextImage.Name = "buttonNextImage";
-            this.buttonNextImage.Size = new System.Drawing.Size(75, 30);
+            this.buttonNextImage.Size = new System.Drawing.Size(113, 29);
             this.buttonNextImage.TabIndex = 1;
             this.buttonNextImage.Text = "next";
             this.buttonNextImage.UseVisualStyleBackColor = true;
             this.buttonNextImage.Click += new System.EventHandler(this.buttonNextImage_Click);
             // 
+            // imagePath
+            // 
+            this.tableLayoutPanel3.SetColumnSpan(this.imagePath, 4);
+            this.imagePath.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.imagePath.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.imagePath.Location = new System.Drawing.Point(3, 3);
+            this.imagePath.Multiline = true;
+            this.imagePath.Name = "imagePath";
+            this.imagePath.Size = new System.Drawing.Size(491, 30);
+            this.imagePath.TabIndex = 0;
+            // 
             // buttonPrevImage
             // 
             this.buttonPrevImage.Dock = System.Windows.Forms.DockStyle.Left;
-            this.buttonPrevImage.Location = new System.Drawing.Point(0, 0);
+            this.buttonPrevImage.Location = new System.Drawing.Point(139, 39);
             this.buttonPrevImage.Name = "buttonPrevImage";
-            this.buttonPrevImage.Size = new System.Drawing.Size(75, 30);
+            this.buttonPrevImage.Size = new System.Drawing.Size(117, 29);
             this.buttonPrevImage.TabIndex = 0;
             this.buttonPrevImage.Text = "prev";
             this.buttonPrevImage.UseVisualStyleBackColor = true;
             this.buttonPrevImage.Click += new System.EventHandler(this.buttonPrevImage_Click);
             // 
-            // groupBoxStat
+            // panel1
             // 
-            this.groupBoxStat.Controls.Add(this.commonStatBox);
-            this.groupBoxStat.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBoxStat.Location = new System.Drawing.Point(515, 3);
-            this.groupBoxStat.Name = "groupBoxStat";
-            this.tableLayoutPanel3.SetRowSpan(this.groupBoxStat, 5);
-            this.groupBoxStat.Size = new System.Drawing.Size(168, 158);
-            this.groupBoxStat.TabIndex = 2;
-            this.groupBoxStat.TabStop = false;
-            this.groupBoxStat.Text = "CommonStat";
+            this.panel1.Controls.Add(this.loadButton);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(3, 39);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(130, 29);
+            this.panel1.TabIndex = 1;
             // 
-            // commonStatBox
+            // loadButton
             // 
-            this.commonStatBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.commonStatBox.FormattingEnabled = true;
-            this.commonStatBox.Location = new System.Drawing.Point(3, 16);
-            this.commonStatBox.Name = "commonStatBox";
-            this.commonStatBox.Size = new System.Drawing.Size(162, 139);
-            this.commonStatBox.TabIndex = 0;
+            this.loadButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.loadButton.Location = new System.Drawing.Point(0, 0);
+            this.loadButton.Name = "loadButton";
+            this.loadButton.Size = new System.Drawing.Size(130, 29);
+            this.loadButton.TabIndex = 3;
+            this.loadButton.Text = "load";
+            this.loadButton.UseVisualStyleBackColor = true;
+            this.loadButton.Click += new System.EventHandler(this.loadButton_Click);
             // 
             // groupBox7
             // 
             this.groupBox7.Controls.Add(this.savingStepsCheckBox);
             this.groupBox7.Controls.Add(this.saveClassificationCheckBox);
             this.groupBox7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox7.Location = new System.Drawing.Point(3, 111);
+            this.groupBox7.Location = new System.Drawing.Point(3, 106);
             this.groupBox7.Name = "groupBox7";
-            this.tableLayoutPanel3.SetRowSpan(this.groupBox7, 2);
-            this.groupBox7.Size = new System.Drawing.Size(137, 50);
+            this.groupBox7.Size = new System.Drawing.Size(130, 45);
             this.groupBox7.TabIndex = 5;
             this.groupBox7.TabStop = false;
             // 
@@ -1378,7 +1522,7 @@
             this.savingStepsCheckBox.AutoSize = true;
             this.savingStepsCheckBox.Location = new System.Drawing.Point(6, 5);
             this.savingStepsCheckBox.Name = "savingStepsCheckBox";
-            this.savingStepsCheckBox.Size = new System.Drawing.Size(89, 17);
+            this.savingStepsCheckBox.Size = new System.Drawing.Size(107, 20);
             this.savingStepsCheckBox.TabIndex = 4;
             this.savingStepsCheckBox.Text = "Saving Steps";
             this.savingStepsCheckBox.UseVisualStyleBackColor = true;
@@ -1388,52 +1532,29 @@
             this.saveClassificationCheckBox.AutoSize = true;
             this.saveClassificationCheckBox.Location = new System.Drawing.Point(6, 27);
             this.saveClassificationCheckBox.Name = "saveClassificationCheckBox";
-            this.saveClassificationCheckBox.Size = new System.Drawing.Size(123, 17);
+            this.saveClassificationCheckBox.Size = new System.Drawing.Size(151, 20);
             this.saveClassificationCheckBox.TabIndex = 3;
             this.saveClassificationCheckBox.Text = "Saving Classification";
             this.saveClassificationCheckBox.UseVisualStyleBackColor = true;
             // 
             // groupBox8
             // 
-            this.groupBox8.Controls.Add(this.timeDelayCheckBox);
-            this.groupBox8.Controls.Add(this.upDownTimeDelay);
+            this.tableLayoutPanel3.SetColumnSpan(this.groupBox8, 2);
             this.groupBox8.Controls.Add(this.upDownFilesNumber);
+            this.groupBox8.Controls.Add(this.productionCheckBox);
             this.groupBox8.Controls.Add(this.label20);
             this.groupBox8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox8.Location = new System.Drawing.Point(146, 111);
+            this.groupBox8.Location = new System.Drawing.Point(139, 106);
             this.groupBox8.Name = "groupBox8";
-            this.tableLayoutPanel3.SetRowSpan(this.groupBox8, 2);
-            this.groupBox8.Size = new System.Drawing.Size(192, 50);
+            this.groupBox8.Size = new System.Drawing.Size(240, 45);
             this.groupBox8.TabIndex = 6;
             this.groupBox8.TabStop = false;
             // 
-            // timeDelayCheckBox
-            // 
-            this.timeDelayCheckBox.AutoSize = true;
-            this.timeDelayCheckBox.Location = new System.Drawing.Point(6, 25);
-            this.timeDelayCheckBox.Name = "timeDelayCheckBox";
-            this.timeDelayCheckBox.Size = new System.Drawing.Size(79, 17);
-            this.timeDelayCheckBox.TabIndex = 9;
-            this.timeDelayCheckBox.Text = "Time Delay";
-            this.timeDelayCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // upDownTimeDelay
-            // 
-            this.upDownTimeDelay.Location = new System.Drawing.Point(113, 25);
-            this.upDownTimeDelay.Name = "upDownTimeDelay";
-            this.upDownTimeDelay.Size = new System.Drawing.Size(70, 20);
-            this.upDownTimeDelay.TabIndex = 8;
-            this.upDownTimeDelay.Value = new decimal(new int[] {
-            3,
-            0,
-            0,
-            0});
-            // 
             // upDownFilesNumber
             // 
-            this.upDownFilesNumber.Location = new System.Drawing.Point(113, 0);
+            this.upDownFilesNumber.Location = new System.Drawing.Point(104, 0);
             this.upDownFilesNumber.Name = "upDownFilesNumber";
-            this.upDownFilesNumber.Size = new System.Drawing.Size(70, 20);
+            this.upDownFilesNumber.Size = new System.Drawing.Size(70, 22);
             this.upDownFilesNumber.TabIndex = 7;
             this.upDownFilesNumber.Value = new decimal(new int[] {
             50,
@@ -1441,56 +1562,98 @@
             0,
             0});
             // 
+            // productionCheckBox
+            // 
+            this.productionCheckBox.AutoSize = true;
+            this.productionCheckBox.Location = new System.Drawing.Point(9, 25);
+            this.productionCheckBox.Name = "productionCheckBox";
+            this.productionCheckBox.Size = new System.Drawing.Size(91, 20);
+            this.productionCheckBox.TabIndex = 10;
+            this.productionCheckBox.Text = "Production";
+            this.productionCheckBox.UseVisualStyleBackColor = true;
+            // 
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(3, 3);
+            this.label20.Location = new System.Drawing.Point(6, 2);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(92, 13);
+            this.label20.Size = new System.Drawing.Size(118, 16);
             this.label20.TabIndex = 6;
             this.label20.Text = "Number of images";
             // 
             // groupProcessingButton
             // 
             this.groupProcessingButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupProcessingButton.Location = new System.Drawing.Point(344, 111);
+            this.groupProcessingButton.Location = new System.Drawing.Point(385, 106);
             this.groupProcessingButton.Name = "groupProcessingButton";
-            this.groupProcessingButton.Size = new System.Drawing.Size(165, 30);
+            this.groupProcessingButton.Size = new System.Drawing.Size(109, 45);
             this.groupProcessingButton.TabIndex = 7;
             this.groupProcessingButton.Text = "Group Processing";
             this.groupProcessingButton.UseVisualStyleBackColor = true;
             this.groupProcessingButton.Click += new System.EventHandler(this.groupProcessingButton_Click);
             // 
-            // teachFileLoadButton
-            // 
-            this.teachFileLoadButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.teachFileLoadButton.Location = new System.Drawing.Point(3, 75);
-            this.teachFileLoadButton.Name = "teachFileLoadButton";
-            this.teachFileLoadButton.Size = new System.Drawing.Size(137, 30);
-            this.teachFileLoadButton.TabIndex = 8;
-            this.teachFileLoadButton.Text = "Load TeachFile";
-            this.teachFileLoadButton.UseVisualStyleBackColor = true;
-            // 
             // processingButton
             // 
             this.processingButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.processingButton.Location = new System.Drawing.Point(344, 39);
+            this.processingButton.Location = new System.Drawing.Point(385, 39);
             this.processingButton.Name = "processingButton";
-            this.processingButton.Size = new System.Drawing.Size(165, 30);
+            this.processingButton.Size = new System.Drawing.Size(109, 29);
             this.processingButton.TabIndex = 9;
             this.processingButton.Text = "Processing";
             this.processingButton.UseVisualStyleBackColor = true;
             this.processingButton.Click += new System.EventHandler(this.button2_Click);
             // 
-            // productionCheckBox
+            // groupBoxLog3
             // 
-            this.productionCheckBox.AutoSize = true;
-            this.productionCheckBox.Location = new System.Drawing.Point(146, 75);
-            this.productionCheckBox.Name = "productionCheckBox";
-            this.productionCheckBox.Size = new System.Drawing.Size(123, 17);
-            this.productionCheckBox.TabIndex = 10;
-            this.productionCheckBox.Text = "productionExecution";
-            this.productionCheckBox.UseVisualStyleBackColor = true;
+            this.groupBoxLog3.Controls.Add(this.listBox1);
+            this.groupBoxLog3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBoxLog3.Location = new System.Drawing.Point(500, 3);
+            this.groupBoxLog3.Name = "groupBoxLog3";
+            this.tableLayoutPanel3.SetRowSpan(this.groupBoxLog3, 4);
+            this.groupBoxLog3.Size = new System.Drawing.Size(168, 148);
+            this.groupBoxLog3.TabIndex = 11;
+            this.groupBoxLog3.TabStop = false;
+            this.groupBoxLog3.Text = "System Answer";
+            // 
+            // listBox1
+            // 
+            this.listBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 16;
+            this.listBox1.Location = new System.Drawing.Point(3, 18);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(162, 127);
+            this.listBox1.TabIndex = 0;
+            // 
+            // teachButton
+            // 
+            this.teachButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.teachButton.Location = new System.Drawing.Point(385, 74);
+            this.teachButton.Name = "teachButton";
+            this.teachButton.Size = new System.Drawing.Size(109, 26);
+            this.teachButton.TabIndex = 10;
+            this.teachButton.Text = "Add for teaching";
+            this.teachButton.UseVisualStyleBackColor = true;
+            // 
+            // teachFileLoadButton
+            // 
+            this.teachFileLoadButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.teachFileLoadButton.Location = new System.Drawing.Point(3, 74);
+            this.teachFileLoadButton.Name = "teachFileLoadButton";
+            this.teachFileLoadButton.Size = new System.Drawing.Size(130, 26);
+            this.teachFileLoadButton.TabIndex = 8;
+            this.teachFileLoadButton.Text = "Load TeachFile";
+            this.teachFileLoadButton.UseVisualStyleBackColor = true;
+            // 
+            // textBox1
+            // 
+            this.tableLayoutPanel3.SetColumnSpan(this.textBox1, 2);
+            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBox1.Location = new System.Drawing.Point(139, 74);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(240, 24);
+            this.textBox1.TabIndex = 13;
             // 
             // tableLayoutPanel4
             // 
@@ -1500,11 +1663,11 @@
             this.tableLayoutPanel4.Controls.Add(this.sourceModMPicture, 0, 0);
             this.tableLayoutPanel4.Controls.Add(this.outModMPicture, 1, 0);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(176, 519);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(172, 481);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 1;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(167, 166);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(162, 122);
             this.tableLayoutPanel4.TabIndex = 23;
             // 
             // sourceModMPicture
@@ -1512,7 +1675,7 @@
             this.sourceModMPicture.Dock = System.Windows.Forms.DockStyle.Fill;
             this.sourceModMPicture.Location = new System.Drawing.Point(3, 3);
             this.sourceModMPicture.Name = "sourceModMPicture";
-            this.sourceModMPicture.Size = new System.Drawing.Size(77, 160);
+            this.sourceModMPicture.Size = new System.Drawing.Size(75, 116);
             this.sourceModMPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.sourceModMPicture.TabIndex = 0;
             this.sourceModMPicture.TabStop = false;
@@ -1521,9 +1684,9 @@
             // outModMPicture
             // 
             this.outModMPicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.outModMPicture.Location = new System.Drawing.Point(86, 3);
+            this.outModMPicture.Location = new System.Drawing.Point(84, 3);
             this.outModMPicture.Name = "outModMPicture";
-            this.outModMPicture.Size = new System.Drawing.Size(78, 160);
+            this.outModMPicture.Size = new System.Drawing.Size(75, 116);
             this.outModMPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.outModMPicture.TabIndex = 1;
             this.outModMPicture.TabStop = false;
@@ -1537,11 +1700,11 @@
             this.tableLayoutPanel5.Controls.Add(this.sourceModAPicture, 0, 0);
             this.tableLayoutPanel5.Controls.Add(this.outModAPicture, 1, 0);
             this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel5.Location = new System.Drawing.Point(349, 519);
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(340, 481);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             this.tableLayoutPanel5.RowCount = 1;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(167, 166);
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(165, 122);
             this.tableLayoutPanel5.TabIndex = 24;
             // 
             // sourceModAPicture
@@ -1549,7 +1712,7 @@
             this.sourceModAPicture.Dock = System.Windows.Forms.DockStyle.Fill;
             this.sourceModAPicture.Location = new System.Drawing.Point(3, 3);
             this.sourceModAPicture.Name = "sourceModAPicture";
-            this.sourceModAPicture.Size = new System.Drawing.Size(77, 160);
+            this.sourceModAPicture.Size = new System.Drawing.Size(76, 116);
             this.sourceModAPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.sourceModAPicture.TabIndex = 0;
             this.sourceModAPicture.TabStop = false;
@@ -1558,9 +1721,9 @@
             // outModAPicture
             // 
             this.outModAPicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.outModAPicture.Location = new System.Drawing.Point(86, 3);
+            this.outModAPicture.Location = new System.Drawing.Point(85, 3);
             this.outModAPicture.Name = "outModAPicture";
-            this.outModAPicture.Size = new System.Drawing.Size(78, 160);
+            this.outModAPicture.Size = new System.Drawing.Size(77, 116);
             this.outModAPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.outModAPicture.TabIndex = 1;
             this.outModAPicture.TabStop = false;
@@ -1569,9 +1732,9 @@
             // cropPicture
             // 
             this.cropPicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cropPicture.Location = new System.Drawing.Point(349, 346);
+            this.cropPicture.Location = new System.Drawing.Point(340, 332);
             this.cropPicture.Name = "cropPicture";
-            this.cropPicture.Size = new System.Drawing.Size(167, 167);
+            this.cropPicture.Size = new System.Drawing.Size(165, 123);
             this.cropPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.cropPicture.TabIndex = 26;
             this.cropPicture.TabStop = false;
@@ -1580,17 +1743,138 @@
             // productionPicture
             // 
             this.productionPicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.productionPicture.Location = new System.Drawing.Point(522, 519);
+            this.productionPicture.Location = new System.Drawing.Point(511, 481);
             this.productionPicture.Name = "productionPicture";
-            this.productionPicture.Size = new System.Drawing.Size(167, 166);
+            this.productionPicture.Size = new System.Drawing.Size(163, 122);
             this.productionPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.productionPicture.TabIndex = 27;
             this.productionPicture.TabStop = false;
             this.productionPicture.Click += new System.EventHandler(this.pictureBox_Click);
             // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label22.Location = new System.Drawing.Point(3, 160);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(163, 20);
+            this.label22.TabIndex = 28;
+            this.label22.Text = "Source";
+            this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label22.Visible = false;
+            // 
+            // groupBoxStat
+            // 
+            this.groupBoxStat.Controls.Add(this.commonStatBox);
+            this.groupBoxStat.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBoxStat.Location = new System.Drawing.Point(680, 461);
+            this.groupBoxStat.Name = "groupBoxStat";
+            this.tableLayoutPanel1.SetRowSpan(this.groupBoxStat, 5);
+            this.groupBoxStat.Size = new System.Drawing.Size(199, 224);
+            this.groupBoxStat.TabIndex = 2;
+            this.groupBoxStat.TabStop = false;
+            this.groupBoxStat.Text = "CommonStat";
+            // 
+            // commonStatBox
+            // 
+            this.commonStatBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.commonStatBox.FormattingEnabled = true;
+            this.commonStatBox.ItemHeight = 16;
+            this.commonStatBox.Location = new System.Drawing.Point(3, 18);
+            this.commonStatBox.Name = "commonStatBox";
+            this.commonStatBox.Size = new System.Drawing.Size(193, 203);
+            this.commonStatBox.TabIndex = 0;
+            // 
+            // modMBox
+            // 
+            this.modMBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.modMBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.modMBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.modMBox.FormattingEnabled = true;
+            this.modMBox.Items.AddRange(new object[] {
+            "Uncertain",
+            "Correct",
+            "Incorrect"});
+            this.modMBox.Location = new System.Drawing.Point(172, 639);
+            this.modMBox.Name = "modMBox";
+            this.modMBox.Size = new System.Drawing.Size(162, 28);
+            this.modMBox.TabIndex = 40;
+            this.modMBox.Visible = false;
+            // 
+            // modABox
+            // 
+            this.modABox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.modABox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.modABox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.modABox.FormattingEnabled = true;
+            this.modABox.Items.AddRange(new object[] {
+            "Uncertain",
+            "Correct",
+            "Incorrect"});
+            this.modABox.Location = new System.Drawing.Point(340, 639);
+            this.modABox.Name = "modABox";
+            this.modABox.Size = new System.Drawing.Size(165, 28);
+            this.modABox.TabIndex = 41;
+            this.modABox.Visible = false;
+            // 
+            // elastoStatusBox
+            // 
+            this.elastoStatusBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.elastoStatusBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.elastoStatusBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.elastoStatusBox.FormattingEnabled = true;
+            this.elastoStatusBox.Items.AddRange(new object[] {
+            "Uncertain",
+            "Correct",
+            "Incorrect"});
+            this.elastoStatusBox.Location = new System.Drawing.Point(3, 639);
+            this.elastoStatusBox.Name = "elastoStatusBox";
+            this.elastoStatusBox.Size = new System.Drawing.Size(163, 28);
+            this.elastoStatusBox.TabIndex = 39;
+            this.elastoStatusBox.Visible = false;
+            // 
+            // simpleElastoStatus
+            // 
+            this.simpleElastoStatus.AutoSize = true;
+            this.simpleElastoStatus.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.simpleElastoStatus.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.simpleElastoStatus.Location = new System.Drawing.Point(3, 606);
+            this.simpleElastoStatus.Name = "simpleElastoStatus";
+            this.simpleElastoStatus.Size = new System.Drawing.Size(163, 30);
+            this.simpleElastoStatus.TabIndex = 42;
+            this.simpleElastoStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // simpleModMStatus
+            // 
+            this.simpleModMStatus.AutoSize = true;
+            this.simpleModMStatus.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.simpleModMStatus.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.simpleModMStatus.Location = new System.Drawing.Point(172, 606);
+            this.simpleModMStatus.Name = "simpleModMStatus";
+            this.simpleModMStatus.Size = new System.Drawing.Size(162, 30);
+            this.simpleModMStatus.TabIndex = 43;
+            this.simpleModMStatus.Text = " ";
+            this.simpleModMStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // simpleModAStatus
+            // 
+            this.simpleModAStatus.AutoSize = true;
+            this.simpleModAStatus.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.simpleModAStatus.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.simpleModAStatus.Location = new System.Drawing.Point(340, 606);
+            this.simpleModAStatus.Name = "simpleModAStatus";
+            this.simpleModAStatus.Size = new System.Drawing.Size(165, 30);
+            this.simpleModAStatus.TabIndex = 44;
+            this.simpleModAStatus.Text = " ";
+            this.simpleModAStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // saveFileDialog
             // 
             this.saveFileDialog.RestoreDirectory = true;
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
             // 
             // Form1
             // 
@@ -1637,6 +1921,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.sourcePicture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.elastoPicture)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.binarizationPicture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.edgePicture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.morphologyPicture)).EndInit();
@@ -1656,13 +1941,12 @@
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
             this.panel1.ResumeLayout(false);
-            this.groupBoxStat.ResumeLayout(false);
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
             this.groupBox8.ResumeLayout(false);
             this.groupBox8.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.upDownTimeDelay)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.upDownFilesNumber)).EndInit();
+            this.groupBoxLog3.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.sourceModMPicture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.outModMPicture)).EndInit();
@@ -1671,6 +1955,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.outModAPicture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cropPicture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.productionPicture)).EndInit();
+            this.groupBoxStat.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1775,11 +2060,8 @@
         private System.Windows.Forms.GroupBox groupBox8;
         private System.Windows.Forms.NumericUpDown upDownFilesNumber;
         private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.CheckBox timeDelayCheckBox;
-        private System.Windows.Forms.NumericUpDown upDownTimeDelay;
         private System.Windows.Forms.Button groupProcessingButton;
         private System.Windows.Forms.Button teachFileLoadButton;
-        private System.Windows.Forms.Button loadButton;
         private System.Windows.Forms.Button processingButton;
         private System.Windows.Forms.PictureBox cropPicture;
         private System.Windows.Forms.PictureBox productionPicture;
@@ -1787,6 +2069,29 @@
         private System.Windows.Forms.NumericUpDown upDownLimitUsBrightness;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.CheckBox productionCheckBox;
+        private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Button teachButton;
+        private System.Windows.Forms.GroupBox groupBoxLog3;
+        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ComboBox elastoStatusBox;
+        private System.Windows.Forms.ComboBox modMBox;
+        private System.Windows.Forms.ComboBox modABox;
+        private System.Windows.Forms.Button loadButton;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Label simpleElastoStatus;
+        private System.Windows.Forms.Label simpleModMStatus;
+        private System.Windows.Forms.Label simpleModAStatus;
     }
 }
 

@@ -15,7 +15,9 @@ namespace ImageLoader
     {
         Image sourceImage;
         private List<PictureBox> pictures;
-
+        private List<Label> imageLabels;
+        private List<ComboBox> teachStatusComboBox;
+        private List<Label> simpleStatusLabel;
         public Form1()
         {
             InitializeComponent();
@@ -24,14 +26,29 @@ namespace ImageLoader
                 sourcePicture, elastoPicture, kuwaharaPicture, binarizationPicture, edgePicture, morphologyPicture,cropPicture,
                 choosingPicture, approximationPicture, sourceModMPicture, outModMPicture, sourceModAPicture, outModAPicture, productionPicture
             };
+            imageLabels = new List<Label>
+            {
+                label22, label23, label24, label25, label26, label27,
+                label28, label29, label30, label31, label32
+            };
+            teachStatusComboBox = new List<ComboBox>
+            {
+                elastoStatusBox, modMBox, modABox
+            };
+            simpleStatusLabel = new List<Label>
+            {
+                simpleElastoStatus, simpleModMStatus, simpleModAStatus
+            };
+            
         }
-
-
 
         private void LoadImage()
         {
             openFileDialog.Filter = "image (JPEG) files (*.jpg)|*.jpg|All files (*.*)|*.*";
             AllClear();
+            imageLabels.ForEach(label => label.Visible = false);
+            teachStatusComboBox.ForEach(box => box.Visible = false);
+            simpleStatusLabel.ForEach(label => label.Visible = false);
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -48,6 +65,11 @@ namespace ImageLoader
             if (sourcePicture.Image != null)
             {
                 BoxClear();
+                imageLabels.ForEach(label=> label.Visible=true);
+                teachStatusComboBox.ForEach(box => box.Visible = true);
+                teachStatusComboBox.ForEach(box => box.SelectedItem = "Uncertain");
+                simpleStatusLabel.ForEach(label => label.Visible = true);
+
                 FibroscanImage image = new FibroscanImage(sourceImage, true);
                 VerificationStatus elastoStatus = ElastogramVerification(image);
                 Ultrasoundverification(image);
@@ -118,6 +140,7 @@ namespace ImageLoader
 
             VerificationStatus elastoStatus = image.Step10Classify();
             resultBox.Items.Add("Elastogram is " + elastoStatus);
+            simpleElastoStatus.Text = elastoStatus.ToString();
             return elastoStatus;
         }
 
@@ -125,21 +148,27 @@ namespace ImageLoader
         {
             long timer = 0;
             sourceModMPicture.Image = image.Step11LoadUltrasoundM((double)upDownBrightPixelLimit.Value, (int)upDownUsDeviationStreak.Value);
-
             VerificationStatus umms = VerificationStatus.NotCalculated;
+
             outModMPicture.Image = image.Step15DrawBrightLines(ref umms, (int)upDownLimitUsBrightness.Value, (int)upDownBrightPixelLimit.Value, (int)upDownBrightLinesLimit.Value);
+
             resultBox.Items.Add("UltraSoundModM is " + umms);
+            simpleModMStatus.Text = umms.ToString();
 
             signatureBox.Items.Add("Mod M bright lines:  " +
                                    image.WorkingUltrasoundModM.getBrightLines((int)upDownLimitUsBrightness.Value, (int)upDownBrightPixelLimit.Value).Count);
 
             sourceModAPicture.Image = image.Step13LoadUltrasoundA();
-
             VerificationStatus umas = VerificationStatus.NotCalculated;
+
             outModAPicture.Image = image.Step14DrawUltraSoundApproximation(ref umas, (int)upDownRelativeEstimationLimit.Value);
-            resultBox.Items.Add("UltraSoundModA is " + umas);
+
             signatureBox.Items.Add("ModA Estimation:   " + Math.Round(image.WorkingUltrasoundModA.RelativeEstimation, 2));
             signatureBox.Items.Add("ModA RSquare        : " + Math.Round(image.WorkingUltrasoundModA.RSquare));
+            resultBox.Items.Add("UltraSoundModA is " + umas);
+            simpleModAStatus.Text = umms.ToString();
+
+
         }
 
         private void FolderVerification()
@@ -349,7 +378,7 @@ namespace ImageLoader
         {
             LoadImage();
         }
-        private void button1_Click(object sender, EventArgs e)
+        private void loadButton_Click(object sender, EventArgs e)
         {
             LoadImage();
         }
@@ -389,5 +418,7 @@ namespace ImageLoader
                         img.Save(saveFileDialog.FileName + ".jpg");
         }
         #endregion
+
+        
     }
 }
