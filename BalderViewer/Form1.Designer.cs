@@ -1,4 +1,4 @@
-﻿namespace ImageLoader
+﻿namespace BalderViewer
 {
     partial class Form1
     {
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.openSourceFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -99,6 +99,7 @@
             this.label26 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
+            this.teachButton = new System.Windows.Forms.Button();
             this.label23 = new System.Windows.Forms.Label();
             this.binarizationPicture = new System.Windows.Forms.PictureBox();
             this.edgePicture = new System.Windows.Forms.PictureBox();
@@ -122,24 +123,26 @@
             this.resultBox = new System.Windows.Forms.ListBox();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.buttonNextImage = new System.Windows.Forms.Button();
+            this.savingStepsCheckBox = new System.Windows.Forms.CheckBox();
             this.imagePath = new System.Windows.Forms.TextBox();
             this.buttonPrevImage = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.loadButton = new System.Windows.Forms.Button();
-            this.groupBox7 = new System.Windows.Forms.GroupBox();
-            this.savingStepsCheckBox = new System.Windows.Forms.CheckBox();
-            this.saveClassificationCheckBox = new System.Windows.Forms.CheckBox();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.upDownFilesNumber = new System.Windows.Forms.NumericUpDown();
             this.productionCheckBox = new System.Windows.Forms.CheckBox();
             this.label20 = new System.Windows.Forms.Label();
-            this.groupProcessingButton = new System.Windows.Forms.Button();
+            this.folderProcessingButton = new System.Windows.Forms.Button();
             this.processingButton = new System.Windows.Forms.Button();
-            this.groupBoxLog3 = new System.Windows.Forms.GroupBox();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.teachButton = new System.Windows.Forms.Button();
             this.teachFileLoadButton = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.xlsTextBox = new System.Windows.Forms.TextBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.saveClassificationCheckBox = new System.Windows.Forms.CheckBox();
+            this.xlsProcessingButton = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.precedentsFileBox = new System.Windows.Forms.TextBox();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.csvInfoBox = new System.Windows.Forms.ListBox();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.sourceModMPicture = new System.Windows.Forms.PictureBox();
             this.outModMPicture = new System.Windows.Forms.PictureBox();
@@ -158,7 +161,7 @@
             this.simpleModMStatus = new System.Windows.Forms.Label();
             this.simpleModAStatus = new System.Windows.Forms.Label();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.openCsvFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip.SuspendLayout();
             this.leftToolStrip.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -203,10 +206,9 @@
             this.groupBoxLog1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.groupBox7.SuspendLayout();
             this.groupBox8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.upDownFilesNumber)).BeginInit();
-            this.groupBoxLog3.SuspendLayout();
+            this.groupBox7.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sourceModMPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.outModMPicture)).BeginInit();
@@ -218,10 +220,10 @@
             this.groupBoxStat.SuspendLayout();
             this.SuspendLayout();
             // 
-            // openFileDialog
+            // openSourceFileDialog
             // 
-            this.openFileDialog.FileName = "openFileDialog1";
-            this.openFileDialog.RestoreDirectory = true;
+            this.openSourceFileDialog.FileName = "openFileDialog1";
+            this.openSourceFileDialog.RestoreDirectory = true;
             // 
             // menuStrip
             // 
@@ -339,7 +341,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(233, 69);
+            this.groupBox1.Size = new System.Drawing.Size(245, 69);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Elastogram settings";
@@ -423,7 +425,7 @@
             this.groupBox5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox5.Location = new System.Drawing.Point(3, 78);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(233, 214);
+            this.groupBox5.Size = new System.Drawing.Size(245, 214);
             this.groupBox5.TabIndex = 8;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Binarizations";
@@ -459,7 +461,7 @@
             // 
             // upDownBinarGlobalRadius
             // 
-            this.upDownBinarGlobalRadius.Location = new System.Drawing.Point(125, 189);
+            this.upDownBinarGlobalRadius.Location = new System.Drawing.Point(159, 191);
             this.upDownBinarGlobalRadius.Name = "upDownBinarGlobalRadius";
             this.upDownBinarGlobalRadius.ReadOnly = true;
             this.upDownBinarGlobalRadius.Size = new System.Drawing.Size(53, 22);
@@ -490,7 +492,7 @@
             // 
             // upDownBinarLocalRadius
             // 
-            this.upDownBinarLocalRadius.Location = new System.Drawing.Point(125, 163);
+            this.upDownBinarLocalRadius.Location = new System.Drawing.Point(159, 163);
             this.upDownBinarLocalRadius.Name = "upDownBinarLocalRadius";
             this.upDownBinarLocalRadius.ReadOnly = true;
             this.upDownBinarLocalRadius.Size = new System.Drawing.Size(53, 22);
@@ -526,7 +528,7 @@
             // wolfRadioButton
             // 
             this.wolfRadioButton.AutoSize = true;
-            this.wolfRadioButton.Location = new System.Drawing.Point(125, 42);
+            this.wolfRadioButton.Location = new System.Drawing.Point(118, 42);
             this.wolfRadioButton.Name = "wolfRadioButton";
             this.wolfRadioButton.Size = new System.Drawing.Size(96, 20);
             this.wolfRadioButton.TabIndex = 10;
@@ -548,7 +550,7 @@
             // niblackRadioButton
             // 
             this.niblackRadioButton.AutoSize = true;
-            this.niblackRadioButton.Location = new System.Drawing.Point(125, 19);
+            this.niblackRadioButton.Location = new System.Drawing.Point(153, 19);
             this.niblackRadioButton.Name = "niblackRadioButton";
             this.niblackRadioButton.Size = new System.Drawing.Size(72, 20);
             this.niblackRadioButton.TabIndex = 0;
@@ -564,7 +566,7 @@
             0,
             0,
             131072});
-            this.upDownBinarizationK.Location = new System.Drawing.Point(125, 137);
+            this.upDownBinarizationK.Location = new System.Drawing.Point(159, 137);
             this.upDownBinarizationK.Maximum = new decimal(new int[] {
             1,
             0,
@@ -587,7 +589,7 @@
             // 
             // upDownBinarThreshold
             // 
-            this.upDownBinarThreshold.Location = new System.Drawing.Point(125, 111);
+            this.upDownBinarThreshold.Location = new System.Drawing.Point(159, 109);
             this.upDownBinarThreshold.Maximum = new decimal(new int[] {
             255,
             0,
@@ -622,7 +624,7 @@
             this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox4.Location = new System.Drawing.Point(3, 458);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(233, 74);
+            this.groupBox4.Size = new System.Drawing.Size(245, 74);
             this.groupBox4.TabIndex = 7;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Ransac";
@@ -662,7 +664,7 @@
             0,
             0,
             131072});
-            this.upDownRansacOutliers.Location = new System.Drawing.Point(167, 18);
+            this.upDownRansacOutliers.Location = new System.Drawing.Point(182, 18);
             this.upDownRansacOutliers.Maximum = new decimal(new int[] {
             1,
             0,
@@ -685,7 +687,7 @@
             0,
             0,
             131072});
-            this.upDownRansacSample.Location = new System.Drawing.Point(55, 18);
+            this.upDownRansacSample.Location = new System.Drawing.Point(66, 18);
             this.upDownRansacSample.Maximum = new decimal(new int[] {
             1,
             0,
@@ -717,7 +719,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(117, 21);
+            this.label14.Location = new System.Drawing.Point(119, 20);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(53, 16);
             this.label14.TabIndex = 1;
@@ -741,7 +743,7 @@
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox3.Location = new System.Drawing.Point(3, 408);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(233, 44);
+            this.groupBox3.Size = new System.Drawing.Size(245, 44);
             this.groupBox3.TabIndex = 9;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Crop";
@@ -749,7 +751,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(109, 21);
+            this.label5.Location = new System.Drawing.Point(104, 21);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(61, 16);
             this.label5.TabIndex = 8;
@@ -757,7 +759,7 @@
             // 
             // upDownCropDistance
             // 
-            this.upDownCropDistance.Location = new System.Drawing.Point(164, 19);
+            this.upDownCropDistance.Location = new System.Drawing.Point(167, 19);
             this.upDownCropDistance.Name = "upDownCropDistance";
             this.upDownCropDistance.ReadOnly = true;
             this.upDownCropDistance.Size = new System.Drawing.Size(49, 22);
@@ -806,14 +808,14 @@
             this.groupBox2.Location = new System.Drawing.Point(3, 538);
             this.groupBox2.Name = "groupBox2";
             this.tableLayoutPanel2.SetRowSpan(this.groupBox2, 2);
-            this.groupBox2.Size = new System.Drawing.Size(233, 141);
+            this.groupBox2.Size = new System.Drawing.Size(245, 141);
             this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Ultrasound Settings";
             // 
             // upDownLimitUsBrightness
             // 
-            this.upDownLimitUsBrightness.Location = new System.Drawing.Point(134, 111);
+            this.upDownLimitUsBrightness.Location = new System.Drawing.Point(164, 119);
             this.upDownLimitUsBrightness.Maximum = new decimal(new int[] {
             255,
             0,
@@ -831,7 +833,7 @@
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(13, 111);
+            this.label21.Location = new System.Drawing.Point(6, 119);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(100, 16);
             this.label21.TabIndex = 16;
@@ -839,7 +841,7 @@
             // 
             // upDownRelativeEstimationLimit
             // 
-            this.upDownRelativeEstimationLimit.Location = new System.Drawing.Point(134, 88);
+            this.upDownRelativeEstimationLimit.Location = new System.Drawing.Point(165, 94);
             this.upDownRelativeEstimationLimit.Name = "upDownRelativeEstimationLimit";
             this.upDownRelativeEstimationLimit.Size = new System.Drawing.Size(57, 22);
             this.upDownRelativeEstimationLimit.TabIndex = 15;
@@ -852,7 +854,7 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(12, 91);
+            this.label19.Location = new System.Drawing.Point(7, 96);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(147, 16);
             this.label19.TabIndex = 14;
@@ -860,7 +862,7 @@
             // 
             // upDownBrightLinesLimit
             // 
-            this.upDownBrightLinesLimit.Location = new System.Drawing.Point(134, 64);
+            this.upDownBrightLinesLimit.Location = new System.Drawing.Point(164, 68);
             this.upDownBrightLinesLimit.Maximum = new decimal(new int[] {
             240,
             0,
@@ -878,7 +880,7 @@
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(11, 69);
+            this.label18.Location = new System.Drawing.Point(6, 73);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(101, 16);
             this.label18.TabIndex = 12;
@@ -886,7 +888,7 @@
             // 
             // upDownUsDeviationStreak
             // 
-            this.upDownUsDeviationStreak.Location = new System.Drawing.Point(134, 42);
+            this.upDownUsDeviationStreak.Location = new System.Drawing.Point(164, 42);
             this.upDownUsDeviationStreak.Maximum = new decimal(new int[] {
             20,
             0,
@@ -904,7 +906,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(10, 45);
+            this.label17.Location = new System.Drawing.Point(8, 46);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(108, 16);
             this.label17.TabIndex = 10;
@@ -912,7 +914,7 @@
             // 
             // upDownBrightPixelLimit
             // 
-            this.upDownBrightPixelLimit.Location = new System.Drawing.Point(134, 19);
+            this.upDownBrightPixelLimit.Location = new System.Drawing.Point(164, 17);
             this.upDownBrightPixelLimit.Name = "upDownBrightPixelLimit";
             this.upDownBrightPixelLimit.Size = new System.Drawing.Size(57, 22);
             this.upDownBrightPixelLimit.TabIndex = 9;
@@ -925,7 +927,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(11, 23);
+            this.label16.Location = new System.Drawing.Point(8, 23);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(105, 16);
             this.label16.TabIndex = 0;
@@ -934,9 +936,9 @@
             // kuwaharaPicture
             // 
             this.kuwaharaPicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.kuwaharaPicture.Location = new System.Drawing.Point(340, 183);
+            this.kuwaharaPicture.Location = new System.Drawing.Point(334, 208);
             this.kuwaharaPicture.Name = "kuwaharaPicture";
-            this.kuwaharaPicture.Size = new System.Drawing.Size(165, 123);
+            this.kuwaharaPicture.Size = new System.Drawing.Size(162, 115);
             this.kuwaharaPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.kuwaharaPicture.TabIndex = 5;
             this.kuwaharaPicture.TabStop = false;
@@ -945,9 +947,9 @@
             // sourcePicture
             // 
             this.sourcePicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.sourcePicture.Location = new System.Drawing.Point(3, 183);
+            this.sourcePicture.Location = new System.Drawing.Point(3, 208);
             this.sourcePicture.Name = "sourcePicture";
-            this.sourcePicture.Size = new System.Drawing.Size(163, 123);
+            this.sourcePicture.Size = new System.Drawing.Size(160, 115);
             this.sourcePicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.sourcePicture.TabIndex = 3;
             this.sourcePicture.TabStop = false;
@@ -956,9 +958,9 @@
             // elastoPicture
             // 
             this.elastoPicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.elastoPicture.Location = new System.Drawing.Point(172, 183);
+            this.elastoPicture.Location = new System.Drawing.Point(169, 208);
             this.elastoPicture.Name = "elastoPicture";
-            this.elastoPicture.Size = new System.Drawing.Size(162, 123);
+            this.elastoPicture.Size = new System.Drawing.Size(159, 115);
             this.elastoPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.elastoPicture.TabIndex = 4;
             this.elastoPicture.TabStop = false;
@@ -972,7 +974,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.19913F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0181F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 205F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 243F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 255F));
             this.tableLayoutPanel1.Controls.Add(this.label32, 2, 5);
             this.tableLayoutPanel1.Controls.Add(this.label31, 1, 5);
             this.tableLayoutPanel1.Controls.Add(this.label30, 0, 5);
@@ -982,6 +984,7 @@
             this.tableLayoutPanel1.Controls.Add(this.label26, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.label25, 3, 1);
             this.tableLayoutPanel1.Controls.Add(this.label24, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.teachButton, 3, 8);
             this.tableLayoutPanel1.Controls.Add(this.label23, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.elastoPicture, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.sourcePicture, 0, 2);
@@ -1013,7 +1016,7 @@
             this.tableLayoutPanel1.Location = new System.Drawing.Point(46, 24);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 10;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 160F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 185F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.3996F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
@@ -1030,9 +1033,9 @@
             // 
             this.label32.AutoSize = true;
             this.label32.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label32.Location = new System.Drawing.Point(340, 458);
+            this.label32.Location = new System.Drawing.Point(334, 467);
             this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(165, 20);
+            this.label32.Size = new System.Drawing.Size(162, 20);
             this.label32.TabIndex = 38;
             this.label32.Text = "Mod A";
             this.label32.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1042,9 +1045,9 @@
             // 
             this.label31.AutoSize = true;
             this.label31.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label31.Location = new System.Drawing.Point(172, 458);
+            this.label31.Location = new System.Drawing.Point(169, 467);
             this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(162, 20);
+            this.label31.Size = new System.Drawing.Size(159, 20);
             this.label31.TabIndex = 37;
             this.label31.Text = "Mod M";
             this.label31.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1054,9 +1057,9 @@
             // 
             this.label30.AutoSize = true;
             this.label30.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label30.Location = new System.Drawing.Point(3, 458);
+            this.label30.Location = new System.Drawing.Point(3, 467);
             this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(163, 20);
+            this.label30.Size = new System.Drawing.Size(160, 20);
             this.label30.TabIndex = 36;
             this.label30.Text = "Final Elasto";
             this.label30.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1066,9 +1069,9 @@
             // 
             this.label29.AutoSize = true;
             this.label29.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label29.Location = new System.Drawing.Point(511, 309);
+            this.label29.Location = new System.Drawing.Point(502, 326);
             this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(163, 20);
+            this.label29.Size = new System.Drawing.Size(160, 20);
             this.label29.TabIndex = 35;
             this.label29.Text = "Choosing";
             this.label29.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1078,9 +1081,9 @@
             // 
             this.label28.AutoSize = true;
             this.label28.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label28.Location = new System.Drawing.Point(340, 309);
+            this.label28.Location = new System.Drawing.Point(334, 326);
             this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(165, 20);
+            this.label28.Size = new System.Drawing.Size(162, 20);
             this.label28.TabIndex = 34;
             this.label28.Text = "Crop";
             this.label28.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1090,9 +1093,9 @@
             // 
             this.label27.AutoSize = true;
             this.label27.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label27.Location = new System.Drawing.Point(172, 309);
+            this.label27.Location = new System.Drawing.Point(169, 326);
             this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(162, 20);
+            this.label27.Size = new System.Drawing.Size(159, 20);
             this.label27.TabIndex = 33;
             this.label27.Text = "Morphology";
             this.label27.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1102,9 +1105,9 @@
             // 
             this.label26.AutoSize = true;
             this.label26.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label26.Location = new System.Drawing.Point(3, 309);
+            this.label26.Location = new System.Drawing.Point(3, 326);
             this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(163, 20);
+            this.label26.Size = new System.Drawing.Size(160, 20);
             this.label26.TabIndex = 32;
             this.label26.Text = "Edge Removing";
             this.label26.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1114,9 +1117,9 @@
             // 
             this.label25.AutoSize = true;
             this.label25.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label25.Location = new System.Drawing.Point(511, 160);
+            this.label25.Location = new System.Drawing.Point(502, 185);
             this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(163, 20);
+            this.label25.Size = new System.Drawing.Size(160, 20);
             this.label25.TabIndex = 31;
             this.label25.Text = "Binarization";
             this.label25.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1126,21 +1129,33 @@
             // 
             this.label24.AutoSize = true;
             this.label24.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label24.Location = new System.Drawing.Point(340, 160);
+            this.label24.Location = new System.Drawing.Point(334, 185);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(165, 20);
+            this.label24.Size = new System.Drawing.Size(162, 20);
             this.label24.TabIndex = 30;
             this.label24.Text = "Kuwahara";
             this.label24.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label24.Visible = false;
             // 
+            // teachButton
+            // 
+            this.teachButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.teachButton.Location = new System.Drawing.Point(502, 640);
+            this.teachButton.Name = "teachButton";
+            this.teachButton.Size = new System.Drawing.Size(160, 24);
+            this.teachButton.TabIndex = 10;
+            this.teachButton.Text = "Add to Teaching";
+            this.teachButton.UseVisualStyleBackColor = true;
+            this.teachButton.Visible = false;
+            this.teachButton.Click += new System.EventHandler(this.teachButton_Click);
+            // 
             // label23
             // 
             this.label23.AutoSize = true;
             this.label23.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label23.Location = new System.Drawing.Point(172, 160);
+            this.label23.Location = new System.Drawing.Point(169, 185);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(162, 20);
+            this.label23.Size = new System.Drawing.Size(159, 20);
             this.label23.TabIndex = 29;
             this.label23.Text = "Source Elasto";
             this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1149,9 +1164,9 @@
             // binarizationPicture
             // 
             this.binarizationPicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.binarizationPicture.Location = new System.Drawing.Point(511, 183);
+            this.binarizationPicture.Location = new System.Drawing.Point(502, 208);
             this.binarizationPicture.Name = "binarizationPicture";
-            this.binarizationPicture.Size = new System.Drawing.Size(163, 123);
+            this.binarizationPicture.Size = new System.Drawing.Size(160, 115);
             this.binarizationPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.binarizationPicture.TabIndex = 6;
             this.binarizationPicture.TabStop = false;
@@ -1160,9 +1175,9 @@
             // edgePicture
             // 
             this.edgePicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.edgePicture.Location = new System.Drawing.Point(3, 332);
+            this.edgePicture.Location = new System.Drawing.Point(3, 349);
             this.edgePicture.Name = "edgePicture";
-            this.edgePicture.Size = new System.Drawing.Size(163, 123);
+            this.edgePicture.Size = new System.Drawing.Size(160, 115);
             this.edgePicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.edgePicture.TabIndex = 7;
             this.edgePicture.TabStop = false;
@@ -1171,9 +1186,9 @@
             // morphologyPicture
             // 
             this.morphologyPicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.morphologyPicture.Location = new System.Drawing.Point(172, 332);
+            this.morphologyPicture.Location = new System.Drawing.Point(169, 349);
             this.morphologyPicture.Name = "morphologyPicture";
-            this.morphologyPicture.Size = new System.Drawing.Size(162, 123);
+            this.morphologyPicture.Size = new System.Drawing.Size(159, 115);
             this.morphologyPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.morphologyPicture.TabIndex = 8;
             this.morphologyPicture.TabStop = false;
@@ -1182,9 +1197,9 @@
             // choosingPicture
             // 
             this.choosingPicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.choosingPicture.Location = new System.Drawing.Point(511, 332);
+            this.choosingPicture.Location = new System.Drawing.Point(502, 349);
             this.choosingPicture.Name = "choosingPicture";
-            this.choosingPicture.Size = new System.Drawing.Size(163, 123);
+            this.choosingPicture.Size = new System.Drawing.Size(160, 115);
             this.choosingPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.choosingPicture.TabIndex = 9;
             this.choosingPicture.TabStop = false;
@@ -1193,9 +1208,9 @@
             // approximationPicture
             // 
             this.approximationPicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.approximationPicture.Location = new System.Drawing.Point(3, 481);
+            this.approximationPicture.Location = new System.Drawing.Point(3, 490);
             this.approximationPicture.Name = "approximationPicture";
-            this.approximationPicture.Size = new System.Drawing.Size(163, 122);
+            this.approximationPicture.Size = new System.Drawing.Size(160, 114);
             this.approximationPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.approximationPicture.TabIndex = 10;
             this.approximationPicture.TabStop = false;
@@ -1212,7 +1227,7 @@
             this.tableLayoutPanel2.Controls.Add(this.groupBox3, 0, 3);
             this.tableLayoutPanel2.Controls.Add(this.groupBox6, 0, 2);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(885, 3);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(873, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 7;
             this.tableLayoutPanel1.SetRowSpan(this.tableLayoutPanel2, 10);
@@ -1223,7 +1238,7 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(239, 682);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(251, 682);
             this.tableLayoutPanel2.TabIndex = 19;
             // 
             // groupBox6
@@ -1240,14 +1255,14 @@
             this.groupBox6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox6.Location = new System.Drawing.Point(3, 298);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(233, 104);
+            this.groupBox6.Size = new System.Drawing.Size(245, 104);
             this.groupBox6.TabIndex = 10;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "EdgeObjects";
             // 
             // upDownEdgeRightCentral
             // 
-            this.upDownEdgeRightCentral.Location = new System.Drawing.Point(155, 76);
+            this.upDownEdgeRightCentral.Location = new System.Drawing.Point(164, 76);
             this.upDownEdgeRightCentral.Maximum = new decimal(new int[] {
             240,
             0,
@@ -1281,7 +1296,7 @@
             // 
             // upDownEdgeLeft2Central
             // 
-            this.upDownEdgeLeft2Central.Location = new System.Drawing.Point(155, 50);
+            this.upDownEdgeLeft2Central.Location = new System.Drawing.Point(164, 50);
             this.upDownEdgeLeft2Central.Maximum = new decimal(new int[] {
             240,
             0,
@@ -1315,7 +1330,7 @@
             // 
             // upDownEdgeLeft1Central
             // 
-            this.upDownEdgeLeft1Central.Location = new System.Drawing.Point(155, 21);
+            this.upDownEdgeLeft1Central.Location = new System.Drawing.Point(164, 23);
             this.upDownEdgeLeft1Central.Maximum = new decimal(new int[] {
             240,
             0,
@@ -1378,10 +1393,10 @@
             // 
             this.groupBoxLog2.Controls.Add(this.signatureBox);
             this.groupBoxLog2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBoxLog2.Location = new System.Drawing.Point(680, 163);
+            this.groupBoxLog2.Location = new System.Drawing.Point(668, 188);
             this.groupBoxLog2.Name = "groupBoxLog2";
             this.tableLayoutPanel1.SetRowSpan(this.groupBoxLog2, 4);
-            this.groupBoxLog2.Size = new System.Drawing.Size(199, 292);
+            this.groupBoxLog2.Size = new System.Drawing.Size(199, 276);
             this.groupBoxLog2.TabIndex = 20;
             this.groupBoxLog2.TabStop = false;
             this.groupBoxLog2.Text = "Signatura";
@@ -1394,16 +1409,16 @@
             this.signatureBox.ItemHeight = 19;
             this.signatureBox.Location = new System.Drawing.Point(3, 18);
             this.signatureBox.Name = "signatureBox";
-            this.signatureBox.Size = new System.Drawing.Size(193, 271);
+            this.signatureBox.Size = new System.Drawing.Size(193, 255);
             this.signatureBox.TabIndex = 0;
             // 
             // groupBoxLog1
             // 
             this.groupBoxLog1.Controls.Add(this.resultBox);
             this.groupBoxLog1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBoxLog1.Location = new System.Drawing.Point(680, 3);
+            this.groupBoxLog1.Location = new System.Drawing.Point(668, 3);
             this.groupBoxLog1.Name = "groupBoxLog1";
-            this.groupBoxLog1.Size = new System.Drawing.Size(199, 154);
+            this.groupBoxLog1.Size = new System.Drawing.Size(199, 179);
             this.groupBoxLog1.TabIndex = 21;
             this.groupBoxLog1.TabStop = false;
             this.groupBoxLog1.Text = "Verification Result";
@@ -1417,52 +1432,69 @@
             this.resultBox.ItemHeight = 19;
             this.resultBox.Location = new System.Drawing.Point(3, 18);
             this.resultBox.Name = "resultBox";
-            this.resultBox.Size = new System.Drawing.Size(193, 133);
+            this.resultBox.Size = new System.Drawing.Size(193, 158);
             this.resultBox.TabIndex = 0;
             // 
             // tableLayoutPanel3
             // 
             this.tableLayoutPanel3.ColumnCount = 5;
             this.tableLayoutPanel1.SetColumnSpan(this.tableLayoutPanel3, 4);
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.4132F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 18.37188F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 18.37188F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17.18796F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.65508F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 158F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 58.17308F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 41.82692F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 140F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 161F));
             this.tableLayoutPanel3.Controls.Add(this.buttonNextImage, 2, 1);
+            this.tableLayoutPanel3.Controls.Add(this.savingStepsCheckBox, 0, 4);
             this.tableLayoutPanel3.Controls.Add(this.imagePath, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.buttonPrevImage, 1, 1);
             this.tableLayoutPanel3.Controls.Add(this.panel1, 0, 1);
-            this.tableLayoutPanel3.Controls.Add(this.groupBox7, 0, 3);
-            this.tableLayoutPanel3.Controls.Add(this.groupBox8, 1, 3);
-            this.tableLayoutPanel3.Controls.Add(this.groupProcessingButton, 3, 3);
+            this.tableLayoutPanel3.Controls.Add(this.groupBox8, 1, 4);
+            this.tableLayoutPanel3.Controls.Add(this.folderProcessingButton, 3, 3);
             this.tableLayoutPanel3.Controls.Add(this.processingButton, 3, 1);
-            this.tableLayoutPanel3.Controls.Add(this.groupBoxLog3, 4, 0);
-            this.tableLayoutPanel3.Controls.Add(this.teachButton, 3, 2);
             this.tableLayoutPanel3.Controls.Add(this.teachFileLoadButton, 0, 2);
-            this.tableLayoutPanel3.Controls.Add(this.textBox1, 1, 2);
+            this.tableLayoutPanel3.Controls.Add(this.xlsTextBox, 1, 2);
+            this.tableLayoutPanel3.Controls.Add(this.checkBox1, 3, 4);
+            this.tableLayoutPanel3.Controls.Add(this.saveClassificationCheckBox, 0, 5);
+            this.tableLayoutPanel3.Controls.Add(this.xlsProcessingButton, 2, 2);
+            this.tableLayoutPanel3.Controls.Add(this.button1, 0, 3);
+            this.tableLayoutPanel3.Controls.Add(this.precedentsFileBox, 1, 3);
+            this.tableLayoutPanel3.Controls.Add(this.groupBox7, 4, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 4;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 35.21127F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.98058F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 31.06796F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(671, 154);
+            this.tableLayoutPanel3.RowCount = 6;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(659, 179);
             this.tableLayoutPanel3.TabIndex = 22;
             // 
             // buttonNextImage
             // 
             this.buttonNextImage.Dock = System.Windows.Forms.DockStyle.Right;
-            this.buttonNextImage.Location = new System.Drawing.Point(266, 39);
+            this.buttonNextImage.Enabled = false;
+            this.buttonNextImage.Location = new System.Drawing.Point(281, 38);
             this.buttonNextImage.Name = "buttonNextImage";
-            this.buttonNextImage.Size = new System.Drawing.Size(113, 29);
+            this.buttonNextImage.Size = new System.Drawing.Size(73, 24);
             this.buttonNextImage.TabIndex = 1;
-            this.buttonNextImage.Text = "next";
+            this.buttonNextImage.Text = "next ";
             this.buttonNextImage.UseVisualStyleBackColor = true;
             this.buttonNextImage.Click += new System.EventHandler(this.buttonNextImage_Click);
+            // 
+            // savingStepsCheckBox
+            // 
+            this.savingStepsCheckBox.AutoSize = true;
+            this.savingStepsCheckBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.savingStepsCheckBox.Location = new System.Drawing.Point(3, 128);
+            this.savingStepsCheckBox.Name = "savingStepsCheckBox";
+            this.savingStepsCheckBox.Size = new System.Drawing.Size(152, 21);
+            this.savingStepsCheckBox.TabIndex = 4;
+            this.savingStepsCheckBox.Text = "Saving ImageSteps";
+            this.savingStepsCheckBox.UseVisualStyleBackColor = true;
             // 
             // imagePath
             // 
@@ -1472,15 +1504,17 @@
             this.imagePath.Location = new System.Drawing.Point(3, 3);
             this.imagePath.Multiline = true;
             this.imagePath.Name = "imagePath";
-            this.imagePath.Size = new System.Drawing.Size(491, 30);
+            this.imagePath.ReadOnly = true;
+            this.imagePath.Size = new System.Drawing.Size(491, 29);
             this.imagePath.TabIndex = 0;
             // 
             // buttonPrevImage
             // 
             this.buttonPrevImage.Dock = System.Windows.Forms.DockStyle.Left;
-            this.buttonPrevImage.Location = new System.Drawing.Point(139, 39);
+            this.buttonPrevImage.Enabled = false;
+            this.buttonPrevImage.Location = new System.Drawing.Point(161, 38);
             this.buttonPrevImage.Name = "buttonPrevImage";
-            this.buttonPrevImage.Size = new System.Drawing.Size(117, 29);
+            this.buttonPrevImage.Size = new System.Drawing.Size(97, 24);
             this.buttonPrevImage.TabIndex = 0;
             this.buttonPrevImage.Text = "prev";
             this.buttonPrevImage.UseVisualStyleBackColor = true;
@@ -1490,9 +1524,9 @@
             // 
             this.panel1.Controls.Add(this.loadButton);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(3, 39);
+            this.panel1.Location = new System.Drawing.Point(3, 38);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(130, 29);
+            this.panel1.Size = new System.Drawing.Size(152, 24);
             this.panel1.TabIndex = 1;
             // 
             // loadButton
@@ -1500,42 +1534,11 @@
             this.loadButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.loadButton.Location = new System.Drawing.Point(0, 0);
             this.loadButton.Name = "loadButton";
-            this.loadButton.Size = new System.Drawing.Size(130, 29);
+            this.loadButton.Size = new System.Drawing.Size(152, 24);
             this.loadButton.TabIndex = 3;
             this.loadButton.Text = "load";
             this.loadButton.UseVisualStyleBackColor = true;
             this.loadButton.Click += new System.EventHandler(this.loadButton_Click);
-            // 
-            // groupBox7
-            // 
-            this.groupBox7.Controls.Add(this.savingStepsCheckBox);
-            this.groupBox7.Controls.Add(this.saveClassificationCheckBox);
-            this.groupBox7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox7.Location = new System.Drawing.Point(3, 106);
-            this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(130, 45);
-            this.groupBox7.TabIndex = 5;
-            this.groupBox7.TabStop = false;
-            // 
-            // savingStepsCheckBox
-            // 
-            this.savingStepsCheckBox.AutoSize = true;
-            this.savingStepsCheckBox.Location = new System.Drawing.Point(6, 5);
-            this.savingStepsCheckBox.Name = "savingStepsCheckBox";
-            this.savingStepsCheckBox.Size = new System.Drawing.Size(107, 20);
-            this.savingStepsCheckBox.TabIndex = 4;
-            this.savingStepsCheckBox.Text = "Saving Steps";
-            this.savingStepsCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // saveClassificationCheckBox
-            // 
-            this.saveClassificationCheckBox.AutoSize = true;
-            this.saveClassificationCheckBox.Location = new System.Drawing.Point(6, 27);
-            this.saveClassificationCheckBox.Name = "saveClassificationCheckBox";
-            this.saveClassificationCheckBox.Size = new System.Drawing.Size(151, 20);
-            this.saveClassificationCheckBox.TabIndex = 3;
-            this.saveClassificationCheckBox.Text = "Saving Classification";
-            this.saveClassificationCheckBox.UseVisualStyleBackColor = true;
             // 
             // groupBox8
             // 
@@ -1544,15 +1547,16 @@
             this.groupBox8.Controls.Add(this.productionCheckBox);
             this.groupBox8.Controls.Add(this.label20);
             this.groupBox8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox8.Location = new System.Drawing.Point(139, 106);
+            this.groupBox8.Location = new System.Drawing.Point(161, 128);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(240, 45);
+            this.tableLayoutPanel3.SetRowSpan(this.groupBox8, 2);
+            this.groupBox8.Size = new System.Drawing.Size(193, 48);
             this.groupBox8.TabIndex = 6;
             this.groupBox8.TabStop = false;
             // 
             // upDownFilesNumber
             // 
-            this.upDownFilesNumber.Location = new System.Drawing.Point(104, 0);
+            this.upDownFilesNumber.Location = new System.Drawing.Point(143, 1);
             this.upDownFilesNumber.Name = "upDownFilesNumber";
             this.upDownFilesNumber.Size = new System.Drawing.Size(70, 22);
             this.upDownFilesNumber.TabIndex = 7;
@@ -1581,79 +1585,123 @@
             this.label20.TabIndex = 6;
             this.label20.Text = "Number of images";
             // 
-            // groupProcessingButton
+            // folderProcessingButton
             // 
-            this.groupProcessingButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupProcessingButton.Location = new System.Drawing.Point(385, 106);
-            this.groupProcessingButton.Name = "groupProcessingButton";
-            this.groupProcessingButton.Size = new System.Drawing.Size(109, 45);
-            this.groupProcessingButton.TabIndex = 7;
-            this.groupProcessingButton.Text = "Group Processing";
-            this.groupProcessingButton.UseVisualStyleBackColor = true;
-            this.groupProcessingButton.Click += new System.EventHandler(this.groupProcessingButton_Click);
+            this.folderProcessingButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.folderProcessingButton.Location = new System.Drawing.Point(360, 98);
+            this.folderProcessingButton.Name = "folderProcessingButton";
+            this.folderProcessingButton.Size = new System.Drawing.Size(134, 24);
+            this.folderProcessingButton.TabIndex = 7;
+            this.folderProcessingButton.Text = "Folder Processing";
+            this.folderProcessingButton.UseVisualStyleBackColor = true;
+            this.folderProcessingButton.Click += new System.EventHandler(this.groupProcessingButton_Click);
             // 
             // processingButton
             // 
             this.processingButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.processingButton.Location = new System.Drawing.Point(385, 39);
+            this.processingButton.Location = new System.Drawing.Point(360, 38);
             this.processingButton.Name = "processingButton";
-            this.processingButton.Size = new System.Drawing.Size(109, 29);
+            this.processingButton.Size = new System.Drawing.Size(134, 24);
             this.processingButton.TabIndex = 9;
             this.processingButton.Text = "Processing";
             this.processingButton.UseVisualStyleBackColor = true;
             this.processingButton.Click += new System.EventHandler(this.button2_Click);
             // 
-            // groupBoxLog3
-            // 
-            this.groupBoxLog3.Controls.Add(this.listBox1);
-            this.groupBoxLog3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBoxLog3.Location = new System.Drawing.Point(500, 3);
-            this.groupBoxLog3.Name = "groupBoxLog3";
-            this.tableLayoutPanel3.SetRowSpan(this.groupBoxLog3, 4);
-            this.groupBoxLog3.Size = new System.Drawing.Size(168, 148);
-            this.groupBoxLog3.TabIndex = 11;
-            this.groupBoxLog3.TabStop = false;
-            this.groupBoxLog3.Text = "System Answer";
-            // 
-            // listBox1
-            // 
-            this.listBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 16;
-            this.listBox1.Location = new System.Drawing.Point(3, 18);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(162, 127);
-            this.listBox1.TabIndex = 0;
-            // 
-            // teachButton
-            // 
-            this.teachButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.teachButton.Location = new System.Drawing.Point(385, 74);
-            this.teachButton.Name = "teachButton";
-            this.teachButton.Size = new System.Drawing.Size(109, 26);
-            this.teachButton.TabIndex = 10;
-            this.teachButton.Text = "Add for teaching";
-            this.teachButton.UseVisualStyleBackColor = true;
-            // 
             // teachFileLoadButton
             // 
             this.teachFileLoadButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.teachFileLoadButton.Location = new System.Drawing.Point(3, 74);
+            this.teachFileLoadButton.Location = new System.Drawing.Point(3, 68);
             this.teachFileLoadButton.Name = "teachFileLoadButton";
-            this.teachFileLoadButton.Size = new System.Drawing.Size(130, 26);
+            this.teachFileLoadButton.Size = new System.Drawing.Size(152, 24);
             this.teachFileLoadButton.TabIndex = 8;
-            this.teachFileLoadButton.Text = "Load TeachFile";
+            this.teachFileLoadButton.Text = "Load CSV";
             this.teachFileLoadButton.UseVisualStyleBackColor = true;
+            this.teachFileLoadButton.Click += new System.EventHandler(this.teachFileLoadButton_Click);
             // 
-            // textBox1
+            // xlsTextBox
             // 
-            this.tableLayoutPanel3.SetColumnSpan(this.textBox1, 2);
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox1.Location = new System.Drawing.Point(139, 74);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(240, 24);
-            this.textBox1.TabIndex = 13;
+            this.tableLayoutPanel3.SetColumnSpan(this.xlsTextBox, 2);
+            this.xlsTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.xlsTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.xlsTextBox.Location = new System.Drawing.Point(161, 68);
+            this.xlsTextBox.Name = "xlsTextBox";
+            this.xlsTextBox.ReadOnly = true;
+            this.xlsTextBox.Size = new System.Drawing.Size(193, 24);
+            this.xlsTextBox.TabIndex = 13;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.checkBox1.Location = new System.Drawing.Point(360, 128);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(134, 21);
+            this.checkBox1.TabIndex = 14;
+            this.checkBox1.Text = "Saving to CSV";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // saveClassificationCheckBox
+            // 
+            this.saveClassificationCheckBox.AutoSize = true;
+            this.saveClassificationCheckBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.saveClassificationCheckBox.Location = new System.Drawing.Point(3, 155);
+            this.saveClassificationCheckBox.Name = "saveClassificationCheckBox";
+            this.saveClassificationCheckBox.Size = new System.Drawing.Size(152, 21);
+            this.saveClassificationCheckBox.TabIndex = 3;
+            this.saveClassificationCheckBox.Text = "Saving Classification";
+            this.saveClassificationCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // xlsProcessingButton
+            // 
+            this.xlsProcessingButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.xlsProcessingButton.Location = new System.Drawing.Point(360, 68);
+            this.xlsProcessingButton.Name = "xlsProcessingButton";
+            this.xlsProcessingButton.Size = new System.Drawing.Size(134, 24);
+            this.xlsProcessingButton.TabIndex = 15;
+            this.xlsProcessingButton.Text = "CSV Processing";
+            this.xlsProcessingButton.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button1.Location = new System.Drawing.Point(3, 98);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(152, 24);
+            this.button1.TabIndex = 16;
+            this.button1.Text = "Load Precedents";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // precedentsFileBox
+            // 
+            this.tableLayoutPanel3.SetColumnSpan(this.precedentsFileBox, 2);
+            this.precedentsFileBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.precedentsFileBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.precedentsFileBox.Location = new System.Drawing.Point(161, 98);
+            this.precedentsFileBox.Name = "precedentsFileBox";
+            this.precedentsFileBox.ReadOnly = true;
+            this.precedentsFileBox.Size = new System.Drawing.Size(193, 24);
+            this.precedentsFileBox.TabIndex = 17;
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.csvInfoBox);
+            this.groupBox7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox7.Location = new System.Drawing.Point(500, 3);
+            this.groupBox7.Name = "groupBox7";
+            this.tableLayoutPanel3.SetRowSpan(this.groupBox7, 6);
+            this.groupBox7.Size = new System.Drawing.Size(156, 173);
+            this.groupBox7.TabIndex = 18;
+            this.groupBox7.TabStop = false;
+            // 
+            // csvInfoBox
+            // 
+            this.csvInfoBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.csvInfoBox.FormattingEnabled = true;
+            this.csvInfoBox.ItemHeight = 16;
+            this.csvInfoBox.Location = new System.Drawing.Point(3, 18);
+            this.csvInfoBox.Name = "csvInfoBox";
+            this.csvInfoBox.Size = new System.Drawing.Size(150, 152);
+            this.csvInfoBox.TabIndex = 0;
             // 
             // tableLayoutPanel4
             // 
@@ -1663,11 +1711,11 @@
             this.tableLayoutPanel4.Controls.Add(this.sourceModMPicture, 0, 0);
             this.tableLayoutPanel4.Controls.Add(this.outModMPicture, 1, 0);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(172, 481);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(169, 490);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 1;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(162, 122);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(159, 114);
             this.tableLayoutPanel4.TabIndex = 23;
             // 
             // sourceModMPicture
@@ -1675,7 +1723,7 @@
             this.sourceModMPicture.Dock = System.Windows.Forms.DockStyle.Fill;
             this.sourceModMPicture.Location = new System.Drawing.Point(3, 3);
             this.sourceModMPicture.Name = "sourceModMPicture";
-            this.sourceModMPicture.Size = new System.Drawing.Size(75, 116);
+            this.sourceModMPicture.Size = new System.Drawing.Size(73, 108);
             this.sourceModMPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.sourceModMPicture.TabIndex = 0;
             this.sourceModMPicture.TabStop = false;
@@ -1684,9 +1732,9 @@
             // outModMPicture
             // 
             this.outModMPicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.outModMPicture.Location = new System.Drawing.Point(84, 3);
+            this.outModMPicture.Location = new System.Drawing.Point(82, 3);
             this.outModMPicture.Name = "outModMPicture";
-            this.outModMPicture.Size = new System.Drawing.Size(75, 116);
+            this.outModMPicture.Size = new System.Drawing.Size(74, 108);
             this.outModMPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.outModMPicture.TabIndex = 1;
             this.outModMPicture.TabStop = false;
@@ -1700,11 +1748,11 @@
             this.tableLayoutPanel5.Controls.Add(this.sourceModAPicture, 0, 0);
             this.tableLayoutPanel5.Controls.Add(this.outModAPicture, 1, 0);
             this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel5.Location = new System.Drawing.Point(340, 481);
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(334, 490);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             this.tableLayoutPanel5.RowCount = 1;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(165, 122);
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(162, 114);
             this.tableLayoutPanel5.TabIndex = 24;
             // 
             // sourceModAPicture
@@ -1712,7 +1760,7 @@
             this.sourceModAPicture.Dock = System.Windows.Forms.DockStyle.Fill;
             this.sourceModAPicture.Location = new System.Drawing.Point(3, 3);
             this.sourceModAPicture.Name = "sourceModAPicture";
-            this.sourceModAPicture.Size = new System.Drawing.Size(76, 116);
+            this.sourceModAPicture.Size = new System.Drawing.Size(75, 108);
             this.sourceModAPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.sourceModAPicture.TabIndex = 0;
             this.sourceModAPicture.TabStop = false;
@@ -1721,9 +1769,9 @@
             // outModAPicture
             // 
             this.outModAPicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.outModAPicture.Location = new System.Drawing.Point(85, 3);
+            this.outModAPicture.Location = new System.Drawing.Point(84, 3);
             this.outModAPicture.Name = "outModAPicture";
-            this.outModAPicture.Size = new System.Drawing.Size(77, 116);
+            this.outModAPicture.Size = new System.Drawing.Size(75, 108);
             this.outModAPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.outModAPicture.TabIndex = 1;
             this.outModAPicture.TabStop = false;
@@ -1732,9 +1780,9 @@
             // cropPicture
             // 
             this.cropPicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cropPicture.Location = new System.Drawing.Point(340, 332);
+            this.cropPicture.Location = new System.Drawing.Point(334, 349);
             this.cropPicture.Name = "cropPicture";
-            this.cropPicture.Size = new System.Drawing.Size(165, 123);
+            this.cropPicture.Size = new System.Drawing.Size(162, 115);
             this.cropPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.cropPicture.TabIndex = 26;
             this.cropPicture.TabStop = false;
@@ -1743,9 +1791,9 @@
             // productionPicture
             // 
             this.productionPicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.productionPicture.Location = new System.Drawing.Point(511, 481);
+            this.productionPicture.Location = new System.Drawing.Point(502, 490);
             this.productionPicture.Name = "productionPicture";
-            this.productionPicture.Size = new System.Drawing.Size(163, 122);
+            this.productionPicture.Size = new System.Drawing.Size(160, 114);
             this.productionPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.productionPicture.TabIndex = 27;
             this.productionPicture.TabStop = false;
@@ -1755,9 +1803,9 @@
             // 
             this.label22.AutoSize = true;
             this.label22.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label22.Location = new System.Drawing.Point(3, 160);
+            this.label22.Location = new System.Drawing.Point(3, 185);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(163, 20);
+            this.label22.Size = new System.Drawing.Size(160, 20);
             this.label22.TabIndex = 28;
             this.label22.Text = "Source";
             this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1767,10 +1815,10 @@
             // 
             this.groupBoxStat.Controls.Add(this.commonStatBox);
             this.groupBoxStat.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBoxStat.Location = new System.Drawing.Point(680, 461);
+            this.groupBoxStat.Location = new System.Drawing.Point(668, 470);
             this.groupBoxStat.Name = "groupBoxStat";
             this.tableLayoutPanel1.SetRowSpan(this.groupBoxStat, 5);
-            this.groupBoxStat.Size = new System.Drawing.Size(199, 224);
+            this.groupBoxStat.Size = new System.Drawing.Size(199, 215);
             this.groupBoxStat.TabIndex = 2;
             this.groupBoxStat.TabStop = false;
             this.groupBoxStat.Text = "CommonStat";
@@ -1782,7 +1830,7 @@
             this.commonStatBox.ItemHeight = 16;
             this.commonStatBox.Location = new System.Drawing.Point(3, 18);
             this.commonStatBox.Name = "commonStatBox";
-            this.commonStatBox.Size = new System.Drawing.Size(193, 203);
+            this.commonStatBox.Size = new System.Drawing.Size(193, 194);
             this.commonStatBox.TabIndex = 0;
             // 
             // modMBox
@@ -1795,9 +1843,9 @@
             "Uncertain",
             "Correct",
             "Incorrect"});
-            this.modMBox.Location = new System.Drawing.Point(172, 639);
+            this.modMBox.Location = new System.Drawing.Point(169, 640);
             this.modMBox.Name = "modMBox";
-            this.modMBox.Size = new System.Drawing.Size(162, 28);
+            this.modMBox.Size = new System.Drawing.Size(159, 28);
             this.modMBox.TabIndex = 40;
             this.modMBox.Visible = false;
             // 
@@ -1811,9 +1859,9 @@
             "Uncertain",
             "Correct",
             "Incorrect"});
-            this.modABox.Location = new System.Drawing.Point(340, 639);
+            this.modABox.Location = new System.Drawing.Point(334, 640);
             this.modABox.Name = "modABox";
-            this.modABox.Size = new System.Drawing.Size(165, 28);
+            this.modABox.Size = new System.Drawing.Size(162, 28);
             this.modABox.TabIndex = 41;
             this.modABox.Visible = false;
             // 
@@ -1827,9 +1875,9 @@
             "Uncertain",
             "Correct",
             "Incorrect"});
-            this.elastoStatusBox.Location = new System.Drawing.Point(3, 639);
+            this.elastoStatusBox.Location = new System.Drawing.Point(3, 640);
             this.elastoStatusBox.Name = "elastoStatusBox";
-            this.elastoStatusBox.Size = new System.Drawing.Size(163, 28);
+            this.elastoStatusBox.Size = new System.Drawing.Size(160, 28);
             this.elastoStatusBox.TabIndex = 39;
             this.elastoStatusBox.Visible = false;
             // 
@@ -1838,9 +1886,9 @@
             this.simpleElastoStatus.AutoSize = true;
             this.simpleElastoStatus.Dock = System.Windows.Forms.DockStyle.Fill;
             this.simpleElastoStatus.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.simpleElastoStatus.Location = new System.Drawing.Point(3, 606);
+            this.simpleElastoStatus.Location = new System.Drawing.Point(3, 607);
             this.simpleElastoStatus.Name = "simpleElastoStatus";
-            this.simpleElastoStatus.Size = new System.Drawing.Size(163, 30);
+            this.simpleElastoStatus.Size = new System.Drawing.Size(160, 30);
             this.simpleElastoStatus.TabIndex = 42;
             this.simpleElastoStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -1849,9 +1897,9 @@
             this.simpleModMStatus.AutoSize = true;
             this.simpleModMStatus.Dock = System.Windows.Forms.DockStyle.Fill;
             this.simpleModMStatus.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.simpleModMStatus.Location = new System.Drawing.Point(172, 606);
+            this.simpleModMStatus.Location = new System.Drawing.Point(169, 607);
             this.simpleModMStatus.Name = "simpleModMStatus";
-            this.simpleModMStatus.Size = new System.Drawing.Size(162, 30);
+            this.simpleModMStatus.Size = new System.Drawing.Size(159, 30);
             this.simpleModMStatus.TabIndex = 43;
             this.simpleModMStatus.Text = " ";
             this.simpleModMStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1861,9 +1909,9 @@
             this.simpleModAStatus.AutoSize = true;
             this.simpleModAStatus.Dock = System.Windows.Forms.DockStyle.Fill;
             this.simpleModAStatus.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.simpleModAStatus.Location = new System.Drawing.Point(340, 606);
+            this.simpleModAStatus.Location = new System.Drawing.Point(334, 607);
             this.simpleModAStatus.Name = "simpleModAStatus";
-            this.simpleModAStatus.Size = new System.Drawing.Size(165, 30);
+            this.simpleModAStatus.Size = new System.Drawing.Size(162, 30);
             this.simpleModAStatus.TabIndex = 44;
             this.simpleModAStatus.Text = " ";
             this.simpleModAStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1872,9 +1920,10 @@
             // 
             this.saveFileDialog.RestoreDirectory = true;
             // 
-            // openFileDialog1
+            // openCsvFileDialog
             // 
-            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openCsvFileDialog.FileName = "openFileDialog1";
+            this.openCsvFileDialog.Filter = "CSV file|*.csv";
             // 
             // Form1
             // 
@@ -1941,12 +1990,10 @@
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
             this.panel1.ResumeLayout(false);
-            this.groupBox7.ResumeLayout(false);
-            this.groupBox7.PerformLayout();
             this.groupBox8.ResumeLayout(false);
             this.groupBox8.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.upDownFilesNumber)).EndInit();
-            this.groupBoxLog3.ResumeLayout(false);
+            this.groupBox7.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.sourceModMPicture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.outModMPicture)).EndInit();
@@ -1962,7 +2009,7 @@
         }
 
         #endregion
-        private System.Windows.Forms.OpenFileDialog openFileDialog;
+        private System.Windows.Forms.OpenFileDialog openSourceFileDialog;
         private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
@@ -2052,7 +2099,6 @@
         private System.Windows.Forms.PictureBox outModAPicture;
         private System.Windows.Forms.GroupBox groupBoxStat;
         private System.Windows.Forms.ListBox commonStatBox;
-        private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.CheckBox savingStepsCheckBox;
         private System.Windows.Forms.CheckBox saveClassificationCheckBox;
         private System.Windows.Forms.Button buttonNextImage;
@@ -2060,7 +2106,7 @@
         private System.Windows.Forms.GroupBox groupBox8;
         private System.Windows.Forms.NumericUpDown upDownFilesNumber;
         private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.Button groupProcessingButton;
+        private System.Windows.Forms.Button folderProcessingButton;
         private System.Windows.Forms.Button teachFileLoadButton;
         private System.Windows.Forms.Button processingButton;
         private System.Windows.Forms.PictureBox cropPicture;
@@ -2081,17 +2127,21 @@
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Button teachButton;
-        private System.Windows.Forms.GroupBox groupBoxLog3;
-        private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.ComboBox elastoStatusBox;
         private System.Windows.Forms.ComboBox modMBox;
         private System.Windows.Forms.ComboBox modABox;
         private System.Windows.Forms.Button loadButton;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.TextBox xlsTextBox;
         private System.Windows.Forms.Label simpleElastoStatus;
         private System.Windows.Forms.Label simpleModMStatus;
         private System.Windows.Forms.Label simpleModAStatus;
+        private System.Windows.Forms.OpenFileDialog openCsvFileDialog;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Button xlsProcessingButton;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox precedentsFileBox;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.ListBox csvInfoBox;
     }
 }
 

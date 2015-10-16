@@ -1,15 +1,17 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using Eklekto.Helpers;
 using FibroscanProcessor;
 
-namespace ImageLoader
+namespace BalderViewer
 {
     public partial class Form1 : Form
     {
@@ -39,22 +41,27 @@ namespace ImageLoader
             {
                 simpleElastoStatus, simpleModMStatus, simpleModAStatus
             };
-            
+
         }
 
         private void LoadImage()
         {
-            openFileDialog.Filter = "image (JPEG) files (*.jpg)|*.jpg|All files (*.*)|*.*";
+            openSourceFileDialog.Filter = "image (JPEG) files (*.jpg)|*.jpg|All files (*.*)|*.*";
             AllClear();
             imageLabels.ForEach(label => label.Visible = false);
             teachStatusComboBox.ForEach(box => box.Visible = false);
             simpleStatusLabel.ForEach(label => label.Visible = false);
+            teachButton.Visible = false;
+            buttonNextImage.Enabled = false;
+            buttonPrevImage.Enabled = false;
 
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            if (openSourceFileDialog.ShowDialog() == DialogResult.OK)
             {
-                sourceImage = Image.FromFile(openFileDialog.FileName);
+                sourceImage = Image.FromFile(openSourceFileDialog.FileName);
                 sourcePicture.Image = sourceImage;
-                imagePath.Text = openFileDialog.FileName;
+                imagePath.Text = openSourceFileDialog.FileName;
+                buttonNextImage.Enabled = true;
+                buttonPrevImage.Enabled = true;
             }
         }
 
@@ -65,10 +72,11 @@ namespace ImageLoader
             if (sourcePicture.Image != null)
             {
                 BoxClear();
-                imageLabels.ForEach(label=> label.Visible=true);
+                imageLabels.ForEach(label => label.Visible = true);
                 teachStatusComboBox.ForEach(box => box.Visible = true);
                 teachStatusComboBox.ForEach(box => box.SelectedItem = "Uncertain");
                 simpleStatusLabel.ForEach(label => label.Visible = true);
+                teachButton.Visible = true;
 
                 FibroscanImage image = new FibroscanImage(sourceImage, true);
                 VerificationStatus elastoStatus = ElastogramVerification(image);
@@ -81,7 +89,7 @@ namespace ImageLoader
                     productionPicture.Image = prod.Merged;
                 }
                 //else
-                  //  productionPicture.Image = image.Step15DrawBrightLines(240,20);
+                //  productionPicture.Image = image.Step15DrawBrightLines(240,20);
 
                 if (savingStepsCheckBox.Checked)
                     SaveSteps();
@@ -196,19 +204,19 @@ namespace ImageLoader
             if (sourcePicture.Image != null)
                 FolderVerification();
         }
-       
+
         #region Saving
         private void SaveOneImageToFolder()
         {
             if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
                 for (int i = 0; i < pictures.Count; i++)
                     if (pictures[i].Image != null)
-                        pictures[i].Image.Save(folderBrowserDialog.SelectedPath + "//"+ i + ".jpg");
+                        pictures[i].Image.Save(folderBrowserDialog.SelectedPath + "//" + i + ".jpg");
         }
 
         private void SaveSteps()
         {
-            String savingFolder = Path.GetDirectoryName(imagePath.Text) + "//ResultSteps//" +Path.GetFileNameWithoutExtension(imagePath.Text);
+            String savingFolder = Path.GetDirectoryName(imagePath.Text) + "//ResultSteps//" + Path.GetFileNameWithoutExtension(imagePath.Text);
             Directory.CreateDirectory(savingFolder);
             for (int i = 0; i < pictures.Count; i++)
                 if (pictures[i].Image != null)
@@ -222,8 +230,38 @@ namespace ImageLoader
             pictures[0].Image.Save(savingFolder + "//" + Path.GetFileName(imagePath.Text));
         }
 
+        private void saveRightAnswerToCsv()
+        {
+            try
+            {
+                ConcurrentDictionary<string, string> csvElementList = new ConcurrentDictionary<string, string>(
+                    File.ReadLines(xlsTextBox.Text)
+                        .Select(line => line.Split(','))
+                        .ToDictionary(line => line[0], line => line[1]));
+                if (!String.IsNullOrWhiteSpace(elastoStatusBox.Text) && !String.IsNullOrWhiteSpace(imagePath.Text))
+                    csvElementList.AddOrUpdate(imagePath.Text, elastoStatusBox.Text);
+
+                File.WriteAllText(xlsTextBox.Text,
+                    String.Join(Environment.NewLine, csvElementList.Select(d => d.Key + "," + d.Value).OrderBy(key => key)));
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void saveSignatura()
+        {
+            using (System.IO.StreamWriter file =
+             new System.IO.StreamWriter(precedentsFileBox.Text, true))
+            {
+                //file.WriteLine(String.Join(", ", array));
+            }
+        }
+
         #endregion
- 
+
         #region buttons
         private void buttonNextImage_Click(object sender, EventArgs e)
         {
@@ -231,16 +269,17 @@ namespace ImageLoader
             {
                 AllClear();
                 imagePath.Text = Directory.EnumerateFiles(Path.GetDirectoryName(imagePath.Text))
-                        .Skip(GetCurrentFileImdex(imagePath.Text) + 1)
-                        .First();
+                    .Skip(GetCurrentFileImdex(imagePath.Text) + 1)
+                    .First();
+                sourceImage = Image.FromFile(imagePath.Text);
+                sourcePicture.Image = sourceImage;
+                StartImageVerification();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-            sourceImage = Image.FromFile(imagePath.Text);
-            sourcePicture.Image = sourceImage;
-            StartImageVerification();
+
         }
 
         private void buttonPrevImage_Click(object sender, EventArgs e)
@@ -249,18 +288,31 @@ namespace ImageLoader
             {
                 AllClear();
                 imagePath.Text = Directory.EnumerateFiles(Path.GetDirectoryName(imagePath.Text))
-                        .Skip(GetCurrentFileImdex(imagePath.Text) - 1)
-                        .First();
+                    .Skip(GetCurrentFileImdex(imagePath.Text) - 1)
+                    .First();
+                sourceImage = Image.FromFile(imagePath.Text);
+                sourcePicture.Image = sourceImage;
+                StartImageVerification();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-            sourceImage = Image.FromFile(imagePath.Text);
-            sourcePicture.Image = sourceImage;
-            StartImageVerification();
+
         }
 
+        private void teachFileLoadButton_Click(object sender, EventArgs e)
+        {
+            if (openCsvFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                xlsTextBox.Text = openCsvFileDialog.FileName;
+            }
+        }
+
+        private void teachButton_Click(object sender, EventArgs e)
+        {
+            saveRightAnswerToCsv();
+        }
         #endregion
 
         #region Helpers
@@ -307,14 +359,14 @@ namespace ImageLoader
                     imagePath.Text = Directory.EnumerateFiles(Path.GetDirectoryName(imagePath.Text))
                             .Skip(GetCurrentFileImdex(imagePath.Text) + 1)
                             .First();
+                    sourceImage = Image.FromFile(imagePath.Text);
+                    sourcePicture.Image = sourceImage;
+                    StartImageVerification();
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
                 }
-                sourceImage = Image.FromFile(imagePath.Text);
-                sourcePicture.Image = sourceImage;
-                StartImageVerification();
                 return true;
             }
 
@@ -326,14 +378,14 @@ namespace ImageLoader
                     imagePath.Text = Directory.EnumerateFiles(Path.GetDirectoryName(imagePath.Text))
                             .Skip(GetCurrentFileImdex(imagePath.Text) - 1)
                             .First();
+                    sourceImage = Image.FromFile(imagePath.Text);
+                    sourcePicture.Image = sourceImage;
+                    StartImageVerification();
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
                 }
-                sourceImage = Image.FromFile(imagePath.Text);
-                sourcePicture.Image = sourceImage;
-                StartImageVerification();
                 return true;
             }
 
@@ -412,13 +464,15 @@ namespace ImageLoader
         private void pictureBox_Saving(object sender, EventArgs e)
         {
             //fBigImage.ShowDialog();
-            Image img = ((PictureBox) sender).Image;
+            Image img = ((PictureBox)sender).Image;
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
-                    if (img != null)
-                        img.Save(saveFileDialog.FileName + ".jpg");
+                if (img != null)
+                    img.Save(saveFileDialog.FileName + ".jpg");
         }
+
+
         #endregion
 
-        
+
     }
 }

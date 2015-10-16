@@ -7,8 +7,8 @@
     <ProjectGuid>{9D0E0A8C-1F93-4771-A1DC-5108915890A2}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ImageLoader</RootNamespace>
-    <AssemblyName>ImageLoader</AssemblyName>
+    <RootNamespace>BalderViewer</RootNamespace>
+    <AssemblyName>BalderViewer</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -56,6 +56,7 @@
     <Compile Include="BigImage.Designer.cs">
       <DependentUpon>BigImage.cs</DependentUpon>
     </Compile>
+    <Compile Include="ConcurentDictionaryHelper.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
