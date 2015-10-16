@@ -26,22 +26,7 @@ namespace ImageLoader
             };
         }
 
-        private void AllClear()
-        {
-            pictures.ForEach(picture =>
-            {
-                picture.Image = null;
-                picture.Invalidate();
-            });
-            BoxClear();
-        }
 
-        private void BoxClear()
-        {
-            signatureBox.Items.Clear();
-            resultBox.Items.Clear();
-            commonStatBox.Items.Clear();
-        }
 
         private void LoadImage()
         {
@@ -66,10 +51,15 @@ namespace ImageLoader
                 FibroscanImage image = new FibroscanImage(sourceImage, true);
                 VerificationStatus elastoStatus = ElastogramVerification(image);
                 Ultrasoundverification(image);
-                
+
                 //Production code
-                FibroscanImage prod = new FibroscanImage(sourceImage);
-                productionPicture.Image = prod.Merged;
+                if (productionCheckBox.Checked)
+                {
+                    FibroscanImage prod = new FibroscanImage(sourceImage);
+                    productionPicture.Image = prod.Merged;
+                }
+                //else
+                  //  productionPicture.Image = image.Step15DrawBrightLines(240,20);
 
                 if (savingStepsCheckBox.Checked)
                     SaveSteps();
@@ -108,7 +98,7 @@ namespace ImageLoader
 
             morphologyPicture.Image = image.Step6Morphology((int)numericUpDown3.Value);
 
-            cropPicture.Image = image.Step7CropObjects(ref timer, (int)upDownCropStep.Value, (int)upDownCropDistance.Value);
+            cropPicture.Image = image.Step7CropObjects((int)upDownCropStep.Value, (int)upDownCropDistance.Value);
 
             choosingPicture.Image = image.Step8ChooseOneObject(ref timer, 0.55, 0.65);
 
@@ -134,17 +124,22 @@ namespace ImageLoader
         private void Ultrasoundverification(FibroscanImage image)
         {
             long timer = 0;
-            sourceModMPicture.Image = image.Step11LoadUltrasoundM(ref timer);
+            sourceModMPicture.Image = image.Step11LoadUltrasoundM((double)upDownBrightPixelLimit.Value, (int)upDownUsDeviationStreak.Value);
 
             VerificationStatus umms = VerificationStatus.NotCalculated;
-            outModMPicture.Image = image.Step12DrawBadLines(ref timer, ref umms);
+            outModMPicture.Image = image.Step15DrawBrightLines(ref umms, (int)upDownLimitUsBrightness.Value, (int)upDownBrightPixelLimit.Value, (int)upDownBrightLinesLimit.Value);
             resultBox.Items.Add("UltraSoundModM is " + umms);
 
-            sourceModAPicture.Image = image.Step13LoadUltrasoundA(ref timer);
+            signatureBox.Items.Add("Mod M bright lines:  " +
+                                   image.WorkingUltrasoundModM.getBrightLines((int)upDownLimitUsBrightness.Value, (int)upDownBrightPixelLimit.Value).Count);
+
+            sourceModAPicture.Image = image.Step13LoadUltrasoundA();
 
             VerificationStatus umas = VerificationStatus.NotCalculated;
-            outModAPicture.Image = image.Step14DrawUltraSoundApproximation(ref timer, ref umas);
+            outModAPicture.Image = image.Step14DrawUltraSoundApproximation(ref umas, (int)upDownRelativeEstimationLimit.Value);
             resultBox.Items.Add("UltraSoundModA is " + umas);
+            signatureBox.Items.Add("ModA Estimation:   " + Math.Round(image.WorkingUltrasoundModA.RelativeEstimation, 2));
+            signatureBox.Items.Add("ModA RSquare        : " + Math.Round(image.WorkingUltrasoundModA.RSquare));
         }
 
         private void FolderVerification()
@@ -154,15 +149,14 @@ namespace ImageLoader
             for (int i = 0; i < filesNumber; i++)
             {
                 BoxClear();
-                imagePath.Text = firstFiles[i];
-                sourceImage = Image.FromFile(imagePath.Text);
-                sourcePicture.Image = sourceImage;
-                StartImageVerification();
+                if (Path.GetExtension(firstFiles[i]) == ".jpg")
+                {
+                    imagePath.Text = firstFiles[i];
+                    sourceImage = Image.FromFile(imagePath.Text);
+                    sourcePicture.Image = sourceImage;
+                    StartImageVerification();
+                }
                 commonStatBox.Items.Add(i + 1 + " files processed");
-
-
-
-                //System.Threading.Thread.Sleep(1000*(int) upDownTimeDelay.Value);
             }
         }
 
@@ -172,9 +166,7 @@ namespace ImageLoader
                 LoadImage();
             if (sourcePicture.Image != null)
                 FolderVerification();
-            
         }
-
        
         #region Saving
         private void SaveOneImageToFolder()
@@ -202,12 +194,7 @@ namespace ImageLoader
         }
 
         #endregion
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            DialogResult rsl = MessageBox.Show("Не смей уходить, когда я анализирую изображения!", "Одумайся!", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (rsl == DialogResult.No)
-                Application.Exit();
-        }
+ 
         #region buttons
         private void buttonNextImage_Click(object sender, EventArgs e)
         {
@@ -247,7 +234,7 @@ namespace ImageLoader
 
         #endregion
 
-            #region Helpers
+        #region Helpers
         private int GetCurrentFileImdex(string text)
         {
             var filesEnumerator = Directory.EnumerateFiles(Path.GetDirectoryName(text));
@@ -261,9 +248,98 @@ namespace ImageLoader
             }
             return fileIndex;
         }
+        private void AllClear()
+        {
+            pictures.ForEach(picture =>
+            {
+                picture.Image = null;
+                picture.Invalidate();
+            });
+            BoxClear();
+        }
+
+        private void BoxClear()
+        {
+            signatureBox.Items.Clear();
+            resultBox.Items.Clear();
+            commonStatBox.Items.Clear();
+        }
         #endregion
-        
+
+        #region Hotkeys
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == (Keys.Right))
+            {
+                try
+                {
+                    AllClear();
+                    imagePath.Text = Directory.EnumerateFiles(Path.GetDirectoryName(imagePath.Text))
+                            .Skip(GetCurrentFileImdex(imagePath.Text) + 1)
+                            .First();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                sourceImage = Image.FromFile(imagePath.Text);
+                sourcePicture.Image = sourceImage;
+                StartImageVerification();
+                return true;
+            }
+
+            if (keyData == (Keys.Left))
+            {
+                try
+                {
+                    AllClear();
+                    imagePath.Text = Directory.EnumerateFiles(Path.GetDirectoryName(imagePath.Text))
+                            .Skip(GetCurrentFileImdex(imagePath.Text) - 1)
+                            .First();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                sourceImage = Image.FromFile(imagePath.Text);
+                sourcePicture.Image = sourceImage;
+                StartImageVerification();
+                return true;
+            }
+
+            if (keyData == (Keys.Escape))
+            {
+                {
+                    DialogResult rsl = MessageBox.Show("Ты не посмеешь уйти, когда я анализирую изображения!", "Одумайся!", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (rsl == DialogResult.No)
+                        Application.Exit();
+                }
+                return true;
+            }
+            if (keyData == (Keys.Space))
+            {
+                LoadImage();
+                return true;
+            }
+            if (keyData == (Keys.Enter))
+            {
+                StartImageVerification();
+                return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        #endregion
+
         #region Casual methods
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult rsl = MessageBox.Show("Не смей уходить, когда я анализирую изображения!", "Одумайся!", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (rsl == DialogResult.No)
+                Application.Exit();
+        }
 
         private void toolStripButton3_Click(object sender, EventArgs e)
         {
@@ -302,6 +378,15 @@ namespace ImageLoader
         {
             BigImage fBigImage = new BigImage(((PictureBox)sender).Image);
             fBigImage.ShowDialog();
+        }
+
+        private void pictureBox_Saving(object sender, EventArgs e)
+        {
+            //fBigImage.ShowDialog();
+            Image img = ((PictureBox) sender).Image;
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                    if (img != null)
+                        img.Save(saveFileDialog.FileName + ".jpg");
         }
         #endregion
     }

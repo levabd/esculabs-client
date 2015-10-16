@@ -76,13 +76,15 @@
             this.upDownCropStep = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.numericUpDown6 = new System.Windows.Forms.NumericUpDown();
+            this.upDownLimitUsBrightness = new System.Windows.Forms.NumericUpDown();
+            this.label21 = new System.Windows.Forms.Label();
+            this.upDownRelativeEstimationLimit = new System.Windows.Forms.NumericUpDown();
             this.label19 = new System.Windows.Forms.Label();
-            this.numericUpDown5 = new System.Windows.Forms.NumericUpDown();
+            this.upDownBrightLinesLimit = new System.Windows.Forms.NumericUpDown();
             this.label18 = new System.Windows.Forms.Label();
-            this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
+            this.upDownUsDeviationStreak = new System.Windows.Forms.NumericUpDown();
             this.label17 = new System.Windows.Forms.Label();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.upDownBrightPixelLimit = new System.Windows.Forms.NumericUpDown();
             this.label16 = new System.Windows.Forms.Label();
             this.kuwaharaPicture = new System.Windows.Forms.PictureBox();
             this.sourcePicture = new System.Windows.Forms.PictureBox();
@@ -127,6 +129,7 @@
             this.groupProcessingButton = new System.Windows.Forms.Button();
             this.teachFileLoadButton = new System.Windows.Forms.Button();
             this.processingButton = new System.Windows.Forms.Button();
+            this.productionCheckBox = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.sourceModMPicture = new System.Windows.Forms.PictureBox();
             this.outModMPicture = new System.Windows.Forms.PictureBox();
@@ -135,6 +138,7 @@
             this.outModAPicture = new System.Windows.Forms.PictureBox();
             this.cropPicture = new System.Windows.Forms.PictureBox();
             this.productionPicture = new System.Windows.Forms.PictureBox();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.menuStrip.SuspendLayout();
             this.leftToolStrip.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -153,10 +157,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.upDownCropDistance)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.upDownCropStep)).BeginInit();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownLimitUsBrightness)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownRelativeEstimationLimit)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownBrightLinesLimit)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownUsDeviationStreak)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownBrightPixelLimit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kuwaharaPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sourcePicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.elastoPicture)).BeginInit();
@@ -206,7 +211,7 @@
             this.viewToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(1164, 24);
+            this.menuStrip.Size = new System.Drawing.Size(1173, 24);
             this.menuStrip.TabIndex = 4;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -264,7 +269,7 @@
             this.toolStripButton2});
             this.leftToolStrip.Location = new System.Drawing.Point(0, 24);
             this.leftToolStrip.Name = "leftToolStrip";
-            this.leftToolStrip.Size = new System.Drawing.Size(46, 653);
+            this.leftToolStrip.Size = new System.Drawing.Size(46, 688);
             this.leftToolStrip.TabIndex = 5;
             this.leftToolStrip.Text = "toolStrip1";
             // 
@@ -314,7 +319,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(221, 69);
+            this.groupBox1.Size = new System.Drawing.Size(218, 69);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Elastogram settings";
@@ -398,7 +403,7 @@
             this.groupBox5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox5.Location = new System.Drawing.Point(3, 78);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(221, 214);
+            this.groupBox5.Size = new System.Drawing.Size(218, 214);
             this.groupBox5.TabIndex = 8;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Binarizations";
@@ -597,7 +602,7 @@
             this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox4.Location = new System.Drawing.Point(3, 458);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(221, 74);
+            this.groupBox4.Size = new System.Drawing.Size(218, 74);
             this.groupBox4.TabIndex = 7;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Ransac";
@@ -611,7 +616,7 @@
             0});
             this.upDownRansacIterations.Location = new System.Drawing.Point(111, 47);
             this.upDownRansacIterations.Maximum = new decimal(new int[] {
-            10000,
+            50000,
             0,
             0,
             0});
@@ -624,7 +629,7 @@
             this.upDownRansacIterations.Size = new System.Drawing.Size(70, 20);
             this.upDownRansacIterations.TabIndex = 9;
             this.upDownRansacIterations.Value = new decimal(new int[] {
-            6000,
+            12000,
             0,
             0,
             0});
@@ -647,16 +652,16 @@
             this.upDownRansacOutliers.Size = new System.Drawing.Size(46, 20);
             this.upDownRansacOutliers.TabIndex = 10;
             this.upDownRansacOutliers.Value = new decimal(new int[] {
-            35,
+            2,
             0,
             0,
-            131072});
+            65536});
             // 
             // upDownRansacSample
             // 
             this.upDownRansacSample.DecimalPlaces = 2;
             this.upDownRansacSample.Increment = new decimal(new int[] {
-            5,
+            1,
             0,
             0,
             131072});
@@ -666,14 +671,19 @@
             0,
             0,
             0});
+            this.upDownRansacSample.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
             this.upDownRansacSample.Name = "upDownRansacSample";
             this.upDownRansacSample.Size = new System.Drawing.Size(46, 20);
             this.upDownRansacSample.TabIndex = 9;
             this.upDownRansacSample.Value = new decimal(new int[] {
-            3,
+            15,
             0,
             0,
-            65536});
+            131072});
             // 
             // label15
             // 
@@ -711,7 +721,7 @@
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox3.Location = new System.Drawing.Point(3, 408);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(221, 44);
+            this.groupBox3.Size = new System.Drawing.Size(218, 44);
             this.groupBox3.TabIndex = 9;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Crop";
@@ -746,7 +756,7 @@
             this.upDownCropStep.Size = new System.Drawing.Size(49, 20);
             this.upDownCropStep.TabIndex = 1;
             this.upDownCropStep.Value = new decimal(new int[] {
-            24,
+            20,
             0,
             0,
             0});
@@ -762,30 +772,58 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.numericUpDown6);
+            this.groupBox2.Controls.Add(this.upDownLimitUsBrightness);
+            this.groupBox2.Controls.Add(this.label21);
+            this.groupBox2.Controls.Add(this.upDownRelativeEstimationLimit);
             this.groupBox2.Controls.Add(this.label19);
-            this.groupBox2.Controls.Add(this.numericUpDown5);
+            this.groupBox2.Controls.Add(this.upDownBrightLinesLimit);
             this.groupBox2.Controls.Add(this.label18);
-            this.groupBox2.Controls.Add(this.numericUpDown4);
+            this.groupBox2.Controls.Add(this.upDownUsDeviationStreak);
             this.groupBox2.Controls.Add(this.label17);
-            this.groupBox2.Controls.Add(this.numericUpDown2);
+            this.groupBox2.Controls.Add(this.upDownBrightPixelLimit);
             this.groupBox2.Controls.Add(this.label16);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(3, 538);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(221, 106);
+            this.groupBox2.Size = new System.Drawing.Size(218, 141);
             this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Ultrasound Settings";
             // 
-            // numericUpDown6
+            // upDownLimitUsBrightness
             // 
-            this.numericUpDown6.Location = new System.Drawing.Point(134, 82);
-            this.numericUpDown6.Name = "numericUpDown6";
-            this.numericUpDown6.Size = new System.Drawing.Size(57, 20);
-            this.numericUpDown6.TabIndex = 15;
-            this.numericUpDown6.Value = new decimal(new int[] {
-            90,
+            this.upDownLimitUsBrightness.Location = new System.Drawing.Point(134, 111);
+            this.upDownLimitUsBrightness.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.upDownLimitUsBrightness.Name = "upDownLimitUsBrightness";
+            this.upDownLimitUsBrightness.Size = new System.Drawing.Size(57, 20);
+            this.upDownLimitUsBrightness.TabIndex = 17;
+            this.upDownLimitUsBrightness.Value = new decimal(new int[] {
+            246,
+            0,
+            0,
+            0});
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(13, 111);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(79, 13);
+            this.label21.TabIndex = 16;
+            this.label21.Text = "Limit brightness";
+            // 
+            // upDownRelativeEstimationLimit
+            // 
+            this.upDownRelativeEstimationLimit.Location = new System.Drawing.Point(134, 88);
+            this.upDownRelativeEstimationLimit.Name = "upDownRelativeEstimationLimit";
+            this.upDownRelativeEstimationLimit.Size = new System.Drawing.Size(57, 20);
+            this.upDownRelativeEstimationLimit.TabIndex = 15;
+            this.upDownRelativeEstimationLimit.Value = new decimal(new int[] {
+            85,
             0,
             0,
             0});
@@ -793,25 +831,25 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(12, 89);
+            this.label19.Location = new System.Drawing.Point(12, 91);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(115, 13);
             this.label19.TabIndex = 14;
             this.label19.Text = "LimitRelativeEstimation";
             // 
-            // numericUpDown5
+            // upDownBrightLinesLimit
             // 
-            this.numericUpDown5.Location = new System.Drawing.Point(134, 60);
-            this.numericUpDown5.Maximum = new decimal(new int[] {
+            this.upDownBrightLinesLimit.Location = new System.Drawing.Point(134, 64);
+            this.upDownBrightLinesLimit.Maximum = new decimal(new int[] {
             240,
             0,
             0,
             0});
-            this.numericUpDown5.Name = "numericUpDown5";
-            this.numericUpDown5.Size = new System.Drawing.Size(57, 20);
-            this.numericUpDown5.TabIndex = 13;
-            this.numericUpDown5.Value = new decimal(new int[] {
-            15,
+            this.upDownBrightLinesLimit.Name = "upDownBrightLinesLimit";
+            this.upDownBrightLinesLimit.Size = new System.Drawing.Size(57, 20);
+            this.upDownBrightLinesLimit.TabIndex = 13;
+            this.upDownBrightLinesLimit.Value = new decimal(new int[] {
+            30,
             0,
             0,
             0});
@@ -819,24 +857,24 @@
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(11, 67);
+            this.label18.Location = new System.Drawing.Point(11, 69);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(72, 13);
+            this.label18.Size = new System.Drawing.Size(80, 13);
             this.label18.TabIndex = 12;
-            this.label18.Text = "LimitBadLines";
+            this.label18.Text = "LimitBrightLines";
             // 
-            // numericUpDown4
+            // upDownUsDeviationStreak
             // 
-            this.numericUpDown4.Location = new System.Drawing.Point(134, 42);
-            this.numericUpDown4.Maximum = new decimal(new int[] {
+            this.upDownUsDeviationStreak.Location = new System.Drawing.Point(134, 42);
+            this.upDownUsDeviationStreak.Maximum = new decimal(new int[] {
             20,
             0,
             0,
             0});
-            this.numericUpDown4.Name = "numericUpDown4";
-            this.numericUpDown4.Size = new System.Drawing.Size(57, 20);
-            this.numericUpDown4.TabIndex = 11;
-            this.numericUpDown4.Value = new decimal(new int[] {
+            this.upDownUsDeviationStreak.Name = "upDownUsDeviationStreak";
+            this.upDownUsDeviationStreak.Size = new System.Drawing.Size(57, 20);
+            this.upDownUsDeviationStreak.TabIndex = 11;
+            this.upDownUsDeviationStreak.Value = new decimal(new int[] {
             3,
             0,
             0,
@@ -851,13 +889,13 @@
             this.label17.TabIndex = 10;
             this.label17.Text = "LimitStreakCount";
             // 
-            // numericUpDown2
+            // upDownBrightPixelLimit
             // 
-            this.numericUpDown2.Location = new System.Drawing.Point(134, 19);
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(57, 20);
-            this.numericUpDown2.TabIndex = 9;
-            this.numericUpDown2.Value = new decimal(new int[] {
+            this.upDownBrightPixelLimit.Location = new System.Drawing.Point(134, 19);
+            this.upDownBrightPixelLimit.Name = "upDownBrightPixelLimit";
+            this.upDownBrightPixelLimit.Size = new System.Drawing.Size(57, 20);
+            this.upDownBrightPixelLimit.TabIndex = 9;
+            this.upDownBrightPixelLimit.Value = new decimal(new int[] {
             30,
             0,
             0,
@@ -868,16 +906,16 @@
             this.label16.AutoSize = true;
             this.label16.Location = new System.Drawing.Point(11, 23);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(73, 13);
+            this.label16.Size = new System.Drawing.Size(82, 13);
             this.label16.TabIndex = 0;
-            this.label16.Text = "LimitDeviation";
+            this.label16.Text = "LimitBrightPixels";
             // 
             // kuwaharaPicture
             // 
             this.kuwaharaPicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.kuwaharaPicture.Location = new System.Drawing.Point(343, 173);
+            this.kuwaharaPicture.Location = new System.Drawing.Point(349, 173);
             this.kuwaharaPicture.Name = "kuwaharaPicture";
-            this.kuwaharaPicture.Size = new System.Drawing.Size(164, 155);
+            this.kuwaharaPicture.Size = new System.Drawing.Size(167, 167);
             this.kuwaharaPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.kuwaharaPicture.TabIndex = 5;
             this.kuwaharaPicture.TabStop = false;
@@ -888,7 +926,7 @@
             this.sourcePicture.Dock = System.Windows.Forms.DockStyle.Fill;
             this.sourcePicture.Location = new System.Drawing.Point(3, 173);
             this.sourcePicture.Name = "sourcePicture";
-            this.sourcePicture.Size = new System.Drawing.Size(164, 155);
+            this.sourcePicture.Size = new System.Drawing.Size(167, 167);
             this.sourcePicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.sourcePicture.TabIndex = 3;
             this.sourcePicture.TabStop = false;
@@ -897,9 +935,9 @@
             // elastoPicture
             // 
             this.elastoPicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.elastoPicture.Location = new System.Drawing.Point(173, 173);
+            this.elastoPicture.Location = new System.Drawing.Point(176, 173);
             this.elastoPicture.Name = "elastoPicture";
-            this.elastoPicture.Size = new System.Drawing.Size(164, 155);
+            this.elastoPicture.Size = new System.Drawing.Size(167, 167);
             this.elastoPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.elastoPicture.TabIndex = 4;
             this.elastoPicture.TabStop = false;
@@ -939,16 +977,16 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.3996F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.20079F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1118, 653);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1127, 688);
             this.tableLayoutPanel1.TabIndex = 6;
             this.tableLayoutPanel1.Click += new System.EventHandler(this.pictureBox_Click);
             // 
             // binarizationPicture
             // 
             this.binarizationPicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.binarizationPicture.Location = new System.Drawing.Point(513, 173);
+            this.binarizationPicture.Location = new System.Drawing.Point(522, 173);
             this.binarizationPicture.Name = "binarizationPicture";
-            this.binarizationPicture.Size = new System.Drawing.Size(164, 155);
+            this.binarizationPicture.Size = new System.Drawing.Size(167, 167);
             this.binarizationPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.binarizationPicture.TabIndex = 6;
             this.binarizationPicture.TabStop = false;
@@ -957,9 +995,9 @@
             // edgePicture
             // 
             this.edgePicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.edgePicture.Location = new System.Drawing.Point(3, 334);
+            this.edgePicture.Location = new System.Drawing.Point(3, 346);
             this.edgePicture.Name = "edgePicture";
-            this.edgePicture.Size = new System.Drawing.Size(164, 155);
+            this.edgePicture.Size = new System.Drawing.Size(167, 167);
             this.edgePicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.edgePicture.TabIndex = 7;
             this.edgePicture.TabStop = false;
@@ -968,9 +1006,9 @@
             // morphologyPicture
             // 
             this.morphologyPicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.morphologyPicture.Location = new System.Drawing.Point(173, 334);
+            this.morphologyPicture.Location = new System.Drawing.Point(176, 346);
             this.morphologyPicture.Name = "morphologyPicture";
-            this.morphologyPicture.Size = new System.Drawing.Size(164, 155);
+            this.morphologyPicture.Size = new System.Drawing.Size(167, 167);
             this.morphologyPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.morphologyPicture.TabIndex = 8;
             this.morphologyPicture.TabStop = false;
@@ -979,9 +1017,9 @@
             // choosingPicture
             // 
             this.choosingPicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.choosingPicture.Location = new System.Drawing.Point(513, 334);
+            this.choosingPicture.Location = new System.Drawing.Point(522, 346);
             this.choosingPicture.Name = "choosingPicture";
-            this.choosingPicture.Size = new System.Drawing.Size(164, 155);
+            this.choosingPicture.Size = new System.Drawing.Size(167, 167);
             this.choosingPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.choosingPicture.TabIndex = 9;
             this.choosingPicture.TabStop = false;
@@ -990,9 +1028,9 @@
             // approximationPicture
             // 
             this.approximationPicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.approximationPicture.Location = new System.Drawing.Point(3, 495);
+            this.approximationPicture.Location = new System.Drawing.Point(3, 519);
             this.approximationPicture.Name = "approximationPicture";
-            this.approximationPicture.Size = new System.Drawing.Size(164, 155);
+            this.approximationPicture.Size = new System.Drawing.Size(167, 166);
             this.approximationPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.approximationPicture.TabIndex = 10;
             this.approximationPicture.TabStop = false;
@@ -1009,7 +1047,7 @@
             this.tableLayoutPanel2.Controls.Add(this.groupBox3, 0, 3);
             this.tableLayoutPanel2.Controls.Add(this.groupBox6, 0, 2);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(888, 3);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(900, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 6;
             this.tableLayoutPanel1.SetRowSpan(this.tableLayoutPanel2, 4);
@@ -1019,7 +1057,7 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(227, 647);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(224, 682);
             this.tableLayoutPanel2.TabIndex = 19;
             // 
             // groupBox6
@@ -1036,7 +1074,7 @@
             this.groupBox6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox6.Location = new System.Drawing.Point(3, 298);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(221, 104);
+            this.groupBox6.Size = new System.Drawing.Size(218, 104);
             this.groupBox6.TabIndex = 10;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "EdgeObjects";
@@ -1174,10 +1212,10 @@
             // 
             this.groupBoxLog2.Controls.Add(this.signatureBox);
             this.groupBoxLog2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBoxLog2.Location = new System.Drawing.Point(683, 173);
+            this.groupBoxLog2.Location = new System.Drawing.Point(695, 173);
             this.groupBoxLog2.Name = "groupBoxLog2";
             this.tableLayoutPanel1.SetRowSpan(this.groupBoxLog2, 3);
-            this.groupBoxLog2.Size = new System.Drawing.Size(199, 477);
+            this.groupBoxLog2.Size = new System.Drawing.Size(199, 512);
             this.groupBoxLog2.TabIndex = 20;
             this.groupBoxLog2.TabStop = false;
             this.groupBoxLog2.Text = "Signatura";
@@ -1190,14 +1228,14 @@
             this.signatureBox.ItemHeight = 19;
             this.signatureBox.Location = new System.Drawing.Point(3, 16);
             this.signatureBox.Name = "signatureBox";
-            this.signatureBox.Size = new System.Drawing.Size(193, 458);
+            this.signatureBox.Size = new System.Drawing.Size(193, 493);
             this.signatureBox.TabIndex = 0;
             // 
             // groupBoxLog1
             // 
             this.groupBoxLog1.Controls.Add(this.resultBox);
             this.groupBoxLog1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBoxLog1.Location = new System.Drawing.Point(683, 3);
+            this.groupBoxLog1.Location = new System.Drawing.Point(695, 3);
             this.groupBoxLog1.Name = "groupBoxLog1";
             this.groupBoxLog1.Size = new System.Drawing.Size(199, 164);
             this.groupBoxLog1.TabIndex = 21;
@@ -1232,6 +1270,7 @@
             this.tableLayoutPanel3.Controls.Add(this.groupProcessingButton, 2, 3);
             this.tableLayoutPanel3.Controls.Add(this.teachFileLoadButton, 0, 2);
             this.tableLayoutPanel3.Controls.Add(this.processingButton, 2, 1);
+            this.tableLayoutPanel3.Controls.Add(this.productionCheckBox, 1, 2);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
@@ -1242,7 +1281,7 @@
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 36F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 19F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(674, 164);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(686, 164);
             this.tableLayoutPanel3.TabIndex = 22;
             // 
             // imagePath
@@ -1253,7 +1292,7 @@
             this.imagePath.Location = new System.Drawing.Point(3, 3);
             this.imagePath.Multiline = true;
             this.imagePath.Name = "imagePath";
-            this.imagePath.Size = new System.Drawing.Size(498, 30);
+            this.imagePath.Size = new System.Drawing.Size(506, 30);
             this.imagePath.TabIndex = 0;
             // 
             // panel1
@@ -1265,13 +1304,13 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 39);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(330, 30);
+            this.panel1.Size = new System.Drawing.Size(335, 30);
             this.panel1.TabIndex = 1;
             // 
             // loadButton
             // 
             this.loadButton.Dock = System.Windows.Forms.DockStyle.Right;
-            this.loadButton.Location = new System.Drawing.Point(255, 0);
+            this.loadButton.Location = new System.Drawing.Point(260, 0);
             this.loadButton.Name = "loadButton";
             this.loadButton.Size = new System.Drawing.Size(75, 30);
             this.loadButton.TabIndex = 2;
@@ -1305,10 +1344,10 @@
             // 
             this.groupBoxStat.Controls.Add(this.commonStatBox);
             this.groupBoxStat.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBoxStat.Location = new System.Drawing.Point(507, 3);
+            this.groupBoxStat.Location = new System.Drawing.Point(515, 3);
             this.groupBoxStat.Name = "groupBoxStat";
             this.tableLayoutPanel3.SetRowSpan(this.groupBoxStat, 5);
-            this.groupBoxStat.Size = new System.Drawing.Size(164, 158);
+            this.groupBoxStat.Size = new System.Drawing.Size(168, 158);
             this.groupBoxStat.TabIndex = 2;
             this.groupBoxStat.TabStop = false;
             this.groupBoxStat.Text = "CommonStat";
@@ -1319,7 +1358,7 @@
             this.commonStatBox.FormattingEnabled = true;
             this.commonStatBox.Location = new System.Drawing.Point(3, 16);
             this.commonStatBox.Name = "commonStatBox";
-            this.commonStatBox.Size = new System.Drawing.Size(158, 139);
+            this.commonStatBox.Size = new System.Drawing.Size(162, 139);
             this.commonStatBox.TabIndex = 0;
             // 
             // groupBox7
@@ -1330,7 +1369,7 @@
             this.groupBox7.Location = new System.Drawing.Point(3, 111);
             this.groupBox7.Name = "groupBox7";
             this.tableLayoutPanel3.SetRowSpan(this.groupBox7, 2);
-            this.groupBox7.Size = new System.Drawing.Size(135, 50);
+            this.groupBox7.Size = new System.Drawing.Size(137, 50);
             this.groupBox7.TabIndex = 5;
             this.groupBox7.TabStop = false;
             // 
@@ -1361,10 +1400,10 @@
             this.groupBox8.Controls.Add(this.upDownFilesNumber);
             this.groupBox8.Controls.Add(this.label20);
             this.groupBox8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox8.Location = new System.Drawing.Point(144, 111);
+            this.groupBox8.Location = new System.Drawing.Point(146, 111);
             this.groupBox8.Name = "groupBox8";
             this.tableLayoutPanel3.SetRowSpan(this.groupBox8, 2);
-            this.groupBox8.Size = new System.Drawing.Size(189, 50);
+            this.groupBox8.Size = new System.Drawing.Size(192, 50);
             this.groupBox8.TabIndex = 6;
             this.groupBox8.TabStop = false;
             // 
@@ -1414,9 +1453,9 @@
             // groupProcessingButton
             // 
             this.groupProcessingButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupProcessingButton.Location = new System.Drawing.Point(339, 111);
+            this.groupProcessingButton.Location = new System.Drawing.Point(344, 111);
             this.groupProcessingButton.Name = "groupProcessingButton";
-            this.groupProcessingButton.Size = new System.Drawing.Size(162, 30);
+            this.groupProcessingButton.Size = new System.Drawing.Size(165, 30);
             this.groupProcessingButton.TabIndex = 7;
             this.groupProcessingButton.Text = "Group Processing";
             this.groupProcessingButton.UseVisualStyleBackColor = true;
@@ -1427,7 +1466,7 @@
             this.teachFileLoadButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.teachFileLoadButton.Location = new System.Drawing.Point(3, 75);
             this.teachFileLoadButton.Name = "teachFileLoadButton";
-            this.teachFileLoadButton.Size = new System.Drawing.Size(135, 30);
+            this.teachFileLoadButton.Size = new System.Drawing.Size(137, 30);
             this.teachFileLoadButton.TabIndex = 8;
             this.teachFileLoadButton.Text = "Load TeachFile";
             this.teachFileLoadButton.UseVisualStyleBackColor = true;
@@ -1435,13 +1474,23 @@
             // processingButton
             // 
             this.processingButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.processingButton.Location = new System.Drawing.Point(339, 39);
+            this.processingButton.Location = new System.Drawing.Point(344, 39);
             this.processingButton.Name = "processingButton";
-            this.processingButton.Size = new System.Drawing.Size(162, 30);
+            this.processingButton.Size = new System.Drawing.Size(165, 30);
             this.processingButton.TabIndex = 9;
             this.processingButton.Text = "Processing";
             this.processingButton.UseVisualStyleBackColor = true;
             this.processingButton.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // productionCheckBox
+            // 
+            this.productionCheckBox.AutoSize = true;
+            this.productionCheckBox.Location = new System.Drawing.Point(146, 75);
+            this.productionCheckBox.Name = "productionCheckBox";
+            this.productionCheckBox.Size = new System.Drawing.Size(123, 17);
+            this.productionCheckBox.TabIndex = 10;
+            this.productionCheckBox.Text = "productionExecution";
+            this.productionCheckBox.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel4
             // 
@@ -1451,11 +1500,11 @@
             this.tableLayoutPanel4.Controls.Add(this.sourceModMPicture, 0, 0);
             this.tableLayoutPanel4.Controls.Add(this.outModMPicture, 1, 0);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(173, 495);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(176, 519);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 1;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(164, 155);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(167, 166);
             this.tableLayoutPanel4.TabIndex = 23;
             // 
             // sourceModMPicture
@@ -1463,7 +1512,7 @@
             this.sourceModMPicture.Dock = System.Windows.Forms.DockStyle.Fill;
             this.sourceModMPicture.Location = new System.Drawing.Point(3, 3);
             this.sourceModMPicture.Name = "sourceModMPicture";
-            this.sourceModMPicture.Size = new System.Drawing.Size(76, 149);
+            this.sourceModMPicture.Size = new System.Drawing.Size(77, 160);
             this.sourceModMPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.sourceModMPicture.TabIndex = 0;
             this.sourceModMPicture.TabStop = false;
@@ -1472,9 +1521,9 @@
             // outModMPicture
             // 
             this.outModMPicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.outModMPicture.Location = new System.Drawing.Point(85, 3);
+            this.outModMPicture.Location = new System.Drawing.Point(86, 3);
             this.outModMPicture.Name = "outModMPicture";
-            this.outModMPicture.Size = new System.Drawing.Size(76, 149);
+            this.outModMPicture.Size = new System.Drawing.Size(78, 160);
             this.outModMPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.outModMPicture.TabIndex = 1;
             this.outModMPicture.TabStop = false;
@@ -1488,11 +1537,11 @@
             this.tableLayoutPanel5.Controls.Add(this.sourceModAPicture, 0, 0);
             this.tableLayoutPanel5.Controls.Add(this.outModAPicture, 1, 0);
             this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel5.Location = new System.Drawing.Point(343, 495);
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(349, 519);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             this.tableLayoutPanel5.RowCount = 1;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(164, 155);
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(167, 166);
             this.tableLayoutPanel5.TabIndex = 24;
             // 
             // sourceModAPicture
@@ -1500,18 +1549,18 @@
             this.sourceModAPicture.Dock = System.Windows.Forms.DockStyle.Fill;
             this.sourceModAPicture.Location = new System.Drawing.Point(3, 3);
             this.sourceModAPicture.Name = "sourceModAPicture";
-            this.sourceModAPicture.Size = new System.Drawing.Size(76, 149);
+            this.sourceModAPicture.Size = new System.Drawing.Size(77, 160);
             this.sourceModAPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.sourceModAPicture.TabIndex = 0;
             this.sourceModAPicture.TabStop = false;
-            this.sourceModAPicture.Click += new System.EventHandler(this.pictureBox_Click);
+            this.sourceModAPicture.DoubleClick += new System.EventHandler(this.pictureBox_Saving);
             // 
             // outModAPicture
             // 
             this.outModAPicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.outModAPicture.Location = new System.Drawing.Point(85, 3);
+            this.outModAPicture.Location = new System.Drawing.Point(86, 3);
             this.outModAPicture.Name = "outModAPicture";
-            this.outModAPicture.Size = new System.Drawing.Size(76, 149);
+            this.outModAPicture.Size = new System.Drawing.Size(78, 160);
             this.outModAPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.outModAPicture.TabIndex = 1;
             this.outModAPicture.TabStop = false;
@@ -1520,9 +1569,9 @@
             // cropPicture
             // 
             this.cropPicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cropPicture.Location = new System.Drawing.Point(343, 334);
+            this.cropPicture.Location = new System.Drawing.Point(349, 346);
             this.cropPicture.Name = "cropPicture";
-            this.cropPicture.Size = new System.Drawing.Size(164, 155);
+            this.cropPicture.Size = new System.Drawing.Size(167, 167);
             this.cropPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.cropPicture.TabIndex = 26;
             this.cropPicture.TabStop = false;
@@ -1531,19 +1580,23 @@
             // productionPicture
             // 
             this.productionPicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.productionPicture.Location = new System.Drawing.Point(513, 495);
+            this.productionPicture.Location = new System.Drawing.Point(522, 519);
             this.productionPicture.Name = "productionPicture";
-            this.productionPicture.Size = new System.Drawing.Size(164, 155);
+            this.productionPicture.Size = new System.Drawing.Size(167, 166);
             this.productionPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.productionPicture.TabIndex = 27;
             this.productionPicture.TabStop = false;
             this.productionPicture.Click += new System.EventHandler(this.pictureBox_Click);
             // 
+            // saveFileDialog
+            // 
+            this.saveFileDialog.RestoreDirectory = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1164, 677);
+            this.ClientSize = new System.Drawing.Size(1173, 712);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.leftToolStrip);
             this.Controls.Add(this.menuStrip);
@@ -1575,10 +1628,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.upDownCropStep)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownLimitUsBrightness)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownRelativeEstimationLimit)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownBrightLinesLimit)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownUsDeviationStreak)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownBrightPixelLimit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.kuwaharaPicture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sourcePicture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.elastoPicture)).EndInit();
@@ -1695,13 +1749,13 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.NumericUpDown upDownRansacIterations;
         private System.Windows.Forms.NumericUpDown upDownRansacOutliers;
-        private System.Windows.Forms.NumericUpDown numericUpDown4;
+        private System.Windows.Forms.NumericUpDown upDownUsDeviationStreak;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
+        private System.Windows.Forms.NumericUpDown upDownBrightPixelLimit;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.NumericUpDown numericUpDown5;
+        private System.Windows.Forms.NumericUpDown upDownBrightLinesLimit;
         private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.NumericUpDown numericUpDown6;
+        private System.Windows.Forms.NumericUpDown upDownRelativeEstimationLimit;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
         private System.Windows.Forms.Panel panel1;
@@ -1729,6 +1783,10 @@
         private System.Windows.Forms.Button processingButton;
         private System.Windows.Forms.PictureBox cropPicture;
         private System.Windows.Forms.PictureBox productionPicture;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
+        private System.Windows.Forms.NumericUpDown upDownLimitUsBrightness;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.CheckBox productionCheckBox;
     }
 }
 

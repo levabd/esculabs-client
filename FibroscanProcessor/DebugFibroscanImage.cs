@@ -248,7 +248,7 @@ namespace FibroscanProcessor
             return _workingElasto.Image.Bitmap;
         }
 
-        public Image Step7CropObjects(ref long timer, int step, int distance)
+        public Image Step7CropObjects(int step, int distance)
         {
             if (!_debugMode)
                 throw new AccessViolationException("Can`t use this method in production mode");
@@ -281,13 +281,13 @@ namespace FibroscanProcessor
 
             Stopwatch watch = Stopwatch.StartNew();
 
-            _workingBlob.Approximate(TopIndention, sampleShare, outliersShare, iterations);
+            _workingBlob.Approximate(ElastogramTopIndention, sampleShare, outliersShare, iterations);
 
-            IntPoint p1 = new IntPoint(_workingBlob.LeftApproximation.GetX(0), 0);
+            IntPoint p1 = new IntPoint(_workingBlob.LeftApproximation.GetX(ElastogramTopIndention), ElastogramTopIndention);
             IntPoint p2 = new IntPoint(_workingBlob.LeftApproximation.GetX(_workingElasto.Image.Cols - 1), _workingElasto.Image.Cols - 1);
             _workingElasto.Image.DrawGrayLine(p1, p2, 128);
 
-            p1 = new IntPoint(_workingBlob.RightApproximation.GetX(0), 0);
+            p1 = new IntPoint(_workingBlob.RightApproximation.GetX(ElastogramTopIndention), ElastogramTopIndention);
             p2 = new IntPoint(_workingBlob.RightApproximation.GetX(_workingElasto.Image.Cols - 1), _workingElasto.Image.Cols - 1);
             _workingElasto.Image.DrawGrayLine(p1, p2, 128);
 
@@ -313,71 +313,72 @@ namespace FibroscanProcessor
 
         #region DebugUltrasoundM
 
-        public Image Step11LoadUltrasoundM(ref long timer)
+        public Image Step11LoadUltrasoundM(double deviationThreshold, int deviationStreak)
         {
             if (!_debugMode)
                 throw new AccessViolationException("Can`t use this method in production mode");
-            Stopwatch watch = Stopwatch.StartNew();
 
-            _workingUltrasoundModM = LoadGrayUltrasoundModM();
-
-            watch.Stop();
-            timer = watch.ElapsedMilliseconds;
+            _workingUltrasoundModM = LoadGrayUltrasoundModM(deviationThreshold, deviationStreak);
 
             return _workingUltrasoundModM.Image.Bitmap;
         }
 
-        public Image Step12DrawBadLines(ref long timer, ref VerificationStatus result)
+        public Image Step12DrawBadLines(ref VerificationStatus result, int badLinesLimit)
         {
             if (!_debugMode)
                 throw new AccessViolationException("Can`t use this method in production mode");
-            Stopwatch watch = Stopwatch.StartNew();
             List<int> badLines = _workingUltrasoundModM.DeviationStreakLines;
             SimpleGrayImage rez = new SimpleGrayImage(_workingUltrasoundModM.Image.Data);
             badLines.ForEach(line => rez.DrawHorisontalGrayLine(0, _workingUltrasoundModM.Image.Cols - 1, line, 0));
 
-            watch.Stop();
-            timer = watch.ElapsedMilliseconds;
-
-            _ultrasoundModeMStatus = badLines.Count < 15 ? VerificationStatus.Correct : VerificationStatus.Incorrect;
+            _ultrasoundModeMStatus = badLines.Count < badLinesLimit ? VerificationStatus.Correct : VerificationStatus.Incorrect;
             result = _ultrasoundModeMStatus;
 
             return rez.Bitmap;
         }
 
-        public Image Step13LoadUltrasoundA(ref long timer)
+        public Image Step13LoadUltrasoundA()
         {
             if (!_debugMode)
                 throw new AccessViolationException("Can`t use this method in production mode");
-            Stopwatch watch = Stopwatch.StartNew();
 
             _workingUltrasoundModA = LoadGrayUltrasoundModA();
-            watch.Stop();
-            timer = watch.ElapsedMilliseconds;
 
             return _workingUltrasoundModA.Image.Bitmap;
         }
 
-        public Image Step14DrawUltraSoundApproximation(ref long timer, ref VerificationStatus result)
+        public Image Step14DrawUltraSoundApproximation(ref VerificationStatus result, int relativeEstimationLimit)
         {
             if (!_debugMode)
                 throw new AccessViolationException("Can`t use this method in production mode");
-            Stopwatch watch = Stopwatch.StartNew();
 
             ReflectionedLine drawingLine = _workingUltrasoundModA.ApproxLine;
             SimpleGrayImage approxImage = new SimpleGrayImage(_workingUltrasoundModA.Image.Data);
 
-            IntPoint startPoint = new IntPoint(drawingLine.GetX(0), 0);
-            IntPoint endPoint = new IntPoint(drawingLine.GetX(_workingUltrasoundModA.Image.Rows), _workingUltrasoundModA.Image.Rows);
+            IntPoint startPoint = new IntPoint(drawingLine.GetX(ModATopIndention), ModATopIndention);
+            IntPoint endPoint = new IntPoint(drawingLine.GetX(_workingUltrasoundModA.Image.Rows - ModABottomIndention),
+                                                              _workingUltrasoundModA.Image.Rows - ModABottomIndention);
             approxImage.DrawGrayLine(startPoint, endPoint, 128);
 
-            watch.Stop();
-            timer = watch.ElapsedMilliseconds;
-
-            _ultrasoundModeAStatus = _workingUltrasoundModA.RelativeEstimation > MinUltrasoundModARelativeEstimation ? VerificationStatus.Correct : VerificationStatus.Incorrect;
+            _ultrasoundModeAStatus = _workingUltrasoundModA.RelativeEstimation > relativeEstimationLimit ? VerificationStatus.Correct : VerificationStatus.Incorrect;
             result = _ultrasoundModeAStatus;
 
             return approxImage.Bitmap;
+        }
+
+        public Image Step15DrawBrightLines(ref VerificationStatus result, int threshold, int brightPixelLimit, int brightLinesLimit)
+        {
+            if (!_debugMode)
+                throw new AccessViolationException("Can`t use this method in production mode");
+
+            List<int> briteLines = _workingUltrasoundModM.getBrightLines(threshold, brightPixelLimit);
+            SimpleGrayImage rez = new SimpleGrayImage(_workingUltrasoundModM.Image.Data);
+            briteLines.ForEach(line => rez.DrawHorisontalGrayLine(0, _workingUltrasoundModM.Image.Cols - 1, line, 0));
+
+            _ultrasoundModeMStatus = briteLines.Count < brightLinesLimit ? VerificationStatus.Correct : VerificationStatus.Incorrect;
+            result = _ultrasoundModeMStatus;
+
+            return rez.Bitmap;
         }
         #endregion
     }
