@@ -1,4 +1,4 @@
-﻿namespace ImageLoader
+﻿namespace BalderViewer
 {
     partial class BigImage
     {

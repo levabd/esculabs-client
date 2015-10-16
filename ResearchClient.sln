@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FibroscanProcessor", "Fibro
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eklekto", "Eklekto\Eklekto.csproj", "{EAB1EB1A-E757-4F23-9BEE-FB145A1F7792}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageLoader", "ImageLoader\ImageLoader.csproj", "{9D0E0A8C-1F93-4771-A1DC-5108915890A2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BalderViewer", "BalderViewer\BalderViewer.csproj", "{9D0E0A8C-1F93-4771-A1DC-5108915890A2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

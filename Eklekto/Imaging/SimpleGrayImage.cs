@@ -210,6 +210,7 @@ namespace Eklekto.Imaging
 
         #endregion
 
+        #region line drawing
         /// <summary>
         /// Draw line with width 2
         /// </summary>
@@ -285,6 +286,6 @@ namespace Eklekto.Imaging
             for (int y = startY; y <= endY; y++)
                 Data[y, x] = brightness;
         }
-
+        #endregion
     }
 }
