@@ -135,6 +135,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Helpers\AuthorizationArgs.cs" />
+    <Compile Include="Helpers\MessageDialogConfiguration.cs" />
     <Compile Include="Helpers\GenderConverter.cs" />
     <Compile Include="BDatePicker.cs" />
     <Compile Include="ExaminesWindow.xaml.cs">
@@ -150,12 +152,24 @@
     <Compile Include="MeasurePreview.xaml.cs">
       <DependentUpon>MeasurePreview.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201510051838254_CreatePatientsTable.cs" />
-    <Compile Include="Migrations\201510051838254_CreatePatientsTable.Designer.cs">
-      <DependentUpon>201510051838254_CreatePatientsTable.cs</DependentUpon>
+    <Compile Include="Migrations\201510161608545_CreatePatientsAndPhysiciansTables.cs" />
+    <Compile Include="Migrations\201510161608545_CreatePatientsAndPhysiciansTables.Designer.cs">
+      <DependentUpon>201510161608545_CreatePatientsAndPhysiciansTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510161625243_AddRoleColumnToPhysiciansTable.cs" />
+    <Compile Include="Migrations\201510161625243_AddRoleColumnToPhysiciansTable.Designer.cs">
+      <DependentUpon>201510161625243_AddRoleColumnToPhysiciansTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Patient.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Physician.cs" />
+    <Compile Include="Repositories\PhysiciansRepository.cs" />
+    <Compile Include="Views\Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\PatientsListWindow.xaml.cs">
       <DependentUpon>PatientsListWindow.xaml</DependentUpon>
     </Compile>
@@ -172,6 +186,9 @@
     <Compile Include="Repo\PatientsRepo.cs" />
     <Compile Include="StatusBackgroundConverter.cs" />
     <Compile Include="StatusTextConverter.cs" />
+    <Compile Include="Views\PatientsList.xaml.cs">
+      <DependentUpon>PatientsList.xaml</DependentUpon>
+    </Compile>
     <Page Include="ExaminesWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -184,9 +201,21 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Login.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\PatientsListWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Icons.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="ViewImageWindow.xaml">
       <SubType>Designer</SubType>
@@ -213,10 +242,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\PatientsList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\Patient.cs" />
-    <Compile Include="Context\PatientsContext.cs" />
+    <Compile Include="Context\BalderContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -230,8 +263,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Migrations\201510051838254_CreatePatientsTable.resx">
-      <DependentUpon>201510051838254_CreatePatientsTable.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201510161608545_CreatePatientsAndPhysiciansTables.resx">
+      <DependentUpon>201510161608545_CreatePatientsAndPhysiciansTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510161625243_AddRoleColumnToPhysiciansTable.resx">
+      <DependentUpon>201510161625243_AddRoleColumnToPhysiciansTable.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -243,6 +279,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <Resource Include="Resources\Entypo.ttf" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -264,6 +301,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="app.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\WindowsIcons-license.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Entypo-license.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

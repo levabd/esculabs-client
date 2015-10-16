@@ -1,16 +1,17 @@
-namespace Client
+namespace Client.Context
 {
     using Models;
     using System.Data.Entity;
 
-    public partial class PatientsContext : DbContext
+    public partial class BalderContext : DbContext
     {
-        public PatientsContext()
+        public BalderContext()
             : base("name=IgnisConnectionString")
         {
         }
 
         public DbSet<Patient> Patients { get; set; }
+        public DbSet<Physician> Physicians { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

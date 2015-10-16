@@ -8,6 +8,7 @@ namespace Client.Repositories
     using Models;
     using Common.Logging;
     using System.Data.Entity;
+    using Context;
 
     class PatientsRepository
     {
@@ -15,7 +16,7 @@ namespace Client.Repositories
         private static object                       _syncRoot = new object();
 
         private ILog                                _log;
-        private PatientsContext                     _context = null;
+        private BalderContext                     _context = null;
 
         public static PatientsRepository Instance
         {
@@ -40,9 +41,9 @@ namespace Client.Repositories
 
             if (_context == null)
             {
-                Database.SetInitializer(new CreateDatabaseIfNotExists<PatientsContext>());
+                Database.SetInitializer(new CreateDatabaseIfNotExists<BalderContext>());
 
-               _context = new PatientsContext();
+               _context = new BalderContext();
             }
         }
 

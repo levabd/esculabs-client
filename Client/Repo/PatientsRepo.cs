@@ -9,6 +9,7 @@ namespace Client.Repo
     using Models;
     using MongoRepository;
     using Common.Logging;
+    using Context;
 
     class PatientsRepo : IRepository
     {
@@ -16,7 +17,7 @@ namespace Client.Repo
         private static object syncRoot = new Object();
 
         private ILog log;
-        private PatientsContext context = null;
+        private BalderContext context = null;
 
         public static PatientsRepo Instance
         {
@@ -41,7 +42,7 @@ namespace Client.Repo
 
             if (context == null)
             {
-                context = new PatientsContext();
+                context = new BalderContext();
             }
         }
 

@@ -2,25 +2,32 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:Behaviours="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
         xmlns:local="clr-namespace:Client.Pages"
         xmlns:h="clr-namespace:Client.Helpers"
         mc:Ignorable="d"
-        Title="Список пациентов" Height="768" Width="1024" MinWidth="1024" MinHeight="768"
-        ShowIconOnTitleBar="True"
-        GlowBrush="{DynamicResource AccentColorBrush}"                      
-        WindowStartupLocation="CenterScreen" Loaded="MetroWindow_Loaded">
-    <Controls:MetroWindow.RightWindowCommands>
-        <Controls:WindowCommands>
-            <Button Content="Выйти из учётной записи" />
-        </Controls:WindowCommands>
-    </Controls:MetroWindow.RightWindowCommands>
+        Height="768" Width="1024" 
+        MinWidth="1024" 
+        MinHeight="768"
+        Loaded="MetroWindow_Loaded" 
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        ShowTitleBar="False" 
+        TitlebarHeight="0">
+
+    <i:Interaction.Behaviors>
+        <Behaviours:BorderlessWindowBehavior />
+    </i:Interaction.Behaviors>
+
     <Window.Resources>
         <h:GenderConverter x:Key="GenderConverter"/>
     </Window.Resources>
+
     <Grid>
-        <DataGrid x:Name="patientsGrid" Margin="0,100,0,0" AutoGenerateColumns="False" BorderBrush="LightGray" BorderThickness="1" CanUserAddRows="False" GridLinesVisibility="Horizontal">
+        <DataGrid AlternationCount="2" x:Name="patientsGrid" Margin="0,180,0,0" AutoGenerateColumns="False" BorderBrush="LightGray" BorderThickness="1" CanUserAddRows="False" GridLinesVisibility="Horizontal" RowHeight="160" SelectionMode="Single">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Id}" FontWeight="Bold" Header="#" Width="80"/>
                 <DataGridTextColumn Binding="{Binding Iin}" Header="ИИН" Width="120"/>
@@ -40,11 +47,18 @@
                 <BindingGroup/>
             </DataGrid.BindingGroup>
         </DataGrid>
-        <Button x:Name="logoutBtn" Style="{DynamicResource SquareButtonStyle}" Content="Выйти" HorizontalAlignment="Right" Margin="0,25,10,0" VerticalAlignment="Top" Width="140" Height="49" FontFamily="Segoe UI" FontSize="12" FontWeight="Bold" Click="logoutBtn_Click"/>
-        <Button x:Name="syncBtn" Style="{DynamicResource SquareButtonStyle}" Content="Синхронизировать" HorizontalAlignment="Right" Margin="0,25,172,0" VerticalAlignment="Top" Width="164" Height="49" FontFamily="Segoe UI" FontSize="12" FontWeight="Bold"/>
-        <Button x:Name="addPatientBtn" Style="{DynamicResource AccentedSquareButtonStyle}" Content="Добавить пациента" HorizontalAlignment="Right" Margin="0,25,341,0" VerticalAlignment="Top" Width="161" Height="49" FontFamily="Segoe UI" FontSize="12" FontWeight="Bold"/>
-        <TextBox x:Name="nameFilterTextBox" Controls:TextBoxHelper.Watermark="Поиск по ФИО..." Controls:TextBoxHelper.ClearTextButton="True" HorizontalAlignment="Left" Height="23" Margin="21,19,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="441" RenderTransformOrigin="0,0.192" TextChanged="filterTextBox_TextChanged"/>
-        <TextBox x:Name="iinFilterTextBox" Controls:TextBoxHelper.Watermark="Поиск по ИИН..." Controls:TextBoxHelper.ClearTextButton="True" HorizontalAlignment="Left" Height="23" Margin="21,57,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="441" RenderTransformOrigin="0,0.192" TextChanged="filterTextBox_TextChanged"/>
+        <Button x:Name="logoutBtn" Style="{DynamicResource SquareButtonStyle}" Content="Выйти" HorizontalAlignment="Right" Margin="0,84,10,0" VerticalAlignment="Top" Width="159" Height="81" FontFamily="Segoe UI" FontSize="16" FontWeight="Bold" Click="logoutBtn_Click"/>
+        <Button x:Name="addPatientBtn" Style="{DynamicResource MetroCircleButtonStyle}" HorizontalAlignment="Right" Margin="0,0,60,60" VerticalAlignment="Bottom" Width="100" Height="100" Background="{DynamicResource HighlightBrush}" BorderBrush="{x:Null}" Cursor="Hand">
+            <Button.Content>
+                <Rectangle Fill="White" Width="30" Height="30">
+                    <Rectangle.OpacityMask>
+                        <VisualBrush Visual="{StaticResource appbar_add}" Stretch="Fill" />
+                    </Rectangle.OpacityMask>
+                </Rectangle>
+            </Button.Content>
+        </Button>
+        <TextBox x:Name="nameFilterTextBox" Controls:TextBoxHelper.Watermark="Поиск по ФИО..." Controls:TextBoxHelper.ClearTextButton="True" Height="34" Margin="20,84,200,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0,0.192" TextChanged="filterTextBox_TextChanged" FontSize="16"/>
+        <TextBox x:Name="iinFilterTextBox" Controls:TextBoxHelper.Watermark="Поиск по ИИН..." Controls:TextBoxHelper.ClearTextButton="True" Height="34" Margin="20,131,200,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0,0.192" TextChanged="filterTextBox_TextChanged" FontSize="16"/>
 
     </Grid>
 </Controls:MetroWindow>

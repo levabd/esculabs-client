@@ -10,46 +10,24 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Client.Pages
+namespace Client.Views
 {
     using Models;
     using Repositories;
-    using MahApps.Metro.Controls;
 
     /// <summary>
-    /// Interaction logic for PatientsListWindow.xaml
+    /// Interaction logic for PatientsList.xaml
     /// </summary>
-    public partial class PatientsListWindow : MetroWindow
+    public partial class PatientsList : UserControl
     {
         private List<Patient> _patients = null;
-       
-        public PatientsListWindow()
+
+        public PatientsList()
         {
             InitializeComponent();
-        }
-
-        private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
-        {
-            Height = SystemParameters.PrimaryScreenHeight;
-            Width = SystemParameters.PrimaryScreenWidth;
-            Left = 0;
-            Top = 0;
-
-            _patients = PatientsRepository.Instance.All();
-
-            if (_patients == null || !_patients.Any())
-            {
-                return;
-            }
-
-            patientsGrid.ItemsSource = _patients;
-        }
-
-        private void logoutBtn_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
         }
 
         private void filterTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -62,7 +40,7 @@ namespace Client.Pages
             IEnumerable<Patient> filteredList = _patients;
 
             nameFilter = nameFilter.ToLower();
-            
+
             if (!string.IsNullOrWhiteSpace(nameFilter))
             {
                 filteredList = filteredList.Where(x => x.FullNameString.ToLower().Contains(nameFilter));
@@ -74,6 +52,18 @@ namespace Client.Pages
             }
 
             patientsGrid.ItemsSource = filteredList;
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            _patients = PatientsRepository.Instance.All();
+
+            if (_patients == null || !_patients.Any())
+            {
+                return;
+            }
+
+            patientsGrid.ItemsSource = _patients;
         }
     }
 }

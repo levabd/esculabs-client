@@ -1,0 +1,73 @@
+﻿<Controls:MetroWindow x:Class="Client.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:local="clr-namespace:Client"
+        xmlns:v="clr-namespace:Client.Views"
+        mc:Ignorable="d"
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        ShowTitleBar="False" 
+        TitlebarHeight="0"
+        Title="MainWindow" 
+        Width="1024" 
+        Height="768" 
+        IsCloseButtonEnabled="False" 
+        IsMaxRestoreButtonEnabled="False" 
+        IsWindowDraggable="False" 
+        IsMinButtonEnabled="False" 
+        WindowStartupLocation="CenterScreen" 
+        Loaded="MetroWindow_Loaded"
+        >
+    <Window.Resources>
+        <local:TemplateSelector x:Key="templateSelector" />
+        <DataTemplate x:Key="BackButtonIcon">
+            <Rectangle Fill="{DynamicResource HighlightBrush}" Width="50" Height="50">
+                <Rectangle.OpacityMask>
+                    <VisualBrush Visual="{StaticResource appbar_arrow_left}" Stretch="Fill" />
+                </Rectangle.OpacityMask>
+            </Rectangle>
+        </DataTemplate>
+        <DataTemplate x:Key="CloseButtonIcon">
+            <Rectangle Fill="{DynamicResource HighlightBrush}" Width="50" Height="50">
+                <Rectangle.OpacityMask>
+                    <VisualBrush Visual="{StaticResource appbar_power}" Stretch="Fill" />
+                </Rectangle.OpacityMask>
+            </Rectangle>
+        </DataTemplate>
+        <DataTemplate x:Key="LogoutButtonIcon">
+            <Rectangle Fill="{DynamicResource HighlightBrush}" Width="50" Height="50">
+                <Rectangle.OpacityMask>
+                    <VisualBrush Visual="{StaticResource appbar_people_left}" Stretch="Fill" />
+                </Rectangle.OpacityMask>
+            </Rectangle>
+        </DataTemplate>
+    </Window.Resources>
+    
+    <Controls:MetroWindow.Flyouts>
+        <Controls:FlyoutsControl/>
+    </Controls:MetroWindow.Flyouts>
+    <Grid>
+        <Controls:MetroAnimatedSingleRowTabControl x:Name="stepsTabControl" Margin="10,20,10,10" SelectionChanged="stepsTabControl_SelectionChanged">
+            <TabControl.Resources>
+                <Style TargetType="{x:Type TabPanel}">
+                    <Setter Property="Margin" Value="120,0,0,0"></Setter>
+                </Style>
+            </TabControl.Resources>
+            <TabItem Header="Вход" Name="loginTabItem">
+                <v:Login DataContext="{Binding}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,200" x:Name="loginView"/>
+            </TabItem>
+            <TabItem Header="Список пациентов" IsEnabled="False" Name="patientsListTabItem">
+                <v:PatientsList DataContext="{Binding}" Margin="10,55,10,10" Width="Auto" Height="Auto" />
+            </TabItem>
+            <TabItem Header="Выбор модуля" IsEnabled="False" Name="modulesListTabItem">
+                <v:PatientsList DataContext="{Binding}" Margin="10,55,10,10" Width="Auto" Height="Auto" />
+            </TabItem>            
+        </Controls:MetroAnimatedSingleRowTabControl>
+        <Button x:Name="backBtn" Style="{DynamicResource MetroCircleButtonStyle}" HorizontalAlignment="Left" Margin="20,20,0,0"  Width="100" Height="100" Background="White" BorderBrush="{DynamicResource HighlightBrush}" VerticalAlignment="Top" Click="backBtn_Click">
+            <ContentPresenter x:Name="presenter" ContentTemplateSelector="{StaticResource templateSelector}" />
+        </Button>
+    </Grid>
+</Controls:MetroWindow>
