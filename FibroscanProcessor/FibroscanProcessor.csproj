@@ -39,10 +39,13 @@
     <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Elasto\ElastogramClassification.cs" />
+    <Compile Include="Elasto\LearningInfo.cs" />
+    <Compile Include="Elasto\ElastogramSignatura.cs" />
+    <Compile Include="Elasto\SimpleElastoClassificator.cs" />
     <Compile Include="Elasto\ElastoBlob.cs" />
     <Compile Include="Elasto\Elastogram.cs" />
     <Compile Include="DebugFibroscanImage.cs" />
+    <Compile Include="Elasto\LearningElastoClassificator.cs" />
     <Compile Include="FibroscanImage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">

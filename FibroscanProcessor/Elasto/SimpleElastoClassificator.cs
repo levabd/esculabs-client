@@ -3,7 +3,7 @@ using Eklekto.Geometry;
 
 namespace FibroscanProcessor.Elasto
 {
-    public class ElastogramClassification
+    public class SimpleElastoClassificator
     {
         const double RMax = 0.9;
         const double AMax = 0.92;
@@ -13,21 +13,17 @@ namespace FibroscanProcessor.Elasto
         const double WeakAngleDif = 12;
         const double AngleLimit = 12.5;
 
-        public ElastoBlob TargetObject;
-        public Segment FibroLine;
 
         public VerificationStatus Classiffy(ElastoBlob targetObject, Segment fibroLine)
         {
-            TargetObject = targetObject;
-            FibroLine = fibroLine;
-            if (CheckForNull()) return VerificationStatus.NotCalculated;
-            int area = TargetObject.Blob.Area;
-            ReflectionedLine leftLine = TargetObject.LeftApproximation;
-            ReflectionedLine rightLine = TargetObject.RightApproximation;
-            double rSquareLeft = TargetObject.RSquareLeft;
-            double rSquareRight = TargetObject.RSquareRight;
-            double aLeft = TargetObject.RelativeEstimationLeft;
-            double aRight = TargetObject.RelativeEstimationRight;
+            if (CheckForNull(targetObject,fibroLine)) return VerificationStatus.NotCalculated;
+            int area = targetObject.Blob.Area;
+            ReflectionedLine leftLine = targetObject.LeftApproximation;
+            ReflectionedLine rightLine = targetObject.RightApproximation;
+            double rSquareLeft = targetObject.RSquareLeft;
+            double rSquareRight = targetObject.RSquareRight;
+            double aLeft = targetObject.RelativeEstimationLeft;
+            double aRight = targetObject.RelativeEstimationRight;
 
 
             if (area < 4000)
@@ -145,33 +141,33 @@ namespace FibroscanProcessor.Elasto
             return false;
         }
 
-        private bool CheckForNull()
+        private bool CheckForNull(ElastoBlob targetObject, Segment fibroLine)
         {
-            if (TargetObject.Blob.Area == 0)
+            if (targetObject.Blob.Area == 0)
                 return true;
 
-            if (TargetObject.LeftApproximation == null)
+            if (targetObject.LeftApproximation == null)
                 return true;
 
-            if (TargetObject.RightApproximation == null)
+            if (targetObject.RightApproximation == null)
                 return true;
 
-            if (FibroLine == null)
+            if (fibroLine == null)
                 return true;
 
-            if (Math.Abs(TargetObject.RSquareLeft) < Double.Epsilon)
+            if (Math.Abs(targetObject.RSquareLeft) < Double.Epsilon)
                 return true;
 
-            if (Math.Abs(TargetObject.RSquareLeft) < Double.Epsilon)
+            if (Math.Abs(targetObject.RSquareLeft) < Double.Epsilon)
                 return true;
 
-            if (Math.Abs(TargetObject.RSquareRight) < Double.Epsilon)
+            if (Math.Abs(targetObject.RSquareRight) < Double.Epsilon)
                 return true;
 
-            if (Math.Abs(TargetObject.RelativeEstimationRight) < Double.Epsilon)
+            if (Math.Abs(targetObject.RelativeEstimationRight) < Double.Epsilon)
                 return true;
 
-            if (Math.Abs(TargetObject.RelativeEstimationLeft) < Double.Epsilon)
+            if (Math.Abs(targetObject.RelativeEstimationLeft) < Double.Epsilon)
                 return true;
             return false;
         }

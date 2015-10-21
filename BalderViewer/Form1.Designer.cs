@@ -341,7 +341,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(245, 69);
+            this.groupBox1.Size = new System.Drawing.Size(247, 69);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Elastogram settings";
@@ -425,7 +425,7 @@
             this.groupBox5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox5.Location = new System.Drawing.Point(3, 78);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(245, 214);
+            this.groupBox5.Size = new System.Drawing.Size(247, 214);
             this.groupBox5.TabIndex = 8;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Binarizations";
@@ -624,7 +624,7 @@
             this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox4.Location = new System.Drawing.Point(3, 458);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(245, 74);
+            this.groupBox4.Size = new System.Drawing.Size(247, 74);
             this.groupBox4.TabIndex = 7;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Ransac";
@@ -743,7 +743,7 @@
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox3.Location = new System.Drawing.Point(3, 408);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(245, 44);
+            this.groupBox3.Size = new System.Drawing.Size(247, 44);
             this.groupBox3.TabIndex = 9;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Crop";
@@ -808,7 +808,7 @@
             this.groupBox2.Location = new System.Drawing.Point(3, 538);
             this.groupBox2.Name = "groupBox2";
             this.tableLayoutPanel2.SetRowSpan(this.groupBox2, 2);
-            this.groupBox2.Size = new System.Drawing.Size(245, 141);
+            this.groupBox2.Size = new System.Drawing.Size(247, 141);
             this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Ultrasound Settings";
@@ -936,9 +936,9 @@
             // kuwaharaPicture
             // 
             this.kuwaharaPicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.kuwaharaPicture.Location = new System.Drawing.Point(334, 208);
+            this.kuwaharaPicture.Location = new System.Drawing.Point(333, 208);
             this.kuwaharaPicture.Name = "kuwaharaPicture";
-            this.kuwaharaPicture.Size = new System.Drawing.Size(162, 115);
+            this.kuwaharaPicture.Size = new System.Drawing.Size(161, 115);
             this.kuwaharaPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.kuwaharaPicture.TabIndex = 5;
             this.kuwaharaPicture.TabStop = false;
@@ -960,7 +960,7 @@
             this.elastoPicture.Dock = System.Windows.Forms.DockStyle.Fill;
             this.elastoPicture.Location = new System.Drawing.Point(169, 208);
             this.elastoPicture.Name = "elastoPicture";
-            this.elastoPicture.Size = new System.Drawing.Size(159, 115);
+            this.elastoPicture.Size = new System.Drawing.Size(158, 115);
             this.elastoPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.elastoPicture.TabIndex = 4;
             this.elastoPicture.TabStop = false;
@@ -974,7 +974,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.19913F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0181F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 205F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 255F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 257F));
             this.tableLayoutPanel1.Controls.Add(this.label32, 2, 5);
             this.tableLayoutPanel1.Controls.Add(this.label31, 1, 5);
             this.tableLayoutPanel1.Controls.Add(this.label30, 0, 5);
@@ -1033,9 +1033,9 @@
             // 
             this.label32.AutoSize = true;
             this.label32.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label32.Location = new System.Drawing.Point(334, 467);
+            this.label32.Location = new System.Drawing.Point(333, 467);
             this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(162, 20);
+            this.label32.Size = new System.Drawing.Size(161, 20);
             this.label32.TabIndex = 38;
             this.label32.Text = "Mod A";
             this.label32.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1047,7 +1047,7 @@
             this.label31.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label31.Location = new System.Drawing.Point(169, 467);
             this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(159, 20);
+            this.label31.Size = new System.Drawing.Size(158, 20);
             this.label31.TabIndex = 37;
             this.label31.Text = "Mod M";
             this.label31.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1069,7 +1069,7 @@
             // 
             this.label29.AutoSize = true;
             this.label29.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label29.Location = new System.Drawing.Point(502, 326);
+            this.label29.Location = new System.Drawing.Point(500, 326);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(160, 20);
             this.label29.TabIndex = 35;
@@ -1081,9 +1081,9 @@
             // 
             this.label28.AutoSize = true;
             this.label28.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label28.Location = new System.Drawing.Point(334, 326);
+            this.label28.Location = new System.Drawing.Point(333, 326);
             this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(162, 20);
+            this.label28.Size = new System.Drawing.Size(161, 20);
             this.label28.TabIndex = 34;
             this.label28.Text = "Crop";
             this.label28.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1095,7 +1095,7 @@
             this.label27.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label27.Location = new System.Drawing.Point(169, 326);
             this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(159, 20);
+            this.label27.Size = new System.Drawing.Size(158, 20);
             this.label27.TabIndex = 33;
             this.label27.Text = "Morphology";
             this.label27.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1117,7 +1117,7 @@
             // 
             this.label25.AutoSize = true;
             this.label25.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label25.Location = new System.Drawing.Point(502, 185);
+            this.label25.Location = new System.Drawing.Point(500, 185);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(160, 20);
             this.label25.TabIndex = 31;
@@ -1129,9 +1129,9 @@
             // 
             this.label24.AutoSize = true;
             this.label24.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label24.Location = new System.Drawing.Point(334, 185);
+            this.label24.Location = new System.Drawing.Point(333, 185);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(162, 20);
+            this.label24.Size = new System.Drawing.Size(161, 20);
             this.label24.TabIndex = 30;
             this.label24.Text = "Kuwahara";
             this.label24.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1140,7 +1140,7 @@
             // teachButton
             // 
             this.teachButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.teachButton.Location = new System.Drawing.Point(502, 640);
+            this.teachButton.Location = new System.Drawing.Point(500, 640);
             this.teachButton.Name = "teachButton";
             this.teachButton.Size = new System.Drawing.Size(160, 24);
             this.teachButton.TabIndex = 10;
@@ -1155,7 +1155,7 @@
             this.label23.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label23.Location = new System.Drawing.Point(169, 185);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(159, 20);
+            this.label23.Size = new System.Drawing.Size(158, 20);
             this.label23.TabIndex = 29;
             this.label23.Text = "Source Elasto";
             this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1164,7 +1164,7 @@
             // binarizationPicture
             // 
             this.binarizationPicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.binarizationPicture.Location = new System.Drawing.Point(502, 208);
+            this.binarizationPicture.Location = new System.Drawing.Point(500, 208);
             this.binarizationPicture.Name = "binarizationPicture";
             this.binarizationPicture.Size = new System.Drawing.Size(160, 115);
             this.binarizationPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -1188,7 +1188,7 @@
             this.morphologyPicture.Dock = System.Windows.Forms.DockStyle.Fill;
             this.morphologyPicture.Location = new System.Drawing.Point(169, 349);
             this.morphologyPicture.Name = "morphologyPicture";
-            this.morphologyPicture.Size = new System.Drawing.Size(159, 115);
+            this.morphologyPicture.Size = new System.Drawing.Size(158, 115);
             this.morphologyPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.morphologyPicture.TabIndex = 8;
             this.morphologyPicture.TabStop = false;
@@ -1197,7 +1197,7 @@
             // choosingPicture
             // 
             this.choosingPicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.choosingPicture.Location = new System.Drawing.Point(502, 349);
+            this.choosingPicture.Location = new System.Drawing.Point(500, 349);
             this.choosingPicture.Name = "choosingPicture";
             this.choosingPicture.Size = new System.Drawing.Size(160, 115);
             this.choosingPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -1227,7 +1227,7 @@
             this.tableLayoutPanel2.Controls.Add(this.groupBox3, 0, 3);
             this.tableLayoutPanel2.Controls.Add(this.groupBox6, 0, 2);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(873, 3);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(871, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 7;
             this.tableLayoutPanel1.SetRowSpan(this.tableLayoutPanel2, 10);
@@ -1238,7 +1238,7 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(251, 682);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(253, 682);
             this.tableLayoutPanel2.TabIndex = 19;
             // 
             // groupBox6
@@ -1255,7 +1255,7 @@
             this.groupBox6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox6.Location = new System.Drawing.Point(3, 298);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(245, 104);
+            this.groupBox6.Size = new System.Drawing.Size(247, 104);
             this.groupBox6.TabIndex = 10;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "EdgeObjects";
@@ -1393,7 +1393,7 @@
             // 
             this.groupBoxLog2.Controls.Add(this.signatureBox);
             this.groupBoxLog2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBoxLog2.Location = new System.Drawing.Point(668, 188);
+            this.groupBoxLog2.Location = new System.Drawing.Point(666, 188);
             this.groupBoxLog2.Name = "groupBoxLog2";
             this.tableLayoutPanel1.SetRowSpan(this.groupBoxLog2, 4);
             this.groupBoxLog2.Size = new System.Drawing.Size(199, 276);
@@ -1416,7 +1416,7 @@
             // 
             this.groupBoxLog1.Controls.Add(this.resultBox);
             this.groupBoxLog1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBoxLog1.Location = new System.Drawing.Point(668, 3);
+            this.groupBoxLog1.Location = new System.Drawing.Point(666, 3);
             this.groupBoxLog1.Name = "groupBoxLog1";
             this.groupBoxLog1.Size = new System.Drawing.Size(199, 179);
             this.groupBoxLog1.TabIndex = 21;
@@ -1443,7 +1443,7 @@
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 58.17308F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 41.82692F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 140F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 161F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 162F));
             this.tableLayoutPanel3.Controls.Add(this.buttonNextImage, 2, 1);
             this.tableLayoutPanel3.Controls.Add(this.savingStepsCheckBox, 0, 4);
             this.tableLayoutPanel3.Controls.Add(this.imagePath, 0, 0);
@@ -1470,14 +1470,14 @@
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(659, 179);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(657, 179);
             this.tableLayoutPanel3.TabIndex = 22;
             // 
             // buttonNextImage
             // 
             this.buttonNextImage.Dock = System.Windows.Forms.DockStyle.Right;
             this.buttonNextImage.Enabled = false;
-            this.buttonNextImage.Location = new System.Drawing.Point(281, 38);
+            this.buttonNextImage.Location = new System.Drawing.Point(278, 38);
             this.buttonNextImage.Name = "buttonNextImage";
             this.buttonNextImage.Size = new System.Drawing.Size(73, 24);
             this.buttonNextImage.TabIndex = 1;
@@ -1505,7 +1505,7 @@
             this.imagePath.Multiline = true;
             this.imagePath.Name = "imagePath";
             this.imagePath.ReadOnly = true;
-            this.imagePath.Size = new System.Drawing.Size(491, 29);
+            this.imagePath.Size = new System.Drawing.Size(488, 29);
             this.imagePath.TabIndex = 0;
             // 
             // buttonPrevImage
@@ -1550,7 +1550,7 @@
             this.groupBox8.Location = new System.Drawing.Point(161, 128);
             this.groupBox8.Name = "groupBox8";
             this.tableLayoutPanel3.SetRowSpan(this.groupBox8, 2);
-            this.groupBox8.Size = new System.Drawing.Size(193, 48);
+            this.groupBox8.Size = new System.Drawing.Size(190, 48);
             this.groupBox8.TabIndex = 6;
             this.groupBox8.TabStop = false;
             // 
@@ -1588,7 +1588,7 @@
             // folderProcessingButton
             // 
             this.folderProcessingButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.folderProcessingButton.Location = new System.Drawing.Point(360, 98);
+            this.folderProcessingButton.Location = new System.Drawing.Point(357, 98);
             this.folderProcessingButton.Name = "folderProcessingButton";
             this.folderProcessingButton.Size = new System.Drawing.Size(134, 24);
             this.folderProcessingButton.TabIndex = 7;
@@ -1599,7 +1599,7 @@
             // processingButton
             // 
             this.processingButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.processingButton.Location = new System.Drawing.Point(360, 38);
+            this.processingButton.Location = new System.Drawing.Point(357, 38);
             this.processingButton.Name = "processingButton";
             this.processingButton.Size = new System.Drawing.Size(134, 24);
             this.processingButton.TabIndex = 9;
@@ -1626,14 +1626,14 @@
             this.xlsTextBox.Location = new System.Drawing.Point(161, 68);
             this.xlsTextBox.Name = "xlsTextBox";
             this.xlsTextBox.ReadOnly = true;
-            this.xlsTextBox.Size = new System.Drawing.Size(193, 24);
+            this.xlsTextBox.Size = new System.Drawing.Size(190, 24);
             this.xlsTextBox.TabIndex = 13;
             // 
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
             this.checkBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.checkBox1.Location = new System.Drawing.Point(360, 128);
+            this.checkBox1.Location = new System.Drawing.Point(357, 128);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(134, 21);
             this.checkBox1.TabIndex = 14;
@@ -1654,7 +1654,7 @@
             // xlsProcessingButton
             // 
             this.xlsProcessingButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.xlsProcessingButton.Location = new System.Drawing.Point(360, 68);
+            this.xlsProcessingButton.Location = new System.Drawing.Point(357, 68);
             this.xlsProcessingButton.Name = "xlsProcessingButton";
             this.xlsProcessingButton.Size = new System.Drawing.Size(134, 24);
             this.xlsProcessingButton.TabIndex = 15;
@@ -1679,17 +1679,17 @@
             this.precedentsFileBox.Location = new System.Drawing.Point(161, 98);
             this.precedentsFileBox.Name = "precedentsFileBox";
             this.precedentsFileBox.ReadOnly = true;
-            this.precedentsFileBox.Size = new System.Drawing.Size(193, 24);
+            this.precedentsFileBox.Size = new System.Drawing.Size(190, 24);
             this.precedentsFileBox.TabIndex = 17;
             // 
             // groupBox7
             // 
             this.groupBox7.Controls.Add(this.csvInfoBox);
             this.groupBox7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox7.Location = new System.Drawing.Point(500, 3);
+            this.groupBox7.Location = new System.Drawing.Point(497, 3);
             this.groupBox7.Name = "groupBox7";
             this.tableLayoutPanel3.SetRowSpan(this.groupBox7, 6);
-            this.groupBox7.Size = new System.Drawing.Size(156, 173);
+            this.groupBox7.Size = new System.Drawing.Size(157, 173);
             this.groupBox7.TabIndex = 18;
             this.groupBox7.TabStop = false;
             // 
@@ -1700,7 +1700,7 @@
             this.csvInfoBox.ItemHeight = 16;
             this.csvInfoBox.Location = new System.Drawing.Point(3, 18);
             this.csvInfoBox.Name = "csvInfoBox";
-            this.csvInfoBox.Size = new System.Drawing.Size(150, 152);
+            this.csvInfoBox.Size = new System.Drawing.Size(151, 152);
             this.csvInfoBox.TabIndex = 0;
             // 
             // tableLayoutPanel4
@@ -1715,7 +1715,7 @@
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 1;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(159, 114);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(158, 114);
             this.tableLayoutPanel4.TabIndex = 23;
             // 
             // sourceModMPicture
@@ -1734,7 +1734,7 @@
             this.outModMPicture.Dock = System.Windows.Forms.DockStyle.Fill;
             this.outModMPicture.Location = new System.Drawing.Point(82, 3);
             this.outModMPicture.Name = "outModMPicture";
-            this.outModMPicture.Size = new System.Drawing.Size(74, 108);
+            this.outModMPicture.Size = new System.Drawing.Size(73, 108);
             this.outModMPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.outModMPicture.TabIndex = 1;
             this.outModMPicture.TabStop = false;
@@ -1748,11 +1748,11 @@
             this.tableLayoutPanel5.Controls.Add(this.sourceModAPicture, 0, 0);
             this.tableLayoutPanel5.Controls.Add(this.outModAPicture, 1, 0);
             this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel5.Location = new System.Drawing.Point(334, 490);
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(333, 490);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             this.tableLayoutPanel5.RowCount = 1;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(162, 114);
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(161, 114);
             this.tableLayoutPanel5.TabIndex = 24;
             // 
             // sourceModAPicture
@@ -1760,7 +1760,7 @@
             this.sourceModAPicture.Dock = System.Windows.Forms.DockStyle.Fill;
             this.sourceModAPicture.Location = new System.Drawing.Point(3, 3);
             this.sourceModAPicture.Name = "sourceModAPicture";
-            this.sourceModAPicture.Size = new System.Drawing.Size(75, 108);
+            this.sourceModAPicture.Size = new System.Drawing.Size(74, 108);
             this.sourceModAPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.sourceModAPicture.TabIndex = 0;
             this.sourceModAPicture.TabStop = false;
@@ -1769,7 +1769,7 @@
             // outModAPicture
             // 
             this.outModAPicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.outModAPicture.Location = new System.Drawing.Point(84, 3);
+            this.outModAPicture.Location = new System.Drawing.Point(83, 3);
             this.outModAPicture.Name = "outModAPicture";
             this.outModAPicture.Size = new System.Drawing.Size(75, 108);
             this.outModAPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -1780,9 +1780,9 @@
             // cropPicture
             // 
             this.cropPicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cropPicture.Location = new System.Drawing.Point(334, 349);
+            this.cropPicture.Location = new System.Drawing.Point(333, 349);
             this.cropPicture.Name = "cropPicture";
-            this.cropPicture.Size = new System.Drawing.Size(162, 115);
+            this.cropPicture.Size = new System.Drawing.Size(161, 115);
             this.cropPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.cropPicture.TabIndex = 26;
             this.cropPicture.TabStop = false;
@@ -1791,7 +1791,7 @@
             // productionPicture
             // 
             this.productionPicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.productionPicture.Location = new System.Drawing.Point(502, 490);
+            this.productionPicture.Location = new System.Drawing.Point(500, 490);
             this.productionPicture.Name = "productionPicture";
             this.productionPicture.Size = new System.Drawing.Size(160, 114);
             this.productionPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -1815,7 +1815,7 @@
             // 
             this.groupBoxStat.Controls.Add(this.commonStatBox);
             this.groupBoxStat.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBoxStat.Location = new System.Drawing.Point(668, 470);
+            this.groupBoxStat.Location = new System.Drawing.Point(666, 470);
             this.groupBoxStat.Name = "groupBoxStat";
             this.tableLayoutPanel1.SetRowSpan(this.groupBoxStat, 5);
             this.groupBoxStat.Size = new System.Drawing.Size(199, 215);
@@ -1845,7 +1845,7 @@
             "Incorrect"});
             this.modMBox.Location = new System.Drawing.Point(169, 640);
             this.modMBox.Name = "modMBox";
-            this.modMBox.Size = new System.Drawing.Size(159, 28);
+            this.modMBox.Size = new System.Drawing.Size(158, 28);
             this.modMBox.TabIndex = 40;
             this.modMBox.Visible = false;
             // 
@@ -1859,9 +1859,9 @@
             "Uncertain",
             "Correct",
             "Incorrect"});
-            this.modABox.Location = new System.Drawing.Point(334, 640);
+            this.modABox.Location = new System.Drawing.Point(333, 640);
             this.modABox.Name = "modABox";
-            this.modABox.Size = new System.Drawing.Size(162, 28);
+            this.modABox.Size = new System.Drawing.Size(161, 28);
             this.modABox.TabIndex = 41;
             this.modABox.Visible = false;
             // 
@@ -1899,7 +1899,7 @@
             this.simpleModMStatus.ForeColor = System.Drawing.SystemColors.ControlText;
             this.simpleModMStatus.Location = new System.Drawing.Point(169, 607);
             this.simpleModMStatus.Name = "simpleModMStatus";
-            this.simpleModMStatus.Size = new System.Drawing.Size(159, 30);
+            this.simpleModMStatus.Size = new System.Drawing.Size(158, 30);
             this.simpleModMStatus.TabIndex = 43;
             this.simpleModMStatus.Text = " ";
             this.simpleModMStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1909,9 +1909,9 @@
             this.simpleModAStatus.AutoSize = true;
             this.simpleModAStatus.Dock = System.Windows.Forms.DockStyle.Fill;
             this.simpleModAStatus.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.simpleModAStatus.Location = new System.Drawing.Point(334, 607);
+            this.simpleModAStatus.Location = new System.Drawing.Point(333, 607);
             this.simpleModAStatus.Name = "simpleModAStatus";
-            this.simpleModAStatus.Size = new System.Drawing.Size(162, 30);
+            this.simpleModAStatus.Size = new System.Drawing.Size(161, 30);
             this.simpleModAStatus.TabIndex = 44;
             this.simpleModAStatus.Text = " ";
             this.simpleModAStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;

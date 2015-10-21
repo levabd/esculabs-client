@@ -302,7 +302,7 @@ namespace FibroscanProcessor
             if (!_debugMode)
                 throw new AccessViolationException("Can`t use this method in production mode");
 
-            ElastogramClassification rElasto = new ElastogramClassification();
+            SimpleElastoClassificator rElasto = new SimpleElastoClassificator();
 
             _elastoStatus = rElasto.Classiffy(_workingBlob, _fibroline);
 
