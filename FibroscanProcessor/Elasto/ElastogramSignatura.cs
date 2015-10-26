@@ -20,32 +20,10 @@ namespace FibroscanProcessor.Elasto
         public VerificationStatus Answer;
 
         #region Constants
-        private const double AreaNormalizator = 1/21000;
-        private const double AngleNormalizator = 1/Math.PI;
-        private const double EstimationNormalizator = 1;
-        private const double AreaNormalizationShift = 0;
-        private const double AngleNormalizationShift = 0.5;
-        private const double EstimationNormalizationShift = 0;
-        #endregion
+        private const double AreaNormalizator = (double)1/21000;
+        private const int Accuracy = 4;
 
-        private static List<double> _normalizationVector = new List<double>
-        {
-            AreaNormalizator,
-            AngleNormalizator,
-            AngleNormalizator,
-            AngleNormalizator,
-            EstimationNormalizator,
-            EstimationNormalizator,
-            EstimationNormalizator,
-            EstimationNormalizator
-        };
-
-        private static List<double> _shiftNormalizationVector = new List<double>
-        {
-            AreaNormalizationShift,
-            AngleNormalizationShift,AngleNormalizationShift,AngleNormalizationShift,
-            EstimationNormalizationShift,EstimationNormalizationShift,EstimationNormalizationShift,EstimationNormalizationShift
-        };
+        #endregion    
 
         #region Property
         public List<double> Data => new List<double>
@@ -60,18 +38,17 @@ namespace FibroscanProcessor.Elasto
             RelativeEstimationRight
         };
 
-        public List<double> NormalizedSignatura
+        public List<double> NormalizedSignatura => new List<double>
         {
-            get
-            {
-                List<double> tempVector = new List<double>();
-                for (int i = 0; i < Size; i++)
-                {
-                    tempVector.Add(Data[i] * _normalizationVector[i] + _shiftNormalizationVector[i]);
-                }
-                return tempVector;
-            }
-        }
+                    Math.Round(Area * AreaNormalizator, Accuracy),
+                    Math.Round(Math.Tan(FibroAngle) / Math.PI + 0.5, Accuracy),
+                    Math.Round(Math.Tan(LeftAngle) / Math.PI + 0.5, Accuracy),
+                    Math.Round(Math.Tan(RightAngle) / Math.PI + 0.5, Accuracy),
+                    Math.Round(RSquareLeft / 100, Accuracy),
+                    Math.Round(RSquareRight / 100, Accuracy),
+                    Math.Round(RelativeEstimationLeft / 100, Accuracy),
+                    Math.Round(RelativeEstimationRight / 100, Accuracy)
+        };
         #endregion
         
         #region Constructors

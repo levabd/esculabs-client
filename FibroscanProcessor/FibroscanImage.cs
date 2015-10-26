@@ -235,7 +235,7 @@ namespace FibroscanProcessor
                 return VerificationStatus.NotCalculated;
 
             workingBlob.Approximate(ElastogramTopIndention, SampleShare, OutliersShare, RansacIterations);
-                return (new SimpleElastoClassificator()).Classiffy(workingBlob, _fibroline);
+                return (new OldElastoClassificator()).Classiffy(workingBlob, _fibroline);
         }
 
         #endregion

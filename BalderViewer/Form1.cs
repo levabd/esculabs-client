@@ -16,13 +16,19 @@ namespace BalderViewer
     public partial class Form1 : Form
     {
         Image sourceImage;
+        FibroscanImage WorkingImage;
+
         private List<PictureBox> pictures;
         private List<Label> imageLabels;
         private List<ComboBox> teachStatusComboBox;
         private List<Label> simpleStatusLabel;
+
+
+
         public Form1()
         {
             InitializeComponent();
+
             pictures = new List<PictureBox>
             {
                 sourcePicture, elastoPicture, kuwaharaPicture, binarizationPicture, edgePicture, morphologyPicture,cropPicture,
@@ -78,9 +84,9 @@ namespace BalderViewer
                 simpleStatusLabel.ForEach(label => label.Visible = true);
                 teachButton.Visible = true;
 
-                FibroscanImage image = new FibroscanImage(sourceImage, true);
-                VerificationStatus elastoStatus = ElastogramVerification(image);
-                Ultrasoundverification(image);
+                WorkingImage = new FibroscanImage(sourceImage, true);
+                VerificationStatus elastoStatus = ElastogramVerification();
+                Ultrasoundverification();
 
                 //Production code
                 if (productionCheckBox.Checked)
@@ -88,8 +94,7 @@ namespace BalderViewer
                     FibroscanImage prod = new FibroscanImage(sourceImage);
                     productionPicture.Image = prod.Merged;
                 }
-                //else
-                //  productionPicture.Image = image.Step15DrawBrightLines(240,20);
+
 
                 if (savingStepsCheckBox.Checked)
                     SaveSteps();
@@ -98,81 +103,80 @@ namespace BalderViewer
             }
         }
 
-        private VerificationStatus ElastogramVerification(FibroscanImage image)
+        private VerificationStatus ElastogramVerification()
         {
             long timer = 0;
 
-            elastoPicture.Image = image.Step1LoadElastogram();
+            elastoPicture.Image = WorkingImage.Step1LoadElastogram();
 
-            image.Step2ElastoWithoutLine();
+            WorkingImage.Step2ElastoWithoutLine();
 
-            kuwaharaPicture.Image = image.Step3KuwaharaElasto((int)numericUpDown1.Value);
+            kuwaharaPicture.Image = WorkingImage.Step3KuwaharaElasto((int)numericUpDown1.Value);
 
             if (simpleBinRadioButton.Checked)
-                binarizationPicture.Image = image.Step4SimpleBinarization(ref timer, (byte)upDownBinarThreshold.Value);
+                binarizationPicture.Image = WorkingImage.Step4SimpleBinarization(ref timer, (byte)upDownBinarThreshold.Value);
             if (niblackRadioButton.Checked)
-                binarizationPicture.Image = image.Step4NiblackBinarization(ref timer, (double)upDownBinarizationK.Value, (int)upDownBinarLocalRadius.Value);
+                binarizationPicture.Image = WorkingImage.Step4NiblackBinarization(ref timer, (double)upDownBinarizationK.Value, (int)upDownBinarLocalRadius.Value);
             if (sauvolaRadioButton.Checked)
-                binarizationPicture.Image = image.Step4SauvolaBinarization(ref timer, (double)upDownBinarizationK.Value, (int)upDownBinarLocalRadius.Value);
+                binarizationPicture.Image = WorkingImage.Step4SauvolaBinarization(ref timer, (double)upDownBinarizationK.Value, (int)upDownBinarLocalRadius.Value);
             if (wolfRadioButton.Checked)
-                binarizationPicture.Image = image.Step4WolfJoulionBinarization(ref timer, (double)upDownBinarizationK.Value, (int)upDownBinarLocalRadius.Value);
+                binarizationPicture.Image = WorkingImage.Step4WolfJoulionBinarization(ref timer, (double)upDownBinarizationK.Value, (int)upDownBinarLocalRadius.Value);
             if (morphNiblackRadioButton.Checked)
-                binarizationPicture.Image = image.Step4MorphologyNiblackBinarization(ref timer, (double)upDownBinarizationK.Value, (int)upDownBinarLocalRadius.Value,
+                binarizationPicture.Image = WorkingImage.Step4MorphologyNiblackBinarization(ref timer, (double)upDownBinarizationK.Value, (int)upDownBinarLocalRadius.Value,
                                                                 (int)upDownBinarGlobalRadius.Value, (byte)upDownBinarThreshold.Value);
             if (morphOtsuRadioButton.Checked)
-                binarizationPicture.Image = image.Step4SimpleMorphologyBinarization(ref timer, (int)upDownBinarGlobalRadius.Value, (byte)upDownBinarThreshold.Value);
+                binarizationPicture.Image = WorkingImage.Step4SimpleMorphologyBinarization(ref timer, (int)upDownBinarGlobalRadius.Value, (byte)upDownBinarThreshold.Value);
             resultBox.Items.Add("Binarization time:       " + timer);
 
-            edgePicture.Image = image.Step5EdgeRemoving(ref timer, (int)upDownEdgeLeft1.Value, (int)upDownEdgeLeft1Central.Value, (int)upDownEdgeLeft2.Value,
+            edgePicture.Image = WorkingImage.Step5EdgeRemoving(ref timer, (int)upDownEdgeLeft1.Value, (int)upDownEdgeLeft1Central.Value, (int)upDownEdgeLeft2.Value,
                 (int)upDownEdgeLeft2Central.Value, (int)upDownEdgeRight.Value, (int)upDownEdgeRightCentral.Value);
 
-            morphologyPicture.Image = image.Step6Morphology((int)numericUpDown3.Value);
+            morphologyPicture.Image = WorkingImage.Step6Morphology((int)numericUpDown3.Value);
 
-            cropPicture.Image = image.Step7CropObjects((int)upDownCropStep.Value, (int)upDownCropDistance.Value);
+            cropPicture.Image = WorkingImage.Step7CropObjects((int)upDownCropStep.Value, (int)upDownCropDistance.Value);
 
-            choosingPicture.Image = image.Step8ChooseOneObject(ref timer, 0.55, 0.65);
+            choosingPicture.Image = WorkingImage.Step8ChooseOneObject(ref timer, 0.55, 0.65);
 
-            approximationPicture.Image = image.Step9Approximation(ref timer, (double)upDownRansacSample.Value, (double)upDownRansacOutliers.Value,
+            approximationPicture.Image = WorkingImage.Step9Approximation(ref timer, (double)upDownRansacSample.Value, (double)upDownRansacOutliers.Value,
                 (int)upDownRansacIterations.Value);
 
             resultBox.Items.Add("RANSAC time:        " + timer);
 
-            signatureBox.Items.Add("Fibroline Angle:      " + Math.Round(image.Fibroline.Equation.Angle, 2));
-            signatureBox.Items.Add("Left Angle:              " + Math.Round(image.WorkingBlob.LeftApproximation.Angle, 2));
-            signatureBox.Items.Add("Right Angle:            " + Math.Round(image.WorkingBlob.RightApproximation.Angle, 2));
-            signatureBox.Items.Add("Left RSquare:         " + Math.Round(image.WorkingBlob.RSquareLeft, 2));
-            signatureBox.Items.Add("Right RSquare:        " + Math.Round(image.WorkingBlob.RSquareRight, 2));
-            signatureBox.Items.Add("Left Relative Est:      " + Math.Round(image.WorkingBlob.RelativeEstimationLeft, 2));
-            signatureBox.Items.Add("Right Relative Est:     " + Math.Round(image.WorkingBlob.RelativeEstimationRight, 2));
-            signatureBox.Items.Add("Blob Area:                " + image.WorkingBlob.Blob.Area);
+            signatureBox.Items.Add("Fibroline Angle:      " + Math.Round(WorkingImage.Fibroline.Equation.Angle, 2));
+            signatureBox.Items.Add("Left Angle:              " + Math.Round(WorkingImage.WorkingSignature.LeftAngle, 2));
+            signatureBox.Items.Add("Right Angle:            " + Math.Round(WorkingImage.WorkingSignature.RightAngle, 2));
+            signatureBox.Items.Add("Left RSquare:         " + Math.Round(WorkingImage.WorkingSignature.RSquareLeft, 2));
+            signatureBox.Items.Add("Right RSquare:        " + Math.Round(WorkingImage.WorkingSignature.RSquareRight, 2));
+            signatureBox.Items.Add("Left Relative Est:      " + Math.Round(WorkingImage.WorkingSignature.RelativeEstimationLeft, 2));
+            signatureBox.Items.Add("Right Relative Est:     " + Math.Round(WorkingImage.WorkingSignature.RelativeEstimationRight, 2));
+            signatureBox.Items.Add("Blob Area:                " + WorkingImage.WorkingSignature.Area);
 
-            VerificationStatus elastoStatus = image.Step10Classify();
+            VerificationStatus elastoStatus = WorkingImage.Step10Classify();
             resultBox.Items.Add("Elastogram is " + elastoStatus);
             simpleElastoStatus.Text = elastoStatus.ToString();
             return elastoStatus;
         }
 
-        private void Ultrasoundverification(FibroscanImage image)
+        private void Ultrasoundverification()
         {
-            long timer = 0;
-            sourceModMPicture.Image = image.Step11LoadUltrasoundM((double)upDownBrightPixelLimit.Value, (int)upDownUsDeviationStreak.Value);
+            sourceModMPicture.Image = WorkingImage.Step11LoadUltrasoundM((double)upDownBrightPixelLimit.Value, (int)upDownUsDeviationStreak.Value);
             VerificationStatus umms = VerificationStatus.NotCalculated;
 
-            outModMPicture.Image = image.Step15DrawBrightLines(ref umms, (int)upDownLimitUsBrightness.Value, (int)upDownBrightPixelLimit.Value, (int)upDownBrightLinesLimit.Value);
+            outModMPicture.Image = WorkingImage.Step15DrawBrightLines(ref umms, (int)upDownLimitUsBrightness.Value, (int)upDownBrightPixelLimit.Value, (int)upDownBrightLinesLimit.Value);
 
             resultBox.Items.Add("UltraSoundModM is " + umms);
             simpleModMStatus.Text = umms.ToString();
 
             signatureBox.Items.Add("Mod M bright lines:  " +
-                                   image.WorkingUltrasoundModM.getBrightLines((int)upDownLimitUsBrightness.Value, (int)upDownBrightPixelLimit.Value).Count);
+                                   WorkingImage.WorkingUltrasoundModM.getBrightLines((int)upDownLimitUsBrightness.Value, (int)upDownBrightPixelLimit.Value).Count);
 
-            sourceModAPicture.Image = image.Step13LoadUltrasoundA();
+            sourceModAPicture.Image = WorkingImage.Step13LoadUltrasoundA();
             VerificationStatus umas = VerificationStatus.NotCalculated;
 
-            outModAPicture.Image = image.Step14DrawUltraSoundApproximation(ref umas, (int)upDownRelativeEstimationLimit.Value);
+            outModAPicture.Image = WorkingImage.Step14DrawUltraSoundApproximation(ref umas, (int)upDownRelativeEstimationLimit.Value);
 
-            signatureBox.Items.Add("ModA Estimation:   " + Math.Round(image.WorkingUltrasoundModA.RelativeEstimation, 2));
-            signatureBox.Items.Add("ModA RSquare        : " + Math.Round(image.WorkingUltrasoundModA.RSquare));
+            signatureBox.Items.Add("ModA Estimation:   " + Math.Round(WorkingImage.WorkingUltrasoundModA.RelativeEstimation, 2));
+            signatureBox.Items.Add("ModA RSquare        : " + Math.Round(WorkingImage.WorkingUltrasoundModA.RSquare));
             resultBox.Items.Add("UltraSoundModA is " + umas);
             simpleModAStatus.Text = umms.ToString();
 
@@ -234,16 +238,19 @@ namespace BalderViewer
         {
             try
             {
-                ConcurrentDictionary<string, string> csvElementList = new ConcurrentDictionary<string, string>(
-                    File.ReadLines(xlsTextBox.Text)
-                        .Select(line => line.Split(','))
-                        .ToDictionary(line => line[0], line => line[1]));
+                Dictionary<string, string> dict = new Dictionary<string, string>();
+                foreach (string line in File.ReadLines(trainFileTextBox.Text))
+                {
+                    dict.Add(line.Split(' ')[0], line.Substring(line.IndexOf(' ')));
+                }
+                ConcurrentDictionary<string, string> csvElementList = new ConcurrentDictionary<string, string>(dict);
                 if (!String.IsNullOrWhiteSpace(elastoStatusBox.Text) && !String.IsNullOrWhiteSpace(imagePath.Text))
-                    csvElementList.AddOrUpdate(imagePath.Text, elastoStatusBox.Text);
-
-                File.WriteAllText(xlsTextBox.Text,
-                    String.Join(Environment.NewLine, csvElementList.Select(d => d.Key + "," + d.Value).OrderBy(key => key)));
-
+                {
+                    string output = string.Join(" ", WorkingImage.WorkingSignature.NormalizedSignatura);
+                    csvElementList.AddOrUpdate(imagePath.Text, output + " " + elastoStatusBox.Text);
+                }
+                File.WriteAllText(trainFileTextBox.Text,
+                    String.Join(Environment.NewLine, csvElementList.Select(d => d.Key + " " + d.Value).OrderBy(key => key)));
             }
             catch (Exception ex)
             {
@@ -253,10 +260,11 @@ namespace BalderViewer
 
         private void saveSignatura()
         {
-            using (System.IO.StreamWriter file =
-             new System.IO.StreamWriter(precedentsFileBox.Text, true))
+            using (StreamWriter file =
+                             new StreamWriter(trainFileTextBox.Text, true))
             {
-                //file.WriteLine(String.Join(", ", array));
+                string output = string.Join(" ", WorkingImage.WorkingSignature.NormalizedSignatura);
+                file.WriteLine(imagePath.Text + " " + output + " " + elastoStatusBox.Text);
             }
         }
 
@@ -305,13 +313,14 @@ namespace BalderViewer
         {
             if (openCsvFileDialog.ShowDialog() == DialogResult.OK)
             {
-                xlsTextBox.Text = openCsvFileDialog.FileName;
+                trainFileTextBox.Text = openCsvFileDialog.FileName;
             }
         }
 
         private void teachButton_Click(object sender, EventArgs e)
         {
             saveRightAnswerToCsv();
+            //saveSignatura();
         }
         #endregion
 
@@ -421,7 +430,6 @@ namespace BalderViewer
             if (rsl == DialogResult.No)
                 Application.Exit();
         }
-
         private void toolStripButton3_Click(object sender, EventArgs e)
         {
             LoadImage();
@@ -454,25 +462,23 @@ namespace BalderViewer
         {
             StartImageVerification();
         }
-
         private void pictureBox_Click(object sender, EventArgs e)
         {
             BigImage fBigImage = new BigImage(((PictureBox)sender).Image);
             fBigImage.ShowDialog();
         }
-
         private void pictureBox_Saving(object sender, EventArgs e)
         {
-            //fBigImage.ShowDialog();
             Image img = ((PictureBox)sender).Image;
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 if (img != null)
                     img.Save(saveFileDialog.FileName + ".jpg");
         }
-
-
         #endregion
 
+        private void TrainButton_Click(object sender, EventArgs e)
+        {
 
+        }
     }
 }

@@ -3,7 +3,7 @@ using Eklekto.Geometry;
 
 namespace FibroscanProcessor.Elasto
 {
-    public class SimpleElastoClassificator
+    public class OldElastoClassificator
     {
         const double RMax = 0.9;
         const double AMax = 0.92;
@@ -79,40 +79,6 @@ namespace FibroscanProcessor.Elasto
                     return VerificationStatus.Incorrect;
                 return VerificationStatus.Uncertain;
             }
-            /*if (area < 4000)
-                return VerificationStatus.Uncertain;
-
-            if (area < 6000)
-            {
-                if ((IsStrongAngleClose(leftLine, fibroLine.Equation)) &&
-                    IsStrongAngleClose(leftLine, rightLine) &&
-                    (IsGoodTilt(leftLine)) &&
-                    IsGoodApproximation(leftLine, rSquareLeft, aLeft) &&
-                    IsGoodApproximation(rightLine, rSquareRight, aRight))
-                    return VerificationStatus.Correct;
-                return VerificationStatus.Uncertain;
-            }
-
-            if (area < 17500)
-            {
-                if (!IsGoodApproximation(leftLine, rSquareLeft, aLeft) ||
-                    !IsGoodApproximation(rightLine, rSquareRight, aRight))
-                    return VerificationStatus.Uncertain;
-                if ((IsWeakAngleClose(leftLine, fibroLine.Equation)) &&
-                    IsWeakAngleClose(leftLine, rightLine) &&
-                    (IsGoodTilt(leftLine)))
-                    return VerificationStatus.Correct;
-                return VerificationStatus.Incorrect;
-            }
-
-            if (area < 21000)
-            {
-                if (IsGoodApproximation(leftLine, rSquareLeft, aLeft) &&
-                    IsGoodApproximation(rightLine, rSquareRight, aRight))
-                    return VerificationStatus.Incorrect;
-                return VerificationStatus.Uncertain;
-            }
-            */
             return VerificationStatus.Uncertain;
 
         }

@@ -11,7 +11,6 @@ using Eklekto.Imaging.Filters;
 using Eklekto.Imaging.Morfology;
 using FibroscanProcessor.Elasto;
 using FibroscanProcessor.Ultrasound;
-using Point = System.Drawing.Point;
 
 namespace FibroscanProcessor
 {
@@ -30,7 +29,7 @@ namespace FibroscanProcessor
             }
         }
 
-        public ElastoBlob WorkingBlob
+        private ElastoBlob WorkingBlob
         {
             get
             {
@@ -38,6 +37,17 @@ namespace FibroscanProcessor
                     throw new AccessViolationException("Can`t use this method in production mode");
 
                 return _workingBlob;
+            }
+        }
+
+        public ElastogramSignatura WorkingSignature
+        {
+            get
+            {
+                if (!_debugMode)
+                    throw new AccessViolationException("Can`t use this method in production mode");
+
+                return new ElastogramSignatura( _workingBlob, _fibroline);
             }
         }
 
@@ -302,9 +312,9 @@ namespace FibroscanProcessor
             if (!_debugMode)
                 throw new AccessViolationException("Can`t use this method in production mode");
 
-            SimpleElastoClassificator rElasto = new SimpleElastoClassificator();
-
-            _elastoStatus = rElasto.Classiffy(_workingBlob, _fibroline);
+            //OldElastoClassificator rElasto = new OldElastoClassificator();
+            PrimitiveElastoClassificator rElasto = new PrimitiveElastoClassificator();
+            _elastoStatus = rElasto.Classiffy(new ElastogramSignatura(_workingBlob, _fibroline));
 
             return _elastoStatus;
         }

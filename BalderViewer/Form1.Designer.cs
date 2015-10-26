@@ -123,26 +123,24 @@
             this.resultBox = new System.Windows.Forms.ListBox();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.buttonNextImage = new System.Windows.Forms.Button();
-            this.savingStepsCheckBox = new System.Windows.Forms.CheckBox();
             this.imagePath = new System.Windows.Forms.TextBox();
             this.buttonPrevImage = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.loadButton = new System.Windows.Forms.Button();
-            this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.upDownFilesNumber = new System.Windows.Forms.NumericUpDown();
-            this.productionCheckBox = new System.Windows.Forms.CheckBox();
-            this.label20 = new System.Windows.Forms.Label();
-            this.folderProcessingButton = new System.Windows.Forms.Button();
             this.processingButton = new System.Windows.Forms.Button();
             this.teachFileLoadButton = new System.Windows.Forms.Button();
-            this.xlsTextBox = new System.Windows.Forms.TextBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.saveClassificationCheckBox = new System.Windows.Forms.CheckBox();
-            this.xlsProcessingButton = new System.Windows.Forms.Button();
+            this.trainFileTextBox = new System.Windows.Forms.TextBox();
+            this.TrainButton = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.precedentsFileBox = new System.Windows.Forms.TextBox();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
-            this.csvInfoBox = new System.Windows.Forms.ListBox();
+            this.upDownFilesNumber = new System.Windows.Forms.NumericUpDown();
+            this.productionCheckBox = new System.Windows.Forms.CheckBox();
+            this.savingStepsCheckBox = new System.Windows.Forms.CheckBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.folderProcessingButton = new System.Windows.Forms.Button();
+            this.saveClassificationCheckBox = new System.Windows.Forms.CheckBox();
+            this.savePrecedentsButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.sourceModMPicture = new System.Windows.Forms.PictureBox();
             this.outModMPicture = new System.Windows.Forms.PictureBox();
@@ -160,6 +158,37 @@
             this.simpleElastoStatus = new System.Windows.Forms.Label();
             this.simpleModMStatus = new System.Windows.Forms.Label();
             this.simpleModAStatus = new System.Windows.Forms.Label();
+            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            this.precedentBox = new System.Windows.Forms.ListBox();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.upDownTeachConvergence = new System.Windows.Forms.NumericUpDown();
+            this.upDownTeachError = new System.Windows.Forms.NumericUpDown();
+            this.upDownAgeNum = new System.Windows.Forms.NumericUpDown();
+            this.upDownAgeSize = new System.Windows.Forms.NumericUpDown();
+            this.label36 = new System.Windows.Forms.Label();
+            this.label35 = new System.Windows.Forms.Label();
+            this.label34 = new System.Windows.Forms.Label();
+            this.label33 = new System.Windows.Forms.Label();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.upDownSignatureRERight = new System.Windows.Forms.NumericUpDown();
+            this.upDownSignatureRELeft = new System.Windows.Forms.NumericUpDown();
+            this.upDownSignatureR2Right = new System.Windows.Forms.NumericUpDown();
+            this.upDownSignatureR2Left = new System.Windows.Forms.NumericUpDown();
+            this.upDownSignatureAngleFibro = new System.Windows.Forms.NumericUpDown();
+            this.upDownSignatureAngleRight = new System.Windows.Forms.NumericUpDown();
+            this.upDownSignatureAngleLeft = new System.Windows.Forms.NumericUpDown();
+            this.upDownSignatureArea = new System.Windows.Forms.NumericUpDown();
+            this.label44 = new System.Windows.Forms.Label();
+            this.label43 = new System.Windows.Forms.Label();
+            this.label42 = new System.Windows.Forms.Label();
+            this.label41 = new System.Windows.Forms.Label();
+            this.label40 = new System.Windows.Forms.Label();
+            this.label39 = new System.Windows.Forms.Label();
+            this.label38 = new System.Windows.Forms.Label();
+            this.label37 = new System.Windows.Forms.Label();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.isNormalizedPrecedentsBox = new System.Windows.Forms.CheckBox();
+            this.normalizedSignatureBox = new System.Windows.Forms.CheckBox();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.openCsvFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip.SuspendLayout();
@@ -206,9 +235,8 @@
             this.groupBoxLog1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.groupBox8.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.upDownFilesNumber)).BeginInit();
             this.groupBox7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownFilesNumber)).BeginInit();
             this.tableLayoutPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sourceModMPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.outModMPicture)).BeginInit();
@@ -218,6 +246,21 @@
             ((System.ComponentModel.ISupportInitialize)(this.cropPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productionPicture)).BeginInit();
             this.groupBoxStat.SuspendLayout();
+            this.tableLayoutPanel6.SuspendLayout();
+            this.groupBox9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownTeachConvergence)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownTeachError)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownAgeNum)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownAgeSize)).BeginInit();
+            this.groupBox8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownSignatureRERight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownSignatureRELeft)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownSignatureR2Right)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownSignatureR2Left)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownSignatureAngleFibro)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownSignatureAngleRight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownSignatureAngleLeft)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownSignatureArea)).BeginInit();
             this.SuspendLayout();
             // 
             // openSourceFileDialog
@@ -233,7 +276,7 @@
             this.viewToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(1173, 24);
+            this.menuStrip.Size = new System.Drawing.Size(1419, 24);
             this.menuStrip.TabIndex = 4;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -936,9 +979,9 @@
             // kuwaharaPicture
             // 
             this.kuwaharaPicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.kuwaharaPicture.Location = new System.Drawing.Point(333, 208);
+            this.kuwaharaPicture.Location = new System.Drawing.Point(356, 181);
             this.kuwaharaPicture.Name = "kuwaharaPicture";
-            this.kuwaharaPicture.Size = new System.Drawing.Size(161, 115);
+            this.kuwaharaPicture.Size = new System.Drawing.Size(173, 124);
             this.kuwaharaPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.kuwaharaPicture.TabIndex = 5;
             this.kuwaharaPicture.TabStop = false;
@@ -947,9 +990,9 @@
             // sourcePicture
             // 
             this.sourcePicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.sourcePicture.Location = new System.Drawing.Point(3, 208);
+            this.sourcePicture.Location = new System.Drawing.Point(3, 181);
             this.sourcePicture.Name = "sourcePicture";
-            this.sourcePicture.Size = new System.Drawing.Size(160, 115);
+            this.sourcePicture.Size = new System.Drawing.Size(171, 124);
             this.sourcePicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.sourcePicture.TabIndex = 3;
             this.sourcePicture.TabStop = false;
@@ -958,9 +1001,9 @@
             // elastoPicture
             // 
             this.elastoPicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.elastoPicture.Location = new System.Drawing.Point(169, 208);
+            this.elastoPicture.Location = new System.Drawing.Point(180, 181);
             this.elastoPicture.Name = "elastoPicture";
-            this.elastoPicture.Size = new System.Drawing.Size(158, 115);
+            this.elastoPicture.Size = new System.Drawing.Size(170, 124);
             this.elastoPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.elastoPicture.TabIndex = 4;
             this.elastoPicture.TabStop = false;
@@ -968,13 +1011,14 @@
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.ColumnCount = 6;
+            this.tableLayoutPanel1.ColumnCount = 7;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0181F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24.76466F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.19913F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0181F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 205F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 257F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 259F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 198F));
             this.tableLayoutPanel1.Controls.Add(this.label32, 2, 5);
             this.tableLayoutPanel1.Controls.Add(this.label31, 1, 5);
             this.tableLayoutPanel1.Controls.Add(this.label30, 0, 5);
@@ -995,7 +1039,7 @@
             this.tableLayoutPanel1.Controls.Add(this.choosingPicture, 3, 4);
             this.tableLayoutPanel1.Controls.Add(this.approximationPicture, 0, 6);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 5, 0);
-            this.tableLayoutPanel1.Controls.Add(this.groupBoxLog2, 4, 1);
+            this.tableLayoutPanel1.Controls.Add(this.groupBoxLog2, 4, 2);
             this.tableLayoutPanel1.Controls.Add(this.groupBoxLog1, 4, 0);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel3, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel4, 1, 6);
@@ -1010,14 +1054,16 @@
             this.tableLayoutPanel1.Controls.Add(this.simpleElastoStatus, 0, 7);
             this.tableLayoutPanel1.Controls.Add(this.simpleModMStatus, 1, 7);
             this.tableLayoutPanel1.Controls.Add(this.simpleModAStatus, 2, 7);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel6, 6, 0);
+            this.tableLayoutPanel1.Controls.Add(this.normalizedSignatureBox, 4, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tableLayoutPanel1.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(46, 24);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 10;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 185F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 145F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 33F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.3996F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.3996F));
@@ -1026,16 +1072,17 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1127, 688);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1373, 688);
             this.tableLayoutPanel1.TabIndex = 6;
             // 
             // label32
             // 
             this.label32.AutoSize = true;
             this.label32.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label32.Location = new System.Drawing.Point(333, 467);
+            this.label32.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label32.Location = new System.Drawing.Point(356, 458);
             this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(161, 20);
+            this.label32.Size = new System.Drawing.Size(173, 20);
             this.label32.TabIndex = 38;
             this.label32.Text = "Mod A";
             this.label32.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1045,9 +1092,10 @@
             // 
             this.label31.AutoSize = true;
             this.label31.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label31.Location = new System.Drawing.Point(169, 467);
+            this.label31.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label31.Location = new System.Drawing.Point(180, 458);
             this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(158, 20);
+            this.label31.Size = new System.Drawing.Size(170, 20);
             this.label31.TabIndex = 37;
             this.label31.Text = "Mod M";
             this.label31.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1057,9 +1105,10 @@
             // 
             this.label30.AutoSize = true;
             this.label30.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label30.Location = new System.Drawing.Point(3, 467);
+            this.label30.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label30.Location = new System.Drawing.Point(3, 458);
             this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(160, 20);
+            this.label30.Size = new System.Drawing.Size(171, 20);
             this.label30.TabIndex = 36;
             this.label30.Text = "Final Elasto";
             this.label30.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1069,9 +1118,10 @@
             // 
             this.label29.AutoSize = true;
             this.label29.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label29.Location = new System.Drawing.Point(500, 326);
+            this.label29.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label29.Location = new System.Drawing.Point(535, 308);
             this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(160, 20);
+            this.label29.Size = new System.Drawing.Size(171, 20);
             this.label29.TabIndex = 35;
             this.label29.Text = "Choosing";
             this.label29.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1081,9 +1131,10 @@
             // 
             this.label28.AutoSize = true;
             this.label28.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label28.Location = new System.Drawing.Point(333, 326);
+            this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label28.Location = new System.Drawing.Point(356, 308);
             this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(161, 20);
+            this.label28.Size = new System.Drawing.Size(173, 20);
             this.label28.TabIndex = 34;
             this.label28.Text = "Crop";
             this.label28.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1093,9 +1144,10 @@
             // 
             this.label27.AutoSize = true;
             this.label27.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label27.Location = new System.Drawing.Point(169, 326);
+            this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label27.Location = new System.Drawing.Point(180, 308);
             this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(158, 20);
+            this.label27.Size = new System.Drawing.Size(170, 20);
             this.label27.TabIndex = 33;
             this.label27.Text = "Morphology";
             this.label27.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1105,9 +1157,10 @@
             // 
             this.label26.AutoSize = true;
             this.label26.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label26.Location = new System.Drawing.Point(3, 326);
+            this.label26.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label26.Location = new System.Drawing.Point(3, 308);
             this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(160, 20);
+            this.label26.Size = new System.Drawing.Size(171, 20);
             this.label26.TabIndex = 32;
             this.label26.Text = "Edge Removing";
             this.label26.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1117,9 +1170,10 @@
             // 
             this.label25.AutoSize = true;
             this.label25.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label25.Location = new System.Drawing.Point(500, 185);
+            this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label25.Location = new System.Drawing.Point(535, 145);
             this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(160, 20);
+            this.label25.Size = new System.Drawing.Size(171, 33);
             this.label25.TabIndex = 31;
             this.label25.Text = "Binarization";
             this.label25.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1129,9 +1183,10 @@
             // 
             this.label24.AutoSize = true;
             this.label24.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label24.Location = new System.Drawing.Point(333, 185);
+            this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label24.Location = new System.Drawing.Point(356, 145);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(161, 20);
+            this.label24.Size = new System.Drawing.Size(173, 33);
             this.label24.TabIndex = 30;
             this.label24.Text = "Kuwahara";
             this.label24.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1140,9 +1195,9 @@
             // teachButton
             // 
             this.teachButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.teachButton.Location = new System.Drawing.Point(500, 640);
+            this.teachButton.Location = new System.Drawing.Point(535, 640);
             this.teachButton.Name = "teachButton";
-            this.teachButton.Size = new System.Drawing.Size(160, 24);
+            this.teachButton.Size = new System.Drawing.Size(171, 24);
             this.teachButton.TabIndex = 10;
             this.teachButton.Text = "Add to Teaching";
             this.teachButton.UseVisualStyleBackColor = true;
@@ -1153,9 +1208,10 @@
             // 
             this.label23.AutoSize = true;
             this.label23.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label23.Location = new System.Drawing.Point(169, 185);
+            this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label23.Location = new System.Drawing.Point(180, 145);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(158, 20);
+            this.label23.Size = new System.Drawing.Size(170, 33);
             this.label23.TabIndex = 29;
             this.label23.Text = "Source Elasto";
             this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1164,9 +1220,9 @@
             // binarizationPicture
             // 
             this.binarizationPicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.binarizationPicture.Location = new System.Drawing.Point(500, 208);
+            this.binarizationPicture.Location = new System.Drawing.Point(535, 181);
             this.binarizationPicture.Name = "binarizationPicture";
-            this.binarizationPicture.Size = new System.Drawing.Size(160, 115);
+            this.binarizationPicture.Size = new System.Drawing.Size(171, 124);
             this.binarizationPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.binarizationPicture.TabIndex = 6;
             this.binarizationPicture.TabStop = false;
@@ -1175,9 +1231,9 @@
             // edgePicture
             // 
             this.edgePicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.edgePicture.Location = new System.Drawing.Point(3, 349);
+            this.edgePicture.Location = new System.Drawing.Point(3, 331);
             this.edgePicture.Name = "edgePicture";
-            this.edgePicture.Size = new System.Drawing.Size(160, 115);
+            this.edgePicture.Size = new System.Drawing.Size(171, 124);
             this.edgePicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.edgePicture.TabIndex = 7;
             this.edgePicture.TabStop = false;
@@ -1186,9 +1242,9 @@
             // morphologyPicture
             // 
             this.morphologyPicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.morphologyPicture.Location = new System.Drawing.Point(169, 349);
+            this.morphologyPicture.Location = new System.Drawing.Point(180, 331);
             this.morphologyPicture.Name = "morphologyPicture";
-            this.morphologyPicture.Size = new System.Drawing.Size(158, 115);
+            this.morphologyPicture.Size = new System.Drawing.Size(170, 124);
             this.morphologyPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.morphologyPicture.TabIndex = 8;
             this.morphologyPicture.TabStop = false;
@@ -1197,9 +1253,9 @@
             // choosingPicture
             // 
             this.choosingPicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.choosingPicture.Location = new System.Drawing.Point(500, 349);
+            this.choosingPicture.Location = new System.Drawing.Point(535, 331);
             this.choosingPicture.Name = "choosingPicture";
-            this.choosingPicture.Size = new System.Drawing.Size(160, 115);
+            this.choosingPicture.Size = new System.Drawing.Size(171, 124);
             this.choosingPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.choosingPicture.TabIndex = 9;
             this.choosingPicture.TabStop = false;
@@ -1208,9 +1264,9 @@
             // approximationPicture
             // 
             this.approximationPicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.approximationPicture.Location = new System.Drawing.Point(3, 490);
+            this.approximationPicture.Location = new System.Drawing.Point(3, 481);
             this.approximationPicture.Name = "approximationPicture";
-            this.approximationPicture.Size = new System.Drawing.Size(160, 114);
+            this.approximationPicture.Size = new System.Drawing.Size(171, 123);
             this.approximationPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.approximationPicture.TabIndex = 10;
             this.approximationPicture.TabStop = false;
@@ -1227,7 +1283,7 @@
             this.tableLayoutPanel2.Controls.Add(this.groupBox3, 0, 3);
             this.tableLayoutPanel2.Controls.Add(this.groupBox6, 0, 2);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(871, 3);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(917, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 7;
             this.tableLayoutPanel1.SetRowSpan(this.tableLayoutPanel2, 10);
@@ -1393,10 +1449,10 @@
             // 
             this.groupBoxLog2.Controls.Add(this.signatureBox);
             this.groupBoxLog2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBoxLog2.Location = new System.Drawing.Point(666, 188);
+            this.groupBoxLog2.Location = new System.Drawing.Point(712, 181);
             this.groupBoxLog2.Name = "groupBoxLog2";
-            this.tableLayoutPanel1.SetRowSpan(this.groupBoxLog2, 4);
-            this.groupBoxLog2.Size = new System.Drawing.Size(199, 276);
+            this.tableLayoutPanel1.SetRowSpan(this.groupBoxLog2, 3);
+            this.groupBoxLog2.Size = new System.Drawing.Size(199, 274);
             this.groupBoxLog2.TabIndex = 20;
             this.groupBoxLog2.TabStop = false;
             this.groupBoxLog2.Text = "Signatura";
@@ -1409,16 +1465,16 @@
             this.signatureBox.ItemHeight = 19;
             this.signatureBox.Location = new System.Drawing.Point(3, 18);
             this.signatureBox.Name = "signatureBox";
-            this.signatureBox.Size = new System.Drawing.Size(193, 255);
+            this.signatureBox.Size = new System.Drawing.Size(193, 253);
             this.signatureBox.TabIndex = 0;
             // 
             // groupBoxLog1
             // 
             this.groupBoxLog1.Controls.Add(this.resultBox);
             this.groupBoxLog1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBoxLog1.Location = new System.Drawing.Point(666, 3);
+            this.groupBoxLog1.Location = new System.Drawing.Point(712, 3);
             this.groupBoxLog1.Name = "groupBoxLog1";
-            this.groupBoxLog1.Size = new System.Drawing.Size(199, 179);
+            this.groupBoxLog1.Size = new System.Drawing.Size(199, 139);
             this.groupBoxLog1.TabIndex = 21;
             this.groupBoxLog1.TabStop = false;
             this.groupBoxLog1.Text = "Verification Result";
@@ -1432,7 +1488,7 @@
             this.resultBox.ItemHeight = 19;
             this.resultBox.Location = new System.Drawing.Point(3, 18);
             this.resultBox.Name = "resultBox";
-            this.resultBox.Size = new System.Drawing.Size(193, 158);
+            this.resultBox.Size = new System.Drawing.Size(193, 118);
             this.resultBox.TabIndex = 0;
             // 
             // tableLayoutPanel3
@@ -1440,61 +1496,44 @@
             this.tableLayoutPanel3.ColumnCount = 5;
             this.tableLayoutPanel1.SetColumnSpan(this.tableLayoutPanel3, 4);
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 158F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 58.17308F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 41.82692F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 51.46444F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 48.53556F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 140F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 162F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 172F));
             this.tableLayoutPanel3.Controls.Add(this.buttonNextImage, 2, 1);
-            this.tableLayoutPanel3.Controls.Add(this.savingStepsCheckBox, 0, 4);
             this.tableLayoutPanel3.Controls.Add(this.imagePath, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.buttonPrevImage, 1, 1);
             this.tableLayoutPanel3.Controls.Add(this.panel1, 0, 1);
-            this.tableLayoutPanel3.Controls.Add(this.groupBox8, 1, 4);
-            this.tableLayoutPanel3.Controls.Add(this.folderProcessingButton, 3, 3);
             this.tableLayoutPanel3.Controls.Add(this.processingButton, 3, 1);
             this.tableLayoutPanel3.Controls.Add(this.teachFileLoadButton, 0, 2);
-            this.tableLayoutPanel3.Controls.Add(this.xlsTextBox, 1, 2);
-            this.tableLayoutPanel3.Controls.Add(this.checkBox1, 3, 4);
-            this.tableLayoutPanel3.Controls.Add(this.saveClassificationCheckBox, 0, 5);
-            this.tableLayoutPanel3.Controls.Add(this.xlsProcessingButton, 2, 2);
+            this.tableLayoutPanel3.Controls.Add(this.trainFileTextBox, 1, 2);
+            this.tableLayoutPanel3.Controls.Add(this.TrainButton, 2, 2);
             this.tableLayoutPanel3.Controls.Add(this.button1, 0, 3);
             this.tableLayoutPanel3.Controls.Add(this.precedentsFileBox, 1, 3);
             this.tableLayoutPanel3.Controls.Add(this.groupBox7, 4, 0);
+            this.tableLayoutPanel3.Controls.Add(this.savePrecedentsButton, 3, 3);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 6;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(657, 179);
+            this.tableLayoutPanel3.RowCount = 4;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(703, 139);
             this.tableLayoutPanel3.TabIndex = 22;
             // 
             // buttonNextImage
             // 
-            this.buttonNextImage.Dock = System.Windows.Forms.DockStyle.Right;
+            this.buttonNextImage.Dock = System.Windows.Forms.DockStyle.Left;
             this.buttonNextImage.Enabled = false;
-            this.buttonNextImage.Location = new System.Drawing.Point(278, 38);
+            this.buttonNextImage.Location = new System.Drawing.Point(280, 37);
             this.buttonNextImage.Name = "buttonNextImage";
-            this.buttonNextImage.Size = new System.Drawing.Size(73, 24);
+            this.buttonNextImage.Size = new System.Drawing.Size(90, 28);
             this.buttonNextImage.TabIndex = 1;
             this.buttonNextImage.Text = "next ";
             this.buttonNextImage.UseVisualStyleBackColor = true;
             this.buttonNextImage.Click += new System.EventHandler(this.buttonNextImage_Click);
-            // 
-            // savingStepsCheckBox
-            // 
-            this.savingStepsCheckBox.AutoSize = true;
-            this.savingStepsCheckBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.savingStepsCheckBox.Location = new System.Drawing.Point(3, 128);
-            this.savingStepsCheckBox.Name = "savingStepsCheckBox";
-            this.savingStepsCheckBox.Size = new System.Drawing.Size(152, 21);
-            this.savingStepsCheckBox.TabIndex = 4;
-            this.savingStepsCheckBox.Text = "Saving ImageSteps";
-            this.savingStepsCheckBox.UseVisualStyleBackColor = true;
             // 
             // imagePath
             // 
@@ -1505,16 +1544,16 @@
             this.imagePath.Multiline = true;
             this.imagePath.Name = "imagePath";
             this.imagePath.ReadOnly = true;
-            this.imagePath.Size = new System.Drawing.Size(488, 29);
+            this.imagePath.Size = new System.Drawing.Size(524, 28);
             this.imagePath.TabIndex = 0;
             // 
             // buttonPrevImage
             // 
-            this.buttonPrevImage.Dock = System.Windows.Forms.DockStyle.Left;
+            this.buttonPrevImage.Dock = System.Windows.Forms.DockStyle.Right;
             this.buttonPrevImage.Enabled = false;
-            this.buttonPrevImage.Location = new System.Drawing.Point(161, 38);
+            this.buttonPrevImage.Location = new System.Drawing.Point(177, 37);
             this.buttonPrevImage.Name = "buttonPrevImage";
-            this.buttonPrevImage.Size = new System.Drawing.Size(97, 24);
+            this.buttonPrevImage.Size = new System.Drawing.Size(97, 28);
             this.buttonPrevImage.TabIndex = 0;
             this.buttonPrevImage.Text = "prev";
             this.buttonPrevImage.UseVisualStyleBackColor = true;
@@ -1524,9 +1563,9 @@
             // 
             this.panel1.Controls.Add(this.loadButton);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(3, 38);
+            this.panel1.Location = new System.Drawing.Point(3, 37);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(152, 24);
+            this.panel1.Size = new System.Drawing.Size(152, 28);
             this.panel1.TabIndex = 1;
             // 
             // loadButton
@@ -1534,31 +1573,98 @@
             this.loadButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.loadButton.Location = new System.Drawing.Point(0, 0);
             this.loadButton.Name = "loadButton";
-            this.loadButton.Size = new System.Drawing.Size(152, 24);
+            this.loadButton.Size = new System.Drawing.Size(152, 28);
             this.loadButton.TabIndex = 3;
             this.loadButton.Text = "load";
             this.loadButton.UseVisualStyleBackColor = true;
             this.loadButton.Click += new System.EventHandler(this.loadButton_Click);
             // 
-            // groupBox8
+            // processingButton
             // 
-            this.tableLayoutPanel3.SetColumnSpan(this.groupBox8, 2);
-            this.groupBox8.Controls.Add(this.upDownFilesNumber);
-            this.groupBox8.Controls.Add(this.productionCheckBox);
-            this.groupBox8.Controls.Add(this.label20);
-            this.groupBox8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox8.Location = new System.Drawing.Point(161, 128);
-            this.groupBox8.Name = "groupBox8";
-            this.tableLayoutPanel3.SetRowSpan(this.groupBox8, 2);
-            this.groupBox8.Size = new System.Drawing.Size(190, 48);
-            this.groupBox8.TabIndex = 6;
-            this.groupBox8.TabStop = false;
+            this.processingButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.processingButton.Location = new System.Drawing.Point(393, 37);
+            this.processingButton.Name = "processingButton";
+            this.processingButton.Size = new System.Drawing.Size(134, 28);
+            this.processingButton.TabIndex = 9;
+            this.processingButton.Text = "Processing";
+            this.processingButton.UseVisualStyleBackColor = true;
+            this.processingButton.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // teachFileLoadButton
+            // 
+            this.teachFileLoadButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.teachFileLoadButton.Location = new System.Drawing.Point(3, 71);
+            this.teachFileLoadButton.Name = "teachFileLoadButton";
+            this.teachFileLoadButton.Size = new System.Drawing.Size(152, 28);
+            this.teachFileLoadButton.TabIndex = 8;
+            this.teachFileLoadButton.Text = "Load CSV";
+            this.teachFileLoadButton.UseVisualStyleBackColor = true;
+            this.teachFileLoadButton.Click += new System.EventHandler(this.teachFileLoadButton_Click);
+            // 
+            // trainFileTextBox
+            // 
+            this.tableLayoutPanel3.SetColumnSpan(this.trainFileTextBox, 2);
+            this.trainFileTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.trainFileTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.trainFileTextBox.Location = new System.Drawing.Point(161, 71);
+            this.trainFileTextBox.Name = "trainFileTextBox";
+            this.trainFileTextBox.ReadOnly = true;
+            this.trainFileTextBox.Size = new System.Drawing.Size(226, 24);
+            this.trainFileTextBox.TabIndex = 13;
+            // 
+            // TrainButton
+            // 
+            this.TrainButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TrainButton.Location = new System.Drawing.Point(393, 71);
+            this.TrainButton.Name = "TrainButton";
+            this.TrainButton.Size = new System.Drawing.Size(134, 28);
+            this.TrainButton.TabIndex = 15;
+            this.TrainButton.Text = "Train";
+            this.TrainButton.UseVisualStyleBackColor = true;
+            this.TrainButton.Click += new System.EventHandler(this.TrainButton_Click);
+            // 
+            // button1
+            // 
+            this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button1.Location = new System.Drawing.Point(3, 105);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(152, 31);
+            this.button1.TabIndex = 16;
+            this.button1.Text = "Load Precedents";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // precedentsFileBox
+            // 
+            this.tableLayoutPanel3.SetColumnSpan(this.precedentsFileBox, 2);
+            this.precedentsFileBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.precedentsFileBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.precedentsFileBox.Location = new System.Drawing.Point(161, 105);
+            this.precedentsFileBox.Name = "precedentsFileBox";
+            this.precedentsFileBox.ReadOnly = true;
+            this.precedentsFileBox.Size = new System.Drawing.Size(226, 24);
+            this.precedentsFileBox.TabIndex = 17;
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.upDownFilesNumber);
+            this.groupBox7.Controls.Add(this.productionCheckBox);
+            this.groupBox7.Controls.Add(this.savingStepsCheckBox);
+            this.groupBox7.Controls.Add(this.label20);
+            this.groupBox7.Controls.Add(this.folderProcessingButton);
+            this.groupBox7.Controls.Add(this.saveClassificationCheckBox);
+            this.groupBox7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox7.Location = new System.Drawing.Point(533, 3);
+            this.groupBox7.Name = "groupBox7";
+            this.tableLayoutPanel3.SetRowSpan(this.groupBox7, 4);
+            this.groupBox7.Size = new System.Drawing.Size(167, 133);
+            this.groupBox7.TabIndex = 18;
+            this.groupBox7.TabStop = false;
             // 
             // upDownFilesNumber
             // 
-            this.upDownFilesNumber.Location = new System.Drawing.Point(143, 1);
+            this.upDownFilesNumber.Location = new System.Drawing.Point(97, 78);
             this.upDownFilesNumber.Name = "upDownFilesNumber";
-            this.upDownFilesNumber.Size = new System.Drawing.Size(70, 22);
+            this.upDownFilesNumber.Size = new System.Drawing.Size(61, 22);
             this.upDownFilesNumber.TabIndex = 7;
             this.upDownFilesNumber.Value = new decimal(new int[] {
             50,
@@ -1569,139 +1675,62 @@
             // productionCheckBox
             // 
             this.productionCheckBox.AutoSize = true;
-            this.productionCheckBox.Location = new System.Drawing.Point(9, 25);
+            this.productionCheckBox.Location = new System.Drawing.Point(9, 54);
             this.productionCheckBox.Name = "productionCheckBox";
             this.productionCheckBox.Size = new System.Drawing.Size(91, 20);
             this.productionCheckBox.TabIndex = 10;
             this.productionCheckBox.Text = "Production";
             this.productionCheckBox.UseVisualStyleBackColor = true;
             // 
+            // savingStepsCheckBox
+            // 
+            this.savingStepsCheckBox.AutoSize = true;
+            this.savingStepsCheckBox.Location = new System.Drawing.Point(8, 2);
+            this.savingStepsCheckBox.Name = "savingStepsCheckBox";
+            this.savingStepsCheckBox.Size = new System.Drawing.Size(145, 20);
+            this.savingStepsCheckBox.TabIndex = 4;
+            this.savingStepsCheckBox.Text = "Saving ImageSteps";
+            this.savingStepsCheckBox.UseVisualStyleBackColor = true;
+            // 
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(6, 2);
+            this.label20.Location = new System.Drawing.Point(5, 80);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(118, 16);
+            this.label20.Size = new System.Drawing.Size(80, 16);
             this.label20.TabIndex = 6;
-            this.label20.Text = "Number of images";
+            this.label20.Text = "ImageCount";
             // 
             // folderProcessingButton
             // 
-            this.folderProcessingButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.folderProcessingButton.Location = new System.Drawing.Point(357, 98);
+            this.folderProcessingButton.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.folderProcessingButton.Location = new System.Drawing.Point(3, 102);
             this.folderProcessingButton.Name = "folderProcessingButton";
-            this.folderProcessingButton.Size = new System.Drawing.Size(134, 24);
+            this.folderProcessingButton.Size = new System.Drawing.Size(161, 28);
             this.folderProcessingButton.TabIndex = 7;
             this.folderProcessingButton.Text = "Folder Processing";
             this.folderProcessingButton.UseVisualStyleBackColor = true;
             this.folderProcessingButton.Click += new System.EventHandler(this.groupProcessingButton_Click);
             // 
-            // processingButton
-            // 
-            this.processingButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.processingButton.Location = new System.Drawing.Point(357, 38);
-            this.processingButton.Name = "processingButton";
-            this.processingButton.Size = new System.Drawing.Size(134, 24);
-            this.processingButton.TabIndex = 9;
-            this.processingButton.Text = "Processing";
-            this.processingButton.UseVisualStyleBackColor = true;
-            this.processingButton.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // teachFileLoadButton
-            // 
-            this.teachFileLoadButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.teachFileLoadButton.Location = new System.Drawing.Point(3, 68);
-            this.teachFileLoadButton.Name = "teachFileLoadButton";
-            this.teachFileLoadButton.Size = new System.Drawing.Size(152, 24);
-            this.teachFileLoadButton.TabIndex = 8;
-            this.teachFileLoadButton.Text = "Load CSV";
-            this.teachFileLoadButton.UseVisualStyleBackColor = true;
-            this.teachFileLoadButton.Click += new System.EventHandler(this.teachFileLoadButton_Click);
-            // 
-            // xlsTextBox
-            // 
-            this.tableLayoutPanel3.SetColumnSpan(this.xlsTextBox, 2);
-            this.xlsTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.xlsTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.xlsTextBox.Location = new System.Drawing.Point(161, 68);
-            this.xlsTextBox.Name = "xlsTextBox";
-            this.xlsTextBox.ReadOnly = true;
-            this.xlsTextBox.Size = new System.Drawing.Size(190, 24);
-            this.xlsTextBox.TabIndex = 13;
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.checkBox1.Location = new System.Drawing.Point(357, 128);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(134, 21);
-            this.checkBox1.TabIndex = 14;
-            this.checkBox1.Text = "Saving to CSV";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            // 
             // saveClassificationCheckBox
             // 
             this.saveClassificationCheckBox.AutoSize = true;
-            this.saveClassificationCheckBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.saveClassificationCheckBox.Location = new System.Drawing.Point(3, 155);
+            this.saveClassificationCheckBox.Location = new System.Drawing.Point(8, 28);
             this.saveClassificationCheckBox.Name = "saveClassificationCheckBox";
-            this.saveClassificationCheckBox.Size = new System.Drawing.Size(152, 21);
+            this.saveClassificationCheckBox.Size = new System.Drawing.Size(151, 20);
             this.saveClassificationCheckBox.TabIndex = 3;
             this.saveClassificationCheckBox.Text = "Saving Classification";
             this.saveClassificationCheckBox.UseVisualStyleBackColor = true;
             // 
-            // xlsProcessingButton
+            // savePrecedentsButton
             // 
-            this.xlsProcessingButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.xlsProcessingButton.Location = new System.Drawing.Point(357, 68);
-            this.xlsProcessingButton.Name = "xlsProcessingButton";
-            this.xlsProcessingButton.Size = new System.Drawing.Size(134, 24);
-            this.xlsProcessingButton.TabIndex = 15;
-            this.xlsProcessingButton.Text = "CSV Processing";
-            this.xlsProcessingButton.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button1.Location = new System.Drawing.Point(3, 98);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(152, 24);
-            this.button1.TabIndex = 16;
-            this.button1.Text = "Load Precedents";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // precedentsFileBox
-            // 
-            this.tableLayoutPanel3.SetColumnSpan(this.precedentsFileBox, 2);
-            this.precedentsFileBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.precedentsFileBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.precedentsFileBox.Location = new System.Drawing.Point(161, 98);
-            this.precedentsFileBox.Name = "precedentsFileBox";
-            this.precedentsFileBox.ReadOnly = true;
-            this.precedentsFileBox.Size = new System.Drawing.Size(190, 24);
-            this.precedentsFileBox.TabIndex = 17;
-            // 
-            // groupBox7
-            // 
-            this.groupBox7.Controls.Add(this.csvInfoBox);
-            this.groupBox7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox7.Location = new System.Drawing.Point(497, 3);
-            this.groupBox7.Name = "groupBox7";
-            this.tableLayoutPanel3.SetRowSpan(this.groupBox7, 6);
-            this.groupBox7.Size = new System.Drawing.Size(157, 173);
-            this.groupBox7.TabIndex = 18;
-            this.groupBox7.TabStop = false;
-            // 
-            // csvInfoBox
-            // 
-            this.csvInfoBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.csvInfoBox.FormattingEnabled = true;
-            this.csvInfoBox.ItemHeight = 16;
-            this.csvInfoBox.Location = new System.Drawing.Point(3, 18);
-            this.csvInfoBox.Name = "csvInfoBox";
-            this.csvInfoBox.Size = new System.Drawing.Size(151, 152);
-            this.csvInfoBox.TabIndex = 0;
+            this.savePrecedentsButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.savePrecedentsButton.Location = new System.Drawing.Point(393, 105);
+            this.savePrecedentsButton.Name = "savePrecedentsButton";
+            this.savePrecedentsButton.Size = new System.Drawing.Size(134, 31);
+            this.savePrecedentsButton.TabIndex = 19;
+            this.savePrecedentsButton.Text = "Save Precedents";
+            this.savePrecedentsButton.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel4
             // 
@@ -1711,11 +1740,11 @@
             this.tableLayoutPanel4.Controls.Add(this.sourceModMPicture, 0, 0);
             this.tableLayoutPanel4.Controls.Add(this.outModMPicture, 1, 0);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(169, 490);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(180, 481);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 1;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(158, 114);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(170, 123);
             this.tableLayoutPanel4.TabIndex = 23;
             // 
             // sourceModMPicture
@@ -1723,7 +1752,7 @@
             this.sourceModMPicture.Dock = System.Windows.Forms.DockStyle.Fill;
             this.sourceModMPicture.Location = new System.Drawing.Point(3, 3);
             this.sourceModMPicture.Name = "sourceModMPicture";
-            this.sourceModMPicture.Size = new System.Drawing.Size(73, 108);
+            this.sourceModMPicture.Size = new System.Drawing.Size(79, 117);
             this.sourceModMPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.sourceModMPicture.TabIndex = 0;
             this.sourceModMPicture.TabStop = false;
@@ -1732,9 +1761,9 @@
             // outModMPicture
             // 
             this.outModMPicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.outModMPicture.Location = new System.Drawing.Point(82, 3);
+            this.outModMPicture.Location = new System.Drawing.Point(88, 3);
             this.outModMPicture.Name = "outModMPicture";
-            this.outModMPicture.Size = new System.Drawing.Size(73, 108);
+            this.outModMPicture.Size = new System.Drawing.Size(79, 117);
             this.outModMPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.outModMPicture.TabIndex = 1;
             this.outModMPicture.TabStop = false;
@@ -1748,11 +1777,11 @@
             this.tableLayoutPanel5.Controls.Add(this.sourceModAPicture, 0, 0);
             this.tableLayoutPanel5.Controls.Add(this.outModAPicture, 1, 0);
             this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel5.Location = new System.Drawing.Point(333, 490);
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(356, 481);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             this.tableLayoutPanel5.RowCount = 1;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(161, 114);
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(173, 123);
             this.tableLayoutPanel5.TabIndex = 24;
             // 
             // sourceModAPicture
@@ -1760,7 +1789,7 @@
             this.sourceModAPicture.Dock = System.Windows.Forms.DockStyle.Fill;
             this.sourceModAPicture.Location = new System.Drawing.Point(3, 3);
             this.sourceModAPicture.Name = "sourceModAPicture";
-            this.sourceModAPicture.Size = new System.Drawing.Size(74, 108);
+            this.sourceModAPicture.Size = new System.Drawing.Size(80, 117);
             this.sourceModAPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.sourceModAPicture.TabIndex = 0;
             this.sourceModAPicture.TabStop = false;
@@ -1769,9 +1798,9 @@
             // outModAPicture
             // 
             this.outModAPicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.outModAPicture.Location = new System.Drawing.Point(83, 3);
+            this.outModAPicture.Location = new System.Drawing.Point(89, 3);
             this.outModAPicture.Name = "outModAPicture";
-            this.outModAPicture.Size = new System.Drawing.Size(75, 108);
+            this.outModAPicture.Size = new System.Drawing.Size(81, 117);
             this.outModAPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.outModAPicture.TabIndex = 1;
             this.outModAPicture.TabStop = false;
@@ -1780,9 +1809,9 @@
             // cropPicture
             // 
             this.cropPicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cropPicture.Location = new System.Drawing.Point(333, 349);
+            this.cropPicture.Location = new System.Drawing.Point(356, 331);
             this.cropPicture.Name = "cropPicture";
-            this.cropPicture.Size = new System.Drawing.Size(161, 115);
+            this.cropPicture.Size = new System.Drawing.Size(173, 124);
             this.cropPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.cropPicture.TabIndex = 26;
             this.cropPicture.TabStop = false;
@@ -1791,9 +1820,9 @@
             // productionPicture
             // 
             this.productionPicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.productionPicture.Location = new System.Drawing.Point(500, 490);
+            this.productionPicture.Location = new System.Drawing.Point(535, 481);
             this.productionPicture.Name = "productionPicture";
-            this.productionPicture.Size = new System.Drawing.Size(160, 114);
+            this.productionPicture.Size = new System.Drawing.Size(171, 123);
             this.productionPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.productionPicture.TabIndex = 27;
             this.productionPicture.TabStop = false;
@@ -1803,9 +1832,10 @@
             // 
             this.label22.AutoSize = true;
             this.label22.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label22.Location = new System.Drawing.Point(3, 185);
+            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label22.Location = new System.Drawing.Point(3, 145);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(160, 20);
+            this.label22.Size = new System.Drawing.Size(171, 33);
             this.label22.TabIndex = 28;
             this.label22.Text = "Source";
             this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1815,10 +1845,10 @@
             // 
             this.groupBoxStat.Controls.Add(this.commonStatBox);
             this.groupBoxStat.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBoxStat.Location = new System.Drawing.Point(666, 470);
+            this.groupBoxStat.Location = new System.Drawing.Point(712, 461);
             this.groupBoxStat.Name = "groupBoxStat";
             this.tableLayoutPanel1.SetRowSpan(this.groupBoxStat, 5);
-            this.groupBoxStat.Size = new System.Drawing.Size(199, 215);
+            this.groupBoxStat.Size = new System.Drawing.Size(199, 224);
             this.groupBoxStat.TabIndex = 2;
             this.groupBoxStat.TabStop = false;
             this.groupBoxStat.Text = "CommonStat";
@@ -1830,7 +1860,7 @@
             this.commonStatBox.ItemHeight = 16;
             this.commonStatBox.Location = new System.Drawing.Point(3, 18);
             this.commonStatBox.Name = "commonStatBox";
-            this.commonStatBox.Size = new System.Drawing.Size(193, 194);
+            this.commonStatBox.Size = new System.Drawing.Size(193, 203);
             this.commonStatBox.TabIndex = 0;
             // 
             // modMBox
@@ -1843,9 +1873,9 @@
             "Uncertain",
             "Correct",
             "Incorrect"});
-            this.modMBox.Location = new System.Drawing.Point(169, 640);
+            this.modMBox.Location = new System.Drawing.Point(180, 640);
             this.modMBox.Name = "modMBox";
-            this.modMBox.Size = new System.Drawing.Size(158, 28);
+            this.modMBox.Size = new System.Drawing.Size(170, 28);
             this.modMBox.TabIndex = 40;
             this.modMBox.Visible = false;
             // 
@@ -1859,9 +1889,9 @@
             "Uncertain",
             "Correct",
             "Incorrect"});
-            this.modABox.Location = new System.Drawing.Point(333, 640);
+            this.modABox.Location = new System.Drawing.Point(356, 640);
             this.modABox.Name = "modABox";
-            this.modABox.Size = new System.Drawing.Size(161, 28);
+            this.modABox.Size = new System.Drawing.Size(173, 28);
             this.modABox.TabIndex = 41;
             this.modABox.Visible = false;
             // 
@@ -1877,7 +1907,7 @@
             "Incorrect"});
             this.elastoStatusBox.Location = new System.Drawing.Point(3, 640);
             this.elastoStatusBox.Name = "elastoStatusBox";
-            this.elastoStatusBox.Size = new System.Drawing.Size(160, 28);
+            this.elastoStatusBox.Size = new System.Drawing.Size(171, 28);
             this.elastoStatusBox.TabIndex = 39;
             this.elastoStatusBox.Visible = false;
             // 
@@ -1888,7 +1918,7 @@
             this.simpleElastoStatus.ForeColor = System.Drawing.SystemColors.ControlText;
             this.simpleElastoStatus.Location = new System.Drawing.Point(3, 607);
             this.simpleElastoStatus.Name = "simpleElastoStatus";
-            this.simpleElastoStatus.Size = new System.Drawing.Size(160, 30);
+            this.simpleElastoStatus.Size = new System.Drawing.Size(171, 30);
             this.simpleElastoStatus.TabIndex = 42;
             this.simpleElastoStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -1897,9 +1927,9 @@
             this.simpleModMStatus.AutoSize = true;
             this.simpleModMStatus.Dock = System.Windows.Forms.DockStyle.Fill;
             this.simpleModMStatus.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.simpleModMStatus.Location = new System.Drawing.Point(169, 607);
+            this.simpleModMStatus.Location = new System.Drawing.Point(180, 607);
             this.simpleModMStatus.Name = "simpleModMStatus";
-            this.simpleModMStatus.Size = new System.Drawing.Size(158, 30);
+            this.simpleModMStatus.Size = new System.Drawing.Size(170, 30);
             this.simpleModMStatus.TabIndex = 43;
             this.simpleModMStatus.Text = " ";
             this.simpleModMStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1909,12 +1939,440 @@
             this.simpleModAStatus.AutoSize = true;
             this.simpleModAStatus.Dock = System.Windows.Forms.DockStyle.Fill;
             this.simpleModAStatus.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.simpleModAStatus.Location = new System.Drawing.Point(333, 607);
+            this.simpleModAStatus.Location = new System.Drawing.Point(356, 607);
             this.simpleModAStatus.Name = "simpleModAStatus";
-            this.simpleModAStatus.Size = new System.Drawing.Size(161, 30);
+            this.simpleModAStatus.Size = new System.Drawing.Size(173, 30);
             this.simpleModAStatus.TabIndex = 44;
             this.simpleModAStatus.Text = " ";
             this.simpleModAStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tableLayoutPanel6
+            // 
+            this.tableLayoutPanel6.ColumnCount = 1;
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel6.Controls.Add(this.precedentBox, 0, 1);
+            this.tableLayoutPanel6.Controls.Add(this.groupBox9, 0, 4);
+            this.tableLayoutPanel6.Controls.Add(this.groupBox8, 0, 5);
+            this.tableLayoutPanel6.Controls.Add(this.listBox1, 0, 3);
+            this.tableLayoutPanel6.Controls.Add(this.isNormalizedPrecedentsBox, 0, 0);
+            this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(1176, 3);
+            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
+            this.tableLayoutPanel6.RowCount = 6;
+            this.tableLayoutPanel1.SetRowSpan(this.tableLayoutPanel6, 10);
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 130F));
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 265F));
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(194, 682);
+            this.tableLayoutPanel6.TabIndex = 46;
+            // 
+            // precedentBox
+            // 
+            this.precedentBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.precedentBox.FormattingEnabled = true;
+            this.precedentBox.ItemHeight = 16;
+            this.precedentBox.Location = new System.Drawing.Point(3, 28);
+            this.precedentBox.Name = "precedentBox";
+            this.precedentBox.Size = new System.Drawing.Size(188, 112);
+            this.precedentBox.TabIndex = 0;
+            // 
+            // groupBox9
+            // 
+            this.groupBox9.Controls.Add(this.upDownTeachConvergence);
+            this.groupBox9.Controls.Add(this.upDownTeachError);
+            this.groupBox9.Controls.Add(this.upDownAgeNum);
+            this.groupBox9.Controls.Add(this.upDownAgeSize);
+            this.groupBox9.Controls.Add(this.label36);
+            this.groupBox9.Controls.Add(this.label35);
+            this.groupBox9.Controls.Add(this.label34);
+            this.groupBox9.Controls.Add(this.label33);
+            this.groupBox9.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox9.Location = new System.Drawing.Point(3, 289);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Size = new System.Drawing.Size(188, 124);
+            this.groupBox9.TabIndex = 45;
+            this.groupBox9.TabStop = false;
+            this.groupBox9.Text = "Train Settings";
+            // 
+            // upDownTeachConvergence
+            // 
+            this.upDownTeachConvergence.Location = new System.Drawing.Point(121, 99);
+            this.upDownTeachConvergence.Maximum = new decimal(new int[] {
+            240,
+            0,
+            0,
+            0});
+            this.upDownTeachConvergence.Name = "upDownTeachConvergence";
+            this.upDownTeachConvergence.Size = new System.Drawing.Size(57, 22);
+            this.upDownTeachConvergence.TabIndex = 6;
+            this.upDownTeachConvergence.Value = new decimal(new int[] {
+            25,
+            0,
+            0,
+            0});
+            // 
+            // upDownTeachError
+            // 
+            this.upDownTeachError.Location = new System.Drawing.Point(121, 72);
+            this.upDownTeachError.Maximum = new decimal(new int[] {
+            240,
+            0,
+            0,
+            0});
+            this.upDownTeachError.Name = "upDownTeachError";
+            this.upDownTeachError.Size = new System.Drawing.Size(57, 22);
+            this.upDownTeachError.TabIndex = 5;
+            this.upDownTeachError.Value = new decimal(new int[] {
+            25,
+            0,
+            0,
+            0});
+            // 
+            // upDownAgeNum
+            // 
+            this.upDownAgeNum.Location = new System.Drawing.Point(121, 46);
+            this.upDownAgeNum.Maximum = new decimal(new int[] {
+            240,
+            0,
+            0,
+            0});
+            this.upDownAgeNum.Name = "upDownAgeNum";
+            this.upDownAgeNum.Size = new System.Drawing.Size(57, 22);
+            this.upDownAgeNum.TabIndex = 5;
+            this.upDownAgeNum.Value = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+            // 
+            // upDownAgeSize
+            // 
+            this.upDownAgeSize.Location = new System.Drawing.Point(121, 19);
+            this.upDownAgeSize.Maximum = new decimal(new int[] {
+            240,
+            0,
+            0,
+            0});
+            this.upDownAgeSize.Name = "upDownAgeSize";
+            this.upDownAgeSize.Size = new System.Drawing.Size(57, 22);
+            this.upDownAgeSize.TabIndex = 4;
+            this.upDownAgeSize.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Location = new System.Drawing.Point(6, 105);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(89, 16);
+            this.label36.TabIndex = 3;
+            this.label36.Text = "Convergence";
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Location = new System.Drawing.Point(5, 78);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(98, 16);
+            this.label35.TabIndex = 2;
+            this.label35.Text = "ErrorThreshold";
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Location = new System.Drawing.Point(5, 50);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(61, 16);
+            this.label34.TabIndex = 1;
+            this.label34.Text = "AgeNum";
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Location = new System.Drawing.Point(6, 24);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(59, 16);
+            this.label33.TabIndex = 0;
+            this.label33.Text = "AgeSize";
+            // 
+            // groupBox8
+            // 
+            this.groupBox8.Controls.Add(this.upDownSignatureRERight);
+            this.groupBox8.Controls.Add(this.upDownSignatureRELeft);
+            this.groupBox8.Controls.Add(this.upDownSignatureR2Right);
+            this.groupBox8.Controls.Add(this.upDownSignatureR2Left);
+            this.groupBox8.Controls.Add(this.upDownSignatureAngleFibro);
+            this.groupBox8.Controls.Add(this.upDownSignatureAngleRight);
+            this.groupBox8.Controls.Add(this.upDownSignatureAngleLeft);
+            this.groupBox8.Controls.Add(this.upDownSignatureArea);
+            this.groupBox8.Controls.Add(this.label44);
+            this.groupBox8.Controls.Add(this.label43);
+            this.groupBox8.Controls.Add(this.label42);
+            this.groupBox8.Controls.Add(this.label41);
+            this.groupBox8.Controls.Add(this.label40);
+            this.groupBox8.Controls.Add(this.label39);
+            this.groupBox8.Controls.Add(this.label38);
+            this.groupBox8.Controls.Add(this.label37);
+            this.groupBox8.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox8.Location = new System.Drawing.Point(3, 419);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.Size = new System.Drawing.Size(188, 260);
+            this.groupBox8.TabIndex = 46;
+            this.groupBox8.TabStop = false;
+            this.groupBox8.Text = "Signature Radiuses";
+            // 
+            // upDownSignatureRERight
+            // 
+            this.upDownSignatureRERight.DecimalPlaces = 2;
+            this.upDownSignatureRERight.Location = new System.Drawing.Point(121, 217);
+            this.upDownSignatureRERight.Maximum = new decimal(new int[] {
+            240,
+            0,
+            0,
+            0});
+            this.upDownSignatureRERight.Name = "upDownSignatureRERight";
+            this.upDownSignatureRERight.Size = new System.Drawing.Size(57, 22);
+            this.upDownSignatureRERight.TabIndex = 14;
+            this.upDownSignatureRERight.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            // 
+            // upDownSignatureRELeft
+            // 
+            this.upDownSignatureRELeft.DecimalPlaces = 2;
+            this.upDownSignatureRELeft.Location = new System.Drawing.Point(121, 189);
+            this.upDownSignatureRELeft.Maximum = new decimal(new int[] {
+            240,
+            0,
+            0,
+            0});
+            this.upDownSignatureRELeft.Name = "upDownSignatureRELeft";
+            this.upDownSignatureRELeft.Size = new System.Drawing.Size(57, 22);
+            this.upDownSignatureRELeft.TabIndex = 13;
+            this.upDownSignatureRELeft.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            // 
+            // upDownSignatureR2Right
+            // 
+            this.upDownSignatureR2Right.DecimalPlaces = 2;
+            this.upDownSignatureR2Right.Location = new System.Drawing.Point(121, 161);
+            this.upDownSignatureR2Right.Maximum = new decimal(new int[] {
+            240,
+            0,
+            0,
+            0});
+            this.upDownSignatureR2Right.Name = "upDownSignatureR2Right";
+            this.upDownSignatureR2Right.Size = new System.Drawing.Size(57, 22);
+            this.upDownSignatureR2Right.TabIndex = 12;
+            this.upDownSignatureR2Right.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            // 
+            // upDownSignatureR2Left
+            // 
+            this.upDownSignatureR2Left.DecimalPlaces = 2;
+            this.upDownSignatureR2Left.Location = new System.Drawing.Point(121, 133);
+            this.upDownSignatureR2Left.Maximum = new decimal(new int[] {
+            240,
+            0,
+            0,
+            0});
+            this.upDownSignatureR2Left.Name = "upDownSignatureR2Left";
+            this.upDownSignatureR2Left.Size = new System.Drawing.Size(57, 22);
+            this.upDownSignatureR2Left.TabIndex = 11;
+            this.upDownSignatureR2Left.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            // 
+            // upDownSignatureAngleFibro
+            // 
+            this.upDownSignatureAngleFibro.DecimalPlaces = 2;
+            this.upDownSignatureAngleFibro.Location = new System.Drawing.Point(121, 105);
+            this.upDownSignatureAngleFibro.Maximum = new decimal(new int[] {
+            240,
+            0,
+            0,
+            0});
+            this.upDownSignatureAngleFibro.Name = "upDownSignatureAngleFibro";
+            this.upDownSignatureAngleFibro.Size = new System.Drawing.Size(57, 22);
+            this.upDownSignatureAngleFibro.TabIndex = 10;
+            this.upDownSignatureAngleFibro.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            // 
+            // upDownSignatureAngleRight
+            // 
+            this.upDownSignatureAngleRight.DecimalPlaces = 2;
+            this.upDownSignatureAngleRight.Location = new System.Drawing.Point(121, 77);
+            this.upDownSignatureAngleRight.Maximum = new decimal(new int[] {
+            240,
+            0,
+            0,
+            0});
+            this.upDownSignatureAngleRight.Name = "upDownSignatureAngleRight";
+            this.upDownSignatureAngleRight.Size = new System.Drawing.Size(57, 22);
+            this.upDownSignatureAngleRight.TabIndex = 9;
+            this.upDownSignatureAngleRight.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            // 
+            // upDownSignatureAngleLeft
+            // 
+            this.upDownSignatureAngleLeft.DecimalPlaces = 2;
+            this.upDownSignatureAngleLeft.Location = new System.Drawing.Point(121, 49);
+            this.upDownSignatureAngleLeft.Maximum = new decimal(new int[] {
+            240,
+            0,
+            0,
+            0});
+            this.upDownSignatureAngleLeft.Name = "upDownSignatureAngleLeft";
+            this.upDownSignatureAngleLeft.Size = new System.Drawing.Size(57, 22);
+            this.upDownSignatureAngleLeft.TabIndex = 8;
+            this.upDownSignatureAngleLeft.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            // 
+            // upDownSignatureArea
+            // 
+            this.upDownSignatureArea.DecimalPlaces = 2;
+            this.upDownSignatureArea.Location = new System.Drawing.Point(121, 21);
+            this.upDownSignatureArea.Maximum = new decimal(new int[] {
+            240,
+            0,
+            0,
+            0});
+            this.upDownSignatureArea.Name = "upDownSignatureArea";
+            this.upDownSignatureArea.Size = new System.Drawing.Size(57, 22);
+            this.upDownSignatureArea.TabIndex = 7;
+            this.upDownSignatureArea.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            131072});
+            // 
+            // label44
+            // 
+            this.label44.AutoSize = true;
+            this.label44.Location = new System.Drawing.Point(9, 219);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(61, 16);
+            this.label44.TabIndex = 7;
+            this.label44.Text = "RE Right";
+            // 
+            // label43
+            // 
+            this.label43.AutoSize = true;
+            this.label43.Location = new System.Drawing.Point(9, 193);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(51, 16);
+            this.label43.TabIndex = 6;
+            this.label43.Text = "RE Left";
+            // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.Location = new System.Drawing.Point(9, 164);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(59, 16);
+            this.label42.TabIndex = 5;
+            this.label42.Text = "R2 Right";
+            // 
+            // label41
+            // 
+            this.label41.AutoSize = true;
+            this.label41.Location = new System.Drawing.Point(9, 134);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(49, 16);
+            this.label41.TabIndex = 4;
+            this.label41.Text = "R2 Left";
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Location = new System.Drawing.Point(9, 108);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(77, 16);
+            this.label40.TabIndex = 3;
+            this.label40.Text = "Fibro Angle";
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Location = new System.Drawing.Point(9, 80);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(77, 16);
+            this.label39.TabIndex = 2;
+            this.label39.Text = "Right Angle";
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Location = new System.Drawing.Point(9, 51);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(67, 16);
+            this.label38.TabIndex = 1;
+            this.label38.Text = "Left Angle";
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Location = new System.Drawing.Point(10, 26);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(37, 16);
+            this.label37.TabIndex = 0;
+            this.label37.Text = "Area";
+            // 
+            // listBox1
+            // 
+            this.listBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 16;
+            this.listBox1.Location = new System.Drawing.Point(3, 171);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(188, 112);
+            this.listBox1.TabIndex = 47;
+            // 
+            // isNormalizedPrecedentsBox
+            // 
+            this.isNormalizedPrecedentsBox.AutoSize = true;
+            this.isNormalizedPrecedentsBox.Location = new System.Drawing.Point(3, 3);
+            this.isNormalizedPrecedentsBox.Name = "isNormalizedPrecedentsBox";
+            this.isNormalizedPrecedentsBox.Size = new System.Drawing.Size(168, 19);
+            this.isNormalizedPrecedentsBox.TabIndex = 48;
+            this.isNormalizedPrecedentsBox.Text = "Normalized Precedents";
+            this.isNormalizedPrecedentsBox.UseVisualStyleBackColor = true;
+            // 
+            // normalizedSignatureBox
+            // 
+            this.normalizedSignatureBox.AutoSize = true;
+            this.normalizedSignatureBox.Location = new System.Drawing.Point(712, 148);
+            this.normalizedSignatureBox.Name = "normalizedSignatureBox";
+            this.normalizedSignatureBox.Size = new System.Drawing.Size(156, 20);
+            this.normalizedSignatureBox.TabIndex = 47;
+            this.normalizedSignatureBox.Text = "Normalized Signature";
+            this.normalizedSignatureBox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.normalizedSignatureBox.UseVisualStyleBackColor = true;
             // 
             // saveFileDialog
             // 
@@ -1929,7 +2387,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1173, 712);
+            this.ClientSize = new System.Drawing.Size(1419, 712);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.leftToolStrip);
             this.Controls.Add(this.menuStrip);
@@ -1990,10 +2448,9 @@
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
             this.panel1.ResumeLayout(false);
-            this.groupBox8.ResumeLayout(false);
-            this.groupBox8.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.upDownFilesNumber)).EndInit();
             this.groupBox7.ResumeLayout(false);
+            this.groupBox7.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownFilesNumber)).EndInit();
             this.tableLayoutPanel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.sourceModMPicture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.outModMPicture)).EndInit();
@@ -2003,6 +2460,24 @@
             ((System.ComponentModel.ISupportInitialize)(this.cropPicture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.productionPicture)).EndInit();
             this.groupBoxStat.ResumeLayout(false);
+            this.tableLayoutPanel6.ResumeLayout(false);
+            this.tableLayoutPanel6.PerformLayout();
+            this.groupBox9.ResumeLayout(false);
+            this.groupBox9.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownTeachConvergence)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownTeachError)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownAgeNum)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownAgeSize)).EndInit();
+            this.groupBox8.ResumeLayout(false);
+            this.groupBox8.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownSignatureRERight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownSignatureRELeft)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownSignatureR2Right)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownSignatureR2Left)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownSignatureAngleFibro)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownSignatureAngleRight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownSignatureAngleLeft)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownSignatureArea)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2103,7 +2578,6 @@
         private System.Windows.Forms.CheckBox saveClassificationCheckBox;
         private System.Windows.Forms.Button buttonNextImage;
         private System.Windows.Forms.Button buttonPrevImage;
-        private System.Windows.Forms.GroupBox groupBox8;
         private System.Windows.Forms.NumericUpDown upDownFilesNumber;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Button folderProcessingButton;
@@ -2131,17 +2605,47 @@
         private System.Windows.Forms.ComboBox modMBox;
         private System.Windows.Forms.ComboBox modABox;
         private System.Windows.Forms.Button loadButton;
-        private System.Windows.Forms.TextBox xlsTextBox;
+        private System.Windows.Forms.TextBox trainFileTextBox;
         private System.Windows.Forms.Label simpleElastoStatus;
         private System.Windows.Forms.Label simpleModMStatus;
         private System.Windows.Forms.Label simpleModAStatus;
         private System.Windows.Forms.OpenFileDialog openCsvFileDialog;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.Button xlsProcessingButton;
+        private System.Windows.Forms.Button TrainButton;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox precedentsFileBox;
         private System.Windows.Forms.GroupBox groupBox7;
-        private System.Windows.Forms.ListBox csvInfoBox;
+        private System.Windows.Forms.ListBox precedentBox;
+        private System.Windows.Forms.GroupBox groupBox9;
+        private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.Label label35;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
+        private System.Windows.Forms.Label label36;
+        private System.Windows.Forms.NumericUpDown upDownTeachConvergence;
+        private System.Windows.Forms.NumericUpDown upDownTeachError;
+        private System.Windows.Forms.NumericUpDown upDownAgeNum;
+        private System.Windows.Forms.NumericUpDown upDownAgeSize;
+        private System.Windows.Forms.GroupBox groupBox8;
+        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.CheckBox isNormalizedPrecedentsBox;
+        private System.Windows.Forms.CheckBox normalizedSignatureBox;
+        private System.Windows.Forms.Label label44;
+        private System.Windows.Forms.Label label43;
+        private System.Windows.Forms.Label label42;
+        private System.Windows.Forms.Label label41;
+        private System.Windows.Forms.Label label40;
+        private System.Windows.Forms.Label label39;
+        private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.NumericUpDown upDownSignatureRERight;
+        private System.Windows.Forms.NumericUpDown upDownSignatureRELeft;
+        private System.Windows.Forms.NumericUpDown upDownSignatureR2Right;
+        private System.Windows.Forms.NumericUpDown upDownSignatureR2Left;
+        private System.Windows.Forms.NumericUpDown upDownSignatureAngleFibro;
+        private System.Windows.Forms.NumericUpDown upDownSignatureAngleRight;
+        private System.Windows.Forms.NumericUpDown upDownSignatureAngleLeft;
+        private System.Windows.Forms.NumericUpDown upDownSignatureArea;
+        private System.Windows.Forms.Button savePrecedentsButton;
     }
 }
 
