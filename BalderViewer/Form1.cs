@@ -10,6 +10,7 @@ using System.Threading;
 using System.Windows.Forms;
 using Eklekto.Helpers;
 using FibroscanProcessor;
+using FibroscanProcessor.Elasto;
 
 namespace BalderViewer
 {
@@ -241,16 +242,17 @@ namespace BalderViewer
                 Dictionary<string, string> dict = new Dictionary<string, string>();
                 foreach (string line in File.ReadLines(trainFileTextBox.Text))
                 {
-                    dict.Add(line.Split(' ')[0], line.Substring(line.IndexOf(' ')));
+                    dict.Add(line.Split(' ')[0], line.Substring(line.IndexOf(' ') + 1));
                 }
                 ConcurrentDictionary<string, string> csvElementList = new ConcurrentDictionary<string, string>(dict);
                 if (!String.IsNullOrWhiteSpace(elastoStatusBox.Text) && !String.IsNullOrWhiteSpace(imagePath.Text))
                 {
                     string output = string.Join(" ", WorkingImage.WorkingSignature.NormalizedSignatura);
                     csvElementList.AddOrUpdate(imagePath.Text, output + " " + elastoStatusBox.Text);
+                    commonStatBox.Items.Add("Learning List count is " + csvElementList.Count);
                 }
                 File.WriteAllText(trainFileTextBox.Text,
-                    String.Join(Environment.NewLine, csvElementList.Select(d => d.Key + " " + d.Value).OrderBy(key => key)));
+                    string.Join(Environment.NewLine, csvElementList.Select(d => d.Key + " " + d.Value).OrderBy(key => key)));
             }
             catch (Exception ex)
             {
@@ -317,14 +319,69 @@ namespace BalderViewer
             }
         }
 
+        private void precedentsLoadButton_Click(object sender, EventArgs e)
+        {
+            if (openCsvFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                precedentsFileBox.Text = openCsvFileDialog.FileName;
+            }
+        }
+
         private void teachButton_Click(object sender, EventArgs e)
         {
             saveRightAnswerToCsv();
-            //saveSignatura();
+        }
+
+        private void TrainButton_Click(object sender, EventArgs e)
+        {
+            List<ElastogramSignatura> trainingSignatura = readSignatureFromFile(trainFileTextBox.Text);
+            List<ElastogramSignatura> precedentSignatura = readSignatureFromFile(precedentsFileBox.Text);
+            List<double> classificationRadiueses = new List<double>
+            {
+                (double)upDownSignatureArea.Value,
+                (double)upDownSignatureAngleFibro.Value,
+                (double)upDownSignatureAngleLeft.Value,
+                (double)upDownSignatureAngleRight.Value,
+                (double)upDownSignatureR2Left.Value,
+                (double)upDownSignatureR2Right.Value,
+                (double)upDownSignatureRELeft.Value,
+                (double)upDownSignatureRERight.Value,
+            };
+            LearningElastoClassificator classificator = new LearningElastoClassificator(trainingSignatura, precedentSignatura, classificationRadiueses);
+            classificator.Train((int)upDownAgeSize.Value, (int)upDownAgeNum.Value, (double)upDownTeachConvergence.Value, (double)upDownTeachError.Value);
+            List<ElastogramSignatura> outPrecedents = classificator.Precedents;
+            //outPrecedents.ForEach(signature => precedentBox.Items.Add(signature.Answer));
+            precedentBox.Items.Add(outPrecedents.Count);
         }
         #endregion
 
+
         #region Helpers
+
+        private List<ElastogramSignatura> readSignatureFromFile(string path)
+        {
+            List<ElastogramSignatura> elastoSignatura = new List<ElastogramSignatura>();
+            foreach (string line in File.ReadLines(path))
+            {
+                if (line.Length==0)
+                    break;
+                elastoSignatura.Add(stringToSignatura(line.Substring(line.IndexOf(' ') + 1), ' '));
+            }
+            return elastoSignatura;
+        } 
+
+        private ElastogramSignatura stringToSignatura(string signaturaString, char separator)
+        {
+            string[] numbersString = signaturaString.Split(separator);
+            if (numbersString.Length != ElastogramSignatura.Size + 1)
+                throw new ArgumentOutOfRangeException();
+            List<double> signatureInput = new List<double>();
+            for (int i = 0; i < ElastogramSignatura.Size; i++)
+                signatureInput.Add(Convert.ToDouble(numbersString[i]));
+            VerificationStatus answer = (VerificationStatus) Enum.Parse(typeof(VerificationStatus), numbersString.Last());
+            return new ElastogramSignatura(signatureInput, answer);
+        }
+
         private int GetCurrentFileImdex(string text)
         {
             var filesEnumerator = Directory.EnumerateFiles(Path.GetDirectoryName(text));
@@ -474,11 +531,10 @@ namespace BalderViewer
                 if (img != null)
                     img.Save(saveFileDialog.FileName + ".jpg");
         }
+
+
         #endregion
 
-        private void TrainButton_Click(object sender, EventArgs e)
-        {
-
-        }
+        
     }
 }

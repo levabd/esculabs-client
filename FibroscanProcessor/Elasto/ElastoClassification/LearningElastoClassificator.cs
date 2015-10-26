@@ -62,11 +62,11 @@ namespace FibroscanProcessor.Elasto
         /// <param name="goodTeachingRatio">convergence condition</param>
         /// <param name="errorPiece">maximum piece of errors</param>
         /// <returns>train successeful? </returns>
-        public CommonTrainInfo TrainClassificator(int ageSize, int maxAgeIterations, double goodTeachingPiece, double errorPiece  )
+        public CommonTrainInfo Train(int ageSize, int maxAgeIterations, double goodTeachingPiece, double errorPiece  )
         {
             int maxAgeNumber = Math.Min(maxAgeIterations, TrainingSignatura.Count / ageSize);
             int errorLimitPerAge = (int) errorPiece*ageSize;
-            int convergenceNum = (int) errorPiece*ageSize;
+            int convergenceNum = (int) goodTeachingPiece*ageSize;
             CommonTrainInfo TeachInformation = new CommonTrainInfo(errorLimitPerAge, convergenceNum);
 
             for (int ageNumber = 0; ageNumber < maxAgeNumber; ageNumber++)
