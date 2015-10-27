@@ -52,18 +52,33 @@ namespace FibroscanProcessor.Elasto
         #endregion
         
         #region Constructors
-        public ElastogramSignatura(List<double> inputSignature, VerificationStatus answer = VerificationStatus.NotCalculated)
+        public ElastogramSignatura(List<double> inputSignature, VerificationStatus answer = VerificationStatus.NotCalculated, 
+            bool isNormalized = false)
         {
             if (inputSignature.Count != Size)
                 throw new ArgumentException();
-            Area = inputSignature[0];
-            FibroAngle = inputSignature[1];
-            LeftAngle = inputSignature[2];
-            RightAngle = inputSignature[3];
-            RSquareLeft = inputSignature[4];
-            RSquareRight = inputSignature[5];
-            RelativeEstimationLeft = inputSignature[6];
-            RelativeEstimationRight = inputSignature[7];
+            if (isNormalized)
+            {
+                Area = inputSignature[0] / AreaNormalizator;
+                FibroAngle = Math.Atan((inputSignature[1] - 0.5)*Math.PI);
+                LeftAngle = Math.Atan((inputSignature[2] - 0.5) * Math.PI);
+                RightAngle = Math.Atan((inputSignature[3] - 0.5) * Math.PI);
+                RSquareLeft = inputSignature[4] * 100;
+                RSquareRight = inputSignature[5] * 100;
+                RelativeEstimationLeft = inputSignature[6] * 100;
+                RelativeEstimationRight = inputSignature[7] * 100;
+            }
+            else
+            {
+                Area = inputSignature[0];
+                FibroAngle = inputSignature[1];
+                LeftAngle = inputSignature[2];
+                RightAngle = inputSignature[3];
+                RSquareLeft = inputSignature[4];
+                RSquareRight = inputSignature[5];
+                RelativeEstimationLeft = inputSignature[6];
+                RelativeEstimationRight = inputSignature[7];
+            }
 
             Answer = answer;
         }

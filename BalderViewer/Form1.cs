@@ -24,6 +24,8 @@ namespace BalderViewer
         private List<ComboBox> teachStatusComboBox;
         private List<Label> simpleStatusLabel;
 
+        private LearningElastoClassificator LearningClassificator;
+        private CommonTrainInfo AgeInfo;
 
 
         public Form1()
@@ -152,7 +154,12 @@ namespace BalderViewer
             signatureBox.Items.Add("Right Relative Est:     " + Math.Round(WorkingImage.WorkingSignature.RelativeEstimationRight, 2));
             signatureBox.Items.Add("Blob Area:                " + WorkingImage.WorkingSignature.Area);
 
-            VerificationStatus elastoStatus = WorkingImage.Step10Classify();
+            VerificationStatus elastoStatus;
+            if (isLearningClassificatorCheckBox.Checked)
+                elastoStatus = smartElastogramVerification();
+            else
+                elastoStatus = WorkingImage.Step10Classify();
+
             resultBox.Items.Add("Elastogram is " + elastoStatus);
             simpleElastoStatus.Text = elastoStatus.ToString();
             return elastoStatus;
@@ -202,13 +209,40 @@ namespace BalderViewer
             }
         }
 
-        private void groupProcessingButton_Click(object sender, EventArgs e)
+        private void TrainClassificator()
         {
-            if (sourcePicture.Image == null)
-                LoadImage();
-            if (sourcePicture.Image != null)
-                FolderVerification();
+            List<ElastogramSignatura> trainingSignatura = readSignatureFromFile(trainFileTextBox.Text);
+            List<ElastogramSignatura> precedentSignatura = readSignatureFromFile(precedentsFileBox.Text);
+            List<double> classificationRadiueses = new List<double>
+            {
+                (double)upDownSignatureArea.Value,
+                (double)upDownSignatureAngleFibro.Value,
+                (double)upDownSignatureAngleLeft.Value,
+                (double)upDownSignatureAngleRight.Value,
+                (double)upDownSignatureR2Left.Value,
+                (double)upDownSignatureR2Right.Value,
+                (double)upDownSignatureRELeft.Value,
+                (double)upDownSignatureRERight.Value,
+            };
+             LearningClassificator = new LearningElastoClassificator(trainingSignatura, precedentSignatura, classificationRadiueses);
+             AgeInfo = LearningClassificator.Train((int)upDownAgeSize.Value, (int)upDownAgeNum.Value,
+                (double)upDownTeachConvergence.Value, (double)upDownTeachError.Value);
+            List<ElastogramSignatura> outPrecedents = LearningClassificator.Precedents;
+            precedentBox.Items.Clear();
+            outPrecedents.ForEach(signature => precedentBox.Items.Add(string.Join(" ", signature.NormalizedSignatura)));
+            AgeInfo.Info.ForEach(age => trainInfoBox.Items.Add(string.Join(" ", age.infoList)));
+            trainInfoBox.Items.Add(outPrecedents.Count);
         }
+
+        private VerificationStatus smartElastogramVerification()
+        {
+            if (AgeInfo.IsTrained)
+                return LearningClassificator.Classiffy(WorkingImage.WorkingSignature);
+
+            return VerificationStatus.NotCalculated;
+        } 
+
+
 
         #region Saving
         private void SaveOneImageToFolder()
@@ -311,6 +345,14 @@ namespace BalderViewer
 
         }
 
+        private void groupProcessingButton_Click(object sender, EventArgs e)
+        {
+            if (sourcePicture.Image == null)
+                LoadImage();
+            if (sourcePicture.Image != null)
+                FolderVerification();
+        }
+
         private void teachFileLoadButton_Click(object sender, EventArgs e)
         {
             if (openCsvFileDialog.ShowDialog() == DialogResult.OK)
@@ -334,24 +376,7 @@ namespace BalderViewer
 
         private void TrainButton_Click(object sender, EventArgs e)
         {
-            List<ElastogramSignatura> trainingSignatura = readSignatureFromFile(trainFileTextBox.Text);
-            List<ElastogramSignatura> precedentSignatura = readSignatureFromFile(precedentsFileBox.Text);
-            List<double> classificationRadiueses = new List<double>
-            {
-                (double)upDownSignatureArea.Value,
-                (double)upDownSignatureAngleFibro.Value,
-                (double)upDownSignatureAngleLeft.Value,
-                (double)upDownSignatureAngleRight.Value,
-                (double)upDownSignatureR2Left.Value,
-                (double)upDownSignatureR2Right.Value,
-                (double)upDownSignatureRELeft.Value,
-                (double)upDownSignatureRERight.Value,
-            };
-            LearningElastoClassificator classificator = new LearningElastoClassificator(trainingSignatura, precedentSignatura, classificationRadiueses);
-            classificator.Train((int)upDownAgeSize.Value, (int)upDownAgeNum.Value, (double)upDownTeachConvergence.Value, (double)upDownTeachError.Value);
-            List<ElastogramSignatura> outPrecedents = classificator.Precedents;
-            //outPrecedents.ForEach(signature => precedentBox.Items.Add(signature.Answer));
-            precedentBox.Items.Add(outPrecedents.Count);
+            TrainClassificator();
         }
         #endregion
 
@@ -379,7 +404,7 @@ namespace BalderViewer
             for (int i = 0; i < ElastogramSignatura.Size; i++)
                 signatureInput.Add(Convert.ToDouble(numbersString[i]));
             VerificationStatus answer = (VerificationStatus) Enum.Parse(typeof(VerificationStatus), numbersString.Last());
-            return new ElastogramSignatura(signatureInput, answer);
+            return new ElastogramSignatura(signatureInput, answer , true);
         }
 
         private int GetCurrentFileImdex(string text)
@@ -533,8 +558,9 @@ namespace BalderViewer
         }
 
 
+
         #endregion
 
-        
+       
     }
 }

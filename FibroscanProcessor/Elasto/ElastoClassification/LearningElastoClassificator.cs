@@ -84,6 +84,7 @@ namespace FibroscanProcessor.Elasto
                     return TeachInformation;
                 }
             }
+            TeachInformation.IsTrained = true;//!!!mb temp!!!
             return TeachInformation;
         } 
 

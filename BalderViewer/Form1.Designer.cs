@@ -186,7 +186,7 @@
             this.label39 = new System.Windows.Forms.Label();
             this.label38 = new System.Windows.Forms.Label();
             this.label37 = new System.Windows.Forms.Label();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.trainInfoBox = new System.Windows.Forms.ListBox();
             this.isNormalizedPrecedentsCheckBox = new System.Windows.Forms.CheckBox();
             this.isLearningClassificatorCheckBox = new System.Windows.Forms.CheckBox();
             this.normalizedSignatureBox = new System.Windows.Forms.CheckBox();
@@ -980,9 +980,9 @@
             // kuwaharaPicture
             // 
             this.kuwaharaPicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.kuwaharaPicture.Location = new System.Drawing.Point(353, 181);
+            this.kuwaharaPicture.Location = new System.Drawing.Point(351, 181);
             this.kuwaharaPicture.Name = "kuwaharaPicture";
-            this.kuwaharaPicture.Size = new System.Drawing.Size(171, 124);
+            this.kuwaharaPicture.Size = new System.Drawing.Size(170, 124);
             this.kuwaharaPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.kuwaharaPicture.TabIndex = 5;
             this.kuwaharaPicture.TabStop = false;
@@ -993,7 +993,7 @@
             this.sourcePicture.Dock = System.Windows.Forms.DockStyle.Fill;
             this.sourcePicture.Location = new System.Drawing.Point(3, 181);
             this.sourcePicture.Name = "sourcePicture";
-            this.sourcePicture.Size = new System.Drawing.Size(170, 124);
+            this.sourcePicture.Size = new System.Drawing.Size(169, 124);
             this.sourcePicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.sourcePicture.TabIndex = 3;
             this.sourcePicture.TabStop = false;
@@ -1002,9 +1002,9 @@
             // elastoPicture
             // 
             this.elastoPicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.elastoPicture.Location = new System.Drawing.Point(179, 181);
+            this.elastoPicture.Location = new System.Drawing.Point(178, 181);
             this.elastoPicture.Name = "elastoPicture";
-            this.elastoPicture.Size = new System.Drawing.Size(168, 124);
+            this.elastoPicture.Size = new System.Drawing.Size(167, 124);
             this.elastoPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.elastoPicture.TabIndex = 4;
             this.elastoPicture.TabStop = false;
@@ -1019,7 +1019,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0181F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 205F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 259F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 204F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 208F));
             this.tableLayoutPanel1.Controls.Add(this.label32, 2, 5);
             this.tableLayoutPanel1.Controls.Add(this.label31, 1, 5);
             this.tableLayoutPanel1.Controls.Add(this.label30, 0, 5);
@@ -1081,9 +1081,9 @@
             this.label32.AutoSize = true;
             this.label32.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label32.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label32.Location = new System.Drawing.Point(353, 458);
+            this.label32.Location = new System.Drawing.Point(351, 458);
             this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(171, 20);
+            this.label32.Size = new System.Drawing.Size(170, 20);
             this.label32.TabIndex = 38;
             this.label32.Text = "Mod A";
             this.label32.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1094,9 +1094,9 @@
             this.label31.AutoSize = true;
             this.label31.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label31.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label31.Location = new System.Drawing.Point(179, 458);
+            this.label31.Location = new System.Drawing.Point(178, 458);
             this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(168, 20);
+            this.label31.Size = new System.Drawing.Size(167, 20);
             this.label31.TabIndex = 37;
             this.label31.Text = "Mod M";
             this.label31.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1109,7 +1109,7 @@
             this.label30.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label30.Location = new System.Drawing.Point(3, 458);
             this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(170, 20);
+            this.label30.Size = new System.Drawing.Size(169, 20);
             this.label30.TabIndex = 36;
             this.label30.Text = "Final Elasto";
             this.label30.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1120,9 +1120,9 @@
             this.label29.AutoSize = true;
             this.label29.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label29.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label29.Location = new System.Drawing.Point(530, 308);
+            this.label29.Location = new System.Drawing.Point(527, 308);
             this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(170, 20);
+            this.label29.Size = new System.Drawing.Size(169, 20);
             this.label29.TabIndex = 35;
             this.label29.Text = "Choosing";
             this.label29.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1133,9 +1133,9 @@
             this.label28.AutoSize = true;
             this.label28.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label28.Location = new System.Drawing.Point(353, 308);
+            this.label28.Location = new System.Drawing.Point(351, 308);
             this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(171, 20);
+            this.label28.Size = new System.Drawing.Size(170, 20);
             this.label28.TabIndex = 34;
             this.label28.Text = "Crop";
             this.label28.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1146,9 +1146,9 @@
             this.label27.AutoSize = true;
             this.label27.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label27.Location = new System.Drawing.Point(179, 308);
+            this.label27.Location = new System.Drawing.Point(178, 308);
             this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(168, 20);
+            this.label27.Size = new System.Drawing.Size(167, 20);
             this.label27.TabIndex = 33;
             this.label27.Text = "Morphology";
             this.label27.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1161,7 +1161,7 @@
             this.label26.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label26.Location = new System.Drawing.Point(3, 308);
             this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(170, 20);
+            this.label26.Size = new System.Drawing.Size(169, 20);
             this.label26.TabIndex = 32;
             this.label26.Text = "Edge Removing";
             this.label26.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1172,9 +1172,9 @@
             this.label25.AutoSize = true;
             this.label25.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label25.Location = new System.Drawing.Point(530, 145);
+            this.label25.Location = new System.Drawing.Point(527, 145);
             this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(170, 33);
+            this.label25.Size = new System.Drawing.Size(169, 33);
             this.label25.TabIndex = 31;
             this.label25.Text = "Binarization";
             this.label25.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1185,9 +1185,9 @@
             this.label24.AutoSize = true;
             this.label24.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label24.Location = new System.Drawing.Point(353, 145);
+            this.label24.Location = new System.Drawing.Point(351, 145);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(171, 33);
+            this.label24.Size = new System.Drawing.Size(170, 33);
             this.label24.TabIndex = 30;
             this.label24.Text = "Kuwahara";
             this.label24.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1196,9 +1196,9 @@
             // teachButton
             // 
             this.teachButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.teachButton.Location = new System.Drawing.Point(530, 640);
+            this.teachButton.Location = new System.Drawing.Point(527, 640);
             this.teachButton.Name = "teachButton";
-            this.teachButton.Size = new System.Drawing.Size(170, 24);
+            this.teachButton.Size = new System.Drawing.Size(169, 24);
             this.teachButton.TabIndex = 10;
             this.teachButton.Text = "Add to Teaching";
             this.teachButton.UseVisualStyleBackColor = true;
@@ -1210,9 +1210,9 @@
             this.label23.AutoSize = true;
             this.label23.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label23.Location = new System.Drawing.Point(179, 145);
+            this.label23.Location = new System.Drawing.Point(178, 145);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(168, 33);
+            this.label23.Size = new System.Drawing.Size(167, 33);
             this.label23.TabIndex = 29;
             this.label23.Text = "Source Elasto";
             this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1221,9 +1221,9 @@
             // binarizationPicture
             // 
             this.binarizationPicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.binarizationPicture.Location = new System.Drawing.Point(530, 181);
+            this.binarizationPicture.Location = new System.Drawing.Point(527, 181);
             this.binarizationPicture.Name = "binarizationPicture";
-            this.binarizationPicture.Size = new System.Drawing.Size(170, 124);
+            this.binarizationPicture.Size = new System.Drawing.Size(169, 124);
             this.binarizationPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.binarizationPicture.TabIndex = 6;
             this.binarizationPicture.TabStop = false;
@@ -1234,7 +1234,7 @@
             this.edgePicture.Dock = System.Windows.Forms.DockStyle.Fill;
             this.edgePicture.Location = new System.Drawing.Point(3, 331);
             this.edgePicture.Name = "edgePicture";
-            this.edgePicture.Size = new System.Drawing.Size(170, 124);
+            this.edgePicture.Size = new System.Drawing.Size(169, 124);
             this.edgePicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.edgePicture.TabIndex = 7;
             this.edgePicture.TabStop = false;
@@ -1243,9 +1243,9 @@
             // morphologyPicture
             // 
             this.morphologyPicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.morphologyPicture.Location = new System.Drawing.Point(179, 331);
+            this.morphologyPicture.Location = new System.Drawing.Point(178, 331);
             this.morphologyPicture.Name = "morphologyPicture";
-            this.morphologyPicture.Size = new System.Drawing.Size(168, 124);
+            this.morphologyPicture.Size = new System.Drawing.Size(167, 124);
             this.morphologyPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.morphologyPicture.TabIndex = 8;
             this.morphologyPicture.TabStop = false;
@@ -1254,9 +1254,9 @@
             // choosingPicture
             // 
             this.choosingPicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.choosingPicture.Location = new System.Drawing.Point(530, 331);
+            this.choosingPicture.Location = new System.Drawing.Point(527, 331);
             this.choosingPicture.Name = "choosingPicture";
-            this.choosingPicture.Size = new System.Drawing.Size(170, 124);
+            this.choosingPicture.Size = new System.Drawing.Size(169, 124);
             this.choosingPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.choosingPicture.TabIndex = 9;
             this.choosingPicture.TabStop = false;
@@ -1267,7 +1267,7 @@
             this.approximationPicture.Dock = System.Windows.Forms.DockStyle.Fill;
             this.approximationPicture.Location = new System.Drawing.Point(3, 481);
             this.approximationPicture.Name = "approximationPicture";
-            this.approximationPicture.Size = new System.Drawing.Size(170, 123);
+            this.approximationPicture.Size = new System.Drawing.Size(169, 123);
             this.approximationPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.approximationPicture.TabIndex = 10;
             this.approximationPicture.TabStop = false;
@@ -1284,7 +1284,7 @@
             this.tableLayoutPanel2.Controls.Add(this.groupBox3, 0, 3);
             this.tableLayoutPanel2.Controls.Add(this.groupBox6, 0, 2);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(911, 3);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(907, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 7;
             this.tableLayoutPanel1.SetRowSpan(this.tableLayoutPanel2, 10);
@@ -1450,7 +1450,7 @@
             // 
             this.groupBoxLog2.Controls.Add(this.signatureBox);
             this.groupBoxLog2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBoxLog2.Location = new System.Drawing.Point(706, 181);
+            this.groupBoxLog2.Location = new System.Drawing.Point(702, 181);
             this.groupBoxLog2.Name = "groupBoxLog2";
             this.tableLayoutPanel1.SetRowSpan(this.groupBoxLog2, 3);
             this.groupBoxLog2.Size = new System.Drawing.Size(199, 274);
@@ -1473,7 +1473,7 @@
             // 
             this.groupBoxLog1.Controls.Add(this.resultBox);
             this.groupBoxLog1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBoxLog1.Location = new System.Drawing.Point(706, 3);
+            this.groupBoxLog1.Location = new System.Drawing.Point(702, 3);
             this.groupBoxLog1.Name = "groupBoxLog1";
             this.groupBoxLog1.Size = new System.Drawing.Size(199, 139);
             this.groupBoxLog1.TabIndex = 21;
@@ -1500,7 +1500,7 @@
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 51.46444F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 48.53556F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 140F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 175F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 177F));
             this.tableLayoutPanel3.Controls.Add(this.buttonNextImage, 2, 1);
             this.tableLayoutPanel3.Controls.Add(this.imagePath, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.buttonPrevImage, 1, 1);
@@ -1521,14 +1521,14 @@
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(697, 139);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(693, 139);
             this.tableLayoutPanel3.TabIndex = 22;
             // 
             // buttonNextImage
             // 
             this.buttonNextImage.Dock = System.Windows.Forms.DockStyle.Left;
             this.buttonNextImage.Enabled = false;
-            this.buttonNextImage.Location = new System.Drawing.Point(276, 37);
+            this.buttonNextImage.Location = new System.Drawing.Point(273, 37);
             this.buttonNextImage.Name = "buttonNextImage";
             this.buttonNextImage.Size = new System.Drawing.Size(90, 28);
             this.buttonNextImage.TabIndex = 1;
@@ -1545,14 +1545,14 @@
             this.imagePath.Multiline = true;
             this.imagePath.Name = "imagePath";
             this.imagePath.ReadOnly = true;
-            this.imagePath.Size = new System.Drawing.Size(515, 28);
+            this.imagePath.Size = new System.Drawing.Size(509, 28);
             this.imagePath.TabIndex = 0;
             // 
             // buttonPrevImage
             // 
             this.buttonPrevImage.Dock = System.Windows.Forms.DockStyle.Right;
             this.buttonPrevImage.Enabled = false;
-            this.buttonPrevImage.Location = new System.Drawing.Point(173, 37);
+            this.buttonPrevImage.Location = new System.Drawing.Point(170, 37);
             this.buttonPrevImage.Name = "buttonPrevImage";
             this.buttonPrevImage.Size = new System.Drawing.Size(97, 28);
             this.buttonPrevImage.TabIndex = 0;
@@ -1583,7 +1583,7 @@
             // processingButton
             // 
             this.processingButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.processingButton.Location = new System.Drawing.Point(384, 37);
+            this.processingButton.Location = new System.Drawing.Point(378, 37);
             this.processingButton.Name = "processingButton";
             this.processingButton.Size = new System.Drawing.Size(134, 28);
             this.processingButton.TabIndex = 9;
@@ -1610,14 +1610,14 @@
             this.trainFileTextBox.Location = new System.Drawing.Point(161, 71);
             this.trainFileTextBox.Name = "trainFileTextBox";
             this.trainFileTextBox.ReadOnly = true;
-            this.trainFileTextBox.Size = new System.Drawing.Size(217, 24);
+            this.trainFileTextBox.Size = new System.Drawing.Size(211, 24);
             this.trainFileTextBox.TabIndex = 13;
             this.trainFileTextBox.Text = "C:\\rep\\balder-client\\OfficeTeachFile.csv";
             // 
             // TrainButton
             // 
             this.TrainButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TrainButton.Location = new System.Drawing.Point(384, 71);
+            this.TrainButton.Location = new System.Drawing.Point(378, 71);
             this.TrainButton.Name = "TrainButton";
             this.TrainButton.Size = new System.Drawing.Size(134, 28);
             this.TrainButton.TabIndex = 15;
@@ -1644,7 +1644,7 @@
             this.precedentsFileBox.Location = new System.Drawing.Point(161, 105);
             this.precedentsFileBox.Name = "precedentsFileBox";
             this.precedentsFileBox.ReadOnly = true;
-            this.precedentsFileBox.Size = new System.Drawing.Size(217, 24);
+            this.precedentsFileBox.Size = new System.Drawing.Size(211, 24);
             this.precedentsFileBox.TabIndex = 17;
             this.precedentsFileBox.Text = "C:\\rep\\balder-client\\OfficePrecedentsFile.csv";
             // 
@@ -1657,10 +1657,10 @@
             this.groupBox7.Controls.Add(this.folderProcessingButton);
             this.groupBox7.Controls.Add(this.saveClassificationCheckBox);
             this.groupBox7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox7.Location = new System.Drawing.Point(524, 3);
+            this.groupBox7.Location = new System.Drawing.Point(518, 3);
             this.groupBox7.Name = "groupBox7";
             this.tableLayoutPanel3.SetRowSpan(this.groupBox7, 4);
-            this.groupBox7.Size = new System.Drawing.Size(170, 133);
+            this.groupBox7.Size = new System.Drawing.Size(172, 133);
             this.groupBox7.TabIndex = 18;
             this.groupBox7.TabStop = false;
             // 
@@ -1710,7 +1710,7 @@
             this.folderProcessingButton.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.folderProcessingButton.Location = new System.Drawing.Point(3, 102);
             this.folderProcessingButton.Name = "folderProcessingButton";
-            this.folderProcessingButton.Size = new System.Drawing.Size(164, 28);
+            this.folderProcessingButton.Size = new System.Drawing.Size(166, 28);
             this.folderProcessingButton.TabIndex = 7;
             this.folderProcessingButton.Text = "Folder Processing";
             this.folderProcessingButton.UseVisualStyleBackColor = true;
@@ -1729,7 +1729,7 @@
             // savePrecedentsButton
             // 
             this.savePrecedentsButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.savePrecedentsButton.Location = new System.Drawing.Point(384, 105);
+            this.savePrecedentsButton.Location = new System.Drawing.Point(378, 105);
             this.savePrecedentsButton.Name = "savePrecedentsButton";
             this.savePrecedentsButton.Size = new System.Drawing.Size(134, 31);
             this.savePrecedentsButton.TabIndex = 19;
@@ -1744,11 +1744,11 @@
             this.tableLayoutPanel4.Controls.Add(this.sourceModMPicture, 0, 0);
             this.tableLayoutPanel4.Controls.Add(this.outModMPicture, 1, 0);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(179, 481);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(178, 481);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 1;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(168, 123);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(167, 123);
             this.tableLayoutPanel4.TabIndex = 23;
             // 
             // sourceModMPicture
@@ -1756,7 +1756,7 @@
             this.sourceModMPicture.Dock = System.Windows.Forms.DockStyle.Fill;
             this.sourceModMPicture.Location = new System.Drawing.Point(3, 3);
             this.sourceModMPicture.Name = "sourceModMPicture";
-            this.sourceModMPicture.Size = new System.Drawing.Size(78, 117);
+            this.sourceModMPicture.Size = new System.Drawing.Size(77, 117);
             this.sourceModMPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.sourceModMPicture.TabIndex = 0;
             this.sourceModMPicture.TabStop = false;
@@ -1765,7 +1765,7 @@
             // outModMPicture
             // 
             this.outModMPicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.outModMPicture.Location = new System.Drawing.Point(87, 3);
+            this.outModMPicture.Location = new System.Drawing.Point(86, 3);
             this.outModMPicture.Name = "outModMPicture";
             this.outModMPicture.Size = new System.Drawing.Size(78, 117);
             this.outModMPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -1781,11 +1781,11 @@
             this.tableLayoutPanel5.Controls.Add(this.sourceModAPicture, 0, 0);
             this.tableLayoutPanel5.Controls.Add(this.outModAPicture, 1, 0);
             this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel5.Location = new System.Drawing.Point(353, 481);
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(351, 481);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             this.tableLayoutPanel5.RowCount = 1;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(171, 123);
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(170, 123);
             this.tableLayoutPanel5.TabIndex = 24;
             // 
             // sourceModAPicture
@@ -1804,7 +1804,7 @@
             this.outModAPicture.Dock = System.Windows.Forms.DockStyle.Fill;
             this.outModAPicture.Location = new System.Drawing.Point(88, 3);
             this.outModAPicture.Name = "outModAPicture";
-            this.outModAPicture.Size = new System.Drawing.Size(80, 117);
+            this.outModAPicture.Size = new System.Drawing.Size(79, 117);
             this.outModAPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.outModAPicture.TabIndex = 1;
             this.outModAPicture.TabStop = false;
@@ -1813,9 +1813,9 @@
             // cropPicture
             // 
             this.cropPicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cropPicture.Location = new System.Drawing.Point(353, 331);
+            this.cropPicture.Location = new System.Drawing.Point(351, 331);
             this.cropPicture.Name = "cropPicture";
-            this.cropPicture.Size = new System.Drawing.Size(171, 124);
+            this.cropPicture.Size = new System.Drawing.Size(170, 124);
             this.cropPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.cropPicture.TabIndex = 26;
             this.cropPicture.TabStop = false;
@@ -1824,9 +1824,9 @@
             // productionPicture
             // 
             this.productionPicture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.productionPicture.Location = new System.Drawing.Point(530, 481);
+            this.productionPicture.Location = new System.Drawing.Point(527, 481);
             this.productionPicture.Name = "productionPicture";
-            this.productionPicture.Size = new System.Drawing.Size(170, 123);
+            this.productionPicture.Size = new System.Drawing.Size(169, 123);
             this.productionPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.productionPicture.TabIndex = 27;
             this.productionPicture.TabStop = false;
@@ -1839,7 +1839,7 @@
             this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label22.Location = new System.Drawing.Point(3, 145);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(170, 33);
+            this.label22.Size = new System.Drawing.Size(169, 33);
             this.label22.TabIndex = 28;
             this.label22.Text = "Source";
             this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1849,7 +1849,7 @@
             // 
             this.groupBoxStat.Controls.Add(this.commonStatBox);
             this.groupBoxStat.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBoxStat.Location = new System.Drawing.Point(706, 461);
+            this.groupBoxStat.Location = new System.Drawing.Point(702, 461);
             this.groupBoxStat.Name = "groupBoxStat";
             this.tableLayoutPanel1.SetRowSpan(this.groupBoxStat, 5);
             this.groupBoxStat.Size = new System.Drawing.Size(199, 224);
@@ -1877,9 +1877,9 @@
             "Uncertain",
             "Correct",
             "Incorrect"});
-            this.modMBox.Location = new System.Drawing.Point(179, 640);
+            this.modMBox.Location = new System.Drawing.Point(178, 640);
             this.modMBox.Name = "modMBox";
-            this.modMBox.Size = new System.Drawing.Size(168, 28);
+            this.modMBox.Size = new System.Drawing.Size(167, 28);
             this.modMBox.TabIndex = 40;
             this.modMBox.Visible = false;
             // 
@@ -1893,9 +1893,9 @@
             "Uncertain",
             "Correct",
             "Incorrect"});
-            this.modABox.Location = new System.Drawing.Point(353, 640);
+            this.modABox.Location = new System.Drawing.Point(351, 640);
             this.modABox.Name = "modABox";
-            this.modABox.Size = new System.Drawing.Size(171, 28);
+            this.modABox.Size = new System.Drawing.Size(170, 28);
             this.modABox.TabIndex = 41;
             this.modABox.Visible = false;
             // 
@@ -1911,7 +1911,7 @@
             "Incorrect"});
             this.elastoStatusBox.Location = new System.Drawing.Point(3, 640);
             this.elastoStatusBox.Name = "elastoStatusBox";
-            this.elastoStatusBox.Size = new System.Drawing.Size(170, 28);
+            this.elastoStatusBox.Size = new System.Drawing.Size(169, 28);
             this.elastoStatusBox.TabIndex = 39;
             this.elastoStatusBox.Visible = false;
             // 
@@ -1922,7 +1922,7 @@
             this.simpleElastoStatus.ForeColor = System.Drawing.SystemColors.ControlText;
             this.simpleElastoStatus.Location = new System.Drawing.Point(3, 607);
             this.simpleElastoStatus.Name = "simpleElastoStatus";
-            this.simpleElastoStatus.Size = new System.Drawing.Size(170, 30);
+            this.simpleElastoStatus.Size = new System.Drawing.Size(169, 30);
             this.simpleElastoStatus.TabIndex = 42;
             this.simpleElastoStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -1931,9 +1931,9 @@
             this.simpleModMStatus.AutoSize = true;
             this.simpleModMStatus.Dock = System.Windows.Forms.DockStyle.Fill;
             this.simpleModMStatus.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.simpleModMStatus.Location = new System.Drawing.Point(179, 607);
+            this.simpleModMStatus.Location = new System.Drawing.Point(178, 607);
             this.simpleModMStatus.Name = "simpleModMStatus";
-            this.simpleModMStatus.Size = new System.Drawing.Size(168, 30);
+            this.simpleModMStatus.Size = new System.Drawing.Size(167, 30);
             this.simpleModMStatus.TabIndex = 43;
             this.simpleModMStatus.Text = " ";
             this.simpleModMStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1943,9 +1943,9 @@
             this.simpleModAStatus.AutoSize = true;
             this.simpleModAStatus.Dock = System.Windows.Forms.DockStyle.Fill;
             this.simpleModAStatus.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.simpleModAStatus.Location = new System.Drawing.Point(353, 607);
+            this.simpleModAStatus.Location = new System.Drawing.Point(351, 607);
             this.simpleModAStatus.Name = "simpleModAStatus";
-            this.simpleModAStatus.Size = new System.Drawing.Size(171, 30);
+            this.simpleModAStatus.Size = new System.Drawing.Size(170, 30);
             this.simpleModAStatus.TabIndex = 44;
             this.simpleModAStatus.Text = " ";
             this.simpleModAStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1957,11 +1957,11 @@
             this.tableLayoutPanel6.Controls.Add(this.precedentBox, 0, 2);
             this.tableLayoutPanel6.Controls.Add(this.groupBox9, 0, 5);
             this.tableLayoutPanel6.Controls.Add(this.groupBox8, 0, 6);
-            this.tableLayoutPanel6.Controls.Add(this.listBox1, 0, 4);
+            this.tableLayoutPanel6.Controls.Add(this.trainInfoBox, 0, 4);
             this.tableLayoutPanel6.Controls.Add(this.isNormalizedPrecedentsCheckBox, 0, 1);
             this.tableLayoutPanel6.Controls.Add(this.isLearningClassificatorCheckBox, 0, 0);
             this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel6.Location = new System.Drawing.Point(1170, 3);
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(1166, 3);
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
             this.tableLayoutPanel6.RowCount = 7;
             this.tableLayoutPanel1.SetRowSpan(this.tableLayoutPanel6, 10);
@@ -1972,17 +1972,18 @@
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 130F));
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 265F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(200, 682);
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(204, 682);
             this.tableLayoutPanel6.TabIndex = 46;
             // 
             // precedentBox
             // 
             this.precedentBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.precedentBox.FormattingEnabled = true;
+            this.precedentBox.HorizontalScrollbar = true;
             this.precedentBox.ItemHeight = 16;
             this.precedentBox.Location = new System.Drawing.Point(3, 57);
             this.precedentBox.Name = "precedentBox";
-            this.precedentBox.Size = new System.Drawing.Size(194, 98);
+            this.precedentBox.Size = new System.Drawing.Size(198, 98);
             this.precedentBox.TabIndex = 0;
             // 
             // groupBox9
@@ -1998,7 +1999,7 @@
             this.groupBox9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox9.Location = new System.Drawing.Point(3, 290);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(194, 124);
+            this.groupBox9.Size = new System.Drawing.Size(198, 124);
             this.groupBox9.TabIndex = 45;
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "Train Settings";
@@ -2125,7 +2126,7 @@
             this.groupBox8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox8.Location = new System.Drawing.Point(3, 420);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(194, 259);
+            this.groupBox8.Size = new System.Drawing.Size(198, 259);
             this.groupBox8.TabIndex = 46;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Signature Radiuses";
@@ -2140,7 +2141,7 @@
             196608});
             this.upDownSignatureRERight.Location = new System.Drawing.Point(121, 217);
             this.upDownSignatureRERight.Maximum = new decimal(new int[] {
-            240,
+            1,
             0,
             0,
             0});
@@ -2151,7 +2152,7 @@
             1,
             0,
             0,
-            131072});
+            0});
             // 
             // upDownSignatureRELeft
             // 
@@ -2163,7 +2164,7 @@
             196608});
             this.upDownSignatureRELeft.Location = new System.Drawing.Point(121, 189);
             this.upDownSignatureRELeft.Maximum = new decimal(new int[] {
-            240,
+            1,
             0,
             0,
             0});
@@ -2174,7 +2175,7 @@
             1,
             0,
             0,
-            131072});
+            0});
             // 
             // upDownSignatureR2Right
             // 
@@ -2186,7 +2187,7 @@
             196608});
             this.upDownSignatureR2Right.Location = new System.Drawing.Point(121, 161);
             this.upDownSignatureR2Right.Maximum = new decimal(new int[] {
-            240,
+            1,
             0,
             0,
             0});
@@ -2194,7 +2195,7 @@
             this.upDownSignatureR2Right.Size = new System.Drawing.Size(57, 22);
             this.upDownSignatureR2Right.TabIndex = 12;
             this.upDownSignatureR2Right.Value = new decimal(new int[] {
-            1,
+            5,
             0,
             0,
             131072});
@@ -2209,7 +2210,7 @@
             196608});
             this.upDownSignatureR2Left.Location = new System.Drawing.Point(121, 133);
             this.upDownSignatureR2Left.Maximum = new decimal(new int[] {
-            240,
+            1,
             0,
             0,
             0});
@@ -2217,7 +2218,7 @@
             this.upDownSignatureR2Left.Size = new System.Drawing.Size(57, 22);
             this.upDownSignatureR2Left.TabIndex = 11;
             this.upDownSignatureR2Left.Value = new decimal(new int[] {
-            1,
+            5,
             0,
             0,
             131072});
@@ -2232,7 +2233,7 @@
             196608});
             this.upDownSignatureAngleFibro.Location = new System.Drawing.Point(121, 105);
             this.upDownSignatureAngleFibro.Maximum = new decimal(new int[] {
-            240,
+            1,
             0,
             0,
             0});
@@ -2240,10 +2241,10 @@
             this.upDownSignatureAngleFibro.Size = new System.Drawing.Size(57, 22);
             this.upDownSignatureAngleFibro.TabIndex = 10;
             this.upDownSignatureAngleFibro.Value = new decimal(new int[] {
-            5,
+            3,
             0,
             0,
-            196608});
+            65536});
             // 
             // upDownSignatureAngleRight
             // 
@@ -2255,7 +2256,7 @@
             196608});
             this.upDownSignatureAngleRight.Location = new System.Drawing.Point(121, 77);
             this.upDownSignatureAngleRight.Maximum = new decimal(new int[] {
-            240,
+            1,
             0,
             0,
             0});
@@ -2263,10 +2264,10 @@
             this.upDownSignatureAngleRight.Size = new System.Drawing.Size(57, 22);
             this.upDownSignatureAngleRight.TabIndex = 9;
             this.upDownSignatureAngleRight.Value = new decimal(new int[] {
-            5,
+            3,
             0,
             0,
-            196608});
+            65536});
             // 
             // upDownSignatureAngleLeft
             // 
@@ -2278,7 +2279,7 @@
             196608});
             this.upDownSignatureAngleLeft.Location = new System.Drawing.Point(121, 49);
             this.upDownSignatureAngleLeft.Maximum = new decimal(new int[] {
-            240,
+            1,
             0,
             0,
             0});
@@ -2286,10 +2287,10 @@
             this.upDownSignatureAngleLeft.Size = new System.Drawing.Size(57, 22);
             this.upDownSignatureAngleLeft.TabIndex = 8;
             this.upDownSignatureAngleLeft.Value = new decimal(new int[] {
-            5,
+            3,
             0,
             0,
-            196608});
+            65536});
             // 
             // upDownSignatureArea
             // 
@@ -2301,7 +2302,7 @@
             131072});
             this.upDownSignatureArea.Location = new System.Drawing.Point(121, 21);
             this.upDownSignatureArea.Maximum = new decimal(new int[] {
-            240,
+            1,
             0,
             0,
             0});
@@ -2309,10 +2310,10 @@
             this.upDownSignatureArea.Size = new System.Drawing.Size(57, 22);
             this.upDownSignatureArea.TabIndex = 7;
             this.upDownSignatureArea.Value = new decimal(new int[] {
-            5,
+            3,
             0,
             0,
-            131072});
+            65536});
             // 
             // label44
             // 
@@ -2386,15 +2387,15 @@
             this.label37.TabIndex = 0;
             this.label37.Text = "Area";
             // 
-            // listBox1
+            // trainInfoBox
             // 
-            this.listBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 16;
-            this.listBox1.Location = new System.Drawing.Point(3, 186);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(194, 98);
-            this.listBox1.TabIndex = 47;
+            this.trainInfoBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.trainInfoBox.FormattingEnabled = true;
+            this.trainInfoBox.ItemHeight = 16;
+            this.trainInfoBox.Location = new System.Drawing.Point(3, 186);
+            this.trainInfoBox.Name = "trainInfoBox";
+            this.trainInfoBox.Size = new System.Drawing.Size(198, 98);
+            this.trainInfoBox.TabIndex = 47;
             // 
             // isNormalizedPrecedentsCheckBox
             // 
@@ -2402,7 +2403,7 @@
             this.isNormalizedPrecedentsCheckBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.isNormalizedPrecedentsCheckBox.Location = new System.Drawing.Point(3, 30);
             this.isNormalizedPrecedentsCheckBox.Name = "isNormalizedPrecedentsCheckBox";
-            this.isNormalizedPrecedentsCheckBox.Size = new System.Drawing.Size(194, 21);
+            this.isNormalizedPrecedentsCheckBox.Size = new System.Drawing.Size(198, 21);
             this.isNormalizedPrecedentsCheckBox.TabIndex = 48;
             this.isNormalizedPrecedentsCheckBox.Text = "Normalized Precedents";
             this.isNormalizedPrecedentsCheckBox.UseVisualStyleBackColor = true;
@@ -2413,7 +2414,7 @@
             this.isLearningClassificatorCheckBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.isLearningClassificatorCheckBox.Location = new System.Drawing.Point(3, 3);
             this.isLearningClassificatorCheckBox.Name = "isLearningClassificatorCheckBox";
-            this.isLearningClassificatorCheckBox.Size = new System.Drawing.Size(194, 21);
+            this.isLearningClassificatorCheckBox.Size = new System.Drawing.Size(198, 21);
             this.isLearningClassificatorCheckBox.TabIndex = 49;
             this.isLearningClassificatorCheckBox.Text = "Use Learning Classificator";
             this.isLearningClassificatorCheckBox.UseVisualStyleBackColor = true;
@@ -2421,7 +2422,7 @@
             // normalizedSignatureBox
             // 
             this.normalizedSignatureBox.AutoSize = true;
-            this.normalizedSignatureBox.Location = new System.Drawing.Point(706, 148);
+            this.normalizedSignatureBox.Location = new System.Drawing.Point(702, 148);
             this.normalizedSignatureBox.Name = "normalizedSignatureBox";
             this.normalizedSignatureBox.Size = new System.Drawing.Size(156, 20);
             this.normalizedSignatureBox.TabIndex = 47;
@@ -2681,7 +2682,7 @@
         private System.Windows.Forms.NumericUpDown upDownAgeNum;
         private System.Windows.Forms.NumericUpDown upDownAgeSize;
         private System.Windows.Forms.GroupBox groupBox8;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox trainInfoBox;
         private System.Windows.Forms.CheckBox isNormalizedPrecedentsCheckBox;
         private System.Windows.Forms.CheckBox normalizedSignatureBox;
         private System.Windows.Forms.Label label44;

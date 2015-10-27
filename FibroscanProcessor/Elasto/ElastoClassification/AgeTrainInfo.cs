@@ -1,4 +1,7 @@
-﻿namespace FibroscanProcessor.Elasto
+﻿using System;
+using System.Collections.Generic;
+
+namespace FibroscanProcessor.Elasto
 {
     public class AgeTrainInfo
     {
@@ -12,5 +15,11 @@
             Errors = error;
             TeachingNum = teachingNum;
         }
+
+        public List<int> infoList => new List<int>
+        {
+            Errors,
+            TeachingNum
+        };
     }
 }
