@@ -45,8 +45,8 @@ namespace Client
         public void RefreshPatientsList()
         {
             nameFilter.Text = "";
-            fromDateFilter.SelectedDate = null;
-            toDateFilter.SelectedDate = null;
+            //fromDateFilter.SelectedDate = null;
+            //toDateFilter.SelectedDate = null;
 
            // patients = PatientsRepo.Instance.GetGridList();
             patientsGrid.ItemsSource = patients;
@@ -56,10 +56,10 @@ namespace Client
         {
             IEnumerable<TablePatient> list = patients;
             string name = nameFilter.Text;
-            DateTime? dateFrom = fromDateFilter.SelectedDate;
-            DateTime? dateTo = toDateFilter.SelectedDate;
+           // DateTime? dateFrom = fromDateFilter.SelectedDate;
+           // DateTime? dateTo = toDateFilter.SelectedDate;
 
-            list = list.Where(x => (x.Filter(name, dateFrom, dateTo)));
+           // list = list.Where(x => (x.Filter(name, dateFrom, dateTo)));
 
             patientsGrid.ItemsSource = list;
         }
@@ -86,8 +86,8 @@ namespace Client
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            fromDateFilter.SetWatermarkText(DatePickerWatermark);
-            toDateFilter.SetWatermarkText(DatePickerWatermark);
+           // fromDateFilter.SetWatermarkText(DatePickerWatermark);
+           // toDateFilter.SetWatermarkText(DatePickerWatermark);
 
           //  patients = PatientsRepo.Instance.GetGridList();
 
@@ -111,8 +111,8 @@ namespace Client
 
         private void clearDateFilterButton_Click(object sender, RoutedEventArgs e)
         {
-            fromDateFilter.SelectedDate = null;
-            toDateFilter.SelectedDate = null;
+          //  fromDateFilter.SelectedDate = null;
+          //  toDateFilter.SelectedDate = null;
         }
 
         private void clearNameFilterButton_Click(object sender, RoutedEventArgs e)
@@ -123,8 +123,8 @@ namespace Client
         private void patientsGrid_Loaded(object sender, RoutedEventArgs e)
         {
             nameFilter.IsEnabled = true;
-            fromDateFilter.IsEnabled = true;
-            toDateFilter.IsEnabled = true;
+            //fromDateFilter.IsEnabled = true;
+           // toDateFilter.IsEnabled = true;
             clearNameFilterButton.IsEnabled = true;
             clearDateFilterButton.IsEnabled = true;
         }

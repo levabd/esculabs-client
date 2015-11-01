@@ -79,7 +79,7 @@ namespace Client
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            birthdateDatePicker.SetWatermarkText(DatePickerWatermark);
+            //birthdateDatePicker.SetWatermarkText(DatePickerWatermark);
             iinTextBox.Focus();
         }
 
@@ -99,7 +99,7 @@ namespace Client
                 PatientGender gender = (chr % 2 == 0) ? PatientGender.Female : PatientGender.Male;
                 year = (17 + (chr + 1) / 2).ToString() + year;
 
-                birthdateDatePicker.SelectedDate = new DateTime(int.Parse(year), int.Parse(month), int.Parse(day));
+                //birthdateDatePicker.SelectedDate = new DateTime(int.Parse(year), int.Parse(month), int.Parse(day));
 
                 if (gender == PatientGender.Male)
                 {

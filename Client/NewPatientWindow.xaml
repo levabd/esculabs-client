@@ -29,7 +29,7 @@
             <TextBox x:Name="scdTextBox" HorizontalAlignment="Left" Height="25" Margin="224,236,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="366"/>
             <RadioButton x:Name="maleRadioButton" Content="мужской" HorizontalAlignment="Left" Margin="224,317,0,0" VerticalAlignment="Top"/>
             <RadioButton x:Name="femaleRadioButton" Content="женский" HorizontalAlignment="Left" Margin="404,317,0,0" VerticalAlignment="Top"/>
-            <local:BDatePicker x:Name="birthdateDatePicker" HorizontalAlignment="Left" Margin="224,277,0,0" VerticalAlignment="Top" Width="366"/>
+           <!-- <local:BDatePicker x:Name="birthdateDatePicker" HorizontalAlignment="Left" Margin="224,277,0,0" VerticalAlignment="Top" Width="366"/> -->
         </Grid>
     </Grid>
 </Window>

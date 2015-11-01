@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Client.Helpers
 {
-    using Models;
     using System.Windows.Data;
     using System.Globalization;
+    using ModuleFramework;
 
-    [ValueConversion(typeof(PatientGender), typeof(String))]
+    [ValueConversion(typeof(PatientGender), typeof(string))]
     public class GenderConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

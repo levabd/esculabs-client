@@ -18,8 +18,7 @@ namespace Client.Repositories
         private static object _syncRoot = new object();
 
         private ILog _log;
-        private BalderContext _context = null;
-        private Physician current;
+        private PgSqlContext _context = null;
 
         public static PhysiciansRepository Instance
         {
@@ -44,17 +43,7 @@ namespace Client.Repositories
 
             if (_context == null)
             {
-                Database.SetInitializer(new CreateDatabaseIfNotExists<BalderContext>());
-
-                _context = new BalderContext();
-            }
-        }
-
-        public Physician CurrentPhysician
-        {
-            get
-            {
-                return current;
+                _context = new PgSqlContext();
             }
         }
 
@@ -63,10 +52,10 @@ namespace Client.Repositories
             return _context.Physicians.Find(id);
         }
 
-        public bool Authorize(string login, string password)
+        public Physician Authorize(string login, string password)
         {
-            try
-            {
+            //try
+            //{
                 // byte array representation of that string
                 byte[] encodedPassword = new UTF8Encoding().GetBytes(password);
 
@@ -81,21 +70,16 @@ namespace Client.Repositories
                    .ToLower();
 
                 var lowerLogin = login.ToLower();
-                Physician p = _context.Physicians.First(x => lowerLogin.Equals(x.Login.ToLower()) && encoded.Equals(x.Password));
+                var p = _context.Physicians.First(x => lowerLogin.Equals(x.Login.ToLower()) && encoded.Equals(x.Password));
 
-                if (p != null)
-                {
-                    current = p;
+                return p;
+            //}
+            //catch (Exception e)
+            //{
+            //    _log.Error(string.Format("Failed authorization result. Username = {0}, Reason: {1}", login, e.Message));
+            //}
 
-                    return true;
-                }
-            }
-            catch (Exception e)
-            {
-                _log.Error(string.Format("Failed authorization result. Username = {0}, Reason: {1}", login, e.Message));
-            }
-
-            return false;
+            return null;
         }
 
         public Patient Add(Patient patient)

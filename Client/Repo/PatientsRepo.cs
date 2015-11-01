@@ -17,7 +17,7 @@ namespace Client.Repo
         private static object syncRoot = new Object();
 
         private ILog log;
-        private BalderContext context = null;
+        private PgSqlContext context = null;
 
         public static PatientsRepo Instance
         {
@@ -42,7 +42,7 @@ namespace Client.Repo
 
             if (context == null)
             {
-                context = new BalderContext();
+                context = new PgSqlContext();
             }
         }
 

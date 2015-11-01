@@ -8,9 +8,8 @@ namespace Client.Helpers
 {
     using Models;
 
-    public class AuthorizationArgs : EventArgs
+    public class PatientTileClickArgs : EventArgs
     {
-        public bool Authorized { get; set; } = false;
-        public Physician Physician { get; set; }
+        public Patient Patient { get; set; } = null;
     }
 }

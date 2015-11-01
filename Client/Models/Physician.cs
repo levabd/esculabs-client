@@ -1,18 +1,17 @@
 ﻿namespace Client.Models
 {
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-
-    public enum PhysicianRole
-    {
-        Developer,
-        Support,
-        Physician
-    };
 
     [Table("public.physicians")]
     public partial class Physician
     {
+        public Physician()
+        {
+            Roles = new List<Role>();
+        }
+
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("id")]
         public int Id { get; set; }
@@ -57,8 +56,9 @@
         [Column("position")]
         public string Position { get; set; }
 
-        [Required]
-        [Column("role")]
-        public PhysicianRole Role { get; set; }
+        /// <summary>
+        /// Роли врача
+        /// </summary>
+        public virtual ICollection<Role> Roles { get; set; }
     }
 }

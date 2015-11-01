@@ -1,17 +1,13 @@
 ﻿namespace Client.Models
 {
     using System;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-
-    public enum PatientGender
-    {
-        Male,
-        Female
-    };
+    using ModuleFramework;
 
     [Table("public.patients")]
-    public partial class Patient
+    public partial class Patient : IPatient
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("id")]
@@ -114,5 +110,7 @@
         /// </summary>
         [Column("rh_factor")]
         public bool? RhFactor { get; set; }
+
+         
     }
 }

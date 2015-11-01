@@ -7,13 +7,13 @@ namespace Client.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class AddRoleColumnToPhysiciansTable : IMigrationMetadata
+    public sealed partial class CreateEsculabsTables : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddRoleColumnToPhysiciansTable));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(CreateEsculabsTables));
         
         string IMigrationMetadata.Id
         {
-            get { return "201510161625243_AddRoleColumnToPhysiciansTable"; }
+            get { return "201510280037123_CreateEsculabsTables"; }
         }
         
         string IMigrationMetadata.Source

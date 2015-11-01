@@ -17,12 +17,16 @@ namespace Client
     using MahApps.Metro.Controls;
     using MahApps.Metro.Controls.Dialogs;
     using Helpers;
+    using Models;
+    using Views;
 
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : MetroWindow
     {
+        private Physician _currentPhysician;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -35,16 +39,38 @@ namespace Client
             Left = 0;
             Top = 0;
 
-            loginView.LoginEventHandler += new EventHandler<AuthorizationArgs>(HandleAuthorizationAttempt);
+            loginView.LoginEventHandler += new EventHandler<AuthArgs>(HandleAuthorizationAttempt);
         }
 
-        private async void HandleAuthorizationAttempt(object sender, AuthorizationArgs e)
+        private void ShowPatientsListView()
         {
-            if (e.Authorized)
+            var view = new PatientsList();
+            view.TileClickEventHandler += new EventHandler<PatientTileClickArgs>(HandlePatientTileClick);
+            view.AddPatientButtonClick += new EventHandler<RoutedEventArgs>(HandleAddPatientButtonClick);
+
+            transitionContent.Content = view;
+        }
+
+        private void ShowAddPatientView()
+        {
+            var view = new AddPatient();
+
+            transitionContent.Content = view;
+        }
+
+        private void HandleAddPatientButtonClick(object sender, RoutedEventArgs e)
+        {
+            ShowAddPatientView();
+        }
+
+        private async void HandleAuthorizationAttempt(object sender, AuthArgs e)
+        {
+            if (e.Succeded)
             {
+                _currentPhysician = e.Physician;
                 ToggleAuthorizedTabs(true);
 
-                stepsTabControl.SelectedIndex = 1;
+                patientsListTabItem.IsSelected = true;
             }
             else
             {
@@ -52,6 +78,14 @@ namespace Client
             }
         }
 
+        private void HandlePatientTileClick(object sender, PatientTileClickArgs e)
+        {
+            modulesListView.Initialize(this, _currentPhysician, e.Patient);
+            modulesListView.ShowWidgets();
+
+            modulesListTabItem.IsSelected = true;
+        }
+        
         private void stepsTabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (e.Source is TabControl)
@@ -59,6 +93,11 @@ namespace Client
                 var tab = e.Source as TabControl;
 
                 presenter.Content = tab.SelectedIndex;
+
+                if (patientsListTabItem.IsSelected)
+                {
+                    ShowPatientsListView();
+                }
             }
         }
 
@@ -82,9 +121,9 @@ namespace Client
 
                     if (c == MessageDialogResult.Affirmative)
                     {
-                        stepsTabControl.SelectedIndex = 0;
-
                         ToggleAuthorizedTabs(false);
+                        _currentPhysician = null;
+                        stepsTabControl.SelectedIndex = 0;
                     }
 
                     break;

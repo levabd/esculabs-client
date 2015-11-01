@@ -10,13 +10,16 @@ using System.Windows.Markup;
 
 namespace Client
 {
+    using System.Data.Entity;
     using System.Runtime.InteropServices;
+    using Context;
 
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
     public partial class App : Application
     {
+        #region winapi
         protected const int SW_HIDE = 0;
         protected const int SW_SHOW = 1;
         protected const int WH_KEYBOARD = 2;
@@ -41,9 +44,12 @@ namespace Client
         public static extern int CallNextHookEx(int idHook, int nCode, IntPtr wParam, IntPtr lParam);
 
         protected delegate int HookProc(int nCode, IntPtr wParam, IntPtr lParam);
-        
+        #endregion
+
         protected override void OnStartup(StartupEventArgs e)
         {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<PgSqlContext, Migrations.Configuration>("PgSqlConnectionString"));
+
             _hTrayWnd = FindWindow("Shell_TrayWnd", "");
 
             //_hInstance = LoadLibrary("User32"); <<< 

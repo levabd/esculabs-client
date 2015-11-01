@@ -25,34 +25,27 @@ namespace Client.Views
     /// </summary>
     public partial class Login : UserControl
     {
-        public event EventHandler<AuthorizationArgs> LoginEventHandler;
-
-        public bool Authorized = false;
+        public event EventHandler<AuthArgs> LoginEventHandler;
 
         public Login()
         {
             InitializeComponent();
         }
 
-        private async void loginBtn_Click(object sender, RoutedEventArgs e)
+        private void loginBtn_Click(object sender, RoutedEventArgs e)
         {
-            var a = PhysiciansRepository.Instance.Authorize(loginTextBox.Text, passwordTextBox.Password);
+            var p = PhysiciansRepository.Instance.Authorize(loginTextBox.Text, passwordTextBox.Password);
 
             if (LoginEventHandler != null)
             {
-                AuthorizationArgs args = new AuthorizationArgs()
+                AuthArgs args = new AuthArgs()
                 {
-                    Authorized = a,
-                    Physician = a ? PhysiciansRepository.Instance.CurrentPhysician : null
+                    Succeded = p != null,
+                    Physician = p
                 };
                 
                 LoginEventHandler(this, args);
             }
-
-            //if (r == false)
-            //{
-            //    await MetroWindow.ShowMessageAsync("Не удалось выполнить вход", "Не удалось войти в систему с указанным логином/паролем");
-            //}
         }
     }
 }

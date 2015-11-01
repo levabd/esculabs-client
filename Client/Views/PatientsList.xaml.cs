@@ -17,17 +17,35 @@ namespace Client.Views
 {
     using Models;
     using Repositories;
+    using Helpers;
+    using Controls;
 
     /// <summary>
     /// Interaction logic for PatientsList.xaml
     /// </summary>
     public partial class PatientsList : UserControl
     {
-        private List<Patient> _patients = null;
+        public event EventHandler<PatientTileClickArgs> TileClickEventHandler;
+        public event EventHandler<RoutedEventArgs> AddPatientButtonClick;
+
+        private List<Patient> _patients = new List<Patient>();
+
+        public CollectionViewSource Patients { get; private set; }
 
         public PatientsList()
         {
             InitializeComponent();
+
+            ReloadPatientsList();
+            DataContext = this;
+        }
+
+        public void ReloadPatientsList()
+        {
+            _patients = PatientsRepository.Instance.All();
+
+            Patients = new CollectionViewSource();
+            Patients.Source = _patients;
         }
 
         private void filterTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -37,33 +55,46 @@ namespace Client.Views
 
         private void FilterPatientsList(string nameFilter, string iinFilter)
         {
-            IEnumerable<Patient> filteredList = _patients;
-
-            nameFilter = nameFilter.ToLower();
-
-            if (!string.IsNullOrWhiteSpace(nameFilter))
+            Patients.View.Filter = item =>
             {
-                filteredList = filteredList.Where(x => x.FullNameString.ToLower().Contains(nameFilter));
-            }
+                var result = true;
+                var p = item as Patient;
 
-            if (!string.IsNullOrWhiteSpace(iinFilter))
-            {
-                filteredList = filteredList.Where(x => x.Iin.Contains(iinFilter));
-            }
+                nameFilter = nameFilter.ToLower();
 
-            patientsGrid.ItemsSource = filteredList;
+                if (!string.IsNullOrWhiteSpace(nameFilter))
+                {
+                    result = p.FullNameString.ToLower().Contains(nameFilter);
+                }
+
+                if (!string.IsNullOrWhiteSpace(iinFilter))
+                {
+                    result = p.Iin.Contains(iinFilter);
+                }
+
+                return result;
+            };
         }
 
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        private void Tile_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            _patients = PatientsRepository.Instance.All();
-
-            if (_patients == null || !_patients.Any())
+            if (TileClickEventHandler != null)
             {
-                return;
-            }
+                PatientTileClickArgs args = new PatientTileClickArgs()
+                {
+                    Patient = (sender as PatientsListTile).DataContext as Patient
+                };
 
-            patientsGrid.ItemsSource = _patients;
+                TileClickEventHandler(this, args);
+            }
+        }
+
+        private void addPatientBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (AddPatientButtonClick != null)
+            {
+                AddPatientButtonClick(sender, e);
+            }
         }
     }
 }

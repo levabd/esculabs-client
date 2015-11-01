@@ -94,15 +94,15 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Mono.Security, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
-      <HintPath>..\packages\Npgsql.2.2.5\lib\net45\Mono.Security.dll</HintPath>
+      <HintPath>..\packages\Npgsql.2.2.7\lib\net45\Mono.Security.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Npgsql, Version=2.2.5.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Npgsql.2.2.5\lib\net45\Npgsql.dll</HintPath>
+    <Reference Include="Npgsql, Version=2.2.7.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Npgsql.2.2.7\lib\net45\Npgsql.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Npgsql.EntityFramework, Version=2.2.5.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Npgsql.EntityFramework.2.2.5\lib\net45\Npgsql.EntityFramework.dll</HintPath>
+    <Reference Include="Npgsql.EntityFramework, Version=2.2.7.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Npgsql.EntityFramework.2.2.7\lib\net45\Npgsql.EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -135,10 +135,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Helpers\AuthorizationArgs.cs" />
+    <Compile Include="Controls\PatientsListTile.xaml.cs">
+      <DependentUpon>PatientsListTile.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\PatientTileClickArgs.cs" />
+    <Compile Include="Helpers\AuthArgs.cs" />
     <Compile Include="Helpers\MessageDialogConfiguration.cs" />
     <Compile Include="Helpers\GenderConverter.cs" />
-    <Compile Include="BDatePicker.cs" />
     <Compile Include="ExaminesWindow.xaml.cs">
       <DependentUpon>ExaminesWindow.xaml</DependentUpon>
     </Compile>
@@ -152,26 +155,24 @@
     <Compile Include="MeasurePreview.xaml.cs">
       <DependentUpon>MeasurePreview.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201510161608545_CreatePatientsAndPhysiciansTables.cs" />
-    <Compile Include="Migrations\201510161608545_CreatePatientsAndPhysiciansTables.Designer.cs">
-      <DependentUpon>201510161608545_CreatePatientsAndPhysiciansTables.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201510161625243_AddRoleColumnToPhysiciansTable.cs" />
-    <Compile Include="Migrations\201510161625243_AddRoleColumnToPhysiciansTable.Designer.cs">
-      <DependentUpon>201510161625243_AddRoleColumnToPhysiciansTable.cs</DependentUpon>
+    <Compile Include="Migrations\201510280037123_CreateEsculabsTables.cs" />
+    <Compile Include="Migrations\201510280037123_CreateEsculabsTables.Designer.cs">
+      <DependentUpon>201510280037123_CreateEsculabsTables.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Patient.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\Role.cs" />
     <Compile Include="Models\Physician.cs" />
+    <Compile Include="Repositories\ModulesRepository.cs" />
     <Compile Include="Repositories\PhysiciansRepository.cs" />
+    <Compile Include="Views\AddPatient.xaml.cs">
+      <DependentUpon>AddPatient.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\PatientsListWindow.xaml.cs">
-      <DependentUpon>PatientsListWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Repositories\PatientsRepository.cs" />
     <Compile Include="ViewImageWindow.xaml.cs">
@@ -186,9 +187,16 @@
     <Compile Include="Repo\PatientsRepo.cs" />
     <Compile Include="StatusBackgroundConverter.cs" />
     <Compile Include="StatusTextConverter.cs" />
+    <Compile Include="Views\ModulesList.xaml.cs">
+      <DependentUpon>ModulesList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PatientsList.xaml.cs">
       <DependentUpon>PatientsList.xaml</DependentUpon>
     </Compile>
+    <Page Include="Controls\PatientsListTile.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ExaminesWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -205,11 +213,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Login.xaml">
+    <Page Include="Views\AddPatient.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\PatientsListWindow.xaml">
+    <Page Include="Views\Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -242,6 +250,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\ModulesList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\PatientsList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -249,7 +261,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\Patient.cs" />
-    <Compile Include="Context\BalderContext.cs" />
+    <Compile Include="Context\PgSqlContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -263,11 +275,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Migrations\201510161608545_CreatePatientsAndPhysiciansTables.resx">
-      <DependentUpon>201510161608545_CreatePatientsAndPhysiciansTables.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201510161625243_AddRoleColumnToPhysiciansTable.resx">
-      <DependentUpon>201510161625243_AddRoleColumnToPhysiciansTable.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201510280037123_CreateEsculabsTables.resx">
+      <DependentUpon>201510280037123_CreateEsculabsTables.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -294,6 +303,10 @@
     <ProjectReference Include="..\FibroscanProcessor\FibroscanProcessor.csproj">
       <Project>{56299f06-7b5a-400d-a41f-a93a956a09f7}</Project>
       <Name>FibroscanProcessor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ModuleFramework\ModuleFramework.csproj">
+      <Project>{23319b71-8321-41ee-98f5-6938f520db52}</Project>
+      <Name>ModuleFramework</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

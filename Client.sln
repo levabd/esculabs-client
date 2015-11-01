@@ -9,6 +9,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FibroscanProcessor", "Fibro
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eklekto", "Eklekto\Eklekto.csproj", "{EAB1EB1A-E757-4F23-9BEE-FB145A1F7792}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{334531D8-1D36-4303-862A-2DED5FEEA231}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fibrosis", "Modules\Fibrosis\Fibrosis.csproj", "{792E1A47-6361-4BE7-8977-F0A46E6D9BE6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModuleFramework", "ModuleFramework\ModuleFramework.csproj", "{23319B71-8321-41EE-98F5-6938F520DB52}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,8 +75,43 @@ Global
 		{EAB1EB1A-E757-4F23-9BEE-FB145A1F7792}.Release|x64.Build.0 = Release|Any CPU
 		{EAB1EB1A-E757-4F23-9BEE-FB145A1F7792}.Release|x86.ActiveCfg = Release|Any CPU
 		{EAB1EB1A-E757-4F23-9BEE-FB145A1F7792}.Release|x86.Build.0 = Release|Any CPU
+		{792E1A47-6361-4BE7-8977-F0A46E6D9BE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{792E1A47-6361-4BE7-8977-F0A46E6D9BE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{792E1A47-6361-4BE7-8977-F0A46E6D9BE6}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{792E1A47-6361-4BE7-8977-F0A46E6D9BE6}.Debug|ARM.Build.0 = Debug|Any CPU
+		{792E1A47-6361-4BE7-8977-F0A46E6D9BE6}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{792E1A47-6361-4BE7-8977-F0A46E6D9BE6}.Debug|x64.Build.0 = Debug|Any CPU
+		{792E1A47-6361-4BE7-8977-F0A46E6D9BE6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{792E1A47-6361-4BE7-8977-F0A46E6D9BE6}.Debug|x86.Build.0 = Debug|Any CPU
+		{792E1A47-6361-4BE7-8977-F0A46E6D9BE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{792E1A47-6361-4BE7-8977-F0A46E6D9BE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{792E1A47-6361-4BE7-8977-F0A46E6D9BE6}.Release|ARM.ActiveCfg = Release|Any CPU
+		{792E1A47-6361-4BE7-8977-F0A46E6D9BE6}.Release|ARM.Build.0 = Release|Any CPU
+		{792E1A47-6361-4BE7-8977-F0A46E6D9BE6}.Release|x64.ActiveCfg = Release|Any CPU
+		{792E1A47-6361-4BE7-8977-F0A46E6D9BE6}.Release|x64.Build.0 = Release|Any CPU
+		{792E1A47-6361-4BE7-8977-F0A46E6D9BE6}.Release|x86.ActiveCfg = Release|Any CPU
+		{792E1A47-6361-4BE7-8977-F0A46E6D9BE6}.Release|x86.Build.0 = Release|Any CPU
+		{23319B71-8321-41EE-98F5-6938F520DB52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23319B71-8321-41EE-98F5-6938F520DB52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23319B71-8321-41EE-98F5-6938F520DB52}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{23319B71-8321-41EE-98F5-6938F520DB52}.Debug|ARM.Build.0 = Debug|Any CPU
+		{23319B71-8321-41EE-98F5-6938F520DB52}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{23319B71-8321-41EE-98F5-6938F520DB52}.Debug|x64.Build.0 = Debug|Any CPU
+		{23319B71-8321-41EE-98F5-6938F520DB52}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{23319B71-8321-41EE-98F5-6938F520DB52}.Debug|x86.Build.0 = Debug|Any CPU
+		{23319B71-8321-41EE-98F5-6938F520DB52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23319B71-8321-41EE-98F5-6938F520DB52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23319B71-8321-41EE-98F5-6938F520DB52}.Release|ARM.ActiveCfg = Release|Any CPU
+		{23319B71-8321-41EE-98F5-6938F520DB52}.Release|ARM.Build.0 = Release|Any CPU
+		{23319B71-8321-41EE-98F5-6938F520DB52}.Release|x64.ActiveCfg = Release|Any CPU
+		{23319B71-8321-41EE-98F5-6938F520DB52}.Release|x64.Build.0 = Release|Any CPU
+		{23319B71-8321-41EE-98F5-6938F520DB52}.Release|x86.ActiveCfg = Release|Any CPU
+		{23319B71-8321-41EE-98F5-6938F520DB52}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{792E1A47-6361-4BE7-8977-F0A46E6D9BE6} = {334531D8-1D36-4303-862A-2DED5FEEA231}
 	EndGlobalSection
 EndGlobal

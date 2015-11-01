@@ -16,7 +16,7 @@ namespace Client.Repositories
         private static object                       _syncRoot = new object();
 
         private ILog                                _log;
-        private BalderContext                     _context = null;
+        private PgSqlContext                     _context = null;
 
         public static PatientsRepository Instance
         {
@@ -41,9 +41,7 @@ namespace Client.Repositories
 
             if (_context == null)
             {
-                Database.SetInitializer(new CreateDatabaseIfNotExists<BalderContext>());
-
-               _context = new BalderContext();
+               _context = new PgSqlContext();
             }
         }
 
