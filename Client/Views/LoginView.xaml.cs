@@ -23,11 +23,11 @@ namespace Client.Views
     /// <summary>
     /// Interaction logic for Login.xaml
     /// </summary>
-    public partial class Login : UserControl
+    public partial class LoginView : UserControl
     {
         public event EventHandler<AuthArgs> LoginEventHandler;
 
-        public Login()
+        public LoginView()
         {
             InitializeComponent();
         }

@@ -49,24 +49,14 @@
         <Controls:FlyoutsControl/>
     </Controls:MetroWindow.Flyouts>
     <Grid>
-        <Controls:MetroAnimatedSingleRowTabControl x:Name="stepsTabControl" Margin="10,20,10,10" SelectionChanged="stepsTabControl_SelectionChanged">
-            <TabControl.Resources>
-                <Style TargetType="{x:Type TabPanel}">
-                    <Setter Property="Margin" Value="120,0,0,0"></Setter>
-                </Style>
-            </TabControl.Resources>
-            <TabItem Header="Вход" Name="loginTabItem">
-                <v:Login HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,200" x:Name="loginView"/>
-            </TabItem>
-            <TabItem Header="Список пациентов" IsEnabled="False" Name="patientsListTabItem">
-                <Controls:TransitioningContentControl x:Name="transitionContent" Margin="10,55,10,10" Width="Auto" Height="Auto" Transition="RightReplace" />
-                <!--<v:PatientsList Margin="10,55,10,10" Width="Auto" Height="Auto" x:Name="patientsListView"/> -->
-                <!-- <v:AddPatient Margin="10,55,10,10" Width="Auto" Height="Auto" x:Name="addPatientView"/> -->
-            </TabItem>
-            <TabItem Header="Выбор модуля" IsEnabled="False" Name="modulesListTabItem">
-                <v:ModulesList Margin="10,55,10,10" Width="Auto" Height="Auto" x:Name="modulesListView"/>
-            </TabItem>            
-        </Controls:MetroAnimatedSingleRowTabControl>
+        <Controls:TransitioningContentControl x:Name="ViewContainer" 
+                                              Margin="10,55,10,10" 
+                                              Width="Auto" 
+                                              Height="Auto"
+                                              VerticalAlignment="Center" 
+                                              HorizontalAlignment="Center" 
+                                              Transition="RightReplace"/>
+
         <Button x:Name="backBtn" Style="{DynamicResource MetroCircleButtonStyle}" HorizontalAlignment="Left" Margin="20,20,0,0"  Width="100" Height="100" Background="White" BorderBrush="{DynamicResource HighlightBrush}" VerticalAlignment="Top" Click="backBtn_Click">
             <ContentPresenter x:Name="presenter" ContentTemplateSelector="{StaticResource templateSelector}" />
         </Button>

@@ -23,7 +23,7 @@ namespace Client.Views
     /// <summary>
     /// Interaction logic for PatientsList.xaml
     /// </summary>
-    public partial class PatientsList : UserControl
+    public partial class PatientsListView : UserControl
     {
         public event EventHandler<PatientTileClickArgs> TileClickEventHandler;
         public event EventHandler<RoutedEventArgs> AddPatientButtonClick;
@@ -32,7 +32,7 @@ namespace Client.Views
 
         public CollectionViewSource Patients { get; private set; }
 
-        public PatientsList()
+        public PatientsListView()
         {
             InitializeComponent();
 

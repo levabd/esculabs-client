@@ -114,6 +114,7 @@
     <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.1.1.2.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
       <Private>True</Private>
@@ -149,6 +150,7 @@
       <DependentUpon>ExamineWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="FibxParser.cs" />
+    <Compile Include="Helpers\ViewManager.cs" />
     <Compile Include="LoaderWindow.xaml.cs">
       <DependentUpon>LoaderWindow.xaml</DependentUpon>
     </Compile>
@@ -171,8 +173,11 @@
     <Compile Include="Views\AddPatient.xaml.cs">
       <DependentUpon>AddPatient.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Login.xaml.cs">
-      <DependentUpon>Login.xaml</DependentUpon>
+    <Compile Include="Views\LoaderView.xaml.cs">
+      <DependentUpon>LoaderView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LoginView.xaml.cs">
+      <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Repositories\PatientsRepository.cs" />
     <Compile Include="ViewImageWindow.xaml.cs">
@@ -190,8 +195,8 @@
     <Compile Include="Views\ModulesList.xaml.cs">
       <DependentUpon>ModulesList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\PatientsList.xaml.cs">
-      <DependentUpon>PatientsList.xaml</DependentUpon>
+    <Compile Include="Views\PatientsListView.xaml.cs">
+      <DependentUpon>PatientsListView.xaml</DependentUpon>
     </Compile>
     <Page Include="Controls\PatientsListTile.xaml">
       <SubType>Designer</SubType>
@@ -217,7 +222,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Login.xaml">
+    <Page Include="Views\LoaderView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LoginView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -254,7 +263,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\PatientsList.xaml">
+    <Page Include="Views\PatientsListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

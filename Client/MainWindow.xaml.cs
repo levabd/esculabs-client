@@ -25,11 +25,14 @@ namespace Client
     /// </summary>
     public partial class MainWindow : MetroWindow
     {
+        private ViewManager _views;
         private Physician _currentPhysician;
 
         public MainWindow()
         {
             InitializeComponent();
+
+            _views = new ViewManager();
         }
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
@@ -39,28 +42,17 @@ namespace Client
             Left = 0;
             Top = 0;
 
-            loginView.LoginEventHandler += new EventHandler<AuthArgs>(HandleAuthorizationAttempt);
-        }
+            _views.SetContainer(ViewContainer);
 
-        private void ShowPatientsListView()
-        {
-            var view = new PatientsList();
-            view.TileClickEventHandler += new EventHandler<PatientTileClickArgs>(HandlePatientTileClick);
-            view.AddPatientButtonClick += new EventHandler<RoutedEventArgs>(HandleAddPatientButtonClick);
+            var loginView = (LoginView)_views.SetView("LoginView");
 
-            transitionContent.Content = view;
-        }
+            if (loginView == null)
+            {
+                MessageBox.Show("Can't load LoginView");
+                return;
+            }
 
-        private void ShowAddPatientView()
-        {
-            var view = new AddPatient();
-
-            transitionContent.Content = view;
-        }
-
-        private void HandleAddPatientButtonClick(object sender, RoutedEventArgs e)
-        {
-            ShowAddPatientView();
+            loginView.LoginEventHandler += HandleAuthorizationAttempt;
         }
 
         private async void HandleAuthorizationAttempt(object sender, AuthArgs e)
@@ -68,9 +60,10 @@ namespace Client
             if (e.Succeded)
             {
                 _currentPhysician = e.Physician;
-                ToggleAuthorizedTabs(true);
 
-                patientsListTabItem.IsSelected = true;
+                var view = (PatientsListView)_views.SetView("PatientsListView");
+                view.TileClickEventHandler += HandlePatientTileClick;
+                view.AddPatientButtonClick += HandleAddPatientButtonClick;
             }
             else
             {
@@ -78,64 +71,55 @@ namespace Client
             }
         }
 
+        private void ShowAddPatientView()
+        {
+            var view = new AddPatient();
+
+            // transitionContent.Content = view;
+        }
+
+        private void HandleAddPatientButtonClick(object sender, RoutedEventArgs e)
+        {
+            ShowAddPatientView();
+        }
+
         private void HandlePatientTileClick(object sender, PatientTileClickArgs e)
         {
-            modulesListView.Initialize(this, _currentPhysician, e.Patient);
-            modulesListView.ShowWidgets();
+            //  modulesListView.Initialize(this, _currentPhysician, e.Patient);
+            // modulesListView.ShowWidgets();
 
-            modulesListTabItem.IsSelected = true;
-        }
-        
-        private void stepsTabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (e.Source is TabControl)
-            {
-                var tab = e.Source as TabControl;
-
-                presenter.Content = tab.SelectedIndex;
-
-                if (patientsListTabItem.IsSelected)
-                {
-                    ShowPatientsListView();
-                }
-            }
+            //  modulesListTabItem.IsSelected = true;
         }
 
         private async void backBtn_Click(object sender, RoutedEventArgs e)
         {
             MessageDialogResult c;
 
-            switch (stepsTabControl.SelectedIndex)
-            {
-                case (0):                    
-                    c = await this.ShowMessageAsync("Выключение устройства", "Вы действительно хотите выйти из приложения и выключить устройство?", MessageDialogStyle.AffirmativeAndNegative, new MessageDialogConfiguration().CommonSettings);
+            //switch (stepsTabControl.SelectedIndex)
+            //{
+            //    case (0):                    
+            //        c = await this.ShowMessageAsync("Выключение устройства", "Вы действительно хотите выйти из приложения и выключить устройство?", MessageDialogStyle.AffirmativeAndNegative, new MessageDialogConfiguration().CommonSettings);
 
-                    if (c == MessageDialogResult.Affirmative)
-                    {
-                        Close();
-                    }
+            //        if (c == MessageDialogResult.Affirmative)
+            //        {
+            //            Close();
+            //        }
 
-                    break;
-                case (1):
-                    c = await this.ShowMessageAsync("Выход из учётной записи", "Вы не сможете работать с устройством, пока заново не введёте свой логин и пароль. Вы действительно хотите выйти из своей учётной записи?", MessageDialogStyle.AffirmativeAndNegative, new MessageDialogConfiguration().CommonSettings);
+            //        break;
+            //    case (1):
+            //        c = await this.ShowMessageAsync("Выход из учётной записи", "Вы не сможете работать с устройством, пока заново не введёте свой логин и пароль. Вы действительно хотите выйти из своей учётной записи?", MessageDialogStyle.AffirmativeAndNegative, new MessageDialogConfiguration().CommonSettings);
 
-                    if (c == MessageDialogResult.Affirmative)
-                    {
-                        ToggleAuthorizedTabs(false);
-                        _currentPhysician = null;
-                        stepsTabControl.SelectedIndex = 0;
-                    }
+            //        if (c == MessageDialogResult.Affirmative)
+            //        {
+            //            ToggleAuthorizedTabs(false);
+            //            _currentPhysician = null;
+            //            stepsTabControl.SelectedIndex = 0;
+            //        }
 
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        private void ToggleAuthorizedTabs(bool enabled = true)
-        {
-            patientsListTabItem.IsEnabled = enabled;
-            modulesListTabItem.IsEnabled = enabled;
+            //        break;
+            //    default:
+            //        break;
+            //}
         }
     }
 

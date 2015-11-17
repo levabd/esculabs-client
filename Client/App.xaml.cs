@@ -13,6 +13,7 @@ namespace Client
     using System.Data.Entity;
     using System.Runtime.InteropServices;
     using Context;
+    using Repositories;
 
     /// <summary>
     /// Interaction logic for App.xaml
