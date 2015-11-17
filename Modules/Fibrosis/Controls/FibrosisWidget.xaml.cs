@@ -11,7 +11,6 @@ namespace Fibrosis
     /// </summary>
     public partial class FibrosisWidget : UserControl
     {
-        private Window _parent;
         private IPatient _patient;
 
         public IPatient Patient
@@ -26,17 +25,14 @@ namespace Fibrosis
             }
         }
 
-        public FibrosisWidget(Window parent)
+        public FibrosisWidget()
         {
             InitializeComponent();
-            _parent = parent;        
         }
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
             var window = new AddExamine();
-            window.Owner = _parent;
-
             window.Show();
         }
     }

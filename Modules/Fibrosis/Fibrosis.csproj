@@ -68,7 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context\PgSqlContext.cs" />
-    <Compile Include="FibrosisProvider.cs" />
+    <Compile Include="ModuleProvider.cs" />
     <Compile Include="Views\AddExamine.xaml.cs">
       <DependentUpon>AddExamine.xaml</DependentUpon>
     </Compile>
@@ -79,8 +79,8 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\FibrosisExamine.cs" />
     <Compile Include="Repositories\ExaminesRepository.cs" />
-    <Compile Include="Widget.xaml.cs">
-      <DependentUpon>Widget.xaml</DependentUpon>
+    <Compile Include="Controls\FibrosisWidget.xaml.cs">
+      <DependentUpon>FibrosisWidget.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -89,7 +89,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Widget.xaml">
+    <Page Include="Controls\FibrosisWidget.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

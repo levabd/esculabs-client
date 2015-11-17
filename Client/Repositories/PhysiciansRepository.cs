@@ -8,7 +8,6 @@ namespace Client.Repositories
 {
     using Models;
     using Common.Logging;
-    using System.Data.Entity;
     using Context;
     using System.Security.Cryptography;
 
@@ -54,8 +53,8 @@ namespace Client.Repositories
 
         public Physician Authorize(string login, string password)
         {
-            //try
-            //{
+            try
+            {
                 // byte array representation of that string
                 byte[] encodedPassword = new UTF8Encoding().GetBytes(password);
 
@@ -73,11 +72,11 @@ namespace Client.Repositories
                 var p = _context.Physicians.First(x => lowerLogin.Equals(x.Login.ToLower()) && encoded.Equals(x.Password));
 
                 return p;
-            //}
-            //catch (Exception e)
-            //{
-            //    _log.Error(string.Format("Failed authorization result. Username = {0}, Reason: {1}", login, e.Message));
-            //}
+        }
+            catch (Exception e)
+            {
+                _log.Error($"Failed authorization result. Username = {login}, Reason: {e.Message}");
+            }
 
             return null;
         }
@@ -93,7 +92,7 @@ namespace Client.Repositories
             }
             catch (Exception e)
             {
-                _log.Error(string.Format("Can't insert data to db. Reason: {0}", e.Message));
+                _log.Error($"Can't insert data to db. Reason: {e.Message}");
                 result = null;
             }
 
@@ -110,7 +109,7 @@ namespace Client.Repositories
             }
             catch (Exception e)
             {
-                _log.Error(string.Format("Can't select data from db. Reason: {0}", e.Message));
+                _log.Error($"Can't select data from db. Reason: {e.Message}");
                 return null;
             }
 
