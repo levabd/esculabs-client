@@ -56,7 +56,7 @@ namespace Client
             //_hInstance = LoadLibrary("User32"); <<< 
             //_hKeyboardHook = SetWindowsHookEx(WH_KEYBOARD, KeyboardHook, _hInstance, 0);
 
-            ToggleWindowsShit(false);
+            //ToggleWindowsShit(false);
 
             CultureInfo CultureInfo = new CultureInfo("ru-RU");
 
@@ -68,7 +68,10 @@ namespace Client
                 new FrameworkPropertyMetadata(
                     XmlLanguage.GetLanguage(
                     CultureInfo.IetfLanguageTag)));
+
             base.OnStartup(e);
+
+            var bydloDB = PatientsRepository.Instance;
         }
 
         private void Application_Exit(object sender, ExitEventArgs e)

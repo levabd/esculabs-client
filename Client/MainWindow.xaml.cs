@@ -25,14 +25,14 @@ namespace Client
     /// </summary>
     public partial class MainWindow : MetroWindow
     {
-        private ViewManager _views;
+        private readonly ViewManager _views;
         private Physician _currentPhysician;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            _views = new ViewManager();
+            _views = new ViewManager { Container = ViewContainer};
         }
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
@@ -42,28 +42,32 @@ namespace Client
             Left = 0;
             Top = 0;
 
-            _views.SetContainer(ViewContainer);
-
-            var loginView = (LoginView)_views.SetView("LoginView");
+            var loginView = _views.SetView("LoginView", x =>
+            {
+                ((LoginView) x).LoginEventHandler += HandleAuthorizationAttempt;
+            });
 
             if (loginView == null)
             {
                 MessageBox.Show("Can't load LoginView");
-                return;
             }
-
-            loginView.LoginEventHandler += HandleAuthorizationAttempt;
         }
 
+  
         private async void HandleAuthorizationAttempt(object sender, AuthArgs e)
         {
             if (e.Succeded)
             {
                 _currentPhysician = e.Physician;
 
-                var view = (PatientsListView)_views.SetView("PatientsListView");
-                view.TileClickEventHandler += HandlePatientTileClick;
-                view.AddPatientButtonClick += HandleAddPatientButtonClick;
+                _views.SetView("PatientsListView", x =>
+                {
+                    var view = (PatientsListView) x;
+
+                    view.TileClickEventHandler += HandlePatientTileClick;
+                    view.AddPatientButtonClick += HandleAddPatientButtonClick;
+                });
+
             }
             else
             {
@@ -91,7 +95,7 @@ namespace Client
             //  modulesListTabItem.IsSelected = true;
         }
 
-        private async void backBtn_Click(object sender, RoutedEventArgs e)
+        private void backBtn_Click(object sender, RoutedEventArgs e)
         {
             MessageDialogResult c;
 

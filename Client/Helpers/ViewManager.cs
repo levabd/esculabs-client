@@ -13,30 +13,25 @@ namespace Client.Helpers
 {
     public class ViewManager
     {
-        private ContentControl _container;
+        public delegate void ViewInitializeDelegate(FrameworkElement v);
 
-        private ObservableCollection<FrameworkElement> _loadedViews;
-        private ObservableCollection<FrameworkElement> _viewStack; 
+        public ContentControl Container { get; set; }
 
         public FrameworkElement Current => _viewStack.First();
         public FrameworkElement Previous => _viewStack[1];
+
+        private ObservableCollection<FrameworkElement> _loadedViews;
+        private ObservableCollection<FrameworkElement> _viewStack; 
 
         public ViewManager()
         {
             _loadedViews = new ObservableCollection<FrameworkElement>();
             _viewStack = new ObservableCollection<FrameworkElement>();
-
-            LoadView("LoaderView");
         }
 
-        public void SetContainer(ContentControl container)
+        public FrameworkElement SetView(string viewName, ViewInitializeDelegate initFunc = null)
         {
-            _container = container;
-        }
-
-        public FrameworkElement SetView(string viewName)
-        {
-            FrameworkElement view = null;
+            FrameworkElement view;
             
             lock (_loadedViews)
             {
@@ -45,10 +40,7 @@ namespace Client.Helpers
 
             if (view == null)
             {
-                SetView("LoaderView");
-
-                var viewLoadTask = new Task(() => view = LoadView(viewName));
-                viewLoadTask.RunSynchronously();
+                view = LoadView(viewName);
             }
 
             if (view == null)
@@ -56,16 +48,18 @@ namespace Client.Helpers
                 return null;
             }
 
-                if (_viewStack.Any())
-                {
-                    _viewStack.Insert(0, view);
-                }
-                else
-                {
-                    _viewStack.Add(view);
-                }
+            if (_viewStack.Any())
+            {
+                _viewStack.Insert(0, view);
+            }
+            else
+            {
+                _viewStack.Add(view);
+            }
 
-            _container.Content = view;
+            initFunc?.Invoke(view);
+
+            Container.Content = view;
 
             return view;
         }

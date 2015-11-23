@@ -3,16 +3,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-    xmlns:local="clr-namespace:Client.Views"
-    xmlns:Helpers="clr-namespace:Client.Helpers" 
     xmlns:Custom="http://metro.mahapps.com/winfx/xaml/controls" 
     xmlns:c="clr-namespace:Client.Controls"
     x:Class="Client.Views.PatientsListView"
     mc:Ignorable="d" 
-    d:DesignHeight="768" d:DesignWidth="1024"
-    Height="Auto" Width="Auto" 
-    MinWidth="1024" 
-    MinHeight="768">
+    d:DesignHeight="768" d:DesignWidth="1024">
     <Grid>
         <ScrollViewer Margin="0,120,0,0" >
             <ItemsControl x:Name="patientsList" ItemsSource="{Binding Patients.View}" AlternationCount="2">

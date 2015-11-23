@@ -7,7 +7,7 @@
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d"             
              Width="Auto"
-             Height="510">
+             Height="510" Margin="0,0,0,100">
     <Grid>
         <Label x:Name="label" Foreground="{DynamicResource AccentColorBrush}" Content="Вход в систему" HorizontalAlignment="Center" Margin="173,0,171,0" VerticalAlignment="Top" Height="43" FontSize="21.333" FontFamily="Segoe UI Semibold"/>
         <TextBox controls:TextBoxHelper.Watermark="Ваш логин" controls:TextBoxHelper.ClearTextButton="True" x:Name="loginTextBox" HorizontalAlignment="Center" Height="41" Margin="66,91,64,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="382" FontSize="21.333" Text="Antrille"/>

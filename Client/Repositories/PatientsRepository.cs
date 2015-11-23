@@ -7,7 +7,6 @@ namespace Client.Repositories
 {
     using Models;
     using Common.Logging;
-    using System.Data.Entity;
     using Context;
 
     class PatientsRepository
@@ -16,7 +15,7 @@ namespace Client.Repositories
         private static object                       _syncRoot = new object();
 
         private ILog                                _log;
-        private PgSqlContext                     _context = null;
+        private PgSqlContext                        _context = null;
 
         public static PatientsRepository Instance
         {
