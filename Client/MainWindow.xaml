@@ -21,7 +21,7 @@
         WindowStartupLocation="CenterScreen" 
         Loaded="MetroWindow_Loaded">
     <Window.Resources>
-        <local:TemplateSelector x:Key="TemplateSelector" />
+        <local:TemplateSelector x:Key="BackButtonTemplateSelector" />
         <DataTemplate x:Key="BackButtonIcon">
             <Rectangle Fill="{DynamicResource HighlightBrush}" Width="50" Height="50">
                 <Rectangle.OpacityMask>
@@ -53,8 +53,8 @@
                                               Margin="10,130,10,10" 
                                               Transition="RightReplace"/>
 
-        <Button x:Name="backBtn" Style="{DynamicResource MetroCircleButtonStyle}" HorizontalAlignment="Left" Margin="20,20,0,0"  Width="100" Height="100" Background="White" BorderBrush="{DynamicResource HighlightBrush}" VerticalAlignment="Top" Click="backBtn_Click">
-            <ContentPresenter x:Name="presenter" ContentTemplateSelector="{StaticResource TemplateSelector}" />
+        <Button x:Name="BackBtn" Style="{DynamicResource MetroCircleButtonStyle}" HorizontalAlignment="Left" Margin="20,20,0,0"  Width="100" Height="100" Background="White" BorderBrush="{DynamicResource HighlightBrush}" VerticalAlignment="Top" Click="BackBtn_Click">
+            <ContentPresenter x:Name="BackButtonPresenter" ContentTemplateSelector="{StaticResource BackButtonTemplateSelector}" />
         </Button>
     </Grid>
 </controls:MetroWindow>

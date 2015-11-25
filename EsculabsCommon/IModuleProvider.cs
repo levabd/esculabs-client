@@ -6,7 +6,7 @@ namespace EsculabsCommon
 {
     public interface IModuleProvider
     {
-        event EventHandler<ViewSwitchEventArgs> ViewSwitchEventHandler;
+        event EventHandler<ViewChangeArgs> ViewSwitchEventHandler;
 
         string Name { get; }
 

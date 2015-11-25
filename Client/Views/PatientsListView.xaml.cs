@@ -27,7 +27,7 @@ namespace Client.Views
     public partial class PatientsListView : BaseView
     {
         public event EventHandler<PatientTileClickArgs> TileClickEventHandler;
-        public event EventHandler<RoutedEventArgs> AddPatientButtonClick;
+        public event EventHandler<RoutedEventArgs> AddPatientButtonClickHandler;
 
         public CollectionViewSource Patients { get; private set; }
 
@@ -97,7 +97,7 @@ namespace Client.Views
 
         private void addPatientBtn_Click(object sender, RoutedEventArgs e)
         {
-            AddPatientButtonClick?.Invoke(sender, e);
+            AddPatientButtonClickHandler?.Invoke(sender, e);
         }
     }
 }

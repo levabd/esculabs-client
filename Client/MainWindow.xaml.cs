@@ -1,19 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Client
 {
+    using EsculabsCommon;
     using MahApps.Metro.Controls;
     using MahApps.Metro.Controls.Dialogs;
     using Helpers;
@@ -26,13 +17,23 @@ namespace Client
     public partial class MainWindow : MetroWindow
     {
         private readonly ViewManager _views;
+        private string _currentView;
         private Physician _currentPhysician;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            _views = new ViewManager { Container = ViewContainer};
+            _views = new ViewManager();
+
+            if (_views == null)
+            {
+                MessageBox.Show("Can't create ViewManager. Really?");
+                return;
+            }
+
+            _views.Container = ViewContainer;
+            _views.ViewChangeEventHandler += HandleViewChange;
         }
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
@@ -42,18 +43,14 @@ namespace Client
             Left = 0;
             Top = 0;
 
-            var loginView = _views.SetView("LoginView", x =>
-            {
-                ((LoginView) x).LoginEventHandler += HandleAuthorizationAttempt;
-            });
+            var loginView = _views.SetView("LoginView", x => ((LoginView) x).LoginEventHandler += HandleAuthorizationAttempt);
 
             if (loginView == null)
             {
                 MessageBox.Show("Can't load LoginView");
             }
         }
-
-  
+        
         private async void HandleAuthorizationAttempt(object sender, AuthArgs e)
         {
             if (e.Succeded)
@@ -63,7 +60,7 @@ namespace Client
                 _views.SetView("PatientsListView", x =>
                 {
                     ((PatientsListView) x).TileClickEventHandler += HandlePatientTileClick;
-                    ((PatientsListView) x).AddPatientButtonClick += HandleAddPatientButtonClick;
+                    ((PatientsListView) x).AddPatientButtonClickHandler += HandleAddPatientButtonClick;
                 });
 
             }
@@ -73,57 +70,69 @@ namespace Client
             }
         }
 
+        private void HandleViewChange(object sender, ViewChangeArgs e)
+        {
+            if (e?.ViewName == null)
+            {
+                return;
+            }
+
+            _currentView = e.ViewName;
+
+            switch (_currentView)
+            {
+                case "LoginView":
+                    BackButtonPresenter.Content = 0;
+                    break;
+                case "PatientsListView":
+                    BackButtonPresenter.Content = 1;
+                    break;
+                default:
+                    BackButtonPresenter.Content = 2;
+                    break;
+            }
+        }
+
         private void HandleAddPatientButtonClick(object sender, RoutedEventArgs e)
         {
-            // Сам в шоке
-            _views.SetView("AddPatientView", x =>
-            {
-                ((AddPatientView) x).BackButtonFunc = () =>
-                {
-                    _views.SetPrevious();
-                };
-            });
+            _views.SetView("AddPatientView", x => ((AddPatientView) x).BackButtonFunc = () => _views.SetPrevious());
         }
 
         private void HandlePatientTileClick(object sender, PatientTileClickArgs e)
         {
-            _views.SetView("ModulesListView", x =>
-            {
-                ((ModulesListView) x).Patient = e.Patient;
-            });
+            _views.SetView("ModulesListView", x => ((ModulesListView) x).Patient = e.Patient);
         }
 
-        private void backBtn_Click(object sender, RoutedEventArgs e)
+        private async void BackBtn_Click(object sender, RoutedEventArgs e)
         {
+            if (_currentView == "LoginView")
+            {
+                var c =
+                    await
+                        this.ShowMessageAsync("Выключение устройства",
+                            "Вы действительно хотите выйти из приложения и выключить устройство?",
+                            MessageDialogStyle.AffirmativeAndNegative, new MessageDialogConfiguration().CommonSettings);
+
+                if (c == MessageDialogResult.Affirmative)
+                {
+                    Close();
+                }
+            }
+            else if (_currentView == "PatientsListView")
+            {
+                var c =
+                    await
+                        this.ShowMessageAsync("Выход из учётной записи",
+                            "Вы не сможете работать с устройством, пока заново не введёте свой логин и пароль. Вы действительно хотите выйти из своей учётной записи?",
+                            MessageDialogStyle.AffirmativeAndNegative, new MessageDialogConfiguration().CommonSettings);
+
+                if (c == MessageDialogResult.Affirmative)
+                {
+                    _currentPhysician = null;
+                }
+            }
+
             _views.SetPrevious();
-
-            //MessageDialogResult c;
-
-            //switch (stepsTabControl.SelectedIndex)
-            //{
-            //    case (0):                    
-            //        c = await this.ShowMessageAsync("Выключение устройства", "Вы действительно хотите выйти из приложения и выключить устройство?", MessageDialogStyle.AffirmativeAndNegative, new MessageDialogConfiguration().CommonSettings);
-
-            //        if (c == MessageDialogResult.Affirmative)
-            //        {
-            //            Close();
-            //        }
-
-            //        break;
-            //    case (1):
-            //        c = await this.ShowMessageAsync("Выход из учётной записи", "Вы не сможете работать с устройством, пока заново не введёте свой логин и пароль. Вы действительно хотите выйти из своей учётной записи?", MessageDialogStyle.AffirmativeAndNegative, new MessageDialogConfiguration().CommonSettings);
-
-            //        if (c == MessageDialogResult.Affirmative)
-            //        {
-            //            ToggleAuthorizedTabs(false);
-            //            _currentPhysician = null;
-            //            stepsTabControl.SelectedIndex = 0;
-            //        }
-
-            //        break;
-            //    default:
-            //        break;
-            //}
         }
     }
 

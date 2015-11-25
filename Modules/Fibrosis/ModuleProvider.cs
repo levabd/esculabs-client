@@ -7,7 +7,7 @@ namespace Fibrosis
 {
     public class ModuleProvider : IModuleProvider
     {
-        public event EventHandler<ViewSwitchEventArgs> ViewSwitchEventHandler;
+        public event EventHandler<ViewChangeArgs> ViewSwitchEventHandler;
 
         public string Name => "Fibrosis";
 
