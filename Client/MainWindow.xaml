@@ -21,7 +21,7 @@
         WindowStartupLocation="CenterScreen" 
         Loaded="MetroWindow_Loaded">
     <Window.Resources>
-        <local:TemplateSelector x:Key="BackButtonTemplateSelector" />
+        <local:BackButtonTemplateSelector x:Key="BackButtonTemplateSelector" />
         <DataTemplate x:Key="BackButtonIcon">
             <Rectangle Fill="{DynamicResource HighlightBrush}" Width="50" Height="50">
                 <Rectangle.OpacityMask>

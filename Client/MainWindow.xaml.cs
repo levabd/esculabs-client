@@ -51,6 +51,11 @@ namespace Client
             }
         }
         
+        /// <summary>
+        /// Обработчик события попытки авторизации
+        /// </summary>
+        /// <param name="sender">LoginView</param>
+        /// <param name="e">Результат авторизации и авторизированный целитель</param>
         private async void HandleAuthorizationAttempt(object sender, AuthArgs e)
         {
             if (e.Succeded)
@@ -70,6 +75,11 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Обработчик события смены вьюх. Стреляется из ViewManager
+        /// </summary>
+        /// <param name="sender">ViewManager</param>
+        /// <param name="e">Вьюха, на которую нас переключил ViewManager</param>
         private void HandleViewChange(object sender, ViewChangeArgs e)
         {
             if (e?.ViewName == null)
@@ -93,16 +103,31 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Обработчик события щелчка на кнопку добавления пациента
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void HandleAddPatientButtonClick(object sender, RoutedEventArgs e)
         {
             _views.SetView("AddPatientView", x => ((AddPatientView) x).BackButtonFunc = () => _views.SetPrevious());
         }
 
+        /// <summary>
+        /// Обработчик события щелчка на плитку списка пациентов
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void HandlePatientTileClick(object sender, PatientTileClickArgs e)
         {
             _views.SetView("ModulesListView", x => ((ModulesListView) x).Patient = e.Patient);
         }
 
+        /// <summary>
+        /// Обработчик щелчка навигационной кнопки "Назад"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void BackBtn_Click(object sender, RoutedEventArgs e)
         {
             if (_currentView == "LoginView")
@@ -136,31 +161,30 @@ namespace Client
         }
     }
 
-    public class TemplateSelector : DataTemplateSelector
+    /// <summary>
+    /// Класс, позволяющий выбирать по индексу иконку кнопки "Назад"
+    /// </summary>
+    public class BackButtonTemplateSelector : DataTemplateSelector
     {
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
             //получаем вызывающий контейнер
-            FrameworkElement element = container as FrameworkElement;
+            var element = container as FrameworkElement;
 
-            if (element != null && item != null && item is int)
+            if (element == null || item == null || !(item is int))
             {
-                int currentItem = 0;
-
-                int.TryParse(item.ToString(), out currentItem);
-
-                switch (currentItem)
-                {
-                    case 0:
-                        return element.FindResource("CloseButtonIcon") as DataTemplate;
-                    case 1:
-                        return element.FindResource("LogoutButtonIcon") as DataTemplate;
-                    default:
-                        return element.FindResource("BackButtonIcon") as DataTemplate;
-                }
+                return null;
             }
 
-            return null;
+            switch ((int)item)
+            {
+                case 0:
+                    return element.FindResource("CloseButtonIcon") as DataTemplate;
+                case 1:
+                    return element.FindResource("LogoutButtonIcon") as DataTemplate;
+                default:
+                    return element.FindResource("BackButtonIcon") as DataTemplate;
+            }
         }
     }
 }
