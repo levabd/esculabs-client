@@ -12,18 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using EsculabsCommon;
 
 namespace Client.Views
 {
     using Repositories;
     using Helpers;
-    using MahApps.Metro.Controls.Dialogs;
-    using MahApps.Metro.Controls;
 
     /// <summary>
     /// Interaction logic for Login.xaml
     /// </summary>
-    public partial class LoginView : UserControl
+    public partial class LoginView : BaseView
     {
         public event EventHandler<AuthArgs> LoginEventHandler;
 

@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Controls;
+using System.Windows.Data;
 
 namespace Client.Repositories
 {
     using Common.Logging;
     using Models;
-    using ModuleFramework;
+    using EsculabsCommon;
     using System.IO;
     using System.Reflection;
     using System.Windows;
@@ -64,50 +66,9 @@ namespace Client.Repositories
             }
         }
 
-        public List<object> GetWidgetsList(Window owner, List<Role> userRoles = null)
+        public List<UserControl> GetWidgetsList()
         {
-
-
-            //foreach (var libFile in libFiles)
-            //{
-            //    _log.Info($"Loading module: {libFile}");
-
-            //    var moduleName = Path.GetFileNameWithoutExtension(libFile);
-            //    moduleName = char.ToUpper(moduleName[0]) + moduleName.Substring(1);
-
-            //    IModuleProvider providerInst = null;
-            //    try
-            //    {
-            //        Assembly assembly = Assembly.LoadFrom(libFile);
-            //        Type type = assembly.GetType("ModuleProvider");
-            //        providerInst = (IModuleProvider)Activator.CreateInstance(type, owner, null);
-
-            //        var methodInfo = type.GetMethod("GetWidget");
-            //        if (methodInfo == null) // the method doesn't exist
-            //        {
-            //            throw new Exception($"Method { moduleName }.{ moduleName}Provider.GetWidget() does not exists in loaded assembly");
-            //        }
-
-            //        var res = providerInst.GetWidget();
-            //        //var res = methodInfo.Invoke(providerInst, null);
-
-            //        if (res != null)
-            //        {
-            //            result.Add(res);
-            //        }
-            //    }
-            //    catch (Exception e)
-            //    {
-            //        _log.Error($"Can't load module {libFile}. Reason: {e.Message}");
-            //    }
-
-            //    //if (providerInst != null)
-            //    //{
-            //    //    result.Add(providerInst);
-            //    //}
-            //}
-
-            return new List<object>();
+            return _modules.Any() ? _modules.Select(module => module.GetWidget()).Where(w => w != null).ToList(): null;
         }
 
         /// <summary>
@@ -145,7 +106,7 @@ namespace Client.Repositories
                         throw new Exception($"Assembly {libFile} contains no types");
                     }
 
-                    var providerType = types.First(type => type.Name.EndsWith(".ModuleProvider"));
+                    var providerType = types.FirstOrDefault(type => type.Name == "ModuleProvider");
 
                     if (providerType == null)
                     {

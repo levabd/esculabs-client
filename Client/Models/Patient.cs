@@ -4,7 +4,7 @@
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using ModuleFramework;
+    using EsculabsCommon;
 
     [Table("public.patients")]
     public partial class Patient : IPatient

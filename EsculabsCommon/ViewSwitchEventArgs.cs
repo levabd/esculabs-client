@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Controls;
 
-namespace ModuleFramework
+namespace EsculabsCommon
 {
     public class ViewSwitchEventArgs : EventArgs
     {

@@ -13,7 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{3345
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fibrosis", "Modules\Fibrosis\Fibrosis.csproj", "{792E1A47-6361-4BE7-8977-F0A46E6D9BE6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModuleFramework", "ModuleFramework\ModuleFramework.csproj", "{23319B71-8321-41EE-98F5-6938F520DB52}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EsculabsCommon", "EsculabsCommon\EsculabsCommon.csproj", "{23319B71-8321-41EE-98F5-6938F520DB52}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -62,10 +62,8 @@ namespace Client
 
                 _views.SetView("PatientsListView", x =>
                 {
-                    var view = (PatientsListView) x;
-
-                    view.TileClickEventHandler += HandlePatientTileClick;
-                    view.AddPatientButtonClick += HandleAddPatientButtonClick;
+                    ((PatientsListView) x).TileClickEventHandler += HandlePatientTileClick;
+                    ((PatientsListView) x).AddPatientButtonClick += HandleAddPatientButtonClick;
                 });
 
             }
@@ -75,29 +73,31 @@ namespace Client
             }
         }
 
-        private void ShowAddPatientView()
-        {
-            var view = new AddPatient();
-
-            // transitionContent.Content = view;
-        }
-
         private void HandleAddPatientButtonClick(object sender, RoutedEventArgs e)
         {
-            ShowAddPatientView();
+            // Сам в шоке
+            _views.SetView("AddPatientView", x =>
+            {
+                ((AddPatientView) x).BackButtonFunc = () =>
+                {
+                    _views.SetPrevious();
+                };
+            });
         }
 
         private void HandlePatientTileClick(object sender, PatientTileClickArgs e)
         {
-            //  modulesListView.Initialize(this, _currentPhysician, e.Patient);
-            // modulesListView.ShowWidgets();
-
-            //  modulesListTabItem.IsSelected = true;
+            _views.SetView("ModulesListView", x =>
+            {
+                ((ModulesListView) x).Patient = e.Patient;
+            });
         }
 
         private void backBtn_Click(object sender, RoutedEventArgs e)
         {
-            MessageDialogResult c;
+            _views.SetPrevious();
+
+            //MessageDialogResult c;
 
             //switch (stepsTabControl.SelectedIndex)
             //{

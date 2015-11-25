@@ -4,7 +4,7 @@ namespace Client.Helpers
 {
     using System.Windows.Data;
     using System.Globalization;
-    using ModuleFramework;
+    using EsculabsCommon;
 
     [ValueConversion(typeof(PatientGender), typeof(string))]
     public class GenderConverter : IValueConverter

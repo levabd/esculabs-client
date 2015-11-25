@@ -5,7 +5,7 @@
     using System.Data.Entity.Migrations;
     using System.Linq;
     using Models;
-    using ModuleFramework;
+    using EsculabsCommon;
     using System.Collections.Generic;
     using Context;
 

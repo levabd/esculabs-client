@@ -11,6 +11,8 @@ using System.Windows.Controls;
 
 namespace Client.Helpers
 {
+    using EsculabsCommon;
+
     public class ViewManager
     {
         public delegate void ViewInitializeDelegate(FrameworkElement v);
@@ -20,13 +22,13 @@ namespace Client.Helpers
         public FrameworkElement Current => _viewStack.First();
         public FrameworkElement Previous => _viewStack[1];
 
-        private ObservableCollection<FrameworkElement> _loadedViews;
-        private ObservableCollection<FrameworkElement> _viewStack; 
+        private List<FrameworkElement> _loadedViews;
+        private List<FrameworkElement> _viewStack; 
 
         public ViewManager()
         {
-            _loadedViews = new ObservableCollection<FrameworkElement>();
-            _viewStack = new ObservableCollection<FrameworkElement>();
+            _loadedViews = new List<FrameworkElement>();
+            _viewStack = new List<FrameworkElement>();
         }
 
         public FrameworkElement SetView(string viewName, ViewInitializeDelegate initFunc = null)
@@ -41,11 +43,13 @@ namespace Client.Helpers
             if (view == null)
             {
                 view = LoadView(viewName);
-            }
 
-            if (view == null)
-            {
-                return null;
+                if (view == null)
+                {
+                    return null;
+                }
+
+                initFunc?.Invoke(view);
             }
 
             if (_viewStack.Any())
@@ -57,11 +61,31 @@ namespace Client.Helpers
                 _viewStack.Add(view);
             }
 
-            initFunc?.Invoke(view);
-
+            ((BaseView) view).ClearInput();
             Container.Content = view;
 
             return view;
+        }
+
+        public void SetPrevious()
+        {
+            if (_viewStack.Count < 2)
+            {
+                return;
+            }
+
+            var list = _viewStack.GetRange(1, _viewStack.Count - 1);
+            _viewStack.Clear();
+            _viewStack.AddRange(list);
+
+            var first = _viewStack.FirstOrDefault();
+
+            if (first == null)
+            {
+                return;
+            }
+
+            Container.Content = first;
         }
 
         private FrameworkElement LoadView(string className)
@@ -89,5 +113,7 @@ namespace Client.Helpers
 
             return view;
         }
+
+
     }
 }

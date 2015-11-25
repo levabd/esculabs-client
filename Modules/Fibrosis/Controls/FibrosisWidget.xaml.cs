@@ -2,7 +2,7 @@
 
 namespace Fibrosis
 {
-    using ModuleFramework;
+    using EsculabsCommon;
     using System.Windows;
     using Views;
 

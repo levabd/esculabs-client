@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using EsculabsCommon;
 
 namespace Client.Views
 {
@@ -23,12 +24,10 @@ namespace Client.Views
     /// <summary>
     /// Interaction logic for PatientsList.xaml
     /// </summary>
-    public partial class PatientsListView : UserControl
+    public partial class PatientsListView : BaseView
     {
         public event EventHandler<PatientTileClickArgs> TileClickEventHandler;
         public event EventHandler<RoutedEventArgs> AddPatientButtonClick;
-
-        private List<Patient> _patients = new List<Patient>();
 
         public CollectionViewSource Patients { get; private set; }
 
@@ -42,10 +41,8 @@ namespace Client.Views
 
         public void ReloadPatientsList()
         {
-            _patients = PatientsRepository.Instance.All();
-
-            Patients = new CollectionViewSource();
-            Patients.Source = _patients;
+            var patients = PatientsRepository.Instance.All();
+            Patients = new CollectionViewSource { Source = patients };
         }
 
         private void filterTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -59,6 +56,11 @@ namespace Client.Views
             {
                 var result = true;
                 var p = item as Patient;
+
+                if (p == null)
+                {
+                    return true;
+                }
 
                 nameFilter = nameFilter.ToLower();
 
@@ -80,21 +82,22 @@ namespace Client.Views
         {
             if (TileClickEventHandler != null)
             {
-                PatientTileClickArgs args = new PatientTileClickArgs()
+                var patientsListTile = sender as PatientsListTile;
+                if (patientsListTile != null)
                 {
-                    Patient = (sender as PatientsListTile).DataContext as Patient
-                };
+                    PatientTileClickArgs args = new PatientTileClickArgs()
+                    {
+                        Patient = patientsListTile.DataContext as Patient
+                    };
 
-                TileClickEventHandler(this, args);
+                    TileClickEventHandler(this, args);
+                }
             }
         }
 
         private void addPatientBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (AddPatientButtonClick != null)
-            {
-                AddPatientButtonClick(sender, e);
-            }
+            AddPatientButtonClick?.Invoke(sender, e);
         }
     }
 }

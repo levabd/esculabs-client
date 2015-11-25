@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Windows;
+using System.Windows.Controls;
 
-namespace ModuleFramework
+namespace EsculabsCommon
 {
-    using System.Windows.Controls;
-
     public interface IModuleProvider
     {
         event EventHandler<ViewSwitchEventArgs> ViewSwitchEventHandler;

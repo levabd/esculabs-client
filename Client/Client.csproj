@@ -170,8 +170,8 @@
     <Compile Include="Models\Physician.cs" />
     <Compile Include="Repositories\ModulesRepository.cs" />
     <Compile Include="Repositories\PhysiciansRepository.cs" />
-    <Compile Include="Views\AddPatient.xaml.cs">
-      <DependentUpon>AddPatient.xaml</DependentUpon>
+    <Compile Include="Views\AddPatientView.xaml.cs">
+      <DependentUpon>AddPatientView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
@@ -189,8 +189,8 @@
     <Compile Include="Repo\PatientsRepo.cs" />
     <Compile Include="StatusBackgroundConverter.cs" />
     <Compile Include="StatusTextConverter.cs" />
-    <Compile Include="Views\ModulesList.xaml.cs">
-      <DependentUpon>ModulesList.xaml</DependentUpon>
+    <Compile Include="Views\ModulesListView.xaml.cs">
+      <DependentUpon>ModulesListView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PatientsListView.xaml.cs">
       <DependentUpon>PatientsListView.xaml</DependentUpon>
@@ -215,7 +215,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\AddPatient.xaml">
+    <Page Include="Views\AddPatientView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -252,7 +252,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ModulesList.xaml">
+    <Page Include="Views\ModulesListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -302,13 +302,13 @@
       <Project>{eab1eb1a-e757-4f23-9bee-fb145a1f7792}</Project>
       <Name>Eklekto</Name>
     </ProjectReference>
+    <ProjectReference Include="..\EsculabsCommon\EsculabsCommon.csproj">
+      <Project>{23319b71-8321-41ee-98f5-6938f520db52}</Project>
+      <Name>EsculabsCommon</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FibroscanProcessor\FibroscanProcessor.csproj">
       <Project>{56299f06-7b5a-400d-a41f-a93a956a09f7}</Project>
       <Name>FibroscanProcessor</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ModuleFramework\ModuleFramework.csproj">
-      <Project>{23319b71-8321-41ee-98f5-6938f520db52}</Project>
-      <Name>ModuleFramework</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

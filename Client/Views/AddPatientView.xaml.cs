@@ -16,20 +16,24 @@ using System.Windows.Shapes;
 namespace Client.Views
 {
     using System.IO.Ports;
-    using ModuleFramework;
+    using EsculabsCommon;
     using Common.Logging;
     using System.Configuration;
     using System.Text.RegularExpressions;
 
     /// <summary>
-    /// Interaction logic for AddPatient.xaml
+    /// Interaction logic for AddPatientView.xaml
     /// </summary>
-    public partial class AddPatient : UserControl
+    public partial class AddPatientView : BaseView
     {
+        public delegate void BackButtonDelegate();
+
+        public BackButtonDelegate BackButtonFunc;
+
         private SerialPort serial;
         private ILog log;
 
-        public AddPatient()
+        public AddPatientView()
         {
             log = LogManager.GetLogger("Add Patient");
 
@@ -52,15 +56,26 @@ namespace Client.Views
             }
             else
             {
-                log.Error(string.Format("Can't extract barcode scanner port name from app settings!"));
+                log.Error("Can't extract barcode scanner port name from app settings!");
             }
         }
-
+        
+        public override void ClearInput()
+        {
+            iinTextBox.Text = null;
+            lastNameTextBox.Text = null;
+            firstNameTextBox.Text = null;
+            middleNameTextBox.Text = null;
+            birthdateDatePicker.SelectedDate = null;
+            maleRadioButton.IsChecked = false;
+            femaleRadioButton.IsChecked = false;
+        }
+        
         private void serial_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             var input = serial.ReadLine();
 
-            /// TODO: убрать из сканнера отправку символа \r
+            // TODO: убрать из сканнера отправку символа \r
 
             if (input.EndsWith("\r"))
             {
@@ -76,7 +91,7 @@ namespace Client.Views
         private void iinTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             Regex regex = new Regex("^[0-9]{12}$");
-            string iin = (sender as TextBox).Text;
+            string iin = (sender as TextBox)?.Text;
 
             if (!string.IsNullOrEmpty(iin) && regex.Match(iin).Success)
             {
@@ -109,14 +124,15 @@ namespace Client.Views
             }
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            serial.Close();
-        }
-
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             iinTextBox.Focus();
+        }
+
+        private void cancelBtn_Click(object sender, RoutedEventArgs e)
+        {
+            serial.Close();
+            BackButtonFunc?.Invoke();
         }
     }
 }
