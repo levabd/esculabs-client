@@ -11,19 +11,20 @@ namespace Fibrosis
     public class ModuleProvider : IModuleProvider
     {
         public event EventHandler<ViewChangeArgs> ViewSwitchEventHandler;
-
         public string Name => "Fibrosis";
-
-        public UserControl GetWidget()
-        {
-            var x = ExaminesRepository.Instance.Find(1);           
-
-            return new FibrosisWidget();
+        
+        public ModuleProvider()
+        {            
         }
 
-        public UserControl GetExaminesList()
+        public UserControl GetWidget(IPatient patient)
         {
-            return new ExaminesListView();            
+            return new FibrosisWidget(patient);
+        }
+
+        public UserControl GetExaminesList(IPatient patient)
+        {
+            return new ExaminesListView(patient);            
         }
     }
 }

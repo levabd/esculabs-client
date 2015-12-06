@@ -66,9 +66,9 @@ namespace Client.Repositories
             }
         }
 
-        public List<UserControl> GetWidgetsList()
+        public List<UserControl> GetWidgetsList(Patient patient)
         {
-            return _modules.Any() ? _modules.Select(module => module.GetWidget()).Where(w => w != null).ToList(): null;
+            return _modules.Any() ? _modules.Select(module => module.GetWidget(patient)).Where(w => w != null).ToList(): null;
         }
 
         /// <summary>

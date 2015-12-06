@@ -10,8 +10,8 @@ namespace EsculabsCommon
 
         string Name { get; }
 
-        UserControl GetWidget();
+        UserControl GetWidget(IPatient patient);
 
-        UserControl GetExaminesList();
+        UserControl GetExaminesList(IPatient patient);
     }
 }

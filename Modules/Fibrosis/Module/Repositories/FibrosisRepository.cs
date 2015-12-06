@@ -10,12 +10,12 @@ namespace Fibrosis.Repositories
     using System.Data.Entity;
     using Context;
 
-    class ExaminesRepository
+    class FibrosisRepository
     {
-        private static volatile ExaminesRepository _instance;
+        private static volatile FibrosisRepository  _instance;
         private static object                       _syncRoot = new object();
 
-        public static ExaminesRepository Instance
+        public static FibrosisRepository Instance
         {
             get
             {
@@ -24,7 +24,7 @@ namespace Fibrosis.Repositories
                     lock (_syncRoot)
                     {
                         if (_instance == null)
-                            _instance = new ExaminesRepository();
+                            _instance = new FibrosisRepository();
                     }
                 }
 
@@ -32,12 +32,12 @@ namespace Fibrosis.Repositories
             }
         }
 
-        public ExaminesRepository()
+        public FibrosisRepository()
         {
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<PgSqlContext, Migrations.Configuration>("PgSqlConnectionString"));
         }
 
-        public Examine Find(int id)
+        public Examine FindExamine(int id)
         {
             using (var db = new PgSqlContext())
             {
@@ -45,19 +45,35 @@ namespace Fibrosis.Repositories
             }
         }
 
-        public async Task<List<Examine>> AllAsync()
+        public async Task<List<Examine>> AllExaminesAsync(int patientId)
         {
             try
             {
                 using (var db = new PgSqlContext())
                 {
-                    return await db.Examines.OrderByDescending(p => p.Id).ToListAsync();
+                    return await db.Examines.OrderByDescending(p => p.Id).Where(x => x.PatientId == patientId).ToListAsync();
                 }
             }
 
             catch (Exception e)
             {
                 return null;
+            }
+        }
+
+        public Examine GetLastExamine(int patientId)
+        {
+            using (var db = new PgSqlContext())
+            {
+                return db.Examines.OrderByDescending(x => x.CreatedAt).FirstOrDefault(p => p.PatientId == patientId);
+            }
+        }
+
+        public PatientMetric GetPatientMetric(int patientId)
+        {
+            using (var db = new PgSqlContext())
+            {
+                return db.PatientMetrics.FirstOrDefault(p => p.PatientId == patientId);
             }
         }
     }

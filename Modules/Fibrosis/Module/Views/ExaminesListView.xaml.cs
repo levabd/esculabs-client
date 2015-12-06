@@ -26,14 +26,18 @@ namespace Fibrosis.Views
     /// </summary>
     public partial class ExaminesListView : BaseView
     {
+        public IPatient Patient { get; set; }
+
         public event EventHandler<ExamineTileClickArgs> TileClickEventHandler;
         public event EventHandler<RoutedEventArgs> AddExamineButtonClickHandler;
 
         public CollectionViewSource Examines { get; private set; }
 
-        public ExaminesListView()
+        public ExaminesListView(IPatient patient)
         {
             InitializeComponent();
+
+            Patient = patient;
 
             ReloadPatientsGrid();
 
@@ -42,7 +46,7 @@ namespace Fibrosis.Views
 
         private async void ReloadPatientsGrid()
         {
-            var examinesTask = ExaminesRepository.Instance.AllAsync();
+            var examinesTask = FibrosisRepository.Instance.AllExaminesAsync(Patient.Id);
 
             Examines = new CollectionViewSource { Source = await examinesTask };
         }

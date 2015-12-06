@@ -73,6 +73,8 @@
     <Compile Include="Controls\ExaminesListTile.xaml.cs">
       <DependentUpon>ExaminesListTile.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\Converters\FriendlyTimeConverter.cs" />
+    <Compile Include="Helpers\Converters\SensorTypeConverter.cs" />
     <Compile Include="Helpers\FIBXParser.cs" />
     <Compile Include="Helpers\ExamineTileClickArgs.cs" />
     <Compile Include="Migrations\201511270614345_CreateFibrosisTables.cs" />
@@ -92,7 +94,7 @@
     <Compile Include="ModuleProvider.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Examine.cs" />
-    <Compile Include="Repositories\ExaminesRepository.cs" />
+    <Compile Include="Repositories\FibrosisRepository.cs" />
     <Compile Include="Controls\FibrosisWidget.xaml.cs">
       <DependentUpon>FibrosisWidget.xaml</DependentUpon>
     </Compile>

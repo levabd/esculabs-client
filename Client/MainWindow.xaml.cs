@@ -120,7 +120,15 @@ namespace Client
         /// <param name="e"></param>
         private void HandlePatientTileClick(object sender, PatientTileClickArgs e)
         {
-            _views.SetView("ModulesListView", x => ((ModulesListView) x).Patient = e.Patient);
+            var view = (ModulesListView)_views.SetView("ModulesListView");
+
+            if (view == null)
+            {
+                return;
+            }
+
+            view.Patient = e.Patient;
+            view.ReloadWidgets();
         }
 
         /// <summary>

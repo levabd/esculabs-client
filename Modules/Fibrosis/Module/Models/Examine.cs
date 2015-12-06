@@ -52,5 +52,58 @@ namespace Fibrosis.Models
         public DateTime? CreatedAt { get; set; }
 
         public virtual ICollection<Measure> Measures { get; set; }
+
+        public string FibrosisStage
+        {
+            get
+            {
+                if (Med == 0)
+                {
+                    return "Нет данных";
+                }
+
+                if (Med > 12.5f)
+                {
+                    return "F4";
+                }
+
+                if (Med >= 9.6f)
+                {
+                    return "F3";
+                }
+
+                if (Med >= 7.3f)
+                {
+                    return "F2";
+                }
+
+                if (Med >= 5.9f)
+                {
+                    return "F1";
+                }
+
+                if (Med >= 1.5f)
+                {
+                    return "F0";
+                }
+
+                return "Отсутствует";
+            }
+        }
+
+        public int? IqrMed
+        {
+            get
+            {
+                try
+                {
+                    return Convert.ToInt32(Math.Round((Iqr / Med) * 100));
+                }
+                catch (Exception)
+                {
+                    return null;
+                }
+            }
+        }
     }
 }
