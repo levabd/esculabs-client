@@ -98,8 +98,19 @@ namespace Client.Repositories
                     // Загружаем модуль
                     var assembly = Assembly.LoadFrom(libFile);
 
+                    Type[] types;
+
                     // Получаем тип класса провайдера из библиотеки
-                    var types = assembly.GetTypes();
+                    try
+                    {
+                        types = assembly.GetTypes();
+                    }
+                    catch (ReflectionTypeLoadException e)
+                    {
+                        var s = e.LoaderExceptions;
+
+                        throw new Exception($"Can't load {moduleName} types");
+                    }
 
                     if (types.Length == 0)
                     {

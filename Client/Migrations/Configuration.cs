@@ -1,7 +1,6 @@
 ﻿namespace Client.Migrations
 {
     using System;
-    using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
     using Models;
@@ -18,7 +17,7 @@
 
         protected override void Seed(PgSqlContext context)
         {
-            if (context.Patients.Count() == 0)
+            if (!context.Patients.Any())
             {
                 context.Patients.AddOrUpdate(
                   new Patient
@@ -112,7 +111,7 @@
               );
             }
 
-            if (context.Physicians.Count() == 0)
+            if (!context.Physicians.Any())
             {
                 context.Physicians.AddOrUpdate(
                     new Physician

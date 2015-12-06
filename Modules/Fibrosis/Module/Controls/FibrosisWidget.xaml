@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="Fibrosis.Controls.FibrosisWidget"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Fibrosis"
+             mc:Ignorable="d" 
+             Height="380" Width="500" BorderBrush="LightGray" BorderThickness="1">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250*"/>
+            <ColumnDefinition Width="250*"/>
+        </Grid.ColumnDefinitions>
+
+        <Label x:Name="titleLabel" Content="Фибросканирование" Margin="10,10,10,0" VerticalAlignment="Top" FontSize="18.667" Grid.ColumnSpan="2" Grid.Column="0" />
+        <Label x:Name="lastDateLabel" Content="17 октября 2015г." Margin="10,45,10,0" VerticalAlignment="Top" FontSize="13.333" Grid.ColumnSpan="2" Grid.Column="0" />
+        <Label Content="Периметр грудной клетки" Margin="0,78,10,0" VerticalAlignment="Top" FontSize="13.333" HorizontalAlignment="Right" Grid.Column="0"/>
+        <Label Content="между кожей и капсулой" Margin="0,111,10,0" VerticalAlignment="Top" FontSize="13.333" HorizontalAlignment="Right" Grid.Column="0"/>
+        <Label x:Name="tpLabel" Content="1.78" Margin="10,78,10,0" VerticalAlignment="Top" FontSize="13.333" HorizontalAlignment="Left" Grid.Column="1"/>
+        <Label x:Name="scdLabel" Content="150" Margin="10,111,10,0" VerticalAlignment="Top" FontSize="13.333" HorizontalAlignment="Left" Grid.Column="1"/>
+        <Label Content="Тип сенсора" Margin="0,144,10,0" VerticalAlignment="Top" FontSize="13.333" HorizontalAlignment="Right" Grid.Column="0"/>
+        <Label x:Name="sensorLabel" Content="M" Margin="10,144,0,0" VerticalAlignment="Top" FontSize="13.333" HorizontalAlignment="Left" Grid.Column="1"/>
+        <Label Content="E" Margin="0,177,10,0" VerticalAlignment="Top" FontSize="13.333" HorizontalAlignment="Right" Grid.Column="0"/>
+        <Label x:Name="eLabel" Content="3" Margin="10,177,0,0" VerticalAlignment="Top" FontSize="13.333" HorizontalAlignment="Left" Grid.Column="1"/>
+        <Label Content="Стадия фиброза" Margin="0,210,10,0" VerticalAlignment="Top" FontSize="13.333" HorizontalAlignment="Right" Grid.Column="0"/>
+        <Label x:Name="fibrosisStageLabel" Content="F3" Margin="10,210,0,0" VerticalAlignment="Top" FontSize="13.333" HorizontalAlignment="Left" Grid.Column="1"/>
+        <Label Content="Время сканирования" Margin="0,243,12,0" VerticalAlignment="Top" FontSize="13.333" HorizontalAlignment="Right" Grid.Column="0"/>
+        <Label x:Name="durationLabel" Content="15 сек." Margin="8,243,0,0" VerticalAlignment="Top" FontSize="13.333" HorizontalAlignment="Left" Grid.Column="1"/>
+        <Button x:Name="button" Style="{DynamicResource AccentedSquareButtonStyle}" Content="Новое исследование" HorizontalAlignment="Left" Margin="31,0,0,30" VerticalAlignment="Bottom" Width="160" Height="40" Click="button_Click" Grid.Column="0" FontSize="13.333"/>
+        <Button x:Name="button_Copy" Style="{DynamicResource SquareButtonStyle}" Content="Список исследований" HorizontalAlignment="Right" Margin="0,0,31,30" VerticalAlignment="Bottom" Width="160" Height="40" Grid.Column="1" FontSize="13.333"/>
+    </Grid>
+</UserControl>

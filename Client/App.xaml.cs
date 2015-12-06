@@ -26,7 +26,7 @@ namespace Client
         protected const int WH_KEYBOARD = 2;
 
         private int _hTrayWnd = 0;
-        private IntPtr _hInstance;
+       // private IntPtr _hInstance;
         private int _hKeyboardHook = 0;
 
         [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
@@ -70,8 +70,6 @@ namespace Client
                     CultureInfo.IetfLanguageTag)));
 
             base.OnStartup(e);
-
-            var bydloDB = PatientsRepository.Instance;
         }
 
         private void Application_Exit(object sender, ExitEventArgs e)

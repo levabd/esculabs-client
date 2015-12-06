@@ -36,7 +36,7 @@ namespace Client.Helpers
             _viewStack = new List<FrameworkElement>();
         }
         
-        public FrameworkElement SetView(string viewName, ViewInitializeDelegate initFunc = null)
+        public FrameworkElement SetView(string viewName, ViewInitializeDelegate initFunc = null, Assembly assembly = null)
         {
             FrameworkElement view;
             
@@ -47,7 +47,7 @@ namespace Client.Helpers
 
             if (view == null)
             {
-                view = LoadView(viewName);
+                view = LoadView(viewName, assembly);
 
                 if (view == null)
                 {
@@ -117,11 +117,11 @@ namespace Client.Helpers
             return first;            
         }
 
-        private FrameworkElement LoadView(string className)
+        private FrameworkElement LoadView(string className, Assembly assembly = null)
         {
-            var assembly = Assembly.GetExecutingAssembly();
+            var asm = assembly ?? Assembly.GetExecutingAssembly();
 
-            var type = assembly.GetTypes()
+            var type = asm.GetTypes()
                 .First(t => t.Name.Equals(className));
 
             if (type == null)

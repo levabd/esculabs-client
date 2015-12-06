@@ -35,14 +35,17 @@ namespace Client.Views
         {
             InitializeComponent();
 
-            ReloadPatientsList();
+            ReloadPatientsGrid();
+
             DataContext = this;
         }
 
-        public void ReloadPatientsList()
+        private async void ReloadPatientsGrid()
         {
-            var patients = PatientsRepository.Instance.All();
-            Patients = new CollectionViewSource { Source = patients };
+            var patientsTask = PatientsRepository.Instance.AllAsync();
+
+            Patients = new CollectionViewSource();
+            Patients.Source = await patientsTask;
         }
 
         private void filterTextBox_TextChanged(object sender, TextChangedEventArgs e)

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Client.Repositories
 {
@@ -15,7 +17,6 @@ namespace Client.Repositories
         private static object                       _syncRoot = new object();
 
         private ILog                                _log;
-        private PgSqlContext                        _context = null;
 
         public static PatientsRepository Instance
         {
@@ -36,52 +37,55 @@ namespace Client.Repositories
 
         public PatientsRepository()
         {
-            _log = LogManager.GetLogger("Patients Repository");
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<PgSqlContext, Migrations.Configuration>("PgSqlConnectionString"));
 
-            if (_context == null)
-            {
-               _context = new PgSqlContext();
-            }
+            _log = LogManager.GetLogger("Patients Repository");
         }
 
         public Patient Find(int id)
         {
-            return _context.Patients.Find(id);
+            using (var context = new PgSqlContext())
+            {
+                return context.Patients.Find(id);
+            }
         }
 
         public Patient Add(Patient patient)
         {
-            Patient result = null;
+            Patient result;
 
             try
             {
-                result = _context.Patients.Add(patient);
-                _context.SaveChanges();
+                using (var context = new PgSqlContext())
+                {
+                    result = context.Patients.Add(patient);
+                    context.SaveChanges();
+                }
             }
             catch (Exception e)
             {
-                _log.Error(string.Format("Can't insert data to db. Reason: {0}", e.Message));
+                _log.Error($"Can't insert data to db. Reason: {e.Message}");
                 result = null;
             }
 
             return result;
         }
 
-        public List<Patient> All()
+        public async Task<List<Patient>> AllAsync()
         {
-            List<Patient> patients = null;
-
             try
             {
-                patients = _context.Patients.OrderByDescending(p => p.Id).ToList();
-            }
-            catch (Exception e)
-            {
-                _log.Error(string.Format("Can't select data from db. Reason: {0}", e.Message));
-                return null;
+                using (var db = new PgSqlContext())
+                {
+                    return await db.Patients.OrderByDescending(p => p.Id).ToListAsync();
+                }
             }
 
-            return patients;
+            catch (Exception e)
+            {
+                _log.Error($"Can't select data from db. Reason: {e.Message}");
+                return null;
+            }
         }
     }
 }

@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Client.Helpers
+namespace Fibrosis.Helpers
 {
     using Models;
 
-    public class PatientTileClickArgs : EventArgs
+    public class ExamineTileClickArgs : EventArgs
     {
-        public Patient Patient { get; set; } = null;
+        public Examine Examine { get; set; } = null;
     }
 }

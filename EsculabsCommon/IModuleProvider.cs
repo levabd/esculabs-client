@@ -11,5 +11,7 @@ namespace EsculabsCommon
         string Name { get; }
 
         UserControl GetWidget();
+
+        UserControl GetExaminesList();
     }
 }

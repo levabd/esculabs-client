@@ -143,20 +143,7 @@
     <Compile Include="Helpers\AuthArgs.cs" />
     <Compile Include="Helpers\MessageDialogConfiguration.cs" />
     <Compile Include="Helpers\GenderConverter.cs" />
-    <Compile Include="ExaminesWindow.xaml.cs">
-      <DependentUpon>ExaminesWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ExamineWindow.xaml.cs">
-      <DependentUpon>ExamineWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="FibxParser.cs" />
     <Compile Include="Helpers\ViewManager.cs" />
-    <Compile Include="LoaderWindow.xaml.cs">
-      <DependentUpon>LoaderWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MeasurePreview.xaml.cs">
-      <DependentUpon>MeasurePreview.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\201510280037123_CreateEsculabsTables.cs" />
     <Compile Include="Migrations\201510280037123_CreateEsculabsTables.Designer.cs">
       <DependentUpon>201510280037123_CreateEsculabsTables.cs</DependentUpon>
@@ -177,18 +164,6 @@
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Repositories\PatientsRepository.cs" />
-    <Compile Include="ViewImageWindow.xaml.cs">
-      <DependentUpon>ViewImageWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Model\TableExamine.cs" />
-    <Compile Include="Model\TablePatient.cs" />
-    <Compile Include="NewPatientWindow.xaml.cs">
-      <DependentUpon>NewPatientWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Repo\IRepository.cs" />
-    <Compile Include="Repo\PatientsRepo.cs" />
-    <Compile Include="StatusBackgroundConverter.cs" />
-    <Compile Include="StatusTextConverter.cs" />
     <Compile Include="Views\ModulesListView.xaml.cs">
       <DependentUpon>ModulesListView.xaml</DependentUpon>
     </Compile>
@@ -196,18 +171,6 @@
       <DependentUpon>PatientsListView.xaml</DependentUpon>
     </Compile>
     <Page Include="Controls\PatientsListTile.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ExaminesWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ExamineWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="LoaderWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -227,31 +190,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="ViewImageWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="PatientsWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\Examine.cs" />
-    <Compile Include="PatientsWindow.xaml.cs">
-      <DependentUpon>PatientsWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Page Include="MeasurePreview.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="NewPatientWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\ModulesListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -262,7 +204,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\Patient.cs" />
     <Compile Include="Context\PgSqlContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -298,17 +239,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Eklekto\Eklekto.csproj">
-      <Project>{eab1eb1a-e757-4f23-9bee-fb145a1f7792}</Project>
-      <Name>Eklekto</Name>
-    </ProjectReference>
     <ProjectReference Include="..\EsculabsCommon\EsculabsCommon.csproj">
       <Project>{23319b71-8321-41ee-98f5-6938f520db52}</Project>
       <Name>EsculabsCommon</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FibroscanProcessor\FibroscanProcessor.csproj">
-      <Project>{56299f06-7b5a-400d-a41f-a93a956a09f7}</Project>
-      <Name>FibroscanProcessor</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
