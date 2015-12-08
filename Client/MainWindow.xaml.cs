@@ -43,7 +43,13 @@ namespace Client
             Left = 0;
             Top = 0;
 
-            var loginView = _views.SetView("LoginView", x => ((LoginView) x).LoginEventHandler += HandleAuthorizationAttempt);
+            var loginView = _views.SetView("LoginView", x =>
+            {
+                // Быдлокод. Обработчик события может быть подписан только один раз
+
+                ((LoginView)x).LoginEventHandler -= HandleAuthorizationAttempt;
+                ((LoginView) x).LoginEventHandler += HandleAuthorizationAttempt;
+            });
 
             if (loginView == null)
             {
@@ -64,6 +70,11 @@ namespace Client
 
                 _views.SetView("PatientsListView", x =>
                 {
+                    // Быдлокод. Обработчик события может быть подписан только один раз
+
+                    ((PatientsListView)x).TileClickEventHandler -= HandlePatientTileClick;
+                    ((PatientsListView)x).AddPatientButtonClickHandler -= HandleAddPatientButtonClick;
+
                     ((PatientsListView) x).TileClickEventHandler += HandlePatientTileClick;
                     ((PatientsListView) x).AddPatientButtonClickHandler += HandleAddPatientButtonClick;
                 });

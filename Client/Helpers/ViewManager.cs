@@ -36,27 +36,15 @@ namespace Client.Helpers
             _viewStack = new List<FrameworkElement>();
         }
         
-        public FrameworkElement SetView(string viewName, ViewInitializeDelegate initFunc = null, Assembly assembly = null)
+        public FrameworkElement SetView(string viewName, ViewInitializeDelegate initDelegate = null, Assembly assembly = null)
         {
-            FrameworkElement view;
-            
-            lock (_loadedViews)
-            {
-                view = _loadedViews.FirstOrDefault(x => x.Name.Equals(viewName));
-            }
+            var view = LoadView(viewName, assembly);
 
             if (view == null)
             {
-                view = LoadView(viewName, assembly);
-
-                if (view == null)
-                {
-                    return null;
-                }
-
-                initFunc?.Invoke(view);
+                return null;
             }
-
+            
             if (_viewStack.Any())
             {
                 _viewStack.Insert(0, view);
@@ -65,6 +53,8 @@ namespace Client.Helpers
             {
                 _viewStack.Add(view);
             }
+
+            initDelegate?.Invoke(view);
 
             ((BaseView) view).ClearInput();
             Container.Content = view;
@@ -120,29 +110,31 @@ namespace Client.Helpers
         private FrameworkElement LoadView(string className, Assembly assembly = null)
         {
             var asm = assembly ?? Assembly.GetExecutingAssembly();
-
+            
             var type = asm.GetTypes()
                 .First(t => t.Name.Equals(className));
-
+            
             if (type == null)
             {
                 return null;
             }
 
-            var view = (FrameworkElement) Activator.CreateInstance(type);
-            if (view != null)
+            var viewName = type.FullName;            
+            var view = _loadedViews.FirstOrDefault(x => x.GetType().FullName == viewName);
+
+            if (view == null)
             {
-                view.Name = className;
+                view = (FrameworkElement)Activator.CreateInstance(type);
 
-                lock (_loadedViews)
+                if (view == null)
                 {
-                    _loadedViews.Add(view);
+                    return null;
                 }
-            }
 
+                _loadedViews.Add(view);
+            }
+            
             return view;
         }
-
-
     }
 }
