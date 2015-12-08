@@ -11,19 +11,19 @@
     d:DesignHeight="768" d:DesignWidth="1024">
     <Grid>
         <ScrollViewer Margin="0,120,0,0" >
-            <ItemsControl x:Name="ExaminesList" ItemsSource="{Binding Examines.View}" AlternationCount="2">
+            <ItemsControl x:Name="ExaminesList" ItemsSource="{Binding Examines}" AlternationCount="2">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <c:PatientsListTile x:Name="Tile" MouseUp="Tile_MouseUp"/>
                         <DataTemplate.Triggers>
                             <Trigger Property="ItemsControl.AlternationIndex" Value="0">
-                                <Setter Property="Background" Value="{StaticResource AccentColorBrush4}" TargetName="Tile"/>
+                                <Setter Property="Background" Value="GhostWhite" TargetName="Tile"/>
                             </Trigger>
                             <Trigger Property="ItemsControl.AlternationIndex" Value="1">
                                 <Setter Property="Background" Value="White" TargetName="Tile"/>
                             </Trigger>
                             <Trigger Property="ItemsControl.IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="{StaticResource AccentColorBrush3}" TargetName="Tile"/>
+                                <Setter Property="Background" Value="WhiteSmoke" TargetName="Tile"/>
                             </Trigger>
                         </DataTemplate.Triggers>
                     </DataTemplate>

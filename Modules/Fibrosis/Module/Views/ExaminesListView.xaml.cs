@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -24,9 +26,13 @@ namespace Fibrosis.Views
     /// <summary>
     /// Interaction logic for PatientsList.xaml
     /// </summary>
-    public partial class ExaminesListView : BaseView
+    public partial class ExaminesListView : BaseView, INotifyPropertyChanged
     {
         private IPatient _patient;
+        private List<Examine> _examines;
+
+        public event EventHandler<ExamineTileClickArgs> TileClickEventHandler;
+        public event EventHandler<RoutedEventArgs> AddExamineButtonClickHandler;
 
         public IPatient Patient
         {
@@ -41,10 +47,18 @@ namespace Fibrosis.Views
             }
         }
 
-        public event EventHandler<ExamineTileClickArgs> TileClickEventHandler;
-        public event EventHandler<RoutedEventArgs> AddExamineButtonClickHandler;
-
-        public CollectionViewSource Examines { get; private set; }
+        public List<Examine> Examines
+        {
+            get
+            {
+                return _examines;
+            }
+            set
+            {
+                _examines = value;
+                OnPropertyChanged();
+            }
+        }
 
         public ExaminesListView()
         {
@@ -56,8 +70,7 @@ namespace Fibrosis.Views
         private async void ReloadPatientsGrid()
         {
             var examinesTask = FibrosisRepository.Instance.AllExaminesAsync(Patient.Id);
-
-            Examines = new CollectionViewSource { Source = await examinesTask };
+            Examines = await examinesTask;
         }
 
         private void filterTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -110,6 +123,13 @@ namespace Fibrosis.Views
         private void AddExamineBtn_Click(object sender, RoutedEventArgs e)
         {
             AddExamineButtonClickHandler?.Invoke(sender, e);
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

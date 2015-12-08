@@ -75,6 +75,7 @@
     </Compile>
     <Compile Include="Helpers\Converters\FriendlyTimeConverter.cs" />
     <Compile Include="Helpers\Converters\SensorTypeConverter.cs" />
+    <Compile Include="Helpers\ExamineStatusTemplateSelector.cs" />
     <Compile Include="Helpers\FIBXParser.cs" />
     <Compile Include="Helpers\ExamineTileClickArgs.cs" />
     <Compile Include="Migrations\201511270614345_CreateFibrosisTables.cs" />
