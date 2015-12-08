@@ -6,17 +6,20 @@ namespace Fibrosis.Controls
     using EsculabsCommon;
     using System.Windows;
     using Repositories;
+    using Views;
 
     /// <summary>
     /// Interaction logic for Widget.xaml
     /// </summary>
     public partial class FibrosisWidget : UserControl
     {
-        public IPatient         Patient { get; set; }
-        public PatientMetric    PatientMetric { get; set; }
-        public Examine          LastExamine { get; set; }
+        private readonly ModuleProvider _moduleProvider;
 
-        public FibrosisWidget(IPatient patient)
+        public IPatient                 Patient { get; set; }
+        public PatientMetric            PatientMetric { get; set; }
+        public Examine                  LastExamine { get; set; }
+
+        public FibrosisWidget(ModuleProvider moduleProvider, IPatient patient)
         {
             InitializeComponent();
 
@@ -27,14 +30,26 @@ namespace Fibrosis.Controls
                 LastExamine = FibrosisRepository.Instance.GetLastExamine(Patient.Id);
             }
 
+            _moduleProvider = moduleProvider;
+
             DataContext = this;
         }
 
-        private void button_Click(object sender, RoutedEventArgs e)
+        private void AddExamineBtn_Click(object sender, RoutedEventArgs e)
         {
-   
+
+        }
+
+        private void ExaminesListBtn_Click(object sender, RoutedEventArgs e)
+        {
+            _moduleProvider.SetView(new ViewChangeArgs
+            {
+                ViewName = typeof(ExaminesListView).Name,
+                ViewInitDelegate = x =>
+                {
+                    ((ExaminesListView) x).Patient = Patient;
+                }
+            });
         }
     }
-
-
 }

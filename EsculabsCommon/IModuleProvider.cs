@@ -12,6 +12,6 @@ namespace EsculabsCommon
 
         UserControl GetWidget(IPatient patient);
 
-        UserControl GetExaminesList(IPatient patient);
+        void SetView(ViewChangeArgs args);
     }
 }

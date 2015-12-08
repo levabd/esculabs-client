@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using Client.Repositories;
 
 namespace Client
 {
@@ -34,8 +35,10 @@ namespace Client
 
             _views.Container = ViewContainer;
             _views.ViewChangeEventHandler += HandleViewChange;
-        }
 
+            ModulesRepository.Instance.SubscribeViewManager(_views);
+        }
+        
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
             Height = SystemParameters.PrimaryScreenHeight;

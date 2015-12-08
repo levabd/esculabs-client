@@ -31,7 +31,7 @@
         <Label x:Name="fibrosisStageLabel" Content="{Binding LastExamine.FibrosisStage}" Margin="10,210,0,0" VerticalAlignment="Top" FontSize="13.333" HorizontalAlignment="Left" Grid.Column="1"/>
         <Label Content="Длительность сканирования" Margin="0,243,12,0" VerticalAlignment="Top" FontSize="13.333" HorizontalAlignment="Right" Grid.Column="0"/>
         <Label x:Name="durationLabel" Content="{Binding LastExamine.Duration, Converter={StaticResource FriendlyTimeConverter}}"  Margin="8,243,0,0" VerticalAlignment="Top" FontSize="13.333" HorizontalAlignment="Left" Grid.Column="1"/>        
-        <Button x:Name="button" Style="{DynamicResource AccentedSquareButtonStyle}" Content="Новое исследование" HorizontalAlignment="Left" Margin="31,0,0,30" VerticalAlignment="Bottom" Width="160" Height="40" Click="button_Click" Grid.Column="0" FontSize="13.333"/>
-        <Button x:Name="button_Copy" Style="{DynamicResource SquareButtonStyle}" Content="Список исследований" HorizontalAlignment="Right" Margin="0,0,31,30" VerticalAlignment="Bottom" Width="160" Height="40" Grid.Column="1" FontSize="13.333"/>
+        <Button x:Name="AddExamineBtn" Style="{DynamicResource AccentedSquareButtonStyle}" Content="Новое исследование" HorizontalAlignment="Left" Margin="31,0,0,30" VerticalAlignment="Bottom" Width="160" Height="40" Grid.Column="0" FontSize="13.333" Click="AddExamineBtn_Click"/>
+        <Button x:Name="ExaminesListBtn" Style="{DynamicResource SquareButtonStyle}" Content="Список исследований" HorizontalAlignment="Right" Margin="0,0,31,30" VerticalAlignment="Bottom" Width="160" Height="40" Grid.Column="1" FontSize="13.333" Click="ExaminesListBtn_Click"/>
     </Grid>
 </UserControl>

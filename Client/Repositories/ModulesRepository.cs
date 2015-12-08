@@ -11,7 +11,7 @@ namespace Client.Repositories
     using EsculabsCommon;
     using System.IO;
     using System.Reflection;
-    using System.Windows;
+    using Helpers;
 
     public class ModulesRepository
     {
@@ -69,6 +69,16 @@ namespace Client.Repositories
         public List<UserControl> GetWidgetsList(Patient patient)
         {
             return _modules.Any() ? _modules.Select(module => module.GetWidget(patient)).Where(w => w != null).ToList(): null;
+        }
+
+        public void SubscribeViewManager(ViewManager viewManager)
+        {
+            if (!_modules.Any())
+            {
+                return;
+            }
+
+            _modules.ForEach(mp => mp.ViewSwitchEventHandler += viewManager.HandleModuleViewChange);
         }
 
         /// <summary>

@@ -19,12 +19,12 @@ namespace Fibrosis
 
         public UserControl GetWidget(IPatient patient)
         {
-            return new FibrosisWidget(patient);
+            return new FibrosisWidget(this, patient);
         }
 
-        public UserControl GetExaminesList(IPatient patient)
+        public void SetView(ViewChangeArgs args)
         {
-            return new ExaminesListView(patient);            
+            ViewSwitchEventHandler?.Invoke(this, args);
         }
     }
 }

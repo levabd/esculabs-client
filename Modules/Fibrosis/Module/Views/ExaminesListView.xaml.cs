@@ -26,20 +26,29 @@ namespace Fibrosis.Views
     /// </summary>
     public partial class ExaminesListView : BaseView
     {
-        public IPatient Patient { get; set; }
+        private IPatient _patient;
+
+        public IPatient Patient
+        {
+            get
+            {
+                return _patient;
+            }
+            set
+            {
+                _patient = value;
+                ReloadPatientsGrid();
+            }
+        }
 
         public event EventHandler<ExamineTileClickArgs> TileClickEventHandler;
         public event EventHandler<RoutedEventArgs> AddExamineButtonClickHandler;
 
         public CollectionViewSource Examines { get; private set; }
 
-        public ExaminesListView(IPatient patient)
+        public ExaminesListView()
         {
             InitializeComponent();
-
-            Patient = patient;
-
-            ReloadPatientsGrid();
 
             DataContext = this;
         }

@@ -14,11 +14,8 @@ namespace Client.Helpers
         #region Объявления
 
         // Событие, срабатываемое при смене вьюхи
-        public event EventHandler<ViewChangeArgs> ViewChangeEventHandler;
-        
-        // Делегат для инициализации _впервые_ отображаемой вьюхи
-        public delegate void ViewInitializeDelegate(FrameworkElement v);
-
+        public event EventHandler<ViewChangeArgs>   ViewChangeEventHandler;
+      
         // Контейнер, отображающий вьюхи
         public ContentControl                       Container { get; set; }
 
@@ -35,7 +32,14 @@ namespace Client.Helpers
             _loadedViews = new List<FrameworkElement>();
             _viewStack = new List<FrameworkElement>();
         }
-        
+
+        public void HandleModuleViewChange(object sender, ViewChangeArgs args)
+        {
+            var assembly = sender.GetType().Assembly;
+
+            SetView(args.ViewName, args.ViewInitDelegate, assembly);
+        }
+
         public FrameworkElement SetView(string viewName, ViewInitializeDelegate initDelegate = null, Assembly assembly = null)
         {
             var view = LoadView(viewName, assembly);
@@ -136,5 +140,7 @@ namespace Client.Helpers
             
             return view;
         }
+
+
     }
 }
