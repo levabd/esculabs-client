@@ -24,6 +24,7 @@ namespace Fibrosis.Views
     /// </summary>
     public partial class ExamineView : BaseView, INotifyPropertyChanged
     {
+        private ModuleProvider _moduleProvider;
         private Examine _examine;
         private IPatient _patient;
 
@@ -49,6 +50,19 @@ namespace Fibrosis.Views
             set
             {
                 _examine = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ModuleProvider ModuleProvider
+        {
+            get
+            {
+                return _moduleProvider;
+            }
+            set
+            {
+                _moduleProvider = value;
                 OnPropertyChanged();
             }
         }
@@ -105,6 +119,16 @@ namespace Fibrosis.Views
         private void Preview_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             var preview = sender as MeasurePreview;
+
+            ModuleProvider?.SetView(new ViewChangeArgs
+            {
+                ViewName = typeof(MeasureView).FullName,
+                ViewInitDelegate = x =>
+                {
+                    ((MeasureView)x).SourceImage.Source = ImageFromByteArray(preview.measure.Source);
+                    ((MeasureView)x).ProcessedImage.Source = ImageFromByteArray(preview.measure.ResultMerged);
+                }
+            });
 
             //ViewImageWindow window = new ViewImageWindow("Просмотр сканирования", ImageFromBase64(preview.measure.ResultMerged), 512, 384);
             //window.Owner = this;
@@ -203,6 +227,15 @@ namespace Fibrosis.Views
 
         private void dispersionBtn_Click(object sender, RoutedEventArgs e)
         {
+            ModuleProvider?.SetView(new ViewChangeArgs
+            {
+                ViewName = typeof(WhiskerPlotView).FullName,
+                ViewInitDelegate = x =>
+                {
+                    ((WhiskerPlotView)x).WhiskerPlot.Source = ImageFromByteArray(Examine.WhiskerPlot);
+                }
+            });
+
             //ViewImageWindow window = new ViewImageWindow("Просмотр дисперсии", ImageFromBase64(examine.ElastoExam.WhiskerPlot), 832, 320);
             //window.Owner = this;
             //window.ShowDialog();

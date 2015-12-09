@@ -109,6 +109,12 @@
     <Compile Include="Views\ExamineView.xaml.cs">
       <DependentUpon>ExamineView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\WhiskerPlotView.xaml.cs">
+      <DependentUpon>WhiskerPlotView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MeasureView.xaml.cs">
+      <DependentUpon>MeasureView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Include="Controls\FibrosisWidget.xaml">
@@ -130,6 +136,14 @@
     <Page Include="Views\ExamineView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\WhiskerPlotView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\MeasureView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

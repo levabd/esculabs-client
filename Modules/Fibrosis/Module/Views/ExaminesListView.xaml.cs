@@ -130,12 +130,12 @@ namespace Fibrosis.Views
                     ViewName = typeof (ExamineView).FullName,
                     ViewInitDelegate = x =>
                     {
+                        ((ExamineView) x).ModuleProvider = ModuleProvider;
                         ((ExamineView) x).Patient = Patient;
                         ((ExamineView) x).Examine = examinesListTile.DataContext as Examine;
                         ((ExamineView) x).ReloadView();
                     }
                 });
-
             }
         }
 

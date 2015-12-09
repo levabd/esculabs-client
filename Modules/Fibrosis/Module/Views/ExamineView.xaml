@@ -7,8 +7,7 @@
         xmlns:e="clr-namespace:EsculabsCommon;assembly=EsculabsCommon"
         mc:Ignorable="d">
     <Grid>
-        <Button x:Name="backBtn" Content="Список обследований" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="159" Height="44" Click="backBtn_Click"/>
-        <ScrollViewer Margin="250,65,10,4">
+        <ScrollViewer Margin="350,65,10,4">
             <WrapPanel x:Name="measuresPanel" Height="Auto" Width="Auto">
                 <WrapPanel.Resources>
                     <Style TargetType="{x:Type l:MeasurePreview}">
@@ -65,7 +64,7 @@
         </WrapPanel>
         <TextBlock x:Name="nameLabel" Text="Фамилия Имя Отчество" HorizontalAlignment="Center" Margin="0,20,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
         <TextBlock x:Name="dateLabel" Text="10.09.2015 11:07" HorizontalAlignment="Right" Margin="-2,20,10,0" VerticalAlignment="Top" FontSize="16"/>
-        <Button x:Name="dispersionBtn" Content="Дисперсия" HorizontalAlignment="Left" Margin="10,0,6,10" VerticalAlignment="Bottom" Width="235" Height="50" Click="dispersionBtn_Click"/>
+        <Button x:Name="dispersionBtn" Style="{DynamicResource SquareButtonStyle}" Content="Дисперсия" HorizontalAlignment="Left" Margin="10,0,6,10" VerticalAlignment="Bottom" Width="235" Height="50" Click="dispersionBtn_Click"/>
 
     </Grid>
 </e:BaseView>
