@@ -18,7 +18,6 @@ namespace Client
     public partial class MainWindow : MetroWindow
     {
         private readonly ViewManager _views;
-        private string _currentView;
         private Physician _currentPhysician;
 
         public MainWindow()
@@ -96,24 +95,22 @@ namespace Client
         /// <param name="e">Вьюха, на которую нас переключил ViewManager</param>
         private void HandleViewChange(object sender, ViewChangeArgs e)
         {
-            if (e?.ViewName == null)
+            if (e?.View == null)
             {
                 return;
             }
 
-            _currentView = e.ViewName;
-
-            switch (_currentView)
+            if (e.View is LoginView)
             {
-                case "LoginView":
-                    BackButtonPresenter.Content = 0;
-                    break;
-                case "PatientsListView":
-                    BackButtonPresenter.Content = 1;
-                    break;
-                default:
-                    BackButtonPresenter.Content = 2;
-                    break;
+                BackButtonPresenter.Content = 0;
+            }
+            else if (e.View is PatientsListView)
+            {
+                BackButtonPresenter.Content = 1;
+            }
+            else
+            {
+                BackButtonPresenter.Content = 2;
             }
         }
 
@@ -152,7 +149,7 @@ namespace Client
         /// <param name="e"></param>
         private async void BackBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (_currentView == "LoginView")
+            if ((int)BackButtonPresenter.Content == 0)
             {
                 var c =
                     await
@@ -165,7 +162,7 @@ namespace Client
                     Close();
                 }
             }
-            else if (_currentView == "PatientsListView")
+            else if ((int)BackButtonPresenter.Content == 1)
             {
                 var c =
                     await

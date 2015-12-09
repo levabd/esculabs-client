@@ -5,11 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:e="clr-namespace:EsculabsCommon;assembly=EsculabsCommon"
              xmlns:views="clr-namespace:Client.Views"
-             mc:Ignorable="d">
+             mc:Ignorable="d" Width="Auto">
     <Grid>
         <Label Content="{Binding Patient.FullNameString}" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="18.667" FontWeight="Bold" HorizontalAlignment="Center"/>
-        <Label Content="Доступные модули исследований:" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top" FontSize="16" FontFamily="Segoe UI"/>
+        <Label Content="Доступные модули исследований" Margin="0,60,0,0" VerticalAlignment="Top" FontSize="16" FontFamily="Segoe UI" HorizontalContentAlignment="Center"/>
 
-        <ItemsControl x:Name="WidgetsControl" ItemsSource="{Binding Widgets}" Margin="10,100,0,10" HorizontalAlignment="Left" VerticalAlignment="Top" />
+        <ItemsControl x:Name="WidgetsControl" ItemsSource="{Binding Widgets}" Margin="10,130,0,10" VerticalAlignment="Top" HorizontalContentAlignment="Center" Width="Auto"/>
     </Grid>
 </e:BaseView>

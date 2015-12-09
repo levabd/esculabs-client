@@ -39,26 +39,26 @@
         </DataTemplate>
     </UserControl.Resources>
     <Grid>
-        <Label Content="{ Binding CreatedAt }" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" Height="33" FontSize="18.667" />
-        <Label HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Content="Длительность:"/>
-        <Label Content="{Binding Duration, Converter={StaticResource FriendlyTimeConverter}}" HorizontalAlignment="Left" Margin="200,40,0,0" VerticalAlignment="Top" Height="33"/>
-        <Label HorizontalAlignment="Left" Margin="10,65,0,0" VerticalAlignment="Top" Content="E:"/>
-        <Label Content="{ Binding Med }" HorizontalAlignment="Left" Margin="200,65,0,0" VerticalAlignment="Top" Height="33"/>
-        <Label HorizontalAlignment="Left" Margin="10,90,0,0" VerticalAlignment="Top" Content="IQR:"/>
-        <Label Content="{ Binding Iqr }" HorizontalAlignment="Left" Margin="200,90,0,0" VerticalAlignment="Top" Height="33"/>
-        <Label HorizontalAlignment="Left" Margin="10,115,0,0" VerticalAlignment="Top" Content="Количество измерений:"/>
-        <Label Content="{ Binding Measures.Count }" HorizontalAlignment="Left" Margin="200,115,0,0" VerticalAlignment="Top" Height="33"/>
-        <Label HorizontalAlignment="Left" Margin="10,140,0,0" VerticalAlignment="Top" Content="Стадия фиброза:"/>
-        <Label Content="{ Binding FibrosisStage }" HorizontalAlignment="Left" Margin="200,140,0,0" VerticalAlignment="Top" Height="33"/>
-        <Label HorizontalAlignment="Left" Margin="10,165,0,0" VerticalAlignment="Top" Content="Тип датчика:"/>
-        <Label Content="{ Binding SensorType, Converter={StaticResource SensorTypeConverter}}" HorizontalAlignment="Left" Margin="200,165,0,0" VerticalAlignment="Top" Height="33"/>
-        <Label HorizontalAlignment="Right" Margin="0,-140,170,0" VerticalAlignment="Center" HorizontalContentAlignment="Center" Content="Проверка системой"/>
-        <Label HorizontalAlignment="Right" Margin="0,-140,370,0" VerticalAlignment="Center" HorizontalContentAlignment="Center" Content="Проверка экспертом"/>
+        <Label Content="{ Binding CreatedAt }" HorizontalAlignment="Left" Margin="210,5,0,0" VerticalAlignment="Top" Height="33" FontSize="18.667" />
+        <Label HorizontalAlignment="Left" Margin="210,40,0,0" VerticalAlignment="Top" Content="Длительность:"/>
+        <Label Content="{Binding Duration, Converter={StaticResource FriendlyTimeConverter}}" HorizontalAlignment="Left" Margin="400,40,0,0" VerticalAlignment="Top" Height="33"/>
+        <Label HorizontalAlignment="Left" Margin="210,65,0,0" VerticalAlignment="Top" Content="E:"/>
+        <Label Content="{ Binding Med }" HorizontalAlignment="Left" Margin="400,65,0,0" VerticalAlignment="Top" Height="33"/>
+        <Label HorizontalAlignment="Left" Margin="210,90,0,0" VerticalAlignment="Top" Content="IQR:"/>
+        <Label Content="{ Binding Iqr }" HorizontalAlignment="Left" Margin="400,90,0,0" VerticalAlignment="Top" Height="33"/>
+        <Label HorizontalAlignment="Left" Margin="210,115,0,0" VerticalAlignment="Top" Content="Количество измерений:"/>
+        <Label Content="{ Binding Measures.Count }" HorizontalAlignment="Left" Margin="400,115,0,0" VerticalAlignment="Top" Height="33"/>
+        <Label HorizontalAlignment="Left" Margin="210,140,0,0" VerticalAlignment="Top" Content="Стадия фиброза:"/>
+        <Label Content="{ Binding FibrosisStage }" HorizontalAlignment="Left" Margin="400,140,0,0" VerticalAlignment="Top" Height="33"/>
+        <Label HorizontalAlignment="Left" Margin="210,165,0,0" VerticalAlignment="Top" Content="Тип датчика:"/>
+        <Label Content="{ Binding SensorType, Converter={StaticResource SensorTypeConverter}}" HorizontalAlignment="Left" Margin="400,165,0,0" VerticalAlignment="Top" Height="33"/>
+        <Label HorizontalAlignment="Right" Margin="0,-140,270,0" VerticalAlignment="Center" HorizontalContentAlignment="Center" Content="Проверка системой"/>
+        <Label HorizontalAlignment="Right" Margin="0,-140,470,0" VerticalAlignment="Center" HorizontalContentAlignment="Center" Content="Проверка экспертом"/>
 
-        <Canvas HorizontalAlignment="Right" Height="80" Width="80" Margin="0,0,208,0" VerticalAlignment="Center">
+        <Canvas HorizontalAlignment="Right" Height="80" Width="80" Margin="0,0,308,0" VerticalAlignment="Center">
             <ContentPresenter Content="{Binding Valid}" ContentTemplateSelector="{StaticResource ExamineStatusTemplateSelector}" />
         </Canvas>
-        <Canvas HorizontalAlignment="Right" Height="80" Width="80" Margin="0,0,408,0" VerticalAlignment="Center">
+        <Canvas HorizontalAlignment="Right" Height="80" Width="80" Margin="0,0,508,0" VerticalAlignment="Center">
             <ContentPresenter Content="{Binding ExpertStatus}" ContentTemplateSelector="{StaticResource ExamineStatusTemplateSelector}" />
         </Canvas>        
     </Grid>
