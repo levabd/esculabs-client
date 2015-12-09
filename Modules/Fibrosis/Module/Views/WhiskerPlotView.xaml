@@ -9,9 +9,9 @@
              Width="Auto"
              d:DesignHeight="1080" d:DesignWidth="1920">
     <Grid>
-        <Canvas HorizontalAlignment="Center" Margin="0,100,0,0" Width="Auto">
-            <Label Content="Дисперсия" Width="Auto" Height="41" FontSize="21.333" HorizontalContentAlignment="Center" HorizontalAlignment="Center"/>
-            <Image x:Name="WhiskerPlot" Stretch="None" Margin="0,50,0,0"/>
+        <Canvas HorizontalAlignment="Center" Margin="0,100,0,0" Width="1000">
+            <Label Content="Дисперсия" Width="1000" Height="41" FontSize="21.333" HorizontalContentAlignment="Center" HorizontalAlignment="Center"/>
+            <Image x:Name="WhiskerPlot" Stretch="None" Margin="0,50,0,0" Width="1000"/>
         </Canvas>
     </Grid>
 </e:BaseView>
