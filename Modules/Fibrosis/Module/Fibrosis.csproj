@@ -81,6 +81,9 @@
     <Compile Include="Controls\ExaminesListTile.xaml.cs">
       <DependentUpon>ExaminesListTile.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\MeasurePreview.xaml.cs">
+      <DependentUpon>MeasurePreview.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\Converters\FriendlyTimeConverter.cs" />
     <Compile Include="Helpers\Converters\SensorTypeConverter.cs" />
     <Compile Include="Helpers\ExamineStatusTemplateSelector.cs" />
@@ -103,6 +106,9 @@
     <Compile Include="Views\ExaminesListView.xaml.cs">
       <DependentUpon>ExaminesListView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ExamineView.xaml.cs">
+      <DependentUpon>ExamineView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Include="Controls\FibrosisWidget.xaml">
@@ -113,7 +119,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Controls\MeasurePreview.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\ExaminesListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ExamineView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

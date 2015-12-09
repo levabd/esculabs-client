@@ -14,7 +14,7 @@
             <ItemsControl x:Name="ExaminesList" ItemsSource="{Binding Examines}" AlternationCount="2">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <c:PatientsListTile x:Name="Tile" MouseUp="Tile_MouseUp"/>
+                        <c:ExaminesListTile x:Name="Tile" MouseUp="Tile_MouseUp"/>
                         <DataTemplate.Triggers>
                             <Trigger Property="ItemsControl.AlternationIndex" Value="0">
                                 <Setter Property="Background" Value="WhiteSmoke" TargetName="Tile"/>

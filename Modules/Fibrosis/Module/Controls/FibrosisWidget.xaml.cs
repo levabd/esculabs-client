@@ -44,10 +44,11 @@ namespace Fibrosis.Controls
         {
             _moduleProvider.SetView(new ViewChangeArgs
             {
-                ViewName = typeof(ExaminesListView).Name,
+                ViewName = typeof(ExaminesListView).FullName,
                 ViewInitDelegate = x =>
                 {
                     ((ExaminesListView) x).Patient = Patient;
+                    ((ExaminesListView) x).ModuleProvider = _moduleProvider;
                 }
             });
         }

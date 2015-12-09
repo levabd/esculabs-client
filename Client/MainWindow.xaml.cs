@@ -45,7 +45,7 @@ namespace Client
             Left = 0;
             Top = 0;
 
-            var loginView = _views.SetView("LoginView", x =>
+            var loginView = _views.SetView(typeof (LoginView).FullName, x =>
             {
                 // Быдлокод. Обработчик события может быть подписан только один раз
 
@@ -70,7 +70,7 @@ namespace Client
             {
                 _currentPhysician = e.Physician;
 
-                _views.SetView("PatientsListView", x =>
+                _views.SetView(typeof(PatientsListView).FullName, x =>
                 {
                     // Быдлокод. Обработчик события может быть подписан только один раз
 
@@ -121,7 +121,7 @@ namespace Client
         /// <param name="e"></param>
         private void HandleAddPatientButtonClick(object sender, RoutedEventArgs e)
         {
-            _views.SetView("AddPatientView", x => ((AddPatientView) x).BackButtonFunc = () => _views.SetPrevious());
+            _views.SetView(typeof(AddPatientView).FullName, x => ((AddPatientView) x).BackButtonFunc = () => _views.SetPrevious());
         }
 
         /// <summary>
@@ -131,7 +131,7 @@ namespace Client
         /// <param name="e"></param>
         private void HandlePatientTileClick(object sender, PatientTileClickArgs e)
         {
-            var view = (ModulesListView)_views.SetView("ModulesListView");
+            var view = (ModulesListView)_views.SetView(typeof (ModulesListView).FullName);
 
             if (view == null)
             {

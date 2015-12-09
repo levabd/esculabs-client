@@ -29,10 +29,10 @@ namespace Fibrosis.Views
     /// </summary>
     public partial class ExaminesListView : BaseView, INotifyPropertyChanged
     {
+        private ModuleProvider _moduleProvider;
         private IPatient _patient;
         private List<Examine> _examines;
 
-        public event EventHandler<ExamineTileClickArgs> TileClickEventHandler;
         //public event EventHandler<RoutedEventArgs> AddExamineButtonClickHandler;
 
         public IPatient Patient
@@ -57,6 +57,19 @@ namespace Fibrosis.Views
             set
             {
                 _examines = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ModuleProvider ModuleProvider
+        {
+            get
+            {
+                return _moduleProvider;
+            }
+            set
+            {
+                _moduleProvider = value;
                 OnPropertyChanged();
             }
         }
@@ -109,15 +122,20 @@ namespace Fibrosis.Views
 
         private void Tile_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            if (TileClickEventHandler != null)
+            var examinesListTile = sender as ExaminesListTile;
+            if (examinesListTile != null)
             {
-                var patientsListTile = sender as PatientsListTile;
-                if (patientsListTile != null)
+                ModuleProvider?.SetView(new ViewChangeArgs
                 {
-                    var args = new ExamineTileClickArgs { Examine = patientsListTile.DataContext as Examine };
+                    ViewName = typeof (ExamineView).FullName,
+                    ViewInitDelegate = x =>
+                    {
+                        ((ExamineView) x).Patient = Patient;
+                        ((ExamineView) x).Examine = examinesListTile.DataContext as Examine;
+                        ((ExamineView) x).ReloadView();
+                    }
+                });
 
-                    TileClickEventHandler(this, args);
-                }
             }
         }
 

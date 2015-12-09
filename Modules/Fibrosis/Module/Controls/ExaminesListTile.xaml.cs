@@ -19,9 +19,9 @@ namespace Fibrosis.Controls
     /// <summary>
     /// Interaction logic for PatientListTile.xaml
     /// </summary>
-    public partial class PatientsListTile : UserControl
+    public partial class ExaminesListTile : UserControl
     {
-        public PatientsListTile()
+        public ExaminesListTile()
         {
             InitializeComponent();
         }               

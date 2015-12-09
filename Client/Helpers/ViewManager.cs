@@ -116,7 +116,7 @@ namespace Client.Helpers
             var asm = assembly ?? Assembly.GetExecutingAssembly();
             
             var type = asm.GetTypes()
-                .First(t => t.Name.Equals(className));
+                .FirstOrDefault(t => t.FullName.Equals(className));
             
             if (type == null)
             {
