@@ -7,13 +7,13 @@ namespace Fibrosis.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class CreatePatientMetricsTable : IMigrationMetadata
+    public sealed partial class CreateFibrosisTables : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(CreatePatientMetricsTable));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(CreateFibrosisTables));
         
         string IMigrationMetadata.Id
         {
-            get { return "201512060733221_CreatePatientMetricsTable"; }
+            get { return "201512090957246_CreateFibrosisTables"; }
         }
         
         string IMigrationMetadata.Source

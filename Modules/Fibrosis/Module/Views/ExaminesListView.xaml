@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-    xmlns:Custom="http://metro.mahapps.com/winfx/xaml/controls" 
+    xmlns:custom="http://metro.mahapps.com/winfx/xaml/controls" 
     xmlns:e="clr-namespace:EsculabsCommon;assembly=EsculabsCommon"
     xmlns:c="clr-namespace:Fibrosis.Controls"
     x:Class="Fibrosis.Views.ExaminesListView"
@@ -17,32 +17,32 @@
                         <c:PatientsListTile x:Name="Tile" MouseUp="Tile_MouseUp"/>
                         <DataTemplate.Triggers>
                             <Trigger Property="ItemsControl.AlternationIndex" Value="0">
-                                <Setter Property="Background" Value="GhostWhite" TargetName="Tile"/>
+                                <Setter Property="Background" Value="WhiteSmoke" TargetName="Tile"/>
                             </Trigger>
                             <Trigger Property="ItemsControl.AlternationIndex" Value="1">
                                 <Setter Property="Background" Value="White" TargetName="Tile"/>
                             </Trigger>
                             <Trigger Property="ItemsControl.IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="WhiteSmoke" TargetName="Tile"/>
+                                <Setter Property="Background" Value="LightGray" TargetName="Tile"/>
                             </Trigger>
                         </DataTemplate.Triggers>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
-                
+
                 <!-- Items goes here -->
-                
+
             </ItemsControl>
         </ScrollViewer>
-
-        <!--<TextBox x:Name="nameFilterTextBox" Custom:TextBoxHelper.Watermark="Поиск по ФИО..." Custom:TextBoxHelper.ClearTextButton="True" Height="41" Margin="0,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0,0.192" TextChanged="filterTextBox_TextChanged" FontSize="21.333"/>
-        <TextBox x:Name="iinFilterTextBox" Custom:TextBoxHelper.Watermark="Поиск по ИИН..." Custom:TextBoxHelper.ClearTextButton="True" Height="41" Margin="0,66,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0,0.192" TextChanged="filterTextBox_TextChanged" FontSize="21.333"/>
+        <DatePicker x:Name="DateFromFilterTextBox" custom:TextBoxHelper.Watermark="От" custom:TextBoxHelper.ClearTextButton="True" Height="41" Margin="350,10,0,0" VerticalAlignment="Top" FontSize="21.333" HorizontalAlignment="Left" Width="219"/>
+        <DatePicker x:Name="DateToFilterTextBox" custom:TextBoxHelper.Watermark="До" custom:TextBoxHelper.ClearTextButton="True" Height="41" Margin="587,10,0,0"  VerticalAlignment="Top" FontSize="21.333" HorizontalAlignment="Left" Width="219"/>
         <Button x:Name="AddExamineBtn" Style="{DynamicResource MetroCircleButtonStyle}" HorizontalAlignment="Right" Margin="0,0,60,60" VerticalAlignment="Bottom" Width="100" Height="100" Background="{DynamicResource HighlightBrush}" BorderBrush="{x:Null}" Cursor="Hand" Click="AddExamineBtn_Click">
             <Rectangle Fill="White" Width="30" Height="30">
                 <Rectangle.OpacityMask>
                     <VisualBrush Visual="{StaticResource appbar_add}" Stretch="Fill" />
                 </Rectangle.OpacityMask>
             </Rectangle>
-        </Button>-->
+        </Button>
+        <Label Content="Поиск по дате сканирования:" HorizontalAlignment="Left" Margin="12,10,0,0" VerticalAlignment="Top" Height="41" FontSize="21.333"/>
 
     </Grid>
 </e:BaseView>

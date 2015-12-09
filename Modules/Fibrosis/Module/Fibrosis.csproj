@@ -38,6 +38,10 @@
       <HintPath>..\..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="MahApps.Metro, Version=1.1.2.0, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\MahApps.Metro.1.1.2.0\lib\net45\MahApps.Metro.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Mono.Security, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Npgsql.2.2.7\lib\net45\Mono.Security.dll</HintPath>
       <Private>True</Private>
@@ -59,6 +63,10 @@
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\MahApps.Metro.1.1.2.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -76,19 +84,11 @@
     <Compile Include="Helpers\Converters\FriendlyTimeConverter.cs" />
     <Compile Include="Helpers\Converters\SensorTypeConverter.cs" />
     <Compile Include="Helpers\ExamineStatusTemplateSelector.cs" />
-    <Compile Include="Helpers\FIBXParser.cs" />
+    <Compile Include="Helpers\FibxParser.cs" />
     <Compile Include="Helpers\ExamineTileClickArgs.cs" />
-    <Compile Include="Migrations\201511270614345_CreateFibrosisTables.cs" />
-    <Compile Include="Migrations\201511270614345_CreateFibrosisTables.Designer.cs">
-      <DependentUpon>201511270614345_CreateFibrosisTables.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201512040534136_RemoveNameFromExamines.cs" />
-    <Compile Include="Migrations\201512040534136_RemoveNameFromExamines.Designer.cs">
-      <DependentUpon>201512040534136_RemoveNameFromExamines.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201512060733221_CreatePatientMetricsTable.cs" />
-    <Compile Include="Migrations\201512060733221_CreatePatientMetricsTable.Designer.cs">
-      <DependentUpon>201512060733221_CreatePatientMetricsTable.cs</DependentUpon>
+    <Compile Include="Migrations\201512090957246_CreateFibrosisTables.cs" />
+    <Compile Include="Migrations\201512090957246_CreateFibrosisTables.Designer.cs">
+      <DependentUpon>201512090957246_CreateFibrosisTables.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Measure.cs" />
     <Compile Include="Models\PatientMetric.cs" />
@@ -134,22 +134,17 @@
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201511270614345_CreateFibrosisTables.resx">
-      <DependentUpon>201511270614345_CreateFibrosisTables.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201512040534136_RemoveNameFromExamines.resx">
-      <DependentUpon>201512040534136_RemoveNameFromExamines.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201512060733221_CreatePatientMetricsTable.resx">
-      <DependentUpon>201512060733221_CreatePatientMetricsTable.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201512090957246_CreateFibrosisTables.resx">
+      <DependentUpon>201512090957246_CreateFibrosisTables.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>mkdir "$(SolutionDir)\$(SolutionName)\bin\$(ConfigurationName)\Modules"
-copy  "$(TargetPath)" "$(SolutionDir)\$(SolutionName)\bin\$(ConfigurationName)\Modules\$(TargetFileName)"</PostBuildEvent>
+mkdir "$(SolutionDir)\$(SolutionName)\bin\$(ConfigurationName)\Modules\Libs"
+copy  "$(TargetPath)" "$(SolutionDir)\$(SolutionName)\bin\$(ConfigurationName)\Modules\$(TargetFileName)"
+xcopy  /E /Y "$(ProjectDir)..\bin" "$(SolutionDir)\$(SolutionName)\bin\$(ConfigurationName)\Modules\Libs"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

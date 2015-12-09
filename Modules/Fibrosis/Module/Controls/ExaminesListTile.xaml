@@ -9,7 +9,7 @@
              Height="220"
              Foreground="Aqua"
              d:DesignWidth="800" 
-             FontSize="16" BorderBrush="LightGray" BorderThickness="1">
+             FontSize="16" BorderBrush="LightGray" BorderThickness="0,0,1,0">
     <UserControl.Resources>
         <converters:SensorTypeConverter x:Key="SensorTypeConverter" />
         <converters:FriendlyTimeConverter x:Key="FriendlyTimeConverter" />
@@ -52,13 +52,13 @@
         <Label Content="{ Binding FibrosisStage }" HorizontalAlignment="Left" Margin="200,140,0,0" VerticalAlignment="Top" Height="33"/>
         <Label HorizontalAlignment="Left" Margin="10,165,0,0" VerticalAlignment="Top" Content="Тип датчика:"/>
         <Label Content="{ Binding SensorType, Converter={StaticResource SensorTypeConverter}}" HorizontalAlignment="Left" Margin="200,165,0,0" VerticalAlignment="Top" Height="33"/>
-        <Label HorizontalAlignment="Right" Margin="0,-140,70,0" VerticalAlignment="Center" HorizontalContentAlignment="Center" Content="Проверка системой"/>
-        <Label HorizontalAlignment="Right" Margin="0,-140,270,0" VerticalAlignment="Center" HorizontalContentAlignment="Center" Content="Проверка экспертом"/>
+        <Label HorizontalAlignment="Right" Margin="0,-140,170,0" VerticalAlignment="Center" HorizontalContentAlignment="Center" Content="Проверка системой"/>
+        <Label HorizontalAlignment="Right" Margin="0,-140,370,0" VerticalAlignment="Center" HorizontalContentAlignment="Center" Content="Проверка экспертом"/>
 
-        <Canvas HorizontalAlignment="Right" Height="80" Width="80" Margin="0,0,108,0" VerticalAlignment="Center">
+        <Canvas HorizontalAlignment="Right" Height="80" Width="80" Margin="0,0,208,0" VerticalAlignment="Center">
             <ContentPresenter Content="{Binding Valid}" ContentTemplateSelector="{StaticResource ExamineStatusTemplateSelector}" />
         </Canvas>
-        <Canvas HorizontalAlignment="Right" Height="80" Width="80" Margin="0,0,308,0" VerticalAlignment="Center">
+        <Canvas HorizontalAlignment="Right" Height="80" Width="80" Margin="0,0,408,0" VerticalAlignment="Center">
             <ContentPresenter Content="{Binding ExpertStatus}" ContentTemplateSelector="{StaticResource ExamineStatusTemplateSelector}" />
         </Canvas>        
     </Grid>

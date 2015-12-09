@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using EsculabsCommon;
+using Microsoft.Win32;
 
 namespace Fibrosis.Views
 {
@@ -32,7 +33,7 @@ namespace Fibrosis.Views
         private List<Examine> _examines;
 
         public event EventHandler<ExamineTileClickArgs> TileClickEventHandler;
-        public event EventHandler<RoutedEventArgs> AddExamineButtonClickHandler;
+        //public event EventHandler<RoutedEventArgs> AddExamineButtonClickHandler;
 
         public IPatient Patient
         {
@@ -43,7 +44,7 @@ namespace Fibrosis.Views
             set
             {
                 _patient = value;
-                ReloadPatientsGrid();
+                OnPropertyChanged();
             }
         }
 
@@ -67,7 +68,7 @@ namespace Fibrosis.Views
             DataContext = this;
         }
 
-        private async void ReloadPatientsGrid()
+        private async void ReloadExaminesList()
         {
             var examinesTask = FibrosisRepository.Instance.AllExaminesAsync(Patient.Id);
             Examines = await examinesTask;
@@ -122,13 +123,38 @@ namespace Fibrosis.Views
 
         private void AddExamineBtn_Click(object sender, RoutedEventArgs e)
         {
-            AddExamineButtonClickHandler?.Invoke(sender, e);
+            //AddExamineButtonClickHandler?.Invoke(sender, e);
+            var openFileDialog = new OpenFileDialog();
+
+            if (openFileDialog.ShowDialog() != true)
+            {
+                return;
+            }
+
+            if (FibxParser.Instance.Import(openFileDialog.FileName, _patient.Id))
+            {
+                ReloadExaminesList();
+            }
+
+            //if (examine != null && IsLoaded)
+            //{
+            //    RefreshExaminesList();
+                //examinesGrid.ItemsSource = _examines;
+            //}
+
+            // loader.Close();
+  //          Effect = null;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
+            if (propertyName == "Patient")
+            {
+                ReloadExaminesList();
+            }
+
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }

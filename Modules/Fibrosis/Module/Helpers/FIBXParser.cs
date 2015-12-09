@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Drawing;
+using System.Linq;
 using System.Xml;
+using Fibrosis.Repositories;
 
 namespace Fibrosis.Helpers
 {
@@ -41,11 +44,11 @@ namespace Fibrosis.Helpers
             }
         }
 
-        public Examine Import(string fileName, int patientId, int physicianId = 0)
+        public bool Import(string fileName, int patientId, int physicianId = 0)
         {
             if (string.IsNullOrEmpty(fileName) || patientId <= 0)
             {
-                return null;
+                return false;
             }
             
             var tempPath = Path.GetTempPath();
@@ -53,7 +56,7 @@ namespace Fibrosis.Helpers
 
             if (string.IsNullOrEmpty(tempPath))
             {
-                return null;
+                return false;
             }
 
             Examine e = null;
@@ -74,132 +77,130 @@ namespace Fibrosis.Helpers
                 {
                     xml = XDocument.Load(examReportFile);
                 }
-                catch (XmlException exception)
+                catch (XmlException)
                 {
                    // _log.ErrorFormat("Can't parse ExamReport.xml in \"{0}\": {1}", fileName, exception.Message);
                     MessageBox.Show("FIBX-файл повреждён или имеет неизвестный формат");
 
-                    return null;
+                    return false;
                 }
 
                 try
                 {
-                    //e = new Examine();
-                    //e.ElastoExam = new ElastoExam();
+                    e = new Examine
+                    {
+                        PatientId = patientId,
+                        PhysicianId = physicianId
+                    };
 
-                    //var exam = xml.Descendants("Exam").FirstOrDefault();
+                    var exam = xml.Descendants("Exam").FirstOrDefault();
+                    
+                    e.CreatedAt = DateTime.Parse(exam.Descendants("Date").FirstOrDefault()?.Value);
 
-                    //e.CreatedAt = DateTime.Parse(exam.Descendants("Date").FirstOrDefault().Value);
-                    //e.PhysicianId = physicianId;
-                    //e.PatientId = patientId;
+                    var result = exam.Descendants("Result").FirstOrDefault();
 
-                    //var result = exam.Descendants("Result").FirstOrDefault();
+                    SensorType sensorType;
+                    switch (exam.Descendants("ExamType").FirstOrDefault()?.Value)
+                    {
+                        case "S":
+                        case "Small":
+                            sensorType = SensorType.Small;
+                            break;
+                        case "M":
+                        case "Medium":
+                            sensorType = SensorType.Medium;
+                            break;
+                        case "XL":
+                            sensorType = SensorType.Xl;
+                            break;
+                        default:
+                            sensorType = SensorType.Small;
+                            break;
+                    }
 
-                    //var sensorType = SensorType.Small;
-                    //switch (exam.Descendants("ExamType").FirstOrDefault().Value)
-                    //{
-                    //case ("S"):
-                    //case ("Small"):
-                    //    sensorType = SensorType.Small;
-                    //    break;
-                    //case ("M"):
-                    //case ("Medium"):
-                    //    sensorType = SensorType.Medium;
-                    //    break;
-                    //case ("XL"):
-                    //    sensorType = SensorType.XL;
-                    //    break;
-                    //default:
-                    //    sensorType = SensorType.Small;
-                    //    break;
-                    //}
+                    e.SensorType = sensorType;
+                    e.Iqr = double.Parse(result.Descendants("StiffnessIQR").FirstOrDefault()?.Value, CultureInfo.InvariantCulture);
+                    e.Med = double.Parse(result.Descendants("StiffnessMedian").FirstOrDefault()?.Value, CultureInfo.InvariantCulture);
+                    e.Duration = int.Parse(result.Descendants("ExamDuration").FirstOrDefault()?.Value);
+                    e.WhiskerPlot = ImageFileToByteArray(tempPath + slash + result.Descendants("WhiskerPlotImageLink").FirstOrDefault()?.Value);
+                    e.ExpertStatus = ExpertStatus.Pending;
 
-                    //e.ElastoExam.SensorType = sensorType;
-                    //e.ElastoExam.IQR = double.Parse(result.Descendants("StiffnessIQR").FirstOrDefault().Value, CultureInfo.InvariantCulture);
-                    //e.ElastoExam.Med = double.Parse(result.Descendants("StiffnessMedian").FirstOrDefault().Value, CultureInfo.InvariantCulture);
-                    //e.ElastoExam.Duration = int.Parse(result.Descendants("ExamDuration").FirstOrDefault().Value);
-                    //e.ElastoExam.WhiskerPlot = ImageFileToBase64(tempPath + slash + result.Descendants("WhiskerPlotImageLink").FirstOrDefault().Value);
-                    //e.ElastoExam.ExpertStatus = ExpertStatus.Pending;
-                        
-                    //e.ElastoExam.Measures = new List<Measure>();
+                    e.Measures = new List<Measure>();
 
-                    //var measuresCorrect = true;
-                    //foreach (var measure in exam.Descendants("Measurements").FirstOrDefault().Descendants("Measure"))
-                    //{
-                    //    Measure m = new Measure();
+                    var measuresCorrect = true;
+                    foreach (var measure in exam.Descendants("Measurements").FirstOrDefault().Descendants("Measure"))
+                    {
+                        var m = new Measure();
 
-                    //    m.CreatedAt = DateTime.Parse(exam.Descendants("Time").FirstOrDefault().Value);
-                    //    m.Stiffness = double.Parse(measure.Descendants("Stiffness").FirstOrDefault().Value, CultureInfo.InvariantCulture);
+                        m.CreatedAt = DateTime.Parse(exam.Descendants("Time").FirstOrDefault().Value);
+                        m.Stiffness = double.Parse(measure.Descendants("Stiffness").FirstOrDefault().Value, CultureInfo.InvariantCulture);
 
-                    //    var sourceFile = tempPath + slash + measure.Descendants("ImageLink").FirstOrDefault().Value;
+                        var sourceFile = tempPath + slash + measure.Descendants("ImageLink").FirstOrDefault().Value;
 
-                    //    Image source = Image.FromFile(sourceFile);
+                        Image source = Image.FromFile(sourceFile);
 
-                    //    FibroscanImage prod = new FibroscanImage(source);
-                    //    m.ResultMerged = ImageToBase64(prod.Merged);
-                    //    m.Source = ImageFileToBase64(sourceFile);
-                    //    m.ValidationElasto = prod.ElastoStatus;
-                    //    m.ValidationModeA = prod.UltrasoundModeAStatus;
-                    //    m.ValidationModeM = prod.UltrasoundModeMStatus;
+                        FibroscanImage prod = new FibroscanImage(source);
+                        m.ResultMerged = ImageToByteArray(prod.Merged);
+                        m.Source = ImageFileToByteArray(sourceFile);
+                        m.ValidationElasto = prod.ElastoStatus;
+                        m.ValidationModeA = prod.UltrasoundModeAStatus;
+                        m.ValidationModeM = prod.UltrasoundModeMStatus;
 
-                    //    if (measuresCorrect)
-                    //    {
-                    //        measuresCorrect = m.IsCorrect;
-                    //    }
+                        if (measuresCorrect)
+                        {
+                            measuresCorrect = m.IsCorrect;
+                        }
 
-                    //    e.ElastoExam.Measures.Add(m);
-                    //}
+                        e.Measures.Add(m);
+                    }
 
-                    //e.ElastoExam.Valid = e.ElastoExam.Validate() && measuresCorrect;
+                    e.Valid = e.Validate() && measuresCorrect;
 
-                    //var examines = new MongoRepository<Examine>();
-                    //examines.Add(e);                        
+                    return FibrosisRepository.Instance.AddExamine(e) != 0;
                 }
                 catch (Exception exception)
                 {
-                    //_log.ErrorFormat("Can't parse FIBX: {0}", fileName, exception.Message);
-                    MessageBox.Show("Не удалось распознать FIBX-файл");
-                    e = null;
+                    MessageBox.Show($"Не удалось распознать FIBX-файл:\n\n{exception.Message}");
                 }
             }
             else
             {
-                MessageBox.Show("ExamReport.xml не найден в файле\n\n" + fileName + "\n\nОперация прервана.");
+                MessageBox.Show($"ExamReport.xml не найден в файле\n\n{fileName}\n\nОперация прервана.");
             }
 
             Directory.Delete(tempPath, true);
 
-            return e;
+            return false;
         }
 
-        private string ImageFileToBase64(string fileName)
+        private static byte[] ImageFileToByteArray(string fileName)
         {
-            using (Image image = Image.FromFile(fileName))
+            using (var image = Image.FromFile(fileName))
             {
-                using (MemoryStream m = new MemoryStream())
+                using (var m = new MemoryStream())
                 {
                     image.Save(m, image.RawFormat);
-                    byte[] imageBytes = m.ToArray();
+                    var imageBytes = m.ToArray();
 
                     m.Close();
 
-                    return Convert.ToBase64String(imageBytes);
+                    return imageBytes;
                 }
             }
         }
 
-        private string ImageToBase64(Image image)
+        private static byte[] ImageToByteArray(Image image)
         {
             using (image)
             {
-                using (MemoryStream m = new MemoryStream())
+                using (var m = new MemoryStream())
                 {
                     image.Save(m, image.RawFormat);
-                    byte[] imageBytes = m.ToArray();
+                    var imageBytes = m.ToArray();
 
                     m.Close();
 
-                    return Convert.ToBase64String(imageBytes);
+                    return imageBytes;
                 }
             }
         }

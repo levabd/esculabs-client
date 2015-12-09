@@ -68,9 +68,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>mkdir "$(SolutionDir)\$(SolutionName)\bin\$(ConfigurationName)\Modules"
-mkdir "$(SolutionDir)\$(SolutionName)\bin\$(ConfigurationName)\Modules\Libs"
-copy  "$(TargetPath)" "$(SolutionDir)\$(SolutionName)\bin\$(ConfigurationName)\Modules\Libs\$(TargetFileName)"</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

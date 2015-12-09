@@ -39,8 +39,8 @@ namespace Fibrosis.Models
         [Column("duration")]
         public int Duration { get; set; }
 
-        [Column("whisker_plot")]
-        public string WhiskerPlot { get; set; }
+        [Column("whisker_plot", TypeName = "bytea")]
+        public byte[] WhiskerPlot { get; set; }
 
         [Column("valid")]
         public bool Valid { get; set; }
@@ -97,7 +97,7 @@ namespace Fibrosis.Models
             {
                 try
                 {
-                    return Convert.ToInt32(Math.Round((Iqr / Med) * 100));
+                    return Convert.ToInt32(Math.Round(Iqr / Med * 100));
                 }
                 catch (Exception)
                 {
@@ -105,5 +105,7 @@ namespace Fibrosis.Models
                 }
             }
         }
+
+        public bool Validate() => IqrMed > 30;
     }
 }

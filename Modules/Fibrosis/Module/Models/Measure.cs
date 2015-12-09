@@ -55,5 +55,9 @@ namespace Fibrosis.Models
         public DateTime? CreatedAt { get; set; }
 
         public virtual Examine Examine { get; set; }
+
+        public bool IsCorrect => ValidationModeA != VerificationStatus.Incorrect &&
+                                 ValidationModeM != VerificationStatus.Incorrect &&
+                                 ValidationElasto != VerificationStatus.Incorrect;
     }
 }

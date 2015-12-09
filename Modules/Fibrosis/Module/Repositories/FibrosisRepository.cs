@@ -45,17 +45,30 @@ namespace Fibrosis.Repositories
             }
         }
 
+        public int AddExamine(Examine e)
+        {
+            using (var db = new PgSqlContext())
+            {
+                db.Examines.Add(e);
+                return db.SaveChanges();
+            }
+        }
+
         public async Task<List<Examine>> AllExaminesAsync(int patientId)
         {
             try
             {
                 using (var db = new PgSqlContext())
                 {
-                    return await db.Examines.OrderByDescending(p => p.Id).Where(x => x.PatientId == patientId).ToListAsync();
+                    return await db.Examines
+                        .OrderByDescending(p => p.Id)
+                        .Where(x => x.PatientId == patientId)
+                        .Include(e => e.Measures)
+                        .ToListAsync();
                 }
             }
 
-            catch (Exception e)
+            catch (Exception)
             {
                 return null;
             }
