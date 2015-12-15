@@ -1,24 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using EsculabsCommon;
-using Microsoft.Win32;
-
-namespace Fibrosis.Views
+﻿namespace Fibrosis.Views
 {
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Runtime.CompilerServices;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Input;
+    using EsculabsCommon;
+    using EsculabsCommon.Models;
+    using Microsoft.Win32;
+
     using Models;
     using Repositories;
     using Helpers;
@@ -30,12 +21,12 @@ namespace Fibrosis.Views
     public partial class ExaminesListView : BaseView, INotifyPropertyChanged
     {
         private ModuleProvider _moduleProvider;
-        private IPatient _patient;
+        private Patient _patient;
         private List<Examine> _examines;
 
         //public event EventHandler<RoutedEventArgs> AddExamineButtonClickHandler;
 
-        public IPatient Patient
+        public Patient Patient
         {
             get
             {
@@ -174,6 +165,11 @@ namespace Fibrosis.Views
             }
 
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void OpenFibxFolder_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

@@ -46,6 +46,8 @@ namespace Fibrosis.Helpers
 
         public bool Import(string fileName, int patientId, int physicianId = 0)
         {
+            var result = false;
+
             if (string.IsNullOrEmpty(fileName) || patientId <= 0)
             {
                 return false;
@@ -203,6 +205,7 @@ namespace Fibrosis.Helpers
                         throw new Exception("Обследование не было добавлено в БД");
                     }
 
+                    result = true;
                 }
                 catch (Exception exception)
                 {
@@ -216,7 +219,7 @@ namespace Fibrosis.Helpers
             
             Directory.Delete(tempPath, true);
 
-            return false;
+            return result;
         }
 
         private static byte[] ImageFileToByteArray(string fileName)

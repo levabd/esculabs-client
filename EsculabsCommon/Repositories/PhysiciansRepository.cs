@@ -5,19 +5,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Client.Repositories
+namespace EsculabsCommon.Repositories
 {
     using Models;
-    using Common.Logging;
     using Context;
     using System.Security.Cryptography;
 
-    class PhysiciansRepository
+    public class PhysiciansRepository
     {
         private static volatile PhysiciansRepository _instance;
         private static object _syncRoot = new object();
 
-        private ILog _log;
+        //private ILog _log;
         private PgSqlContext _context = null;
 
         public static PhysiciansRepository Instance
@@ -39,7 +38,7 @@ namespace Client.Repositories
 
         public PhysiciansRepository()
         {
-            _log = LogManager.GetLogger("Physicians Repository");
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<PgSqlContext, Migrations.Configuration>("PgSqlConnectionString"));
 
             if (_context == null)
             {
@@ -76,7 +75,7 @@ namespace Client.Repositories
         }
             catch (Exception e)
             {
-                _log.Error($"Failed authorization result. Username = {login}, Reason: {e.Message}");
+                //_log.Error($"Failed authorization result. Username = {login}, Reason: {e.Message}");
             }
 
             return null;
@@ -93,7 +92,7 @@ namespace Client.Repositories
             }
             catch (Exception e)
             {
-                _log.Error($"Can't insert data to db. Reason: {e.Message}");
+                //_log.Error($"Can't insert data to db. Reason: {e.Message}");
                 result = null;
             }
 
@@ -110,7 +109,7 @@ namespace Client.Repositories
             }
             catch (Exception e)
             {
-                _log.Error($"Can't select data from db. Reason: {e.Message}");
+                //_log.Error($"Can't select data from db. Reason: {e.Message}");
                 return null;
             }
 

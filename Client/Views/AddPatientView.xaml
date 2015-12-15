@@ -23,7 +23,7 @@
         <DatePicker Custom:TextBoxHelper.Watermark="Выберите дату" x:Name="birthdateDatePicker" Height="41" FontSize="21.333" HorizontalAlignment="Left" Margin="264,400,0,0" VerticalAlignment="Top" Width="600"/>
         <RadioButton x:Name="maleRadioButton" Height="41" FontSize="21.333" Content="мужской" HorizontalAlignment="Left" Margin="264,500,0,0" VerticalAlignment="Top"/>
         <RadioButton x:Name="femaleRadioButton" Height="41" FontSize="21.333" Content="женский" HorizontalAlignment="Left" Margin="566,500,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="addPatientBtn" Style="{StaticResource AccentedSquareButtonStyle}" Content="Добавить" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="246" FontSize="21.333" Height="67" FontWeight="Normal"/>
+        <Button x:Name="addPatientBtn" Style="{StaticResource AccentedSquareButtonStyle}" Content="Добавить" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="246" FontSize="21.333" Height="67" FontWeight="Normal" Click="addPatientBtn_Click"/>
         <Button x:Name="cancelBtn" Style="{DynamicResource SquareButtonStyle}" Content="Отмена" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="246" FontSize="21.333" Height="67" FontWeight="Normal" Click="cancelBtn_Click"/>
     </Grid>
 </e:BaseView>

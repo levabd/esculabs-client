@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,22 +14,24 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Client.Annotations;
 using EsculabsCommon;
 
 namespace Client.Views
 {
-    using Models;
-    using Repositories;
+    using EsculabsCommon.Models;
+    using EsculabsCommon.Repositories;
     using Helpers;
     using Controls;
 
     /// <summary>
     /// Interaction logic for PatientsList.xaml
     /// </summary>
-    public partial class PatientsListView : BaseView
+    public partial class PatientsListView : BaseView, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler        PropertyChanged;
         public event EventHandler<PatientTileClickArgs> TileClickEventHandler;
-        public event EventHandler<RoutedEventArgs> AddPatientButtonClickHandler;
+        public event EventHandler<RoutedEventArgs>      AddPatientButtonClickHandler;
 
         public CollectionViewSource Patients { get; private set; }
 
@@ -35,16 +39,17 @@ namespace Client.Views
         {
             InitializeComponent();
 
+            Patients = new CollectionViewSource();
+
             ReloadPatientsGrid();
 
             DataContext = this;
         }
 
-        private async void ReloadPatientsGrid()
+        public async void ReloadPatientsGrid()
         {
             var patientsTask = PatientsRepository.Instance.AllAsync();
 
-            Patients = new CollectionViewSource();
             Patients.Source = await patientsTask;
         }
 
@@ -101,6 +106,12 @@ namespace Client.Views
         private void addPatientBtn_Click(object sender, RoutedEventArgs e)
         {
             AddPatientButtonClickHandler?.Invoke(sender, e);
+        }
+        
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

@@ -1,8 +1,8 @@
-﻿using System.Windows.Controls;
-using Fibrosis.Models;
-
-namespace Fibrosis.Controls
+﻿namespace Fibrosis.Controls
 {
+    using System.Windows.Controls;
+    using EsculabsCommon.Models;
+    using Fibrosis.Models;
     using EsculabsCommon;
     using System.Windows;
     using Repositories;
@@ -15,11 +15,11 @@ namespace Fibrosis.Controls
     {
         private readonly ModuleProvider _moduleProvider;
 
-        public IPatient                 Patient { get; set; }
+        public Patient                 Patient { get; set; }
         public PatientMetric            PatientMetric { get; set; }
         public Examine                  LastExamine { get; set; }
 
-        public FibrosisWidget(ModuleProvider moduleProvider, IPatient patient)
+        public FibrosisWidget(ModuleProvider moduleProvider, Patient patient)
         {
             InitializeComponent();
 

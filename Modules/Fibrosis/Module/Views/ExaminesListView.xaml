@@ -6,9 +6,13 @@
     xmlns:custom="http://metro.mahapps.com/winfx/xaml/controls" 
     xmlns:e="clr-namespace:EsculabsCommon;assembly=EsculabsCommon"
     xmlns:c="clr-namespace:Fibrosis.Controls"
+    xmlns:converters="clr-namespace:Fibrosis.Helpers.Converters"
     x:Class="Fibrosis.Views.ExaminesListView"
     mc:Ignorable="d" 
     d:DesignHeight="768" d:DesignWidth="1024">
+    <UserControl.Resources>
+        <converters:AdministratorVisibilityConverter x:Key="AdministratorVisibilityConverter" />
+    </UserControl.Resources>
     <Grid>
         <ScrollViewer Margin="0,120,0,0" >
             <ItemsControl x:Name="ExaminesList" ItemsSource="{Binding Examines}" AlternationCount="2">
@@ -35,6 +39,13 @@
         </ScrollViewer>
         <DatePicker x:Name="DateFromFilterTextBox" custom:TextBoxHelper.Watermark="От" custom:TextBoxHelper.ClearTextButton="True" Height="41" Margin="350,10,0,0" VerticalAlignment="Top" FontSize="21.333" HorizontalAlignment="Left" Width="219"/>
         <DatePicker x:Name="DateToFilterTextBox" custom:TextBoxHelper.Watermark="До" custom:TextBoxHelper.ClearTextButton="True" Height="41" Margin="587,10,0,0"  VerticalAlignment="Top" FontSize="21.333" HorizontalAlignment="Left" Width="219"/>
+        <Button x:Name="OpenFibxFolder" Style="{DynamicResource MetroCircleButtonStyle}" HorizontalAlignment="Right" Margin="0,0,20,0" VerticalAlignment="Top" Width="100" Height="100" Background="White" BorderBrush="{DynamicResource HighlightBrush}" Visibility="{ Binding Path=ModuleProvider.Physician.IsAdministrator, Converter={StaticResource AdministratorVisibilityConverter}}" Click="OpenFibxFolder_Click">
+            <Rectangle Fill="{DynamicResource HighlightBrush}" Width="30" Height="30">
+                <Rectangle.OpacityMask>
+                    <VisualBrush Visual="{StaticResource appbar_cabinet_files}" Stretch="Fill" />
+                </Rectangle.OpacityMask>
+            </Rectangle>
+        </Button>
         <Button x:Name="AddExamineBtn" Style="{DynamicResource MetroCircleButtonStyle}" HorizontalAlignment="Right" Margin="0,0,60,60" VerticalAlignment="Bottom" Width="100" Height="100" Background="{DynamicResource HighlightBrush}" BorderBrush="{x:Null}" Cursor="Hand" Click="AddExamineBtn_Click">
             <Rectangle Fill="White" Width="30" Height="30">
                 <Rectangle.OpacityMask>

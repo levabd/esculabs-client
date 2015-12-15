@@ -7,7 +7,7 @@ using System.Windows.Data;
 namespace Client.Repositories
 {
     using Common.Logging;
-    using Models;
+    using EsculabsCommon.Models;
     using EsculabsCommon;
     using System.IO;
     using System.Reflection;
@@ -66,9 +66,16 @@ namespace Client.Repositories
             }
         }
 
-        public List<UserControl> GetWidgetsList(Patient patient)
+        public List<UserControl> GetWidgetsList(Patient patient, Physician physician)
         {
-            return _modules.Any() ? _modules.Select(module => module.GetWidget(patient)).Where(w => w != null).ToList(): null;
+            if (!_modules.Any())
+            {
+                return null;
+            }
+
+            _modules.ForEach(x => x.SetPhysician(physician));
+
+            return _modules.Select(module => module.GetWidget(patient)).Where(w => w != null).ToList();
         }
 
         public void SubscribeViewManager(ViewManager viewManager)

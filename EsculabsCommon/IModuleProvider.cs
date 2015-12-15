@@ -1,16 +1,18 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Controls;
-
-namespace EsculabsCommon
+﻿namespace EsculabsCommon
 {
+    using System;
+    using System.Windows.Controls;
+    using Models;
+
     public interface IModuleProvider
     {
         event EventHandler<ViewChangeArgs> ViewSwitchEventHandler;
 
         string Name { get; }
 
-        UserControl GetWidget(IPatient patient);
+        void SetPhysician(Physician physician);
+
+        UserControl GetWidget(Patient patient);
 
         void SetView(ViewChangeArgs args);
     }

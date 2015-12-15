@@ -1,19 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Forms.VisualStyles;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using EsculabsCommon;
-using Fibrosis.Controls;
-
-namespace Fibrosis.Views
+﻿namespace Fibrosis.Views
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Linq;
+    using System.Runtime.CompilerServices;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Input;
+    using System.Windows.Media;
+    using System.Windows.Media.Imaging;
+    using EsculabsCommon.Models;
+    using Fibrosis.Controls;
     using Models;
     using System.IO;
     using FibroscanProcessor;
@@ -26,9 +24,9 @@ namespace Fibrosis.Views
     {
         private ModuleProvider _moduleProvider;
         private Examine _examine;
-        private IPatient _patient;
+        private Patient _patient;
 
-        public IPatient Patient
+        public Patient Patient
         {
             get
             {

@@ -1,4 +1,4 @@
-﻿namespace Client.Migrations
+﻿namespace EsculabsCommon.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
@@ -123,6 +123,19 @@
                         Password = "40f96bc52f69c669626b95c7994e6eac",
                         Position = "Разработчик системы",
                         Roles = new List<Role>() { new Role { Name = "developer", Description = "Разработчик Esculabs"} }
+                    }
+                );
+
+                context.Roles.AddOrUpdate(
+                    new Role
+                    {
+                        Description = "Поддержка",
+                        Name = "support"
+                    },
+                    new Role
+                    {
+                        Description = "Врач",
+                        Name = "physician"
                     }
                 );
             }

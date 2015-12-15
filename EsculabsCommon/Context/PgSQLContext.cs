@@ -1,9 +1,9 @@
-namespace Client.Context
+namespace EsculabsCommon.Context
 {
     using Models;
     using System.Data.Entity;
 
-    public partial class PgSqlContext : DbContext
+    public class PgSqlContext : DbContext
     {
         public PgSqlContext()
             : base("name=PgSqlConnectionString")

@@ -1,4 +1,4 @@
-﻿namespace Client.Models
+﻿namespace EsculabsCommon.Models
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;

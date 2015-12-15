@@ -5,18 +5,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Client.Repositories
+namespace EsculabsCommon.Repositories
 {
     using Models;
-    using Common.Logging;
     using Context;
 
-    class PatientsRepository
+    public class PatientsRepository
     {
         private static volatile PatientsRepository  _instance;
         private static object                       _syncRoot = new object();
 
-        private ILog                                _log;
+        //private ILog                                _log;
 
         public static PatientsRepository Instance
         {
@@ -39,7 +38,7 @@ namespace Client.Repositories
         {
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<PgSqlContext, Migrations.Configuration>("PgSqlConnectionString"));
 
-            _log = LogManager.GetLogger("Patients Repository");
+            //_log = LogManager.GetLogger("Patients Repository");
         }
 
         public Patient Find(int id)
@@ -64,7 +63,7 @@ namespace Client.Repositories
             }
             catch (Exception e)
             {
-                _log.Error($"Can't insert data to db. Reason: {e.Message}");
+                //_log.Error($"Can't insert data to db. Reason: {e.Message}");
                 result = null;
             }
 
@@ -83,7 +82,7 @@ namespace Client.Repositories
 
             catch (Exception e)
             {
-                _log.Error($"Can't select data from db. Reason: {e.Message}");
+                //_log.Error($"Can't select data from db. Reason: {e.Message}");
                 return null;
             }
         }

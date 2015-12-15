@@ -1,13 +1,17 @@
-﻿namespace Client.Models
+﻿namespace EsculabsCommon.Models
 {
     using System;
-    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using EsculabsCommon;
+
+    public enum PatientGender
+    {
+        Male,
+        Female
+    }
 
     [Table("public.patients")]
-    public partial class Patient : IPatient
+    public class Patient
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("id")]

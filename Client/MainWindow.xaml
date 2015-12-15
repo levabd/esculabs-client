@@ -57,6 +57,6 @@
             <ContentPresenter x:Name="BackButtonPresenter" ContentTemplateSelector="{StaticResource BackButtonTemplateSelector}" />
         </Button>
         <Label Content="{ Binding Physician.FullNameString }" Margin="0,39,20,0" VerticalAlignment="Top" HorizontalAlignment="Right"  FontSize="18.667"/>
-        <Label Content="{ Binding PhysicianRole.Description }" Margin="0,69,20,0" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+        <Label Content="{ Binding Physician.Position }" Margin="0,69,20,0" VerticalAlignment="Top" HorizontalAlignment="Right"/>
     </Grid>
 </controls:MetroWindow>

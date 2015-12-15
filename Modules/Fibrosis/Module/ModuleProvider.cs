@@ -6,18 +6,21 @@ namespace Fibrosis
 {
     using Controls;
     using EsculabsCommon;
-    using Views;
+    using EsculabsCommon.Models;
 
     public class ModuleProvider : IModuleProvider
     {
+        public Physician Physician { get; set; }
+
         public event EventHandler<ViewChangeArgs> ViewSwitchEventHandler;
         public string Name => "Fibrosis";
-        
-        public ModuleProvider()
-        {            
+
+        public void SetPhysician(Physician physician)
+        {
+            Physician = physician;
         }
 
-        public UserControl GetWidget(IPatient patient)
+        public UserControl GetWidget(Patient patient)
         {
             return new FibrosisWidget(this, patient);
         }

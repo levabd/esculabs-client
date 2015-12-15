@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Client.Helpers
+﻿namespace Client.Helpers
 {
-    using Models;
+    using System;
+    using EsculabsCommon.Models;
 
     public class AuthArgs : EventArgs
     {

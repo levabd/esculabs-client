@@ -1,4 +1,4 @@
-namespace Client.Migrations
+namespace EsculabsCommon.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
@@ -45,6 +45,7 @@ namespace Client.Migrations
                     {
                         id = c.Int(nullable: false, identity: true),
                         name = c.String(nullable: false),
+                        description = c.String(nullable: false),
                     })
                 .PrimaryKey(t => t.id);
             

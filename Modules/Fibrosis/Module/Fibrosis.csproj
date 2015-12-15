@@ -84,6 +84,7 @@
     <Compile Include="Controls\MeasurePreview.xaml.cs">
       <DependentUpon>MeasurePreview.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\Converters\AdministratorVisibilityConverter.cs" />
     <Compile Include="Helpers\Converters\FriendlyTimeConverter.cs" />
     <Compile Include="Helpers\Converters\SensorTypeConverter.cs" />
     <Compile Include="Helpers\ExamineStatusTemplateSelector.cs" />

@@ -17,6 +17,8 @@ namespace Client.Views
 {
     using System.IO.Ports;
     using EsculabsCommon;
+    using EsculabsCommon.Models;
+    using EsculabsCommon.Repositories;
     using Common.Logging;
     using System.Configuration;
     using System.Text.RegularExpressions;
@@ -132,6 +134,42 @@ namespace Client.Views
         private void cancelBtn_Click(object sender, RoutedEventArgs e)
         {
             serial.Close();
+            BackButtonFunc?.Invoke();
+        }
+
+        private void addPatientBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Patient p = new Patient
+            {
+                FirstName = firstNameTextBox.Text,
+                MiddleName = middleNameTextBox.Text,
+                LastName = lastNameTextBox.Text,
+                Iin = iinTextBox.Text
+            };
+
+            if (!maleRadioButton.IsChecked.Value && !femaleRadioButton.IsChecked.Value)
+            {
+                MessageBox.Show("Вы должны выбрать пол пациента!");
+                return;
+            }
+
+            p.Gender = maleRadioButton.IsChecked.Value ? PatientGender.Male : PatientGender.Female;
+
+            if (!birthdateDatePicker.SelectedDate.HasValue)
+            {
+                MessageBox.Show("Вы должны выбрать дату рождения пациента!");
+                return;
+            }
+
+            p.Birthdate = birthdateDatePicker.SelectedDate.Value;
+
+            p = PatientsRepository.Instance.Add(p);
+            if (p == null)
+            {
+                MessageBox.Show("Не удалось сохранить пациента. Проверьте заполненные поля на наличие ошибок.");
+                return;
+            }
+
             BackButtonFunc?.Invoke();
         }
     }

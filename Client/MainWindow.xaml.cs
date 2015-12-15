@@ -1,18 +1,16 @@
-﻿using System;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Windows;
-using System.Windows.Controls;
-using Client.Repositories;
-
-namespace Client
+﻿namespace Client
 {
+    using System.ComponentModel;
+    using System.Linq;
+    using System.Runtime.CompilerServices;
+    using System.Windows;
+    using System.Windows.Controls;
+    using Repositories;
     using EsculabsCommon;
     using MahApps.Metro.Controls;
     using MahApps.Metro.Controls.Dialogs;
     using Helpers;
-    using Models;
+    using EsculabsCommon.Models;
     using Views;
 
     /// <summary>
@@ -24,7 +22,6 @@ namespace Client
 
         private readonly ViewManager _views;
         private Physician _physician;
-        private Role _physicianRole;
         
         public Physician Physician
         {
@@ -35,17 +32,6 @@ namespace Client
                 OnPropertyChanged();
             }
         }
-
-        public Role PhysicianRole
-        {
-            get { return _physicianRole; }
-            set
-            {
-                _physicianRole = value;
-                OnPropertyChanged();
-            }
-        }
-
 
         public MainWindow()
         {
@@ -99,9 +85,6 @@ namespace Client
             {
                 Physician = e.Physician;
 
-                // Получаем самую высокую роль целителя
-                PhysicianRole = Physician.Roles.OrderBy(x => x.Id).FirstOrDefault();
-
                 _views.SetView(typeof(PatientsListView).FullName, x =>
                 {
                     // Быдлокод. Обработчик события может быть подписан только один раз
@@ -109,8 +92,8 @@ namespace Client
                     ((PatientsListView)x).TileClickEventHandler -= HandlePatientTileClick;
                     ((PatientsListView)x).AddPatientButtonClickHandler -= HandleAddPatientButtonClick;
 
-                    ((PatientsListView) x).TileClickEventHandler += HandlePatientTileClick;
-                    ((PatientsListView) x).AddPatientButtonClickHandler += HandleAddPatientButtonClick;
+                    ((PatientsListView)x).TileClickEventHandler += HandlePatientTileClick;
+                    ((PatientsListView)x).AddPatientButtonClickHandler += HandleAddPatientButtonClick;
                 });
 
             }
@@ -153,7 +136,17 @@ namespace Client
         /// <param name="e"></param>
         private void HandleAddPatientButtonClick(object sender, RoutedEventArgs e)
         {
-            _views.SetView(typeof(AddPatientView).FullName, x => ((AddPatientView) x).BackButtonFunc = () => _views.SetPrevious());
+            _views.SetView(typeof(AddPatientView).FullName, x => ((AddPatientView) x).BackButtonFunc = () =>
+            {
+                // TODO: SetView: добавить вьюху-инициатор смены
+                var btn = sender as Button;
+                var grid = btn?.Parent as Grid;
+                var view = grid?.Parent as PatientsListView;
+
+                view?.ReloadPatientsGrid();
+
+                _views.SetPrevious();
+            });
         }
 
         /// <summary>
@@ -171,6 +164,8 @@ namespace Client
             }
 
             view.Patient = e.Patient;
+            view.Physician = Physician;
+
             view.ReloadWidgets();
         }
 
@@ -205,7 +200,6 @@ namespace Client
                 if (c == MessageDialogResult.Affirmative)
                 {
                     Physician = null;
-                    PhysicianRole = null;
                 }
             }
 

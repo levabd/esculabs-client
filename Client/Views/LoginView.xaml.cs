@@ -1,22 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using EsculabsCommon;
-
-namespace Client.Views
+﻿namespace Client.Views
 {
-    using Repositories;
+    using System;
+    using System.Windows;
+    using EsculabsCommon;
+    using EsculabsCommon.Repositories;
     using Helpers;
 
     /// <summary>
@@ -35,16 +22,18 @@ namespace Client.Views
         {
             var p = PhysiciansRepository.Instance.Authorize(loginTextBox.Text, passwordTextBox.Password);
 
-            if (LoginEventHandler != null)
+            if (LoginEventHandler == null)
             {
-                AuthArgs args = new AuthArgs()
-                {
-                    Succeded = p != null,
-                    Physician = p
-                };
-                
-                LoginEventHandler(this, args);
+                return;
             }
+
+            var args = new AuthArgs
+            {
+                Succeded = p != null,
+                Physician = p
+            };
+                
+            LoginEventHandler(this, args);
         }
     }
 }

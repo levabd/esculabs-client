@@ -1,26 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Client.Annotations;
+﻿
 
 namespace Client.Views
 {
-    using Models;
+    using EsculabsCommon.Models;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Runtime.CompilerServices;
+    using System.Windows.Controls;
+    using Annotations;
     using Repositories;
     using EsculabsCommon;
 
@@ -30,6 +17,8 @@ namespace Client.Views
     public partial class ModulesListView : BaseView, INotifyPropertyChanged
     {
         private Patient _patient;
+        private Physician _physician;
+
         private List<UserControl> _widgets;
          
         public Patient Patient
@@ -38,6 +27,16 @@ namespace Client.Views
             set
             {
                 _patient = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public Physician Physician
+        {
+            get { return _physician; }
+            set
+            {
+                _physician = value;
                 OnPropertyChanged();
             }
         }
@@ -61,7 +60,7 @@ namespace Client.Views
 
         public void ReloadWidgets()
         {
-            Widgets = ModulesRepository.Instance.GetWidgetsList(Patient);
+            Widgets = ModulesRepository.Instance.GetWidgetsList(Patient, Physician);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

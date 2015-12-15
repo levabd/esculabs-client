@@ -12,7 +12,6 @@ namespace Client
 {
     using System.Data.Entity;
     using System.Runtime.InteropServices;
-    using Context;
     using Repositories;
 
     /// <summary>
@@ -49,8 +48,6 @@ namespace Client
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<PgSqlContext, Migrations.Configuration>("PgSqlConnectionString"));
-
             _hTrayWnd = FindWindow("Shell_TrayWnd", "");
 
             //_hInstance = LoadLibrary("User32"); <<< 
