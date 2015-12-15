@@ -93,14 +93,24 @@ namespace Fibrosis.Helpers
                         PhysicianId = physicianId
                     };
 
-                    var exam = xml.Descendants("Exam").FirstOrDefault();
-                    
-                    e.CreatedAt = DateTime.Parse(exam.Descendants("Date").FirstOrDefault()?.Value);
+                    var examNode = xml.Descendants("Exam").FirstOrDefault();
 
-                    var result = exam.Descendants("Result").FirstOrDefault();
+                    if (examNode == null)
+                    {
+                        throw new Exception("Ветка Exam не найдена");
+                    }
+
+                    e.CreatedAt = DateTime.Parse(examNode.Descendants("Date").FirstOrDefault()?.Value);
+
+                    var resultNode = examNode.Descendants("Result").FirstOrDefault();
+
+                    if (resultNode == null)
+                    {
+                        throw new Exception("Ветка Result не найдена");
+                    }
 
                     SensorType sensorType;
-                    switch (exam.Descendants("ExamType").FirstOrDefault()?.Value)
+                    switch (examNode.Descendants("ExamType").FirstOrDefault()?.Value)
                     {
                         case "S":
                         case "Small":
@@ -119,44 +129,77 @@ namespace Fibrosis.Helpers
                     }
 
                     e.SensorType = sensorType;
-                    e.Iqr = double.Parse(result.Descendants("StiffnessIQR").FirstOrDefault()?.Value, CultureInfo.InvariantCulture);
-                    e.Med = double.Parse(result.Descendants("StiffnessMedian").FirstOrDefault()?.Value, CultureInfo.InvariantCulture);
-                    e.Duration = int.Parse(result.Descendants("ExamDuration").FirstOrDefault()?.Value);
-                    e.WhiskerPlot = ImageFileToByteArray(tempPath + slash + result.Descendants("WhiskerPlotImageLink").FirstOrDefault()?.Value);
+
+                    var iqr = resultNode.Descendants("StiffnessIQR").FirstOrDefault()?.Value;
+
+                    if (iqr == null)
+                    {
+                        throw new Exception("Отсутствует параметр StiffnessIQR");
+                    }
+
+                    e.Iqr = double.Parse(iqr, CultureInfo.InvariantCulture);
+
+                    var med = resultNode.Descendants("StiffnessMedian").FirstOrDefault()?.Value;
+                    if (med == null)
+                    {
+                        throw new Exception("Отсутствует параметр StiffnessMedian");
+                    }
+                    e.Med = double.Parse(med, CultureInfo.InvariantCulture);
+
+                    var duration = resultNode.Descendants("ExamDuration").FirstOrDefault()?.Value;
+
+                    if (duration != null)
+                    {
+                        e.Duration = int.Parse(duration);
+                    }
+
+                    e.WhiskerPlot = ImageFileToByteArray(tempPath + slash + resultNode.Descendants("WhiskerPlotImageLink").FirstOrDefault()?.Value);
                     e.ExpertStatus = ExpertStatus.Pending;
 
                     e.Measures = new List<Measure>();
 
                     var measuresCorrect = true;
-                    foreach (var measure in exam.Descendants("Measurements").FirstOrDefault().Descendants("Measure"))
+                    var measurements = examNode.Descendants("Measurements").FirstOrDefault();
+
+                    if (measurements != null)
                     {
-                        var m = new Measure();
-
-                        m.CreatedAt = DateTime.Parse(exam.Descendants("Time").FirstOrDefault().Value);
-                        m.Stiffness = double.Parse(measure.Descendants("Stiffness").FirstOrDefault().Value, CultureInfo.InvariantCulture);
-
-                        var sourceFile = tempPath + slash + measure.Descendants("ImageLink").FirstOrDefault().Value;
-
-                        Image source = Image.FromFile(sourceFile);
-
-                        FibroscanImage prod = new FibroscanImage(source);
-                        m.ResultMerged = ImageToByteArray(prod.Merged);
-                        m.Source = ImageFileToByteArray(sourceFile);
-                        m.ValidationElasto = prod.ElastoStatus;
-                        m.ValidationModeA = prod.UltrasoundModeAStatus;
-                        m.ValidationModeM = prod.UltrasoundModeMStatus;
-
-                        if (measuresCorrect)
+                        foreach (var measure in measurements.Descendants("Measure"))
                         {
-                            measuresCorrect = m.IsCorrect;
-                        }
+                            var m = new Measure();
+                            m.CreatedAt = DateTime.Parse(examNode.Descendants("Time").FirstOrDefault()?.Value);
 
-                        e.Measures.Add(m);
+                            var stiffness = measure.Descendants("Stiffness").FirstOrDefault()?.Value;
+                            if (stiffness != null)
+                            {
+                                m.Stiffness = double.Parse(stiffness, CultureInfo.InvariantCulture);
+                            }
+
+                            var sourceFile = tempPath + slash + measure.Descendants("ImageLink").FirstOrDefault()?.Value;
+                            var source = Image.FromFile(sourceFile);
+
+                            var prod = new FibroscanImage(source);
+                            m.ResultMerged = ImageToByteArray(prod.Merged);
+                            m.Source = ImageFileToByteArray(sourceFile);
+                            m.ValidationElasto = prod.ElastoStatus;
+                            m.ValidationModeA = prod.UltrasoundModeAStatus;
+                            m.ValidationModeM = prod.UltrasoundModeMStatus;
+
+                            if (measuresCorrect)
+                            {
+                                measuresCorrect = m.IsCorrect;
+                            }
+
+                            e.Measures.Add(m);
+                        }
                     }
 
                     e.Valid = e.Validate() && measuresCorrect;
 
-                    return FibrosisRepository.Instance.AddExamine(e) != 0;
+                    if (FibrosisRepository.Instance.AddExamine(e) == 0)
+                    {
+                        throw new Exception("Обследование не было добавлено в БД");
+                    }
+
                 }
                 catch (Exception exception)
                 {
@@ -167,6 +210,7 @@ namespace Fibrosis.Helpers
             {
                 MessageBox.Show($"ExamReport.xml не найден в файле\n\n{fileName}\n\nОперация прервана.");
             }
+
 
             Directory.Delete(tempPath, true);
 
