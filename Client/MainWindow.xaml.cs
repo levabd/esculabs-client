@@ -1,4 +1,7 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using Client.Repositories;
@@ -15,10 +18,34 @@ namespace Client
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : MetroWindow
+    public partial class MainWindow : MetroWindow, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
         private readonly ViewManager _views;
-        private Physician _currentPhysician;
+        private Physician _physician;
+        private Role _physicianRole;
+        
+        public Physician Physician
+        {
+            get { return _physician; }
+            set
+            {
+                _physician = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public Role PhysicianRole
+        {
+            get { return _physicianRole; }
+            set
+            {
+                _physicianRole = value;
+                OnPropertyChanged();
+            }
+        }
+
 
         public MainWindow()
         {
@@ -36,6 +63,8 @@ namespace Client
             _views.ViewChangeEventHandler += HandleViewChange;
 
             ModulesRepository.Instance.SubscribeViewManager(_views);
+
+            DataContext = this;
         }
         
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
@@ -68,7 +97,10 @@ namespace Client
         {
             if (e.Succeded)
             {
-                _currentPhysician = e.Physician;
+                Physician = e.Physician;
+
+                // Получаем самую высокую роль целителя
+                PhysicianRole = Physician.Roles.OrderBy(x => x.Id).FirstOrDefault();
 
                 _views.SetView(typeof(PatientsListView).FullName, x =>
                 {
@@ -172,11 +204,17 @@ namespace Client
 
                 if (c == MessageDialogResult.Affirmative)
                 {
-                    _currentPhysician = null;
+                    Physician = null;
+                    PhysicianRole = null;
                 }
             }
 
             _views.SetPrevious();
+        }
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 

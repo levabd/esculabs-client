@@ -122,10 +122,11 @@
                         Login = "antrille",
                         Password = "40f96bc52f69c669626b95c7994e6eac",
                         Position = "Разработчик системы",
-                        Roles = new List<Role>() { new Role { Name = "developer" } }
+                        Roles = new List<Role>() { new Role { Name = "developer", Description = "Разработчик Esculabs"} }
                     }
                 );
             }
+            
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 

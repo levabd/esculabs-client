@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -48,7 +49,7 @@ namespace Client.Repositories
 
         public Physician Find(int id)
         {
-            return _context.Physicians.Find(id);
+            return _context.Physicians.Where(x => x.Id == id).Include(p => p.Roles).FirstOrDefault();
         }
 
         public Physician Authorize(string login, string password)

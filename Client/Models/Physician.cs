@@ -7,10 +7,7 @@
     [Table("public.physicians")]
     public partial class Physician
     {
-        public Physician()
-        {
-            Roles = new List<Role>();
-        }
+        public string FullNameString => $"{LastName} {FirstName} {MiddleName}";
 
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("id")]
