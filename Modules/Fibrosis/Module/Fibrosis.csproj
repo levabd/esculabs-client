@@ -93,6 +93,10 @@
     <Compile Include="Migrations\201512090957246_CreateFibrosisTables.Designer.cs">
       <DependentUpon>201512090957246_CreateFibrosisTables.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201512150519021_AddFibxSourceToExamines.cs" />
+    <Compile Include="Migrations\201512150519021_AddFibxSourceToExamines.Designer.cs">
+      <DependentUpon>201512150519021_AddFibxSourceToExamines.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Measure.cs" />
     <Compile Include="Models\PatientMetric.cs" />
     <Compile Include="ModuleProvider.cs" />
@@ -165,6 +169,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201512090957246_CreateFibrosisTables.resx">
       <DependentUpon>201512090957246_CreateFibrosisTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512150519021_AddFibxSourceToExamines.resx">
+      <DependentUpon>201512150519021_AddFibxSourceToExamines.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -59,9 +59,7 @@ namespace Fibrosis.Helpers
                 return false;
             }
 
-            Examine e = null;
-
-            tempPath += slash + "Balder";
+            tempPath += slash + "Esculabs";
             Directory.CreateDirectory(tempPath);
 
             tempPath += slash + Guid.NewGuid().ToString();
@@ -87,7 +85,7 @@ namespace Fibrosis.Helpers
 
                 try
                 {
-                    e = new Examine
+                    var e = new Examine
                     {
                         PatientId = patientId,
                         PhysicianId = physicianId
@@ -195,6 +193,11 @@ namespace Fibrosis.Helpers
 
                     e.Valid = e.Validate() && measuresCorrect;
 
+                    if (SaveFibxToLocalStorage(fileName))
+                    {
+                        e.FibxSource = Path.GetFileName(fileName);
+                    }
+
                     if (FibrosisRepository.Instance.AddExamine(e) == 0)
                     {
                         throw new Exception("Обследование не было добавлено в БД");
@@ -210,8 +213,7 @@ namespace Fibrosis.Helpers
             {
                 MessageBox.Show($"ExamReport.xml не найден в файле\n\n{fileName}\n\nОперация прервана.");
             }
-
-
+            
             Directory.Delete(tempPath, true);
 
             return false;
@@ -247,6 +249,18 @@ namespace Fibrosis.Helpers
                     return imageBytes;
                 }
             }
+        }
+
+        private static bool SaveFibxToLocalStorage(string filePath)
+        {
+            var localPath = $"{ Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)}\\Esculabs Import";
+            Directory.CreateDirectory(localPath);
+
+            var newFilePath = $"{localPath}\\{Path.GetFileName(filePath)}";
+
+            File.Copy(filePath, newFilePath, true);
+
+            return File.Exists(newFilePath);
         }
     }
 }

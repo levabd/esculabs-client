@@ -48,6 +48,9 @@ namespace Fibrosis.Models
         [Column("expert_status")]
         public ExpertStatus ExpertStatus { get; set; }
 
+        [Column("fibx_source")]
+        public string FibxSource { get; set; }
+
         [Column("created_at", TypeName = "date")]
         public DateTime? CreatedAt { get; set; }
 
