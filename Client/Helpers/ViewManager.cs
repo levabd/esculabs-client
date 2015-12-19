@@ -1,21 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
+using Client.Annotations;
 
 namespace Client.Helpers
 {
     using EsculabsCommon;
 
-    public class ViewManager
+    public class ViewManager : INotifyPropertyChanged
     {
         #region Объявления
+        public event PropertyChangedEventHandler    PropertyChanged;
 
         // Событие, срабатываемое при смене вьюхи
-        public event EventHandler<ViewChangeArgs>   ViewChangeEventHandler;
-      
+        //public event EventHandler<ViewChangeArgs>   ViewChangeEventHandler;
+
+        public FrameworkElement                     CurrentView => _viewStack.FirstOrDefault();
+
         // Контейнер, отображающий вьюхи
         public ContentControl                       Container { get; set; }
 
@@ -61,18 +67,8 @@ namespace Client.Helpers
             initDelegate?.Invoke(view);
 
             ((BaseView) view).ClearInput();
-            Container.Content = view;
 
-            if (ViewChangeEventHandler != null)
-            {
-                var args = new ViewChangeArgs
-                {
-                    ViewName = view.Name,
-                    View = view
-                };
-
-                ViewChangeEventHandler(this, args);
-            }
+            OnPropertyChanged(nameof(CurrentView));
 
             return view;
         }
@@ -95,20 +91,15 @@ namespace Client.Helpers
                 return null;
             }
 
-            Container.Content = first;
-
-            if (ViewChangeEventHandler != null)
-            {
-                var args = new ViewChangeArgs
-                {
-                    ViewName = first.Name,
-                    View = first
-                };
-
-                ViewChangeEventHandler(this, args);
-            }
+            OnPropertyChanged(nameof(CurrentView));
 
             return first;            
+        }
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         private FrameworkElement LoadView(string className, Assembly assembly = null)
@@ -140,7 +131,5 @@ namespace Client.Helpers
             
             return view;
         }
-
-
     }
 }

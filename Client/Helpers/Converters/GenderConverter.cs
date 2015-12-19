@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Client.Helpers
+namespace Client.Helpers.Converters
 {
     using System.Windows.Data;
     using System.Globalization;

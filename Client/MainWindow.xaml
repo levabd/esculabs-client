@@ -4,8 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-        xmlns:local="clr-namespace:Client"
-        xmlns:v="clr-namespace:Client.Views"
+        xmlns:h="clr-namespace:Client.Helpers"
         mc:Ignorable="d"
         ResizeMode="NoResize"
         WindowStyle="None"
@@ -21,7 +20,7 @@
         WindowStartupLocation="CenterScreen" 
         Loaded="MetroWindow_Loaded">
     <Window.Resources>
-        <local:BackButtonTemplateSelector x:Key="BackButtonTemplateSelector" />
+        <h:BackButtonTemplateSelector x:Key="BackButtonTemplateSelector" />
         <DataTemplate x:Key="BackButtonIcon">
             <Rectangle Fill="{DynamicResource HighlightBrush}" Width="50" Height="50">
                 <Rectangle.OpacityMask>
@@ -51,10 +50,10 @@
     <Grid>
         <controls:TransitioningContentControl x:Name="ViewContainer" 
                                               Margin="10,130,10,10" 
-                                              Transition="RightReplace"/>
+                                              Transition="RightReplace" Content="{Binding ViewManager.CurrentView}"/>
 
         <Button x:Name="BackBtn" Style="{DynamicResource MetroCircleButtonStyle}" HorizontalAlignment="Left" Margin="20,20,0,0"  Width="100" Height="100" Background="White" BorderBrush="{DynamicResource HighlightBrush}" VerticalAlignment="Top" Click="BackBtn_Click">
-            <ContentPresenter x:Name="BackButtonPresenter" ContentTemplateSelector="{StaticResource BackButtonTemplateSelector}" />
+            <ContentPresenter x:Name="BackButtonPresenter" Content="{Binding ViewManager.CurrentView}" ContentTemplateSelector="{StaticResource BackButtonTemplateSelector}" />
         </Button>
         <Label Content="{ Binding Physician.FullNameString }" Margin="0,39,20,0" VerticalAlignment="Top" HorizontalAlignment="Right"  FontSize="18.667"/>
         <Label Content="{ Binding Physician.Position }" Margin="0,69,20,0" VerticalAlignment="Top" HorizontalAlignment="Right"/>

@@ -119,10 +119,11 @@
     <Compile Include="Controls\PatientsListTile.xaml.cs">
       <DependentUpon>PatientsListTile.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\BackButtonTemplateSelector.cs" />
     <Compile Include="Helpers\PatientTileClickArgs.cs" />
     <Compile Include="Helpers\AuthArgs.cs" />
     <Compile Include="Helpers\MessageDialogConfiguration.cs" />
-    <Compile Include="Helpers\GenderConverter.cs" />
+    <Compile Include="Helpers\Converters\GenderConverter.cs" />
     <Compile Include="Helpers\ViewManager.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

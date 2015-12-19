@@ -3,14 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:h="clr-namespace:Client.Helpers"
+             xmlns:converters="clr-namespace:Client.Helpers.Converters"
              mc:Ignorable="d" 
              Height="160"
              Foreground="Aqua"
              d:DesignWidth="800" 
              FontSize="16">
     <UserControl.Resources>
-        <h:GenderConverter x:Key="GenderConverter" />
+        <converters:GenderConverter x:Key="GenderConverter" />
     </UserControl.Resources>
     <Grid>
         <Label x:Name="nameLabel" Content="{ Binding FullNameString }" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" Height="33" FontSize="18.667" />

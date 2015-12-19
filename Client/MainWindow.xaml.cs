@@ -6,7 +6,6 @@
     using System.Windows;
     using System.Windows.Controls;
     using Repositories;
-    using EsculabsCommon;
     using MahApps.Metro.Controls;
     using MahApps.Metro.Controls.Dialogs;
     using Helpers;
@@ -33,6 +32,8 @@
             }
         }
 
+        public ViewManager ViewManager => _views;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -46,7 +47,7 @@
             }
 
             _views.Container = ViewContainer;
-            _views.ViewChangeEventHandler += HandleViewChange;
+            //_views.ViewChangeEventHandler += HandleViewChange;
 
             ModulesRepository.Instance.SubscribeViewManager(_views);
 
@@ -104,32 +105,6 @@
         }
 
         /// <summary>
-        /// Обработчик события смены вьюх. Стреляется из ViewManager
-        /// </summary>
-        /// <param name="sender">ViewManager</param>
-        /// <param name="e">Вьюха, на которую нас переключил ViewManager</param>
-        private void HandleViewChange(object sender, ViewChangeArgs e)
-        {
-            if (e?.View == null)
-            {
-                return;
-            }
-
-            if (e.View is LoginView)
-            {
-                BackButtonPresenter.Content = 0;
-            }
-            else if (e.View is PatientsListView)
-            {
-                BackButtonPresenter.Content = 1;
-            }
-            else
-            {
-                BackButtonPresenter.Content = 2;
-            }
-        }
-
-        /// <summary>
         /// Обработчик события щелчка на кнопку добавления пациента
         /// </summary>
         /// <param name="sender"></param>
@@ -176,7 +151,9 @@
         /// <param name="e"></param>
         private async void BackBtn_Click(object sender, RoutedEventArgs e)
         {
-            if ((int)BackButtonPresenter.Content == 0)
+            var currentView = ViewManager.CurrentView;
+
+            if (currentView is LoginView)
             {
                 var c =
                     await
@@ -188,8 +165,12 @@
                 {
                     Close();
                 }
+                else
+                {
+                    return;
+                }
             }
-            else if ((int)BackButtonPresenter.Content == 1)
+            else if (currentView is PatientsListView)
             {
                 var c =
                     await
@@ -201,6 +182,10 @@
                 {
                     Physician = null;
                 }
+                else
+                {
+                    return;
+                }
             }
 
             _views.SetPrevious();
@@ -209,33 +194,6 @@
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-    }
-
-    /// <summary>
-    /// Класс, позволяющий выбирать по индексу иконку кнопки "Назад"
-    /// </summary>
-    public class BackButtonTemplateSelector : DataTemplateSelector
-    {
-        public override DataTemplate SelectTemplate(object item, DependencyObject container)
-        {
-            //получаем вызывающий контейнер
-            var element = container as FrameworkElement;
-
-            if (element == null || item == null || !(item is int))
-            {
-                return null;
-            }
-
-            switch ((int)item)
-            {
-                case 0:
-                    return element.FindResource("CloseButtonIcon") as DataTemplate;
-                case 1:
-                    return element.FindResource("LogoutButtonIcon") as DataTemplate;
-                default:
-                    return element.FindResource("BackButtonIcon") as DataTemplate;
-            }
         }
     }
 }
