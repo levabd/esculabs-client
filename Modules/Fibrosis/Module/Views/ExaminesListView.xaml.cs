@@ -1,30 +1,31 @@
 ﻿namespace Fibrosis.Views
 {
-    using System.Collections.Generic;
+    using System;
+    using System.Diagnostics;
+    using System.IO;
+    using System.Windows.Data;
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Input;
-    using EsculabsCommon;
-    using EsculabsCommon.Models;
     using Microsoft.Win32;
 
+    using EsculabsCommon;
+    using EsculabsCommon.Models;
     using Models;
     using Repositories;
     using Helpers;
     using Controls;
 
-    /// <summary>
-    /// Interaction logic for PatientsList.xaml
-    /// </summary>
     public partial class ExaminesListView : BaseView, INotifyPropertyChanged
     {
         private ModuleProvider _moduleProvider;
         private Patient _patient;
-        private List<Examine> _examines;
 
-        //public event EventHandler<RoutedEventArgs> AddExamineButtonClickHandler;
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public CollectionViewSource Examines { get; private set; }
 
         public Patient Patient
         {
@@ -35,19 +36,6 @@
             set
             {
                 _patient = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public List<Examine> Examines
-        {
-            get
-            {
-                return _examines;
-            }
-            set
-            {
-                _examines = value;
                 OnPropertyChanged();
             }
         }
@@ -69,46 +57,46 @@
         {
             InitializeComponent();
 
+            Examines = new CollectionViewSource();
+
             DataContext = this;
         }
 
         private async void ReloadExaminesList()
         {
             var examinesTask = FibrosisRepository.Instance.AllExaminesAsync(Patient.Id);
-            Examines = await examinesTask;
+            Examines.Source = await examinesTask;
         }
 
-        private void filterTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void DateFilterTextBox_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-          //  FilterPatientsList(nameFilterTextBox.Text, iinFilterTextBox.Text);
+            FilterExaminesList(DateFromFilterTextBox.SelectedDate, DateToFilterTextBox.SelectedDate);
         }
 
-        private void FilterPatientsList(string nameFilter, string iinFilter)
+        private void FilterExaminesList(DateTime? dateFrom, DateTime? dateTo)
         {
-            //Patients.View.Filter = item =>
-            //{
-            //    var result = true;
-            //    var p = item as Patient;
+            Examines.View.Filter = item =>
+            {
+                var e = item as Examine;
 
-            //    if (p == null)
-            //    {
-            //        return true;
-            //    }
+                if (e == null)
+                {
+                    return true;
+                }
 
-            //    nameFilter = nameFilter.ToLower();
+                if (!dateFrom.HasValue)
+                {
+                    dateFrom = DateTime.MinValue;
+                }
 
-            //    if (!string.IsNullOrWhiteSpace(nameFilter))
-            //    {
-            //        result = p.FullNameString.ToLower().Contains(nameFilter);
-            //    }
+                if (!dateTo.HasValue)
+                {
+                    dateTo = DateTime.MaxValue;
+                }
 
-            //    if (!string.IsNullOrWhiteSpace(iinFilter))
-            //    {
-            //        result = p.Iin.Contains(iinFilter);
-            //    }
-
-            //    return result;
-            //};
+                return e.CreatedAt.HasValue &&
+                    e.CreatedAt.Value.Date >= dateFrom.Value.Date && e.CreatedAt.Value.Date <= dateTo.Value.Date;
+            };
         }
 
         private void Tile_MouseUp(object sender, MouseButtonEventArgs e)
@@ -132,7 +120,6 @@
 
         private void AddExamineBtn_Click(object sender, RoutedEventArgs e)
         {
-            //AddExamineButtonClickHandler?.Invoke(sender, e);
             var openFileDialog = new OpenFileDialog();
 
             if (openFileDialog.ShowDialog() != true)
@@ -144,18 +131,7 @@
             {
                 ReloadExaminesList();
             }
-
-            //if (examine != null && IsLoaded)
-            //{
-            //    RefreshExaminesList();
-                //examinesGrid.ItemsSource = _examines;
-            //}
-
-            // loader.Close();
-  //          Effect = null;
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
@@ -169,7 +145,15 @@
 
         private void OpenFibxFolder_Click(object sender, RoutedEventArgs e)
         {
+            var localPath = $"{ Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)}\\Esculabs Import";
+            Directory.CreateDirectory(localPath);
 
+            Process.Start(localPath);
+        }
+
+        private void ClearDateFilterBtn_Click(object sender, RoutedEventArgs e)
+        {
+            DateFromFilterTextBox.SelectedDate = DateToFilterTextBox.SelectedDate = null;
         }
     }
 }

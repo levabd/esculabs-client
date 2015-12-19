@@ -15,7 +15,7 @@
     </UserControl.Resources>
     <Grid>
         <ScrollViewer Margin="0,120,0,0" >
-            <ItemsControl x:Name="ExaminesList" ItemsSource="{Binding Examines}" AlternationCount="2">
+            <ItemsControl x:Name="ExaminesList" ItemsSource="{Binding Examines.View}" AlternationCount="2">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <c:ExaminesListTile x:Name="Tile" MouseUp="Tile_MouseUp"/>
@@ -37,8 +37,13 @@
 
             </ItemsControl>
         </ScrollViewer>
-        <DatePicker x:Name="DateFromFilterTextBox" custom:TextBoxHelper.Watermark="От" custom:TextBoxHelper.ClearTextButton="True" Height="41" Margin="350,10,0,0" VerticalAlignment="Top" FontSize="21.333" HorizontalAlignment="Left" Width="219"/>
-        <DatePicker x:Name="DateToFilterTextBox" custom:TextBoxHelper.Watermark="До" custom:TextBoxHelper.ClearTextButton="True" Height="41" Margin="587,10,0,0"  VerticalAlignment="Top" FontSize="21.333" HorizontalAlignment="Left" Width="219"/>
+        <Canvas Margin="0,10,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Width="920" Height="42">
+            <DatePicker x:Name="DateFromFilterTextBox" custom:TextBoxHelper.Watermark="От" custom:TextBoxHelper.ClearTextButton="True" Height="41" VerticalAlignment="Top" FontSize="21.333" HorizontalAlignment="Left" Width="219" SelectedDateChanged="DateFilterTextBox_SelectedDateChanged" Canvas.Left="338"/>
+            <DatePicker x:Name="DateToFilterTextBox" custom:TextBoxHelper.Watermark="До" custom:TextBoxHelper.ClearTextButton="True" Height="41"  VerticalAlignment="Top" FontSize="21.333" HorizontalAlignment="Left" Width="219" SelectedDateChanged="DateFilterTextBox_SelectedDateChanged" Canvas.Left="575"/>
+            <Label Content="Поиск по дате сканирования:" HorizontalAlignment="Left" VerticalAlignment="Top" Height="41" FontSize="21.333"/>
+            <Button x:Name="ClearDateFilterBtn" Content="Очистить" Style="{DynamicResource SquareButtonStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="105" Height="41" Click="ClearDateFilterBtn_Click" Canvas.Left="812"/>
+
+        </Canvas>
         <Button x:Name="OpenFibxFolder" Style="{DynamicResource MetroCircleButtonStyle}" HorizontalAlignment="Right" Margin="0,0,20,0" VerticalAlignment="Top" Width="100" Height="100" Background="White" BorderBrush="{DynamicResource HighlightBrush}" Visibility="{ Binding Path=ModuleProvider.Physician.IsAdministrator, Converter={StaticResource AdministratorVisibilityConverter}}" Click="OpenFibxFolder_Click">
             <Rectangle Fill="{DynamicResource HighlightBrush}" Width="30" Height="30">
                 <Rectangle.OpacityMask>
@@ -53,7 +58,6 @@
                 </Rectangle.OpacityMask>
             </Rectangle>
         </Button>
-        <Label Content="Поиск по дате сканирования:" HorizontalAlignment="Left" Margin="12,10,0,0" VerticalAlignment="Top" Height="41" FontSize="21.333"/>
 
     </Grid>
 </e:BaseView>
