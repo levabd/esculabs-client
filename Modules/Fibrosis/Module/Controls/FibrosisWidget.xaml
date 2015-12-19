@@ -3,13 +3,33 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:Fibrosis"
-             xmlns:converters="clr-namespace:Fibrosis.Helpers.Converters"
+             xmlns:h="clr-namespace:Fibrosis.Helpers"
              mc:Ignorable="d" 
-             Height="380" Width="500" BorderBrush="LightGray" BorderThickness="1">
+             Height="320" Width="500" BorderBrush="LightGray" BorderThickness="1">
     <UserControl.Resources>
-        <converters:SensorTypeConverter x:Key="SensorTypeConverter" />
-        <converters:FriendlyTimeConverter x:Key="FriendlyTimeConverter" />
+        <h:ExamineStatusTemplateSelector x:Key="ExamineStatusTemplateSelector" />
+
+        <DataTemplate x:Key="ConfirmedStatusIcon">
+            <Rectangle Fill="Green" Width="24" Height="24">
+                <Rectangle.OpacityMask>
+                    <VisualBrush Visual="{StaticResource appbar_check}" Stretch="Fill" />
+                </Rectangle.OpacityMask>
+            </Rectangle>
+        </DataTemplate>
+        <DataTemplate x:Key="PendingStatusIcon">
+            <Rectangle Fill="Orange" Width="20" Height="20">
+                <Rectangle.OpacityMask>
+                    <VisualBrush Visual="{StaticResource appbar_hourglass}" Stretch="Fill" />
+                </Rectangle.OpacityMask>
+            </Rectangle>
+        </DataTemplate>
+        <DataTemplate x:Key="UnconfirmedStatusIcon">
+            <Rectangle Fill="Red" Width="20" Height="20">
+                <Rectangle.OpacityMask>
+                    <VisualBrush Visual="{StaticResource appbar_cancel}" Stretch="Fill" />
+                </Rectangle.OpacityMask>
+            </Rectangle>
+        </DataTemplate>
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -17,20 +37,24 @@
             <ColumnDefinition Width="250*"/>
         </Grid.ColumnDefinitions>
 
-        <Label x:Name="titleLabel" Content="Фибросканирование" Margin="10,10,10,0" VerticalAlignment="Top" FontSize="18.667" Grid.ColumnSpan="2" Grid.Column="0" />
-        <Label x:Name="lastDateLabel" Content="{Binding LastExamine.CreatedAt}" Margin="10,45,10,0" VerticalAlignment="Top" FontSize="13.333" Grid.ColumnSpan="2" Grid.Column="0" />
-        <Label Content="Периметр грудной клетки" Margin="0,78,10,0" VerticalAlignment="Top" FontSize="13.333" HorizontalAlignment="Right" Grid.Column="0"/>
-        <Label Content="между кожей и капсулой" Margin="0,111,10,0" VerticalAlignment="Top" FontSize="13.333" HorizontalAlignment="Right" Grid.Column="0"/>
-        <Label x:Name="tpLabel" Content="{Binding PatientMetric.Tp}" Margin="10,78,10,0" VerticalAlignment="Top" FontSize="13.333" HorizontalAlignment="Left" Grid.Column="1"/>
-        <Label x:Name="scdLabel" Content="{Binding PatientMetric.Scd}" Margin="10,111,10,0" VerticalAlignment="Top" FontSize="13.333" HorizontalAlignment="Left" Grid.Column="1"/>
-        <Label Content="Тип сенсора" Margin="0,144,10,0" VerticalAlignment="Top" FontSize="13.333" HorizontalAlignment="Right" Grid.Column="0"/>
-        <Label x:Name="sensorLabel" Content="{Binding LastExamine.SensorType, Converter={StaticResource SensorTypeConverter}}" Margin="10,144,0,0" VerticalAlignment="Top" FontSize="13.333" HorizontalAlignment="Left" Grid.Column="1"/>
-        <Label Content="E" Margin="0,177,10,0" VerticalAlignment="Top" FontSize="13.333" HorizontalAlignment="Right" Grid.Column="0"/>
-        <Label x:Name="eLabel" Content="{Binding LastExamine.Med}" Margin="10,177,0,0" VerticalAlignment="Top" FontSize="13.333" HorizontalAlignment="Left" Grid.Column="1"/>
-        <Label Content="Стадия фиброза" Margin="0,210,10,0" VerticalAlignment="Top" FontSize="13.333" HorizontalAlignment="Right" Grid.Column="0"/>
-        <Label x:Name="fibrosisStageLabel" Content="{Binding LastExamine.FibrosisStage}" Margin="10,210,0,0" VerticalAlignment="Top" FontSize="13.333" HorizontalAlignment="Left" Grid.Column="1"/>
-        <Label Content="Длительность сканирования" Margin="0,243,12,0" VerticalAlignment="Top" FontSize="13.333" HorizontalAlignment="Right" Grid.Column="0"/>
-        <Label x:Name="durationLabel" Content="{Binding LastExamine.Duration, Converter={StaticResource FriendlyTimeConverter}}"  Margin="8,243,0,0" VerticalAlignment="Top" FontSize="13.333" HorizontalAlignment="Left" Grid.Column="1"/>        
+        <Label Content="Фибросканирование" Margin="10,10,10,0" VerticalAlignment="Top" FontSize="18.667" Grid.ColumnSpan="2" Grid.Column="0" />
+        
+        <Label Content="Дата последнего обследования" Margin="0,60,10,0" VerticalAlignment="Top" FontSize="13.333" HorizontalAlignment="Right" Grid.Column="0"/>
+        <Label Content="{Binding LastExamine.CreatedAt}" Margin="10,60,10,0" VerticalAlignment="Top" FontSize="13.333" Grid.Column="1" />
+        
+        <Label Content="Стадия фиброза" Margin="0,100,10,0" VerticalAlignment="Top" FontSize="13.333" HorizontalAlignment="Right" Grid.Column="0"/>
+        <Label Content="{Binding LastExamine.FibrosisStage}" Margin="10,100,0,0" VerticalAlignment="Top" FontSize="13.333" HorizontalAlignment="Left" Grid.Column="1"/>
+
+        <Label Content="Проверка экспертом" Margin="0,140,10,0" VerticalAlignment="Top" FontSize="13.333" HorizontalAlignment="Right" Grid.Column="0"/>
+        <Canvas Margin="10,144,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="1">
+            <ContentPresenter Content="{Binding LastExamine.ExpertStatus}" ContentTemplateSelector="{StaticResource ExamineStatusTemplateSelector}" />
+        </Canvas>
+       
+        <Label Content="Проверка системой" Margin="0,182,10,0" VerticalAlignment="Top" FontSize="13.333" HorizontalAlignment="Right" Grid.Column="0"/>
+        <Canvas Margin="10,182,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="1">
+            <ContentPresenter Content="{Binding LastExamine.Valid}" ContentTemplateSelector="{StaticResource ExamineStatusTemplateSelector}" />
+        </Canvas>
+
         <Button x:Name="AddExamineBtn" Style="{DynamicResource AccentedSquareButtonStyle}" Content="Новое исследование" HorizontalAlignment="Left" Margin="31,0,0,30" VerticalAlignment="Bottom" Width="160" Height="40" Grid.Column="0" FontSize="13.333" Click="AddExamineBtn_Click"/>
         <Button x:Name="ExaminesListBtn" Style="{DynamicResource SquareButtonStyle}" Content="Список исследований" HorizontalAlignment="Right" Margin="0,0,31,30" VerticalAlignment="Bottom" Width="160" Height="40" Grid.Column="1" FontSize="13.333" Click="ExaminesListBtn_Click"/>
     </Grid>
