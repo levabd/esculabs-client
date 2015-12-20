@@ -7,8 +7,10 @@ namespace FibroscanProcessor.Elasto
     {
         const double RMax = 0.9;
         const double AMax = 0.92;
-        const double StrongAngleDif = 5;
-        const double WeakAngleDif = 12;//10;//8;
+        const double VeryStrongAngleDif = 6;//6
+        const double StrongAngleDif = 8;//6
+        const double MeanAngleDif = 10;//9
+        const double WeakAngleDif = 12;
         const double AngleLimit = 12.5;
 
         public ElastoBlob TargetObject;
@@ -27,7 +29,61 @@ namespace FibroscanProcessor.Elasto
             double aLeft = TargetObject.RelativeEstimationLeft;
             double aRight = TargetObject.RelativeEstimationRight;
 
+
             if (area < 4000)
+                return VerificationStatus.Uncertain;
+            if (area < 6000)
+            {
+                if ((angleDifference(leftLine, fibroLine.Equation)<VeryStrongAngleDif) &&
+                    (angleDifference(leftLine, rightLine) < VeryStrongAngleDif) &&
+                    (IsGoodTilt(leftLine)) &&
+                    IsGoodApproximation(leftLine, rSquareLeft, aLeft) &&
+                    IsGoodApproximation(rightLine, rSquareRight, aRight))
+                    return VerificationStatus.Correct;
+                return VerificationStatus.Uncertain;
+            }
+            if (area < 8000)
+            {
+                if (!IsGoodApproximation(leftLine, rSquareLeft, aLeft) ||
+                    !IsGoodApproximation(rightLine, rSquareRight, aRight))
+                    return VerificationStatus.Uncertain;
+                if ((angleDifference(leftLine, fibroLine.Equation) < WeakAngleDif) &&
+                    (angleDifference(leftLine, rightLine) < WeakAngleDif) &&
+                    (IsGoodTilt(leftLine)))
+                    return VerificationStatus.Correct;
+                return VerificationStatus.Incorrect;
+            }
+            if (area < 10000)
+            {
+                if (!IsGoodApproximation(leftLine, rSquareLeft, aLeft) ||
+                                    !IsGoodApproximation(rightLine, rSquareRight, aRight))
+                    return VerificationStatus.Uncertain;
+                if ((angleDifference(leftLine, fibroLine.Equation) < MeanAngleDif) &&
+                    (angleDifference(leftLine, rightLine) < MeanAngleDif) &&
+                    (IsGoodTilt(leftLine)))
+                    return VerificationStatus.Correct;
+                return VerificationStatus.Incorrect;
+            }
+            if (area < 13500)
+            {
+                if (!IsGoodApproximation(leftLine, rSquareLeft, aLeft) ||
+                                    !IsGoodApproximation(rightLine, rSquareRight, aRight))
+                    return VerificationStatus.Uncertain;
+                if ((angleDifference(leftLine, fibroLine.Equation) < StrongAngleDif) &&
+                    (angleDifference(leftLine, rightLine) < StrongAngleDif) &&
+                    (IsGoodTilt(leftLine)))
+                    return VerificationStatus.Correct;
+                return VerificationStatus.Incorrect;
+            }
+
+            if (area < 21000)
+            {
+                if (IsGoodApproximation(leftLine, rSquareLeft, aLeft) &&
+                    IsGoodApproximation(rightLine, rSquareRight, aRight))
+                    return VerificationStatus.Incorrect;
+                return VerificationStatus.Uncertain;
+            }
+            /*if (area < 4000)
                 return VerificationStatus.Uncertain;
 
             if (area < 6000)
@@ -60,59 +116,31 @@ namespace FibroscanProcessor.Elasto
                     return VerificationStatus.Incorrect;
                 return VerificationStatus.Uncertain;
             }
-
+            */
             return VerificationStatus.Uncertain;
 
-            //Reserved code for classify
-            if ((area < 8000) || (area > 6000))
-            {
-
-                if (IsGoodApproximation(leftLine, rSquareLeft, aLeft) &&
-                   IsGoodApproximation(rightLine, rSquareRight, aRight))
-                    return VerificationStatus.Correct;
-
-                return VerificationStatus.Incorrect;
-            }
-
-            if ((area < 17500) || (area > 12000))
-            {
-                if (IsGoodApproximation(leftLine, rSquareLeft, aLeft) &&
-                    IsGoodApproximation(rightLine, rSquareRight, aRight))
-                    return VerificationStatus.Uncertain;
-                return VerificationStatus.Incorrect;
-            }
         }
 
-        private bool IsStrongAngleClose(ReflectionedLine firstLine, ReflectionedLine secondLine)
+        private double angleDifference(ReflectionedLine firstLine, ReflectionedLine secondLine)
         {
-            if ((180 / Math.PI) * Math.Abs(Math.Atan(firstLine.A) - Math.Atan(secondLine.A)) < StrongAngleDif)
-                return true;
-            return false;
-        }
-
-        private bool IsWeakAngleClose(ReflectionedLine firstLine, ReflectionedLine secondLine)
-        {
-            if ((180 / Math.PI) * Math.Abs(Math.Atan(firstLine.A) - Math.Atan(secondLine.A)) < WeakAngleDif)
-                return true;
-            return false;
+            return Math.Abs(firstLine.Angle - secondLine.Angle);
         }
 
         private bool IsGoodTilt(ReflectionedLine line)
         {
             if (Math.Atan(line.A) > 0)
                 return true;
-            else
-                return false;
+             return false;
         }
 
         private bool IsGoodApproximation(ReflectionedLine approxLine, double rSquare, double relativeEstimation)
         {
-            if ((180 / Math.PI) * Math.Abs(Math.Atan(approxLine.A)) < AngleLimit)
-                //if (relativeEstimation > aMax)
+            double angle = Math.Abs(approxLine.Angle);
+            if ((angle < AngleLimit) && (relativeEstimation > AMax))
                     return true;
-                //else
-                  //  return false;
-            else if (rSquare > RMax)
+            if ((angle < AngleLimit) && (relativeEstimation <= AMax))
+                    return false;
+            if (rSquare > RMax)
                     return true;
             return false;
         }

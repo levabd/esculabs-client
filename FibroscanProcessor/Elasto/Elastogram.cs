@@ -36,12 +36,11 @@ namespace FibroscanProcessor.Elasto
                 throw new InvalidOperationException("Get fibroline first.");
 
             for (int y = _fibroLine.Top.Y; y <= _fibroLine.Bottom.Y; y++)
-                for (int x = 0; x < Image.Cols; x++)
+                for (int x = 1; x < Image.Cols-3; x++)
                 {
                     if (Image.Data[y, x] > FibroLineColor)
                     {
                         Image.Data[y, x] = Image.Data[y, x - 1];
-
                         if (Image.Data[y, x + 1] > FibroLineColor)
                             Image.Data[y, x + 1] = Image.Data[y, x + 3];
                         if (Image.Data[y, x + 2] > FibroLineColor)
