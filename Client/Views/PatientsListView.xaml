@@ -1,0 +1,49 @@
+﻿<e:BaseView
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:Custom="http://metro.mahapps.com/winfx/xaml/controls" 
+    xmlns:e="clr-namespace:EsculabsCommon;assembly=EsculabsCommon"
+    xmlns:c="clr-namespace:Client.Controls"
+    xmlns:views="clr-namespace:Client.Views"
+    x:Class="Client.Views.PatientsListView"
+    mc:Ignorable="d" 
+    d:DesignHeight="768" d:DesignWidth="1024">
+    <Grid>
+        <ScrollViewer Margin="0,120,0,0" >
+            <ItemsControl x:Name="patientsList" ItemsSource="{Binding Patients.View}" AlternationCount="2">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <c:PatientsListTile x:Name="Tile" MouseUp="Tile_MouseUp"/>
+                        <DataTemplate.Triggers>
+                            <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                                <Setter Property="Background" Value="{StaticResource AccentColorBrush4}" TargetName="Tile"/>
+                            </Trigger>
+                            <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                                <Setter Property="Background" Value="White" TargetName="Tile"/>
+                            </Trigger>
+                            <Trigger Property="ItemsControl.IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="{StaticResource AccentColorBrush3}" TargetName="Tile"/>
+                            </Trigger>
+                        </DataTemplate.Triggers>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+                
+                <!-- Items goes here -->
+                
+            </ItemsControl>
+        </ScrollViewer>
+
+        <TextBox x:Name="nameFilterTextBox" Custom:TextBoxHelper.Watermark="Поиск по ФИО..." Custom:TextBoxHelper.ClearTextButton="True" Height="41" Margin="0,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0,0.192" TextChanged="filterTextBox_TextChanged" FontSize="21.333"/>
+        <TextBox x:Name="iinFilterTextBox" Custom:TextBoxHelper.Watermark="Поиск по ИИН..." Custom:TextBoxHelper.ClearTextButton="True" Height="41" Margin="0,66,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0,0.192" TextChanged="filterTextBox_TextChanged" FontSize="21.333"/>
+        <Button x:Name="addPatientBtn" Style="{DynamicResource MetroCircleButtonStyle}" HorizontalAlignment="Right" Margin="0,0,60,60" VerticalAlignment="Bottom" Width="100" Height="100" Background="{DynamicResource HighlightBrush}" BorderBrush="{x:Null}" Cursor="Hand" Click="addPatientBtn_Click">
+            <Rectangle Fill="White" Width="30" Height="30">
+                <Rectangle.OpacityMask>
+                    <VisualBrush Visual="{StaticResource appbar_add}" Stretch="Fill" />
+                </Rectangle.OpacityMask>
+            </Rectangle>
+        </Button>
+
+    </Grid>
+</e:BaseView>
