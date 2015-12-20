@@ -11,7 +11,35 @@
              FontSize="16">
     <UserControl.Resources>
         <converters:GenderConverter x:Key="GenderConverter" />
+        
+        <Style TargetType="{x:Type MenuItem}" x:Key="ContextMenuSeparator">
+            <Setter Property="MenuItem.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Label x:Name="Caption">
+                            <Grid>
+                                <Line X1="0" Y1="16" X2="200" Y2="16" Stroke="Gray" StrokeDashArray="1, 2"/>
+                                <Label HorizontalAlignment="Left" Content="{TemplateBinding MenuItem.Header}" Background="{DynamicResource IdealForegroundColorBrush}"/>
+                            </Grid>
+                        </Label>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False" SourceName="Caption"/>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
     </UserControl.Resources>
+    <UserControl.ContextMenu>
+        <ContextMenu>
+            <MenuItem Header="Модули" IsEnabled="False" Style="{StaticResource ContextMenuSeparator}"/>
+            <MenuItem Height="42" x:Name="Fibroscan" Header="Фибросканирование"/>
+            <MenuItem Height="42" x:Name="Biochemistry" Header="Биохимический анализ"/>
+            <MenuItem Header="Действия" IsEnabled="False" Style="{StaticResource ContextMenuSeparator}"/>
+            <MenuItem Height="42" x:Name="DeleteItem" Header="Удалить пациента"/>
+        </ContextMenu>
+    </UserControl.ContextMenu>
     <Grid>
         <Label x:Name="nameLabel" Content="{ Binding FullNameString }" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" Height="33" FontSize="18.667" />
         <Label HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Content="ИИН:"/>

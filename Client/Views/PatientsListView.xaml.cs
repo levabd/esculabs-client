@@ -88,7 +88,12 @@ namespace Client.Views
 
         private void Tile_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            if (TileClickEventHandler != null)
+            if (TileClickEventHandler == null)
+            {
+                return;
+            }
+
+            if (e.ChangedButton == MouseButton.Left)
             {
                 var patientsListTile = sender as PatientsListTile;
                 if (patientsListTile != null)
