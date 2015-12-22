@@ -7,14 +7,14 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="5fa4958a-b2e3-4398-ab3c-607bd4d116c7"
+    Name="185dbc29-9978-405a-b9ce-ff7ded55fe7a"
     Publisher="CN=antri"
     Version="1.0.0.0" />
 
-  <mp:PhoneIdentity PhoneProductId="5fa4958a-b2e3-4398-ab3c-607bd4d116c7" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="185dbc29-9978-405a-b9ce-ff7ded55fe7a" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>EsculabsClient</DisplayName>
+    <DisplayName>Client</DisplayName>
     <PublisherDisplayName>antri</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
@@ -30,12 +30,12 @@
   <Applications>
     <Application Id="App"
       Executable="$targetnametoken$.exe"
-      EntryPoint="EsculabsClient.App">
+      EntryPoint="Client.App">
       <uap:VisualElements
-        DisplayName="EsculabsClient"
+        DisplayName="Client"
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png"
-        Description="EsculabsClient"
+        Description="Client"
         BackgroundColor="transparent">
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png"/>
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
