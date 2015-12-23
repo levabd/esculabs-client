@@ -44,7 +44,7 @@
 
                 using (var db = new EsculabsContext())
                 {
-                    var encryptedPass = Encryption.Encrypt(password);
+                    var encryptedPass = Encryption.HashString(password);
 
                     return db.Users.FirstOrDefault(x => lowerLogin.Equals(x.Login.ToLower()) 
                             && encryptedPass == x.Password);
