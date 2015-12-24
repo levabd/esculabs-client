@@ -3,6 +3,29 @@
   "version": 1,
   "targets": {
     "UAP,Version=v10.0": {
+      "Cimbalino.Toolkit/2.1.1": {
+        "dependencies": {
+          "Cimbalino.Toolkit.Core": "[2.1.1, )",
+          "Microsoft.Xaml.Behaviors.Uwp.Managed": "[1.0.3, )"
+        },
+        "compile": {
+          "lib/uap10.0/Cimbalino.Toolkit.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Cimbalino.Toolkit.dll": {}
+        }
+      },
+      "Cimbalino.Toolkit.Core/2.1.1": {
+        "dependencies": {
+          "Microsoft.Bcl.Compression": "[3.9.85, )"
+        },
+        "compile": {
+          "lib/uap10.0/Cimbalino.Toolkit.Core.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Cimbalino.Toolkit.Core.dll": {}
+        }
+      },
       "EntityFramework.Commands/7.0.0-rc1-final": {
         "dependencies": {
           "EntityFramework.Relational.Design": "[7.0.0-rc1-final, )"
@@ -96,6 +119,18 @@
         },
         "runtime": {
           "lib/portable-windows8+net45+wp8/System.Interactive.Async.dll": {}
+        }
+      },
+      "Microsoft.Bcl.Build/1.0.14": {},
+      "Microsoft.Bcl.Compression/3.9.85": {
+        "dependencies": {
+          "Microsoft.Bcl.Build": "[1.0.14, )"
+        },
+        "compile": {
+          "lib/win8/_._": {}
+        },
+        "runtime": {
+          "lib/win8/_._": {}
         }
       },
       "Microsoft.CSharp/4.0.0": {
@@ -519,6 +554,16 @@
         },
         "runtime": {
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
+        }
+      },
+      "Microsoft.Xaml.Behaviors.Uwp.Managed/1.0.3": {
+        "compile": {
+          "lib/uap10.0/Microsoft.Xaml.Interactions.dll": {},
+          "lib/uap10.0/Microsoft.Xaml.Interactivity.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Xaml.Interactions.dll": {},
+          "lib/uap10.0/Microsoft.Xaml.Interactivity.dll": {}
         }
       },
       "Remotion.Linq/2.0.1": {
@@ -1912,6 +1957,29 @@
       }
     },
     "UAP,Version=v10.0/win10-arm": {
+      "Cimbalino.Toolkit/2.1.1": {
+        "dependencies": {
+          "Cimbalino.Toolkit.Core": "[2.1.1, )",
+          "Microsoft.Xaml.Behaviors.Uwp.Managed": "[1.0.3, )"
+        },
+        "compile": {
+          "lib/uap10.0/Cimbalino.Toolkit.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Cimbalino.Toolkit.dll": {}
+        }
+      },
+      "Cimbalino.Toolkit.Core/2.1.1": {
+        "dependencies": {
+          "Microsoft.Bcl.Compression": "[3.9.85, )"
+        },
+        "compile": {
+          "lib/uap10.0/Cimbalino.Toolkit.Core.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Cimbalino.Toolkit.Core.dll": {}
+        }
+      },
       "EntityFramework.Commands/7.0.0-rc1-final": {
         "dependencies": {
           "EntityFramework.Relational.Design": "[7.0.0-rc1-final, )"
@@ -2005,6 +2073,18 @@
         },
         "runtime": {
           "lib/portable-windows8+net45+wp8/System.Interactive.Async.dll": {}
+        }
+      },
+      "Microsoft.Bcl.Build/1.0.14": {},
+      "Microsoft.Bcl.Compression/3.9.85": {
+        "dependencies": {
+          "Microsoft.Bcl.Build": "[1.0.14, )"
+        },
+        "compile": {
+          "lib/win8/_._": {}
+        },
+        "runtime": {
+          "lib/win8/_._": {}
         }
       },
       "Microsoft.CSharp/4.0.0": {
@@ -2471,6 +2551,16 @@
         },
         "runtime": {
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
+        }
+      },
+      "Microsoft.Xaml.Behaviors.Uwp.Managed/1.0.3": {
+        "compile": {
+          "lib/uap10.0/Microsoft.Xaml.Interactions.dll": {},
+          "lib/uap10.0/Microsoft.Xaml.Interactivity.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Xaml.Interactions.dll": {},
+          "lib/uap10.0/Microsoft.Xaml.Interactivity.dll": {}
         }
       },
       "Remotion.Linq/2.0.1": {
@@ -3911,6 +4001,29 @@
       }
     },
     "UAP,Version=v10.0/win10-arm-aot": {
+      "Cimbalino.Toolkit/2.1.1": {
+        "dependencies": {
+          "Cimbalino.Toolkit.Core": "[2.1.1, )",
+          "Microsoft.Xaml.Behaviors.Uwp.Managed": "[1.0.3, )"
+        },
+        "compile": {
+          "lib/uap10.0/Cimbalino.Toolkit.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Cimbalino.Toolkit.dll": {}
+        }
+      },
+      "Cimbalino.Toolkit.Core/2.1.1": {
+        "dependencies": {
+          "Microsoft.Bcl.Compression": "[3.9.85, )"
+        },
+        "compile": {
+          "lib/uap10.0/Cimbalino.Toolkit.Core.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Cimbalino.Toolkit.Core.dll": {}
+        }
+      },
       "EntityFramework.Commands/7.0.0-rc1-final": {
         "dependencies": {
           "EntityFramework.Relational.Design": "[7.0.0-rc1-final, )"
@@ -4004,6 +4117,18 @@
         },
         "runtime": {
           "lib/portable-windows8+net45+wp8/System.Interactive.Async.dll": {}
+        }
+      },
+      "Microsoft.Bcl.Build/1.0.14": {},
+      "Microsoft.Bcl.Compression/3.9.85": {
+        "dependencies": {
+          "Microsoft.Bcl.Build": "[1.0.14, )"
+        },
+        "compile": {
+          "lib/win8/_._": {}
+        },
+        "runtime": {
+          "lib/win8/_._": {}
         }
       },
       "Microsoft.CSharp/4.0.0": {
@@ -4456,6 +4581,16 @@
         },
         "runtime": {
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
+        }
+      },
+      "Microsoft.Xaml.Behaviors.Uwp.Managed/1.0.3": {
+        "compile": {
+          "lib/uap10.0/Microsoft.Xaml.Interactions.dll": {},
+          "lib/uap10.0/Microsoft.Xaml.Interactivity.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Xaml.Interactions.dll": {},
+          "lib/uap10.0/Microsoft.Xaml.Interactivity.dll": {}
         }
       },
       "Remotion.Linq/2.0.1": {
@@ -5882,6 +6017,29 @@
       }
     },
     "UAP,Version=v10.0/win10-x64": {
+      "Cimbalino.Toolkit/2.1.1": {
+        "dependencies": {
+          "Cimbalino.Toolkit.Core": "[2.1.1, )",
+          "Microsoft.Xaml.Behaviors.Uwp.Managed": "[1.0.3, )"
+        },
+        "compile": {
+          "lib/uap10.0/Cimbalino.Toolkit.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Cimbalino.Toolkit.dll": {}
+        }
+      },
+      "Cimbalino.Toolkit.Core/2.1.1": {
+        "dependencies": {
+          "Microsoft.Bcl.Compression": "[3.9.85, )"
+        },
+        "compile": {
+          "lib/uap10.0/Cimbalino.Toolkit.Core.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Cimbalino.Toolkit.Core.dll": {}
+        }
+      },
       "EntityFramework.Commands/7.0.0-rc1-final": {
         "dependencies": {
           "EntityFramework.Relational.Design": "[7.0.0-rc1-final, )"
@@ -5975,6 +6133,18 @@
         },
         "runtime": {
           "lib/portable-windows8+net45+wp8/System.Interactive.Async.dll": {}
+        }
+      },
+      "Microsoft.Bcl.Build/1.0.14": {},
+      "Microsoft.Bcl.Compression/3.9.85": {
+        "dependencies": {
+          "Microsoft.Bcl.Build": "[1.0.14, )"
+        },
+        "compile": {
+          "lib/win8/_._": {}
+        },
+        "runtime": {
+          "lib/win8/_._": {}
         }
       },
       "Microsoft.CSharp/4.0.0": {
@@ -6449,6 +6619,16 @@
         },
         "runtime": {
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
+        }
+      },
+      "Microsoft.Xaml.Behaviors.Uwp.Managed/1.0.3": {
+        "compile": {
+          "lib/uap10.0/Microsoft.Xaml.Interactions.dll": {},
+          "lib/uap10.0/Microsoft.Xaml.Interactivity.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Xaml.Interactions.dll": {},
+          "lib/uap10.0/Microsoft.Xaml.Interactivity.dll": {}
         }
       },
       "Remotion.Linq/2.0.1": {
@@ -7889,6 +8069,29 @@
       }
     },
     "UAP,Version=v10.0/win10-x64-aot": {
+      "Cimbalino.Toolkit/2.1.1": {
+        "dependencies": {
+          "Cimbalino.Toolkit.Core": "[2.1.1, )",
+          "Microsoft.Xaml.Behaviors.Uwp.Managed": "[1.0.3, )"
+        },
+        "compile": {
+          "lib/uap10.0/Cimbalino.Toolkit.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Cimbalino.Toolkit.dll": {}
+        }
+      },
+      "Cimbalino.Toolkit.Core/2.1.1": {
+        "dependencies": {
+          "Microsoft.Bcl.Compression": "[3.9.85, )"
+        },
+        "compile": {
+          "lib/uap10.0/Cimbalino.Toolkit.Core.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Cimbalino.Toolkit.Core.dll": {}
+        }
+      },
       "EntityFramework.Commands/7.0.0-rc1-final": {
         "dependencies": {
           "EntityFramework.Relational.Design": "[7.0.0-rc1-final, )"
@@ -7982,6 +8185,18 @@
         },
         "runtime": {
           "lib/portable-windows8+net45+wp8/System.Interactive.Async.dll": {}
+        }
+      },
+      "Microsoft.Bcl.Build/1.0.14": {},
+      "Microsoft.Bcl.Compression/3.9.85": {
+        "dependencies": {
+          "Microsoft.Bcl.Build": "[1.0.14, )"
+        },
+        "compile": {
+          "lib/win8/_._": {}
+        },
+        "runtime": {
+          "lib/win8/_._": {}
         }
       },
       "Microsoft.CSharp/4.0.0": {
@@ -8437,6 +8652,16 @@
         },
         "runtime": {
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
+        }
+      },
+      "Microsoft.Xaml.Behaviors.Uwp.Managed/1.0.3": {
+        "compile": {
+          "lib/uap10.0/Microsoft.Xaml.Interactions.dll": {},
+          "lib/uap10.0/Microsoft.Xaml.Interactivity.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Xaml.Interactions.dll": {},
+          "lib/uap10.0/Microsoft.Xaml.Interactivity.dll": {}
         }
       },
       "Remotion.Linq/2.0.1": {
@@ -9863,6 +10088,29 @@
       }
     },
     "UAP,Version=v10.0/win10-x86": {
+      "Cimbalino.Toolkit/2.1.1": {
+        "dependencies": {
+          "Cimbalino.Toolkit.Core": "[2.1.1, )",
+          "Microsoft.Xaml.Behaviors.Uwp.Managed": "[1.0.3, )"
+        },
+        "compile": {
+          "lib/uap10.0/Cimbalino.Toolkit.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Cimbalino.Toolkit.dll": {}
+        }
+      },
+      "Cimbalino.Toolkit.Core/2.1.1": {
+        "dependencies": {
+          "Microsoft.Bcl.Compression": "[3.9.85, )"
+        },
+        "compile": {
+          "lib/uap10.0/Cimbalino.Toolkit.Core.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Cimbalino.Toolkit.Core.dll": {}
+        }
+      },
       "EntityFramework.Commands/7.0.0-rc1-final": {
         "dependencies": {
           "EntityFramework.Relational.Design": "[7.0.0-rc1-final, )"
@@ -9956,6 +10204,18 @@
         },
         "runtime": {
           "lib/portable-windows8+net45+wp8/System.Interactive.Async.dll": {}
+        }
+      },
+      "Microsoft.Bcl.Build/1.0.14": {},
+      "Microsoft.Bcl.Compression/3.9.85": {
+        "dependencies": {
+          "Microsoft.Bcl.Build": "[1.0.14, )"
+        },
+        "compile": {
+          "lib/win8/_._": {}
+        },
+        "runtime": {
+          "lib/win8/_._": {}
         }
       },
       "Microsoft.CSharp/4.0.0": {
@@ -10430,6 +10690,16 @@
         },
         "runtime": {
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
+        }
+      },
+      "Microsoft.Xaml.Behaviors.Uwp.Managed/1.0.3": {
+        "compile": {
+          "lib/uap10.0/Microsoft.Xaml.Interactions.dll": {},
+          "lib/uap10.0/Microsoft.Xaml.Interactivity.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Xaml.Interactions.dll": {},
+          "lib/uap10.0/Microsoft.Xaml.Interactivity.dll": {}
         }
       },
       "Remotion.Linq/2.0.1": {
@@ -11870,6 +12140,29 @@
       }
     },
     "UAP,Version=v10.0/win10-x86-aot": {
+      "Cimbalino.Toolkit/2.1.1": {
+        "dependencies": {
+          "Cimbalino.Toolkit.Core": "[2.1.1, )",
+          "Microsoft.Xaml.Behaviors.Uwp.Managed": "[1.0.3, )"
+        },
+        "compile": {
+          "lib/uap10.0/Cimbalino.Toolkit.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Cimbalino.Toolkit.dll": {}
+        }
+      },
+      "Cimbalino.Toolkit.Core/2.1.1": {
+        "dependencies": {
+          "Microsoft.Bcl.Compression": "[3.9.85, )"
+        },
+        "compile": {
+          "lib/uap10.0/Cimbalino.Toolkit.Core.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Cimbalino.Toolkit.Core.dll": {}
+        }
+      },
       "EntityFramework.Commands/7.0.0-rc1-final": {
         "dependencies": {
           "EntityFramework.Relational.Design": "[7.0.0-rc1-final, )"
@@ -11963,6 +12256,18 @@
         },
         "runtime": {
           "lib/portable-windows8+net45+wp8/System.Interactive.Async.dll": {}
+        }
+      },
+      "Microsoft.Bcl.Build/1.0.14": {},
+      "Microsoft.Bcl.Compression/3.9.85": {
+        "dependencies": {
+          "Microsoft.Bcl.Build": "[1.0.14, )"
+        },
+        "compile": {
+          "lib/win8/_._": {}
+        },
+        "runtime": {
+          "lib/win8/_._": {}
         }
       },
       "Microsoft.CSharp/4.0.0": {
@@ -12418,6 +12723,16 @@
         },
         "runtime": {
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
+        }
+      },
+      "Microsoft.Xaml.Behaviors.Uwp.Managed/1.0.3": {
+        "compile": {
+          "lib/uap10.0/Microsoft.Xaml.Interactions.dll": {},
+          "lib/uap10.0/Microsoft.Xaml.Interactivity.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Xaml.Interactions.dll": {},
+          "lib/uap10.0/Microsoft.Xaml.Interactivity.dll": {}
         }
       },
       "Remotion.Linq/2.0.1": {
@@ -13845,6 +14160,64 @@
     }
   },
   "libraries": {
+    "Cimbalino.Toolkit/2.1.1": {
+      "sha512": "GvTPHPmyZ63Lc7OKtQbEaD4a0rEEZJwcSLro+b/V8y5hw/MTpfwo4QzFI+c2GD5ykEPffkjzPJUmFMj8ha8PDQ==",
+      "type": "Package",
+      "files": [
+        "[Content_Types].xml",
+        "_rels/.rels",
+        "Cimbalino.Toolkit.nuspec",
+        "lib/uap10.0/Cimbalino.Toolkit.dll",
+        "lib/uap10.0/Cimbalino.Toolkit.pdb",
+        "lib/uap10.0/Cimbalino.Toolkit.pri",
+        "lib/uap10.0/Cimbalino.Toolkit.xml",
+        "lib/win81/Cimbalino.Toolkit.dll",
+        "lib/win81/Cimbalino.Toolkit.pdb",
+        "lib/win81/Cimbalino.Toolkit.pri",
+        "lib/win81/Cimbalino.Toolkit.xml",
+        "lib/wp8/Cimbalino.Toolkit.dll",
+        "lib/wp8/Cimbalino.Toolkit.pdb",
+        "lib/wp8/Cimbalino.Toolkit.xml",
+        "lib/wpa81/Cimbalino.Toolkit.dll",
+        "lib/wpa81/Cimbalino.Toolkit.pdb",
+        "lib/wpa81/Cimbalino.Toolkit.pri",
+        "lib/wpa81/Cimbalino.Toolkit.xml",
+        "package/services/metadata/core-properties/641c722b4f564772812ea21c0ad71ec8.psmdcp",
+        "tools/win8/Install.ps1",
+        "tools/win8/Uninstall.ps1",
+        "tools/wpa81/Install.ps1",
+        "tools/wpa81/Uninstall.ps1"
+      ]
+    },
+    "Cimbalino.Toolkit.Core/2.1.1": {
+      "sha512": "BTH3uiePy5zIhvcKhbwyPgdEpk2acVLEhIS2WE8Ox2iJiSUwLiN6BjR2eg4Tl1F8b5u7WDnCibP4oIg5MKNNRw==",
+      "type": "Package",
+      "files": [
+        "[Content_Types].xml",
+        "_rels/.rels",
+        "Cimbalino.Toolkit.Core.nuspec",
+        "lib/portable-net45+wp8+win8+wpa81/Cimbalino.Toolkit.Core.dll",
+        "lib/portable-net45+wp8+win8+wpa81/Cimbalino.Toolkit.Core.pdb",
+        "lib/portable-net45+wp8+win8+wpa81/Cimbalino.Toolkit.Core.xml",
+        "lib/uap10.0/Cimbalino.Toolkit.Core.dll",
+        "lib/uap10.0/Cimbalino.Toolkit.Core.pdb",
+        "lib/uap10.0/Cimbalino.Toolkit.Core.pri",
+        "lib/uap10.0/Cimbalino.Toolkit.Core.xml",
+        "lib/win81/Cimbalino.Toolkit.Core.dll",
+        "lib/win81/Cimbalino.Toolkit.Core.pdb",
+        "lib/win81/Cimbalino.Toolkit.Core.pri",
+        "lib/win81/Cimbalino.Toolkit.Core.xml",
+        "lib/wp8/Cimbalino.Toolkit.Core.dll",
+        "lib/wp8/Cimbalino.Toolkit.Core.pdb",
+        "lib/wp8/Cimbalino.Toolkit.Core.xml",
+        "lib/wpa81/Cimbalino.Toolkit.Core.dll",
+        "lib/wpa81/Cimbalino.Toolkit.Core.pdb",
+        "lib/wpa81/Cimbalino.Toolkit.Core.pri",
+        "lib/wpa81/Cimbalino.Toolkit.Core.xml",
+        "package/services/metadata/core-properties/66e099b99b824fabbdc9dfb1f42453bc.psmdcp",
+        "tools/Cimbalino.Toolkit.Core.targets"
+      ]
+    },
     "EntityFramework.Commands/7.0.0-rc1-final": {
       "sha512": "+wa2VWX3/vDkOpeCeIotMevqpIISimGqeYNTGYRLRhv+8HzsCLeymLzmmYpjav6zYQVvuJiJodapQvijAIfRrA==",
       "type": "Package",
@@ -13949,6 +14322,52 @@
         "lib/portable-windows8+net45+wp8/System.Interactive.Async.dll",
         "lib/portable-windows8+net45+wp8/System.Interactive.Async.XML",
         "package/services/metadata/core-properties/549f8a68026f4c6d88ab4dc623e03d5b.psmdcp"
+      ]
+    },
+    "Microsoft.Bcl.Build/1.0.14": {
+      "sha512": "cDLKSvNvRa519hplsbSoYqO69TjdDIhfjtKUM0g20/nVROoWsGav9KCI9HtnGjLmdV1+TcUUDhbotcllibjPEA==",
+      "type": "Package",
+      "files": [
+        "[Content_Types].xml",
+        "_rels/.rels",
+        "content/net40/_._",
+        "content/netcore45/_._",
+        "content/portable-net40+win8+sl4+wp71+wpa81/_._",
+        "content/sl4/_._",
+        "content/sl4-windowsphone71/_._",
+        "License-Stable.rtf",
+        "Microsoft.Bcl.Build.nuspec",
+        "package/services/metadata/core-properties/ded9cfb683144eaba586f13af4ae979c.psmdcp",
+        "tools/Install.ps1",
+        "tools/Microsoft.Bcl.Build.targets",
+        "tools/Microsoft.Bcl.Build.Tasks.dll",
+        "tools/Uninstall.ps1"
+      ]
+    },
+    "Microsoft.Bcl.Compression/3.9.85": {
+      "sha512": "3DO/7SNSF3GV25zR8CllyFeRYTUWGhW4pQvQMTlrrHHNXgADaTnVZn67KAc8fOV4sn1yp3X1ZsfMb28O0sdb5Q==",
+      "type": "Package",
+      "files": [
+        "[Content_Types].xml",
+        "_rels/.rels",
+        "build/wp8/Microsoft.Bcl.Compression.targets",
+        "lib/native/ARM/ClrCompression.dll",
+        "lib/native/ARM/ClrCompression.winmd",
+        "lib/native/x86/ClrCompression.dll",
+        "lib/native/x86/ClrCompression.winmd",
+        "lib/net45/_._",
+        "lib/portable-net45+win8+wp8+wpa81/System.IO.Compression.dll",
+        "lib/portable-net45+win8+wp8+wpa81/System.IO.Compression.xml",
+        "lib/portable-net45+win8+wpa81/_._",
+        "lib/portable-net45+wp8+wpa81/System.IO.Compression.dll",
+        "lib/portable-net45+wp8+wpa81/System.IO.Compression.xml",
+        "lib/win8/_._",
+        "lib/wp8/System.IO.Compression.dll",
+        "lib/wp8/System.IO.Compression.xml",
+        "lib/wpa81/_._",
+        "License-Stable.rtf",
+        "Microsoft.Bcl.Compression.nuspec",
+        "package/services/metadata/core-properties/71e716530e0746f5935fdafbd13788de.psmdcp"
       ]
     },
     "Microsoft.CSharp/4.0.0": {
@@ -14789,6 +15208,26 @@
         "ref/net46/Microsoft.Win32.Primitives.dll",
         "ref/xamarinios10/_._",
         "ref/xamarinmac20/_._"
+      ]
+    },
+    "Microsoft.Xaml.Behaviors.Uwp.Managed/1.0.3": {
+      "sha512": "N/HJa+ld/kKIKQaTTBY/ytLukfujKkBMww59p9qmPkEpyHZRMYB8FNalghu1rFMCXoSx9cWD8U4nt/r7qLQmVg==",
+      "type": "Package",
+      "files": [
+        "[Content_Types].xml",
+        "_rels/.rels",
+        "lib/uap10.0/Design/Microsoft.Xaml.Interactions.Design.dll",
+        "lib/uap10.0/Design/Microsoft.Xaml.Interactivity.Design.dll",
+        "lib/uap10.0/Microsoft.Xaml.Interactions.dll",
+        "lib/uap10.0/Microsoft.Xaml.Interactions.pri",
+        "lib/uap10.0/Microsoft.Xaml.Interactions.xml",
+        "lib/uap10.0/Microsoft.Xaml.Interactions/Properties/Microsoft.Xaml.Interactions.rd.xml",
+        "lib/uap10.0/Microsoft.Xaml.Interactivity.dll",
+        "lib/uap10.0/Microsoft.Xaml.Interactivity.pri",
+        "lib/uap10.0/Microsoft.Xaml.Interactivity.xml",
+        "lib/uap10.0/Microsoft.Xaml.Interactivity/Properties/Microsoft.Xaml.Interactivity.rd.xml",
+        "Microsoft.Xaml.Behaviors.Uwp.Managed.nuspec",
+        "package/services/metadata/core-properties/3c85324cf8b64508a39f4ccba86cb561.psmdcp"
       ]
     },
     "Remotion.Linq/2.0.1": {
@@ -17585,6 +18024,7 @@
   },
   "projectFileDependencyGroups": {
     "": [
+      "Cimbalino.Toolkit >= 2.1.1",
       "EntityFramework.Commands >= 7.0.0-rc1-final",
       "EntityFramework.Sqlite >= 7.0.0-rc1-final",
       "Microsoft.NETCore.UniversalWindowsPlatform >= 5.0.0"

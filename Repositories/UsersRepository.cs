@@ -1,4 +1,6 @@
-﻿namespace Client.Repositories
+﻿using System.Collections.Generic;
+
+namespace Client.Repositories
 {
     using System;
     using System.Linq;
@@ -8,8 +10,10 @@
 
     public class UsersRepository
     {
-        private static volatile UsersRepository _instance;
-        private static object _syncRoot = new object();
+        private static UsersRepository _instance;
+        private static readonly object SyncRoot = new object();
+
+        private readonly EsculabsContext _db;
 
         public static UsersRepository Instance
         {
@@ -17,10 +21,9 @@
             {
                 if (_instance == null)
                 {
-                    lock (_syncRoot)
+                    lock (SyncRoot)
                     {
-                        if (_instance == null)
-                            _instance = new UsersRepository();
+                        _instance = new UsersRepository();
                     }
                 }
 
@@ -28,27 +31,25 @@
             }
         }
 
+        public UsersRepository()
+        {
+            _db = new EsculabsContext();
+        }
+
         public User Find(int id)
         {
-            using (var db = new EsculabsContext())
-            {
-                return db.Users.FirstOrDefault(x => x.Id == id);
-            }
+            return _db.Users.FirstOrDefault(x => x.Id == id);
         }
 
         public User TryLogin(string login, string password)
         {
             try
             {
-               var lowerLogin = login.ToLower();
+                var lowerLogin = login.ToLower();
+                var encryptedPass = Encryption.HashString(password);
 
-                using (var db = new EsculabsContext())
-                {
-                    var encryptedPass = Encryption.HashString(password);
-
-                    return db.Users.FirstOrDefault(x => lowerLogin.Equals(x.Login.ToLower()) 
-                            && encryptedPass == x.Password);
-                }
+                return _db.Users.FirstOrDefault(x => lowerLogin.Equals(x.Login.ToLower()) 
+                        && encryptedPass == x.Password);
             }
             catch (Exception e)
             {

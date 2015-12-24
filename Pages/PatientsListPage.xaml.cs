@@ -1,17 +1,16 @@
-﻿using System;
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
-
-namespace Client.Pages
+﻿namespace Client.Pages
 {
+    using System.Collections.ObjectModel;
     using Windows.UI.Core;
     using Windows.UI.Xaml.Controls;
     using Windows.UI.Xaml.Media.Animation;
+    using ViewModels;
+    using Repositories;
 
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public partial class PatientsListPage : Page
     {
+        public PatientViewModel PatientViewModel { get; set; }
+
         public PatientsListPage()
         {
             InitializeComponent();
@@ -19,6 +18,9 @@ namespace Client.Pages
             SetUpPageAnimation();
 
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
+
+            PatientViewModel = new PatientViewModel();
+            DataContext = PatientViewModel;
         }
 
         protected void SetUpPageAnimation()

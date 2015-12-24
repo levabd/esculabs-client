@@ -24,7 +24,7 @@
                 throw new Exception("Ошибка создания хеша");
             }
 
-            // Возвращаем захешированную строку
+            // Возвращаем захешированную строку в формате Base64
             return CryptographicBuffer.EncodeToBase64String(buffHash);
         }
     }

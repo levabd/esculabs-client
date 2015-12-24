@@ -1,5 +1,6 @@
 ﻿namespace Client
 {
+    using Windows.Globalization;
     using Windows.UI.Core;
     using System;
     using System.Linq;
@@ -24,8 +25,10 @@
         /// </summary>
         public App()
         {
-            this.InitializeComponent();
-            this.Suspending += OnSuspending;
+            InitializeComponent();
+            Suspending += OnSuspending;
+
+            ApplicationLanguages.PrimaryLanguageOverride = "ru";
 
             using (var db = new EsculabsContext())
             {
@@ -138,7 +141,7 @@
                             MiddleName = "Григорьевич",
                             LastName = "Попов",
                             Login = "antrille",
-                            Password = "40f96bc52f69c669626b95c7994e6eac",
+                            Password = "VlRsDIOawL69/A3mKXUzrPHAbPV18iE/xzZoL0XXM8YPOTne55uL4zwS4wUC6zKip98FqadSwgHQluQPW2XTiA==",
                             Position = "Разработчик системы",
                             Role = UserRole.Developer
                         }
