@@ -19,13 +19,6 @@ namespace Client
     /// </summary>
     public partial class App : Application
     {
-<<<<<<< HEAD
-<<<<<<< HEAD
-        protected override void OnStartup(StartupEventArgs e)
-        {
-=======
-=======
->>>>>>> 9091c88eeff4630df1b243824f7d74e284b9a9ab
         #region winapi
         protected const int SW_HIDE = 0;
         protected const int SW_SHOW = 1;
@@ -62,10 +55,6 @@ namespace Client
 
             //ToggleWindowsShit(false);
 
-<<<<<<< HEAD
->>>>>>> 9091c88eeff4630df1b243824f7d74e284b9a9ab
-=======
->>>>>>> 9091c88eeff4630df1b243824f7d74e284b9a9ab
             CultureInfo CultureInfo = new CultureInfo("ru-RU");
 
             CultureInfo.DefaultThreadCurrentCulture = CultureInfo;
@@ -76,12 +65,6 @@ namespace Client
                 new FrameworkPropertyMetadata(
                     XmlLanguage.GetLanguage(
                     CultureInfo.IetfLanguageTag)));
-<<<<<<< HEAD
-<<<<<<< HEAD
-            base.OnStartup(e);
-=======
-=======
->>>>>>> 9091c88eeff4630df1b243824f7d74e284b9a9ab
 
             base.OnStartup(e);
         }
@@ -114,10 +97,6 @@ namespace Client
             {
                 ShowWindow(_hTrayWnd, SW_SHOW);
             }
-<<<<<<< HEAD
->>>>>>> 9091c88eeff4630df1b243824f7d74e284b9a9ab
-=======
->>>>>>> 9091c88eeff4630df1b243824f7d74e284b9a9ab
         }
     }
 }

@@ -13,21 +13,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-<<<<<<< HEAD:Modules/Fibrosis/Module/Controls/MeasurePreview.xaml.cs
-<<<<<<< HEAD:Client/MeasurePreview.xaml.cs
-namespace Client
-{
-    using Model;
-=======
 namespace Fibrosis.Controls
 {
     using Models;
->>>>>>> 9091c88eeff4630df1b243824f7d74e284b9a9ab:Modules/Fibrosis/Module/Controls/MeasurePreview.xaml.cs
-=======
-namespace Fibrosis.Controls
-{
-    using Models;
->>>>>>> 9091c88eeff4630df1b243824f7d74e284b9a9ab:Modules/Fibrosis/Module/Controls/MeasurePreview.xaml.cs
 
     /// <summary>
     /// Interaction logic for MeasurePreview.xaml
