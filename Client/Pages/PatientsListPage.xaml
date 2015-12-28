@@ -17,10 +17,10 @@
     </Page.Resources>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <TextBlock HorizontalAlignment="Center" Margin="0,20,0,0" TextWrapping="Wrap" Text="Список пациентов" VerticalAlignment="Top" Style="{StaticResource HeaderTextBlockStyle}"/>
-        <ListView x:Name="PatientsList" Margin="20,120,20,20" ItemsSource="{Binding Patients}">
-            <ListView.ItemTemplate>
+        <GridView x:Name="PatientsList" Margin="20,120,20,20" ItemsSource="{Binding Patients}">
+            <GridView.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Vertical" Padding="7,7,70,7">
                         <TextBlock Padding="10" FontWeight="Bold">
                             <i:Interaction.Behaviors>
                                 <cb:MultiBindingBehavior Converter="{StaticResource FullNameConverter}" PropertyName="Text">
@@ -34,8 +34,8 @@
                         <TextBlock Text="{Binding Iin, Converter={StaticResource StringFormatConverter}, ConverterParameter='ИИН: {0}'}" Padding="10"/>
                     </StackPanel>
                 </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+            </GridView.ItemTemplate>
+        </GridView>
 
     </Grid>
 </Page>
