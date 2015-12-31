@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{792E1A47-6361-4BE7-8977-F0A46E6D9BE6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Fibrosis</RootNamespace>
+    <AssemblyName>Fibrosis</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MahApps.Metro, Version=1.1.2.0, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\MahApps.Metro.1.1.2.0\lib\net45\MahApps.Metro.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Mono.Security, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Npgsql.2.2.7\lib\net45\Mono.Security.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Npgsql, Version=2.2.7.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Npgsql.2.2.7\lib\net45\Npgsql.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Npgsql.EntityFramework, Version=2.2.7.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Npgsql.EntityFramework.2.2.7\lib\net45\Npgsql.EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\MahApps.Metro.1.1.2.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Context\PgSqlContext.cs" />
+    <Compile Include="Controls\ExaminesListTile.xaml.cs">
+      <DependentUpon>ExaminesListTile.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MeasurePreview.xaml.cs">
+      <DependentUpon>MeasurePreview.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\Converters\AdministratorVisibilityConverter.cs" />
+    <Compile Include="Helpers\Converters\FriendlyTimeConverter.cs" />
+    <Compile Include="Helpers\Converters\SensorTypeConverter.cs" />
+    <Compile Include="Helpers\ExamineStatusTemplateSelector.cs" />
+    <Compile Include="Helpers\FibxParser.cs" />
+    <Compile Include="Helpers\ExamineTileClickArgs.cs" />
+    <Compile Include="Migrations\201512090957246_CreateFibrosisTables.cs" />
+    <Compile Include="Migrations\201512090957246_CreateFibrosisTables.Designer.cs">
+      <DependentUpon>201512090957246_CreateFibrosisTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201512150519021_AddFibxSourceToExamines.cs" />
+    <Compile Include="Migrations\201512150519021_AddFibxSourceToExamines.Designer.cs">
+      <DependentUpon>201512150519021_AddFibxSourceToExamines.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Measure.cs" />
+    <Compile Include="Models\PatientMetric.cs" />
+    <Compile Include="ModuleProvider.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Examine.cs" />
+    <Compile Include="Repositories\FibrosisRepository.cs" />
+    <Compile Include="Controls\FibrosisWidget.xaml.cs">
+      <DependentUpon>FibrosisWidget.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\ExaminesListView.xaml.cs">
+      <DependentUpon>ExaminesListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ExamineView.xaml.cs">
+      <DependentUpon>ExamineView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WhiskerPlotView.xaml.cs">
+      <DependentUpon>WhiskerPlotView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MeasureView.xaml.cs">
+      <DependentUpon>MeasureView.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Controls\FibrosisWidget.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ExaminesListTile.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\MeasurePreview.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ExaminesListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ExamineView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\WhiskerPlotView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\MeasureView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\EsculabsCommon\EsculabsCommon.csproj">
+      <Project>{23319b71-8321-41ee-98f5-6938f520db52}</Project>
+      <Name>EsculabsCommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FibroscanProcessor\FibroscanProcessor.csproj">
+      <Project>{bf7cd114-2868-44b2-aca1-34924e805e42}</Project>
+      <Name>FibroscanProcessor</Name>
+      <Private>True</Private>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201512090957246_CreateFibrosisTables.resx">
+      <DependentUpon>201512090957246_CreateFibrosisTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512150519021_AddFibxSourceToExamines.resx">
+      <DependentUpon>201512150519021_AddFibxSourceToExamines.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>mkdir "$(SolutionDir)\$(SolutionName)\bin\$(ConfigurationName)\Modules"
+mkdir "$(SolutionDir)\$(SolutionName)\bin\$(ConfigurationName)\Modules\Libs"
+copy  "$(TargetPath)" "$(SolutionDir)\$(SolutionName)\bin\$(ConfigurationName)\Modules\$(TargetFileName)"
+xcopy  /E /Y "$(ProjectDir)..\bin" "$(SolutionDir)\$(SolutionName)\bin\$(ConfigurationName)\Modules\Libs"</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

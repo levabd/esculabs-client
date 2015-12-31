@@ -1,0 +1,19 @@
+﻿<e:BaseView x:Class="Client.Views.LoginView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:e="clr-namespace:EsculabsCommon;assembly=EsculabsCommon"                
+             xmlns:local="clr-namespace:Client.Views"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+             mc:Ignorable="d"             
+             Width="Auto"
+             Height="510" Margin="0,0,0,100">
+    <Grid>
+        <Label x:Name="label" Foreground="{DynamicResource AccentColorBrush}" Content="Вход в систему" HorizontalAlignment="Center" Margin="173,0,171,0" VerticalAlignment="Top" Height="43" FontSize="21.333" FontFamily="Segoe UI Semibold"/>
+        <TextBox controls:TextBoxHelper.Watermark="Ваш логин" controls:TextBoxHelper.ClearTextButton="True" x:Name="loginTextBox" HorizontalAlignment="Center" Height="41" Margin="66,91,64,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="382" FontSize="21.333" Text="Antrille"/>
+        <PasswordBox controls:TextBoxHelper.Watermark="Ваш пароль" controls:TextBoxHelper.ClearTextButton="True" x:Name="passwordTextBox" HorizontalAlignment="Center" Height="41" Margin="66,150,64,0" VerticalAlignment="Top" Width="382" FontSize="21.333" Password="superadmin1!"/>
+        <Button x:Name="loginBtn" Style="{DynamicResource SquareButtonStyle}" Content="Войти" HorizontalAlignment="Center" Margin="134,254,132,0" VerticalAlignment="Top" Width="246" FontSize="21.333" Height="67" FontWeight="Normal" Click="loginBtn_Click"/>
+        <controls:ProgressRing Foreground="{DynamicResource AccentColorBrush}" Margin="216,377,236,73" IsActive="True"/>
+    </Grid>
+</e:BaseView>

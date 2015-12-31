@@ -1,0 +1,65 @@
+﻿<UserControl x:Class="Fibrosis.Controls.ExaminesListTile"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:h="clr-namespace:Fibrosis.Helpers"
+             xmlns:converters="clr-namespace:Fibrosis.Helpers.Converters"
+             mc:Ignorable="d" 
+             Height="220"
+             Foreground="Aqua"
+             d:DesignWidth="800" 
+             FontSize="16" BorderBrush="LightGray" BorderThickness="0,0,1,0">
+    <UserControl.Resources>
+        <converters:SensorTypeConverter x:Key="SensorTypeConverter" />
+        <converters:FriendlyTimeConverter x:Key="FriendlyTimeConverter" />
+
+        <h:ExamineStatusTemplateSelector x:Key="ExamineStatusTemplateSelector" />
+        
+        <DataTemplate x:Key="ConfirmedStatusIcon">
+            <Rectangle Fill="Green" Width="80" Height="80">
+                <Rectangle.OpacityMask>
+                    <VisualBrush Visual="{StaticResource appbar_check}" Stretch="Fill" />
+                </Rectangle.OpacityMask>
+            </Rectangle>
+        </DataTemplate>
+        <DataTemplate x:Key="PendingStatusIcon">
+            <Rectangle Fill="Orange" Width="80" Height="80">
+                <Rectangle.OpacityMask>
+                    <VisualBrush Visual="{StaticResource appbar_hourglass}" Stretch="Fill" />
+                </Rectangle.OpacityMask>
+            </Rectangle>
+        </DataTemplate>
+        <DataTemplate x:Key="UnconfirmedStatusIcon">
+            <Rectangle Fill="Red" Width="80" Height="80">
+                <Rectangle.OpacityMask>
+                    <VisualBrush Visual="{StaticResource appbar_cancel}" Stretch="Fill" />
+                </Rectangle.OpacityMask>
+            </Rectangle>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <Label Content="{ Binding CreatedAt }" HorizontalAlignment="Left" Margin="210,5,0,0" VerticalAlignment="Top" Height="33" FontSize="18.667" />
+        <Label HorizontalAlignment="Left" Margin="210,40,0,0" VerticalAlignment="Top" Content="Длительность:"/>
+        <Label Content="{Binding Duration, Converter={StaticResource FriendlyTimeConverter}}" HorizontalAlignment="Left" Margin="400,40,0,0" VerticalAlignment="Top" Height="33"/>
+        <Label HorizontalAlignment="Left" Margin="210,65,0,0" VerticalAlignment="Top" Content="E:"/>
+        <Label Content="{ Binding Med }" HorizontalAlignment="Left" Margin="400,65,0,0" VerticalAlignment="Top" Height="33"/>
+        <Label HorizontalAlignment="Left" Margin="210,90,0,0" VerticalAlignment="Top" Content="IQR:"/>
+        <Label Content="{ Binding Iqr }" HorizontalAlignment="Left" Margin="400,90,0,0" VerticalAlignment="Top" Height="33"/>
+        <Label HorizontalAlignment="Left" Margin="210,115,0,0" VerticalAlignment="Top" Content="Количество измерений:"/>
+        <Label Content="{ Binding Measures.Count }" HorizontalAlignment="Left" Margin="400,115,0,0" VerticalAlignment="Top" Height="33"/>
+        <Label HorizontalAlignment="Left" Margin="210,140,0,0" VerticalAlignment="Top" Content="Стадия фиброза:"/>
+        <Label Content="{ Binding FibrosisStage }" HorizontalAlignment="Left" Margin="400,140,0,0" VerticalAlignment="Top" Height="33"/>
+        <Label HorizontalAlignment="Left" Margin="210,165,0,0" VerticalAlignment="Top" Content="Тип датчика:"/>
+        <Label Content="{ Binding SensorType, Converter={StaticResource SensorTypeConverter}}" HorizontalAlignment="Left" Margin="400,165,0,0" VerticalAlignment="Top" Height="33"/>
+        <Label HorizontalAlignment="Right" Margin="0,-140,270,0" VerticalAlignment="Center" HorizontalContentAlignment="Center" Content="Проверка системой"/>
+        <Label HorizontalAlignment="Right" Margin="0,-140,470,0" VerticalAlignment="Center" HorizontalContentAlignment="Center" Content="Проверка экспертом"/>
+
+        <Canvas HorizontalAlignment="Right" Height="80" Width="80" Margin="0,0,308,0" VerticalAlignment="Center">
+            <ContentPresenter Content="{Binding Valid}" ContentTemplateSelector="{StaticResource ExamineStatusTemplateSelector}" />
+        </Canvas>
+        <Canvas HorizontalAlignment="Right" Height="80" Width="80" Margin="0,0,508,0" VerticalAlignment="Center">
+            <ContentPresenter Content="{Binding ExpertStatus}" ContentTemplateSelector="{StaticResource ExamineStatusTemplateSelector}" />
+        </Canvas>        
+    </Grid>
+</UserControl>
