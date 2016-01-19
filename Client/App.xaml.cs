@@ -3,17 +3,14 @@
     using Windows.Globalization;
     using Windows.UI.Core;
     using System;
-    using System.Linq;
     using Windows.ApplicationModel;
     using Windows.ApplicationModel.Activation;
     using Windows.UI.Xaml;
     using Windows.UI.Xaml.Controls;
     using Windows.UI.Xaml.Navigation;
-    using Microsoft.Data.Entity;
-    using Context;
-    using Models;
     using Pages;
     using Windows.UI.ViewManagement;
+
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
@@ -29,134 +26,7 @@
             Suspending += OnSuspending;
 
             ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.FullScreen;
-
             ApplicationLanguages.PrimaryLanguageOverride = "ru";
-
-            using (var db = new EsculabsContext())
-            {
-                db.Database.Migrate();
-
-                var changesPending = false;
-
-                if (!db.Patients.Any())
-                {
-                    db.Patients.AddRange(
-                        new Patient
-                        {
-                            FirstName = "Анатолий",
-                            MiddleName = "Андреевич",
-                            LastName = "Анатольев",
-                            Birthdate = new DateTime(1983, 12, 23),
-                            BloodGroup = 2,
-                            Gender = PatientGender.Male,
-                            Iin = "831223387948",
-                            RhFactor = true
-                        },
-                        new Patient
-                        {
-                            FirstName = "Серик",
-                            MiddleName = "Канатович",
-                            LastName = "Шатаев",
-                            Birthdate = new DateTime(1991, 10, 1),
-                            BloodGroup = 1,
-                            Gender = PatientGender.Male,
-                            Iin = "911001387949",
-                            RhFactor = true
-                        },
-                        new Patient
-                        {
-                            FirstName = "Фёдор",
-                            MiddleName = "Сергеевич",
-                            LastName = "Иванов",
-                            Birthdate = new DateTime(1983, 12, 23),
-                            BloodGroup = 1,
-                            Gender = PatientGender.Male,
-                            Iin = "831223387947",
-                            RhFactor = false,
-                        },
-                        new Patient
-                        {
-                            FirstName = "Светлана",
-                            MiddleName = "Ивановна",
-                            LastName = "Дуденко",
-                            Birthdate = new DateTime(1994, 1, 12),
-                            BloodGroup = 4,
-                            Gender = PatientGender.Female,
-                            Iin = "940112387944",
-                            RhFactor = false
-                        },
-                        new Patient
-                        {
-                            FirstName = "Иннеса",
-                            MiddleName = "Игнатьевна",
-                            LastName = "Попкова",
-                            Birthdate = new DateTime(1976, 8, 27),
-                            BloodGroup = 3,
-                            Gender = PatientGender.Female,
-                            Iin = "760827387945",
-                            RhFactor = true
-                        },
-                        new Patient
-                        {
-                            FirstName = "Акмарал",
-                            MiddleName = "Сейпиновна",
-                            LastName = "Жанбурбаева",
-                            Birthdate = new DateTime(1992, 1, 28),
-                            BloodGroup = 2,
-                            Gender = PatientGender.Female,
-                            Iin = "920128387234",
-                            RhFactor = true
-                        },
-                        new Patient
-                        {
-                            FirstName = "Максим",
-                            MiddleName = "Игоревич",
-                            LastName = "Погорелов",
-                            Birthdate = new DateTime(1993, 2, 7),
-                            BloodGroup = 2,
-                            Gender = PatientGender.Male,
-                            Iin = "930207387345",
-                            RhFactor = true
-                        },
-                        new Patient
-                        {
-                            FirstName = "Антон",
-                            MiddleName = "Сергеевич",
-                            LastName = "Овчаров",
-                            Birthdate = new DateTime(1962, 6, 23),
-                            BloodGroup = 1,
-                            Gender = PatientGender.Male,
-                            Iin = "62623387657",
-                            RhFactor = true
-                        }
-                    );
-
-                    changesPending = true;
-                }
-
-                if (!db.Users.Any())
-                {
-                    db.Users.Add(
-                        new User
-                        {
-                            FirstName = "Алексей",
-                            MiddleName = "Григорьевич",
-                            LastName = "Попов",
-                            Login = "antrille",
-                            Password = "VlRsDIOawL69/A3mKXUzrPHAbPV18iE/xzZoL0XXM8YPOTne55uL4zwS4wUC6zKip98FqadSwgHQluQPW2XTiA==",
-                            Position = "Разработчик системы",
-                            Role = UserRole.Developer
-                        }
-                    );
-
-                    changesPending = true;
-                }
-
-                if (changesPending)
-                {
-                    db.SaveChanges();
-                }
-            }
         }
 
         /// <summary>
@@ -190,7 +60,7 @@
                 if (e.PreviousExecutionState != ApplicationExecutionState.Running)
                 {
                     bool loadState = (e.PreviousExecutionState == ApplicationExecutionState.Terminated);
-                    SplashScreenPage extendedSplash = new SplashScreenPage(e.SplashScreen, loadState);
+                    Pages.SplashScreen extendedSplash = new Pages.SplashScreen(e.SplashScreen, loadState);
 
                     Window.Current.Content = extendedSplash;
                 }
@@ -220,6 +90,7 @@
                 // parameter
                 rootFrame.Navigate(typeof(LoginPage), e.Arguments);
             }
+
             // Ensure the current window is active
             Window.Current.Activate();
         }
