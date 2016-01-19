@@ -13,7 +13,7 @@
     using Context;
     using Models;
     using Pages;
-
+    using Windows.UI.ViewManagement;
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
@@ -27,6 +27,8 @@
         {
             InitializeComponent();
             Suspending += OnSuspending;
+
+            ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.FullScreen;
 
             ApplicationLanguages.PrimaryLanguageOverride = "ru";
 
@@ -172,8 +174,9 @@
             }
 #endif
 
-            Frame rootFrame = Window.Current.Content as Frame;
 
+            Frame rootFrame = Window.Current.Content as Frame;
+          
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active
             if (rootFrame == null)
@@ -184,13 +187,21 @@
                 rootFrame.NavigationFailed += OnNavigationFailed;
                 rootFrame.Navigated += OnNavigated;
 
-                if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
+                if (e.PreviousExecutionState != ApplicationExecutionState.Running)
                 {
-                    //TODO: Load state from previously suspended application
+                    bool loadState = (e.PreviousExecutionState == ApplicationExecutionState.Terminated);
+                    SplashScreenPage extendedSplash = new SplashScreenPage(e.SplashScreen, loadState);
+
+                    Window.Current.Content = extendedSplash;
                 }
 
+                //if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
+                //{
+                    //TODO: Load state from previously suspended application
+                //}
+
                 // Place the frame in the current Window
-                Window.Current.Content = rootFrame;
+                //Window.Current.Content = rootFrame;
 
                 // Register a handler for BackRequested events and set the
                 // visibility of the Back button
@@ -258,5 +269,7 @@
             e.Handled = true;
             rootFrame.GoBack();
         }
+
+
     }
 }
