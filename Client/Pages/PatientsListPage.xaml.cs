@@ -17,7 +17,7 @@ namespace Client.Pages
         {
             InitializeComponent();
 
-            //SetUpPageAnimation();
+            SetUpPageAnimation();
 
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
 

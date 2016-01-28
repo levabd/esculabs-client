@@ -8,12 +8,7 @@ using Windows.Foundation.Collections;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
-using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -26,7 +21,7 @@ namespace Client.Pages
     {
         public AddPatientPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
 
             SetUpPageAnimation();
 
@@ -39,7 +34,7 @@ namespace Client.Pages
         {
             var collection = new TransitionCollection();
             var theme = new NavigationThemeTransition();
-            var info = new DrillInNavigationTransitionInfo();
+            var info = new Windows.UI.Xaml.Media.Animation.SlideNavigationTransitionInfo(); 
 
             theme.DefaultNavigationTransitionInfo = info;
             collection.Add(theme);
