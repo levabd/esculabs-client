@@ -7,37 +7,36 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Client.Controls"
     mc:Ignorable="d">
-
     <Grid>
         <controls:PageHeader x:Name="PageHeader"/>
-        <StackPanel Orientation="Vertical" Width="655" Margin="0,180,0,0">
-            <TextBox Header="Фамилия" Margin="0,0,0,20"/>
-            <TextBox Header="Имя" Margin="0,0,0,20"/>
-            <TextBox Header="Отчество" Margin="0,0,0,20"/>
-            <TextBox Header="ИИН" Margin="0,0,0,20"/>
-            <DatePicker HorizontalContentAlignment="Center" Header="Дата рождения" Width="410" Margin="0,0,0,20"/>
-            <TextBlock Text="Пол" Margin="0,0,0,20"/>
-            <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
-                <RadioButton Content="Мужской" Width="320"/>
-                <RadioButton Content="Женский"/>
-            </StackPanel>
-            <ComboBox Width="655" Header="Группа крови" Margin="0,0,0,20">
-                <ComboBox.Items>
+        <ScrollViewer Margin="0,180,0,0">
+            <StackPanel Orientation="Vertical" Width="655">
+                <TextBox Header="Фамилия" Margin="0,0,0,20"/>
+                <TextBox Header="Имя" Margin="0,0,0,20"/>
+                <TextBox Header="Отчество" Margin="0,0,0,20"/>
+                <TextBox Header="ИИН" Margin="0,0,0,20"/>
+                <DatePicker HorizontalContentAlignment="Center" Header="Дата рождения" Width="410" Margin="0,0,0,20"/>
+                <TextBlock Text="Пол" Margin="0,0,0,20"/>
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+                    <RadioButton Content="Мужской" Width="320"/>
+                    <RadioButton Content="Женский"/>
+                </StackPanel>
+                <ComboBox Width="655" Header="Группа крови" Margin="0,0,0,20">
                     <ComboBoxItem Content="o (I)"/>
                     <ComboBoxItem Content="A (II)"/>
                     <ComboBoxItem Content="B (III)"/>
                     <ComboBoxItem Content="AB (IV)"/>
-                </ComboBox.Items>
-            </ComboBox>
-            <TextBlock Text="Резус фактор" Margin="0,0,0,20"/>
-            <StackPanel Orientation="Horizontal" Margin="0,0,0,78">
-                <RadioButton Content="Rh+ положительный" Width="320"/>
-                <RadioButton Content="Rh- отрицательный"/>
+                </ComboBox>
+                <TextBlock Text="Резус фактор" Margin="0,0,0,20"/>
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,78">
+                    <RadioButton Content="Rh+ положительный" Width="320"/>
+                    <RadioButton Content="Rh- отрицательный"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,100">
+                    <Button x:Name="AddButton" Width="120" Height="32" Content="Добавить" Margin="0,0,20,0" Style="{StaticResource AddPatientButton}" Click="AddButton_Click"/>
+                    <Button x:Name="CancelButton" Width="120" Height="32" Content="Отмена" Click="CancelButton_Click" />
+                </StackPanel>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button x:Name="AddButton" Width="120" Height="32" Content="Добавить" Margin="0,0,20,0" Style="{StaticResource AddPatientButton}" Click="AddButton_Click"/>
-                <Button x:Name="CancelButton" Width="120" Height="32" Content="Отмена" Click="CancelButton_Click" />
-            </StackPanel>
-        </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Page>

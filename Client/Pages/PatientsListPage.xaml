@@ -11,33 +11,34 @@
     <Grid>
         <controls:PageHeader x:Name="PageHeader"/>
         <TextBlock HorizontalAlignment="Left" Margin="115,140,0,0" Text="Фильтр" VerticalAlignment="Top" FontWeight="Light" FontSize="34"/>
-        <StackPanel Margin="115,200,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Orientation="Vertical" Width="420" Height="805" RequestedTheme="Light" Background="White">
-            <Grid Height="640">
-                <ScrollViewer VerticalAlignment="Top" HorizontalAlignment="Left" Height="640">
-                    <StackPanel Orientation="Vertical" Padding="30,25,30,0" HorizontalAlignment="Left" VerticalAlignment="Top" >
-                        <TextBox x:Name="NameFilterTextBox" Header="ФИО" Margin="0,0,0,25"/>
-                        <TextBox x:Name="IinFilterTextBox" Header="ИИН" Margin="0,0,0,25"/>
-                        <ComboBox x:Name="FilterModuleComboBox" Header="Модуль" Width="360" Margin="0,0,0,25">
-                            <ComboBoxItem Content="Фибросканирование" IsSelected="True" />
-                        </ComboBox>
+        <Grid Margin="115,200,0,50" VerticalAlignment="Top" HorizontalAlignment="Left" Width="420" RequestedTheme="Light" Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="165"/>
+            </Grid.RowDefinitions>
+            <ScrollViewer Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Left" >
+                <StackPanel Orientation="Vertical" Padding="30,25,30,0" HorizontalAlignment="Left" VerticalAlignment="Top" >
+                    <TextBox x:Name="NameFilterTextBox" Header="ФИО" Margin="0,0,0,25"/>
+                    <TextBox x:Name="IinFilterTextBox" Header="ИИН" Margin="0,0,0,25"/>
+                    <ComboBox x:Name="FilterModuleComboBox" Header="Модуль" Width="360" Margin="0,0,0,25">
+                        <ComboBoxItem Content="Фибросканирование" IsSelected="True" />
+                    </ComboBox>
 
-                        <TextBox x:Name="FibrosisStageFilterTextBox" Header="Стадия фиброза" Margin="0,0,0,25"/>
-                        <TextBox x:Name="MedianFilterTextBox" Header="Эластичность (E)" Margin="0,0,0,25"/>
-                        <ComboBox x:Name="SystemStatusFilterComboBox" Header="Статус проверки системой" Width="360" Margin="0,0,0,25">
-                            <ComboBoxItem IsSelected="True" Content="любой"/>
-                            <ComboBoxItem x:Name="SystemCorrect" Content="Корректно"/>
-                            <ComboBoxItem x:Name="SystemIncorrect" Content="Некорректно"/>
-                        </ComboBox>
-                        <ComboBox x:Name="ExpertStatusFilterComboBox" Header="Статус проверки экспертом" Width="360" Margin="0,0,0,25">
-                            <ComboBoxItem IsSelected="True" Content="любой"/>
-                            <ComboBoxItem x:Name="ExpertCorrect" Content="Корректно"/>
-                            <ComboBoxItem  x:Name="ExpertIncorrect" Content="Некорректно"/>
-                        </ComboBox>
-                    </StackPanel>
-                </ScrollViewer>
-
-            </Grid>
-            <Grid Background="#e9e9ea" Height="165">
+                    <TextBox x:Name="FibrosisStageFilterTextBox" Header="Стадия фиброза" Margin="0,0,0,25"/>
+                    <TextBox x:Name="MedianFilterTextBox" Header="Эластичность (E)" Margin="0,0,0,25"/>
+                    <ComboBox x:Name="SystemStatusFilterComboBox" Header="Статус проверки системой" Width="360" Margin="0,0,0,25">
+                        <ComboBoxItem IsSelected="True" Content="любой"/>
+                        <ComboBoxItem x:Name="SystemCorrect" Content="Корректно"/>
+                        <ComboBoxItem x:Name="SystemIncorrect" Content="Некорректно"/>
+                    </ComboBox>
+                    <ComboBox x:Name="ExpertStatusFilterComboBox" Header="Статус проверки экспертом" Width="360" Margin="0,0,0,25">
+                        <ComboBoxItem IsSelected="True" Content="любой"/>
+                        <ComboBoxItem x:Name="ExpertCorrect" Content="Корректно"/>
+                        <ComboBoxItem  x:Name="ExpertIncorrect" Content="Некорректно"/>
+                    </ComboBox>
+                </StackPanel>
+            </ScrollViewer>
+            <Grid Background="#e9e9ea" Grid.Row="1">
                 <TextBlock TextWrapping="WrapWholeWords" Width="340" Margin="0,25,0,0">Вы можете добавить пациента с помощью сканера штрих кодов, либо добавить вручную нажав на кнопку ниже</TextBlock>
                 <Button x:Name="AddPatientButton" Width="340" HorizontalAlignment="Center" Margin="0,80,0,0" Height="42" Style="{StaticResource AddPatientButton}" Click="AddPatientButton_Click">
                     <StackPanel Orientation="Horizontal">
@@ -46,7 +47,7 @@
                     </StackPanel>
                 </Button>
             </Grid>
-        </StackPanel>
+        </Grid>
         <TextBlock HorizontalAlignment="Left" Margin="625,140,0,0" Text="Последние обследованные пациенты" VerticalAlignment="Top" FontWeight="Light" FontSize="34"/>
         <GridView x:Name="PatientsList" 
                   Margin="625,200,20,0" 
