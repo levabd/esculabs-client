@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Client.Context;
 using Client.Models;
+using FibrosisModule.Models;
 
 namespace Client.Helpers
 {
@@ -133,6 +134,5 @@ namespace Client.Helpers
 
             return true;
         }
-
     }
 }

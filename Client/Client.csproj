@@ -97,6 +97,9 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Context\EsculabsContext.cs" />
+    <Compile Include="Controls\ExamineCard.xaml.cs">
+      <DependentUpon>ExamineCard.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\PageHeader.xaml.cs">
       <DependentUpon>PageHeader.xaml</DependentUpon>
     </Compile>
@@ -104,7 +107,9 @@
       <DependentUpon>PatientCard.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Converters\BloodGroupConverter.cs" />
+    <Compile Include="Helpers\Converters\FibrosisStageConverter.cs" />
     <Compile Include="Helpers\Converters\FullNameConverter.cs" />
+    <Compile Include="Helpers\Converters\ShortenedNameConverter.cs" />
     <Compile Include="Helpers\DatabaseSeeder.cs" />
     <Compile Include="Helpers\Encryption.cs" />
     <Compile Include="Migrations\20151222214004_CreateEsculabsTables.cs" />
@@ -118,6 +123,9 @@
     <Compile Include="Pages\AddPatientPage.xaml.cs">
       <DependentUpon>AddPatientPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\ExaminesListPage.xaml.cs">
+      <DependentUpon>ExaminesListPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
@@ -128,9 +136,11 @@
       <DependentUpon>ExtendedSplash.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\ExaminesRepository.cs" />
     <Compile Include="Repositories\PatientsRepository.cs" />
     <Compile Include="Repositories\UsersRepository.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\ExamineViewModel.cs" />
     <Compile Include="ViewModels\PatientViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -145,6 +155,64 @@
     <Content Include="Assets\Icons\AddPatient.png" />
     <Content Include="Assets\Icons\BackArrow.png" />
     <Content Include="Assets\Icons\Power.png" />
+    <Content Include="Assets\Measures\1\01after.jpg" />
+    <Content Include="Assets\Measures\1\01before.jpg" />
+    <Content Include="Assets\Measures\1\02after.jpg" />
+    <Content Include="Assets\Measures\1\02before.jpg" />
+    <Content Include="Assets\Measures\1\03after.jpg" />
+    <Content Include="Assets\Measures\1\03before.jpg" />
+    <Content Include="Assets\Measures\1\04after.jpg" />
+    <Content Include="Assets\Measures\1\04before.jpg" />
+    <Content Include="Assets\Measures\1\05after.jpg" />
+    <Content Include="Assets\Measures\1\05before.jpg" />
+    <Content Include="Assets\Measures\1\06after.jpg" />
+    <Content Include="Assets\Measures\1\06before.jpg" />
+    <Content Include="Assets\Measures\1\07after.jpg" />
+    <Content Include="Assets\Measures\1\07before.jpg" />
+    <Content Include="Assets\Measures\1\08after.jpg" />
+    <Content Include="Assets\Measures\1\08before.jpg" />
+    <Content Include="Assets\Measures\1\09after.jpg" />
+    <Content Include="Assets\Measures\1\09before.jpg" />
+    <Content Include="Assets\Measures\1\10after.jpg" />
+    <Content Include="Assets\Measures\1\10before.jpg" />
+    <Content Include="Assets\Measures\2\01after.jpg" />
+    <Content Include="Assets\Measures\2\01before.jpg" />
+    <Content Include="Assets\Measures\2\02after.jpg" />
+    <Content Include="Assets\Measures\2\02before.jpg" />
+    <Content Include="Assets\Measures\2\03after.jpg" />
+    <Content Include="Assets\Measures\2\03before.jpg" />
+    <Content Include="Assets\Measures\2\04after.jpg" />
+    <Content Include="Assets\Measures\2\04before.jpg" />
+    <Content Include="Assets\Measures\2\05after.jpg" />
+    <Content Include="Assets\Measures\2\05before.jpg" />
+    <Content Include="Assets\Measures\2\06after.jpg" />
+    <Content Include="Assets\Measures\2\06before.jpg" />
+    <Content Include="Assets\Measures\2\07after.jpg" />
+    <Content Include="Assets\Measures\2\07before.jpg" />
+    <Content Include="Assets\Measures\2\08after.jpg" />
+    <Content Include="Assets\Measures\2\08before.jpg" />
+    <Content Include="Assets\Measures\2\09after.jpg" />
+    <Content Include="Assets\Measures\2\09before.jpg" />
+    <Content Include="Assets\Measures\3\01after.jpg" />
+    <Content Include="Assets\Measures\3\01before.jpg" />
+    <Content Include="Assets\Measures\3\02after.jpg" />
+    <Content Include="Assets\Measures\3\02before.jpg" />
+    <Content Include="Assets\Measures\3\03after.jpg" />
+    <Content Include="Assets\Measures\3\03before.jpg" />
+    <Content Include="Assets\Measures\3\04after.jpg" />
+    <Content Include="Assets\Measures\3\04before.jpg" />
+    <Content Include="Assets\Measures\3\05after.jpg" />
+    <Content Include="Assets\Measures\3\05before.jpg" />
+    <Content Include="Assets\Measures\3\06after.jpg" />
+    <Content Include="Assets\Measures\3\06before.jpg" />
+    <Content Include="Assets\Measures\3\07after.jpg" />
+    <Content Include="Assets\Measures\3\07before.jpg" />
+    <Content Include="Assets\Measures\3\08after.jpg" />
+    <Content Include="Assets\Measures\3\08before.jpg" />
+    <Content Include="Assets\Measures\3\09after.jpg" />
+    <Content Include="Assets\Measures\3\09before.jpg" />
+    <Content Include="Assets\Measures\3\10after.jpg" />
+    <Content Include="Assets\Measures\3\10before.jpg" />
     <Content Include="Assets\SplashScreenBackground.jpg" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
@@ -160,6 +228,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\ExamineCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\PageHeader.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -169,6 +241,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\AddPatientPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ExaminesListPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -191,6 +267,7 @@
       <Name>FibrosisModule</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

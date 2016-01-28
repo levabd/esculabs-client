@@ -14,7 +14,7 @@
     Width="700"
     Height="290">
     <UserControl.Resources>
-        <c:FullNameConverter x:Key="FullNameConverter"/>
+        <c:ShortenedNameConverter x:Key="ShortenedNameConverter"/>
         <c:BloodGroupConverter x:Key="BloodGroupConverter"/>
         <cc:StringFormatConverter x:Key="StringFormatConverter"/>
     </UserControl.Resources>
@@ -24,7 +24,7 @@
                 <StackPanel Orientation="Vertical">
                     <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="24" FontWeight="Light" Height="30">
                         <i:Interaction.Behaviors>
-                            <cb:MultiBindingBehavior Converter="{StaticResource FullNameConverter}" PropertyName="Text">
+                            <cb:MultiBindingBehavior Converter="{StaticResource ShortenedNameConverter}" PropertyName="Text">
                                 <cb:MultiBindingItem Value="{Binding LastName}" />
                                 <cb:MultiBindingItem Value="{Binding FirstName}" />
                                 <cb:MultiBindingItem Value="{Binding MiddleName}" />
@@ -59,27 +59,27 @@
                     </ComboBox>
                     <StackPanel Orientation="Horizontal" Height="32" Padding="40,0,0,0" Background="#f2f2f2">
                         <TextBlock Width="186" Text="Последнее обследование:" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="SemiBold" />
-                        <TextBlock Width="186" Text="14.01.2016" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="Light" />
+                        <TextBlock Width="186" x:Name="CreatedAt" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="Light" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Height="32" Padding="40,0,0,0" Background="White">
                         <TextBlock Width="186" Text="Эластичность:" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="SemiBold" />
-                        <TextBlock Width="186" Text="14.01.2016" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="Light" />
+                        <TextBlock Width="186" x:Name="Med" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="Light" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Height="32" Padding="40,0,0,0" Background="#f2f2f2">
                         <TextBlock Width="186" Text="Стадия фиброза:" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="SemiBold" />
-                        <TextBlock Width="186" Text="14.01.2016" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="Light" />
+                        <TextBlock Width="186" x:Name="Fibrosis" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="Light" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Height="32" Padding="40,0,0,0" Background="White">
                         <TextBlock Width="186" Text="Проверка системой:" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="SemiBold" />
-                        <TextBlock Width="186" Text="14.01.2016" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="Light" />
+                        <TextBlock Width="186" x:Name="System" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="Light" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Height="32" Padding="40,0,0,0" Background="#f2f2f2">
                         <TextBlock Width="186" Text="Проверка экспертом:" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="SemiBold" />
-                        <TextBlock Width="186" Text="14.01.2016" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="Light" />
+                        <TextBlock Width="186" x:Name="Expert" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="Light" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Height="32" HorizontalAlignment="Center" Margin="0,17,0,0">
                         <Button Width="195" Style="{StaticResource AddPatientButton}" Margin="0,0,4,0">Новое обследование</Button>
-                        <Button Width="195" Style="{StaticResource AddPatientButton}" Background="#505084">Список обследований</Button>
+                        <Button Width="195" Style="{StaticResource AddPatientButton}" Background="#505084" Click="ExaminesListButton_Click">Список обследований</Button>
                     </StackPanel>
                 </StackPanel>
             </Grid>

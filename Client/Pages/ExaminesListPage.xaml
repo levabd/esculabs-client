@@ -1,0 +1,63 @@
+﻿<Page
+    x:Class="Client.Pages.ExaminesListPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Client.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Client.Controls"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:behaviors="using:Cimbalino.Toolkit.Behaviors"
+    xmlns:c="using:Client.Helpers.Converters"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <c:FullNameConverter x:Key="FullNameConverter"/>
+    </Page.Resources>
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <controls:PageHeader x:Name="PageHeader"/>
+        <TextBlock HorizontalAlignment="Left" Margin="115,140,0,0" Text="Фильтр" VerticalAlignment="Top" FontWeight="Light" FontSize="34"/>
+        <Grid Margin="115,200,0,50" HorizontalAlignment="Left" Width="420" RequestedTheme="Light" Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="85"/>
+            </Grid.RowDefinitions>
+            <ScrollViewer Grid.Row="0">
+                <StackPanel Orientation="Vertical" Padding="30,25,30,0" HorizontalAlignment="Left" VerticalAlignment="Top" >
+                    <DatePicker x:Name="DateFromFilterDatePicker" Header="Дата от" Margin="0,0,0,25"/>
+                    <DatePicker x:Name="DateToFilterDatePicker" Header="Дата до" Margin="0,0,0,25"/>
+                    <TextBox x:Name="StiffnesFilterTextBox" Header="Эластичность (E)" Margin="0,0,0,25"/>
+                </StackPanel>
+            </ScrollViewer>
+            <Grid Background="#e9e9ea" Grid.Row="1">
+                <Button x:Name="AddExamineButton" Width="340" HorizontalAlignment="Center" Height="42" Style="{StaticResource AddPatientButton}" >
+                    Начать новое обследование
+                </Button>
+            </Grid>
+        </Grid>
+        <TextBlock HorizontalAlignment="Left" Margin="625,140,0,0" VerticalAlignment="Top" FontWeight="Light" FontSize="34">
+            <interactivity:Interaction.Behaviors>
+                <behaviors:MultiBindingBehavior Converter="{StaticResource FullNameConverter}" PropertyName="Text">
+                    <behaviors:MultiBindingItem Value="{Binding Patient.LastName}" />
+                    <behaviors:MultiBindingItem Value="{Binding Patient.FirstName}" />
+                    <behaviors:MultiBindingItem Value="{Binding Patient.MiddleName}" />
+                </behaviors:MultiBindingBehavior>
+            </interactivity:Interaction.Behaviors>
+        </TextBlock>
+        <GridView x:Name="PatientsList" 
+                  Margin="625,200,20,0" 
+                  Padding="0"
+                  ItemsSource="{Binding Patients}" 
+                  IsItemClickEnabled="False"
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                  ScrollViewer.HorizontalScrollMode="Disabled"
+                  ScrollViewer.VerticalScrollBarVisibility="Auto"
+                  ScrollViewer.VerticalScrollMode="Auto" ItemContainerStyle="{StaticResource PatientCardStyle}">
+            <GridView.ItemTemplate>
+                <DataTemplate>
+                    <controls:PatientCard Margin="0" Padding="0"/>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+        </GridView>
+    </Grid>
+</Page>
+

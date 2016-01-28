@@ -11,27 +11,27 @@
     <Grid>
         <controls:PageHeader x:Name="PageHeader"/>
         <TextBlock HorizontalAlignment="Left" Margin="115,140,0,0" Text="Фильтр" VerticalAlignment="Top" FontWeight="Light" FontSize="34"/>
-        <Grid Margin="115,200,0,50" VerticalAlignment="Top" HorizontalAlignment="Left" Width="420" RequestedTheme="Light" Background="White">
+        <Grid Margin="115,200,0,50" HorizontalAlignment="Left" Width="420" RequestedTheme="Light" Background="White">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="165"/>
             </Grid.RowDefinitions>
             <ScrollViewer Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Left" >
                 <StackPanel Orientation="Vertical" Padding="30,25,30,0" HorizontalAlignment="Left" VerticalAlignment="Top" >
-                    <TextBox x:Name="NameFilterTextBox" Header="ФИО" Margin="0,0,0,25"/>
-                    <TextBox x:Name="IinFilterTextBox" Header="ИИН" Margin="0,0,0,25"/>
-                    <ComboBox x:Name="FilterModuleComboBox" Header="Модуль" Width="360" Margin="0,0,0,25">
+                    <TextBox x:Name="NameFilterTextBox" Header="ФИО" Margin="0,0,0,10"/>
+                    <TextBox x:Name="IinFilterTextBox" Header="ИИН" Margin="0,0,0,10"/>
+                    <ComboBox x:Name="FilterModuleComboBox" Header="Модуль" Width="360" Margin="0,0,0,10">
                         <ComboBoxItem Content="Фибросканирование" IsSelected="True" />
                     </ComboBox>
 
-                    <TextBox x:Name="FibrosisStageFilterTextBox" Header="Стадия фиброза" Margin="0,0,0,25"/>
-                    <TextBox x:Name="MedianFilterTextBox" Header="Эластичность (E)" Margin="0,0,0,25"/>
-                    <ComboBox x:Name="SystemStatusFilterComboBox" Header="Статус проверки системой" Width="360" Margin="0,0,0,25">
+                    <TextBox x:Name="FibrosisStageFilterTextBox" Header="Стадия фиброза" Margin="0,0,0,10"/>
+                    <TextBox x:Name="MedianFilterTextBox" Header="Эластичность (E)" Margin="0,0,0,10"/>
+                    <ComboBox x:Name="SystemStatusFilterComboBox" Header="Статус проверки системой" Width="360" Margin="0,0,0,10">
                         <ComboBoxItem IsSelected="True" Content="любой"/>
                         <ComboBoxItem x:Name="SystemCorrect" Content="Корректно"/>
                         <ComboBoxItem x:Name="SystemIncorrect" Content="Некорректно"/>
                     </ComboBox>
-                    <ComboBox x:Name="ExpertStatusFilterComboBox" Header="Статус проверки экспертом" Width="360" Margin="0,0,0,25">
+                    <ComboBox x:Name="ExpertStatusFilterComboBox" Header="Статус проверки экспертом" Width="360" Margin="0,0,0,10">
                         <ComboBoxItem IsSelected="True" Content="любой"/>
                         <ComboBoxItem x:Name="ExpertCorrect" Content="Корректно"/>
                         <ComboBoxItem  x:Name="ExpertIncorrect" Content="Некорректно"/>

@@ -1,3 +1,5 @@
+using FibrosisModule.Models;
+
 namespace Client.Context
 {
     using System.IO;

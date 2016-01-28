@@ -12,34 +12,16 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using Client.Models;
-using Client.Pages;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
 namespace Client.Controls
 {
-    public sealed partial class PatientCard : UserControl
+    public sealed partial class ExamineCard : UserControl
     {
-        public PatientCard()
+        public ExamineCard()
         {
             this.InitializeComponent();
-
-
-        }
-
-        private void ExaminesListButton_Click(object sender, RoutedEventArgs e)
-        {
-            var button = sender as Button;
-
-            if (button == null)
-            {
-                return;
-            }
-
-            var frame = Window.Current.Content as Frame;
-
-            frame?.Navigate(typeof(ExaminesListPage), button.DataContext as Patient);
         }
     }
 }
