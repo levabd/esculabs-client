@@ -11,7 +11,20 @@
         {
             var names = values.ToArray();
 
-            return names == null ? null : $"{names[0]} {names[1]} {names[2]}";
+            if (names == null)
+            {
+                return null;
+            }
+
+            var s = names[1] as string;
+            var o = names[2] as string;
+
+            if (s != null && o != null)
+            {
+                return $"{names[0]} {s.Substring(0, 1)}. {o.Substring(0, 1)}.";
+            }
+
+            return null;
         }
 
         public override object[] ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

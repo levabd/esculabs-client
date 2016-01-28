@@ -6,13 +6,16 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid HorizontalAlignment="Center" Height="Auto" Width="Auto" VerticalAlignment="Center" Margin="0,0,0,160">
-            <TextBlock HorizontalAlignment="Center"  TextWrapping="Wrap" Text="Вход в систему" Style="{ThemeResource HeaderTextBlockStyle}"  VerticalAlignment="Top"/>
-            <TextBox x:Name="LoginTextBox" PlaceholderText="Имя пользователя" HorizontalAlignment="Center" Margin="0,93,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="365" Height="25" Text="Antrille"/>
-            <PasswordBox x:Name="PasswordBox" PlaceholderText="Пароль" HorizontalAlignment="Center" Margin="0,160,0,0" VerticalAlignment="Top" Width="365" Height="25" KeyUp="PasswordBox_KeyUp" Password="superadmin1!"/>
-            <Button x:Name="LoginButton" Content="Войти" HorizontalAlignment="Center" Margin="0,230,0,0" VerticalAlignment="Top" Width="126" Click="LoginButton_Click" Height="40"/>
+    <Grid>
+        <Button VerticalAlignment="Top" Margin="30,34,0,0" Style="{StaticResource BackButtonTemplate}" Click="ExitButton_Click">
+            <Image Margin="0,0,1,2" Source="ms-appx:///Assets/Icons/Power.png" Width="21" Height="25"/>
+        </Button>
+        <Grid HorizontalAlignment="Center" Height="Auto" Width="Auto" VerticalAlignment="Center" Margin="0,0,0,0">
+            <Image x:Name="SplashImage" Source="ms-appx:///Assets/EsculabsLogo.png" Width="Auto" Height="160" VerticalAlignment="Top"/>
+            <TextBlock HorizontalAlignment="Center"  TextWrapping="Wrap" Text="Контроль качества медицинской диагностики" VerticalAlignment="Top" Height="55" Margin="0,170,0,0" TextAlignment="Center" Width="300" FontSize="18.667"/>
+            <TextBox x:Name="LoginTextBox" Header="Имя пользователя" HorizontalAlignment="Center" Margin="0,250,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="365" Text="Antrille"/>
+            <PasswordBox x:Name="PasswordBox" Header="Пароль" HorizontalAlignment="Center" Margin="0,340,0,0" VerticalAlignment="Top" Width="365"  KeyUp="PasswordBox_KeyUp" Password="superadmin1!"/>
+            <Button x:Name="LoginButton" Content="Войти" HorizontalAlignment="Center" Margin="0,450,0,0" VerticalAlignment="Top" Width="126" Click="LoginButton_Click"/>
         </Grid>
     </Grid>
 </Page>

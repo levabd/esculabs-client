@@ -35,6 +35,18 @@ namespace Client.Pages
             SetUpPageAnimation();
         }
 
+        protected void SetUpPageAnimation()
+        {
+            var collection = new TransitionCollection();
+            var theme = new NavigationThemeTransition();
+            var info = new EntranceNavigationTransitionInfo();
+
+            theme.DefaultNavigationTransitionInfo = info;
+
+            collection.Add(theme);
+            Transitions = collection;
+        }
+
         private async void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             var user = UsersRepository.Instance.TryLogin(LoginTextBox.Text, PasswordBox.Password);
@@ -42,7 +54,7 @@ namespace Client.Pages
             if (user == null)
             {
                 var d = new MessageDialog("Не удалось найти пользователя с указанным логином/паролем!", "Ошибка входа");
-                d.Commands.Add(new UICommand("ГРЯЗЬ!"));
+                d.Commands.Add(new UICommand("ОК"));
 
                 await d.ShowAsync();
 
@@ -60,15 +72,18 @@ namespace Client.Pages
             }
         }
 
-        protected void SetUpPageAnimation()
+        private async void ExitButton_Click(object sender, RoutedEventArgs e)
         {
-            var collection = new TransitionCollection();
-            var theme = new NavigationThemeTransition();
-            var info = new ContinuumNavigationTransitionInfo();
+            var d = new MessageDialog("Вы действительно хотите выйти из приложения и выключить устройство?", "Подтверждение выхода");
+            d.Commands.Add(new UICommand { Label = "Отмена", Id = 0 });
+            d.Commands.Add(new UICommand { Label = "Да", Id = 1 });
 
-            theme.DefaultNavigationTransitionInfo = info;
-            collection.Add(theme);
-            Transitions = collection;
+            var r = await d.ShowAsync();
+
+            if ((int)r.Id == 1)
+            {
+                Application.Current.Exit();
+            }
         }
     }
 }

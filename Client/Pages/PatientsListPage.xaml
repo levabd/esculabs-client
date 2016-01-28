@@ -5,36 +5,71 @@
     xmlns:local="using:Client.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:m="using:Client.Models"
-    xmlns:c="using:Client.Helpers.Converters"
-    xmlns:cb="using:Cimbalino.Toolkit.Behaviors"
-    xmlns:cc="using:Cimbalino.Toolkit.Converters"
-    xmlns:i="using:Microsoft.Xaml.Interactivity"
+    xmlns:controls="using:Client.Controls"
     mc:Ignorable="d">
-    <Page.Resources>
-        <c:FullNameConverter x:Key="FullNameConverter"/>
-        <cc:StringFormatConverter x:Key="StringFormatConverter"/>
-    </Page.Resources>
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <TextBlock HorizontalAlignment="Center" Margin="0,20,0,0" TextWrapping="Wrap" Text="Список пациентов" VerticalAlignment="Top" Style="{StaticResource HeaderTextBlockStyle}"/>
-        <GridView x:Name="PatientsList" Margin="20,120,20,20" ItemsSource="{Binding Patients}">
+
+    <Grid>
+        <controls:PageHeader x:Name="PageHeader"/>
+        <TextBlock HorizontalAlignment="Left" Margin="115,140,0,0" Text="Фильтр" VerticalAlignment="Top" FontWeight="Light" FontSize="34"/>
+        <StackPanel Margin="115,200,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Orientation="Vertical" Width="420" Height="805" RequestedTheme="Light" Background="White">
+            <Grid Height="640">
+                <ScrollViewer VerticalAlignment="Top" HorizontalAlignment="Left" Height="640">
+                    <StackPanel Orientation="Vertical" Padding="30,25,30,0" HorizontalAlignment="Left" VerticalAlignment="Top" >
+                        <TextBox x:Name="NameFilterTextBox" Header="ФИО" Margin="0,0,0,25"/>
+                        <TextBox x:Name="IinFilterTextBox" Header="ИИН" Margin="0,0,0,25"/>
+                        <ComboBox x:Name="FilterModuleComboBox" Header="Модуль" Width="360" Margin="0,0,0,25">
+                            <ComboBoxItem Content="Фибросканирование" IsSelected="True" />
+                        </ComboBox>
+
+                        <TextBox x:Name="FibrosisStageFilterTextBox" Header="Стадия фиброза" Margin="0,0,0,25"/>
+                        <TextBox x:Name="MedianFilterTextBox" Header="Эластичность (E)" Margin="0,0,0,25"/>
+                        <ComboBox x:Name="SystemStatusFilterComboBox" Header="Статус проверки системой" Width="360" Margin="0,0,0,25">
+                            <ComboBoxItem IsSelected="True" Content="любой"/>
+                            <ComboBoxItem x:Name="SystemCorrect" Content="Корректно"/>
+                            <ComboBoxItem x:Name="SystemIncorrect" Content="Некорректно"/>
+                        </ComboBox>
+                        <ComboBox x:Name="ExpertStatusFilterComboBox" Header="Статус проверки экспертом" Width="360" Margin="0,0,0,25">
+                            <ComboBoxItem IsSelected="True" Content="любой"/>
+                            <ComboBoxItem x:Name="ExpertCorrect" Content="Корректно"/>
+                            <ComboBoxItem  x:Name="ExpertIncorrect" Content="Некорректно"/>
+                        </ComboBox>
+                    </StackPanel>
+                </ScrollViewer>
+
+            </Grid>
+            <Grid Background="#e9e9ea" Height="165">
+                <TextBlock TextWrapping="WrapWholeWords" Width="340" Margin="0,25,0,0">Вы можете добавить пациента с помощью сканера штрих кодов, либо добавить вручную нажав на кнопку ниже</TextBlock>
+                <Button Width="340" HorizontalAlignment="Center" Margin="0,80,0,0" Height="42" Style="{StaticResource AddPatientButton}">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="../Assets/Icons/AddPatient.png" Margin="0,0,16,0" Width="26" Height="26"/>
+                        <TextBlock Margin="0,2,0,0">Добавить пациента</TextBlock>
+                    </StackPanel>
+                </Button>
+            </Grid>
+        </StackPanel>
+        <TextBlock HorizontalAlignment="Left" Margin="625,140,0,0" Text="Последние обследованные пациенты" VerticalAlignment="Top" FontWeight="Light" FontSize="34"/>
+        <GridView x:Name="PatientsList" 
+                  Margin="625,200,20,0" 
+                  Padding="0"
+                  ItemsSource="{Binding Patients}" 
+                  IsItemClickEnabled="False"
+                  
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                  ScrollViewer.HorizontalScrollMode="Disabled"
+                  ScrollViewer.VerticalScrollBarVisibility="Auto"
+                  ScrollViewer.VerticalScrollMode="Auto">
+            
             <GridView.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Vertical" Padding="7,7,70,7">
-                        <TextBlock Padding="10" FontWeight="Bold">
-                            <i:Interaction.Behaviors>
-                                <cb:MultiBindingBehavior Converter="{StaticResource FullNameConverter}" PropertyName="Text">
-                                    <cb:MultiBindingItem Value="{Binding LastName}" />
-                                    <cb:MultiBindingItem Value="{Binding FirstName}" />
-                                    <cb:MultiBindingItem Value="{Binding MiddleName}" />
-                                </cb:MultiBindingBehavior>
-                            </i:Interaction.Behaviors>
-                        </TextBlock>
-                        <TextBlock Text="{Binding Birthdate, Converter={StaticResource StringFormatConverter}, ConverterParameter='Дата рождения: {0:d}'}" Padding="10"/>
-                        <TextBlock Text="{Binding Iin, Converter={StaticResource StringFormatConverter}, ConverterParameter='ИИН: {0}'}" Padding="10"/>
-                    </StackPanel>
+                    <controls:PatientCard Margin="0" Padding="0"/>
                 </DataTemplate>
             </GridView.ItemTemplate>
+            <GridView.ItemContainerStyle>
+                <Style TargetType="GridViewItem">
+                    <Setter Property="Padding" Value="0"/>
+                    <Setter Property="Margin" Value="0,0,0,20"/>
+                </Style>
+            </GridView.ItemContainerStyle>
         </GridView>
 
     </Grid>

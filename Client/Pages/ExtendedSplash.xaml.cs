@@ -25,7 +25,7 @@ namespace Client.Pages
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class SplashScreen : Page
+    public sealed partial class ExtendedSplash : Page
     {
         // Variable to hold the splash screen object.
         private readonly Windows.ApplicationModel.Activation.SplashScreen _splash;             
@@ -33,7 +33,7 @@ namespace Client.Pages
         internal Frame          RootFrame;
         internal CoreDispatcher UiThreadDispatcher;
 
-        public SplashScreen(Windows.ApplicationModel.Activation.SplashScreen splashScreen, bool loadState)
+        public ExtendedSplash(Windows.ApplicationModel.Activation.SplashScreen splashScreen, bool loadState, Frame rootFrame)
         {
             InitializeComponent();
 
@@ -54,8 +54,7 @@ namespace Client.Pages
                 UpdateProgressBarRect(_splash.ImageLocation);
             }
 
-            // Create a Frame to act as the navigation context 
-            RootFrame = new Frame();
+            RootFrame = rootFrame;
 
             UiThreadDispatcher = CoreWindow.GetForCurrentThread().Dispatcher;
         }
@@ -80,19 +79,23 @@ namespace Client.Pages
         {
             MigrateDatabase();
 
-            // TODO: Initialization here. Remove delay
-            await Task.Delay(TimeSpan.FromSeconds(5));
+            await UiThreadDispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                BlurredBackgroundFadeStoryboard.Begin();
 
-            await UiThreadDispatcher.RunAsync(CoreDispatcherPriority.Normal, DismissSplash);
+                ControlsFadeOutStoryboard.Completed += async (s, a) =>
+                {
+                    await UiThreadDispatcher.RunAsync(CoreDispatcherPriority.Normal, DismissSplash);
+                };
+
+                ControlsFadeOutStoryboard.Begin();
+            });
         }
 
         void DismissSplash()
         {
             // Navigate to mainpage
-            RootFrame.Navigate(typeof(LoginPage));
-
-            // Place the frame in the current Window
-            Window.Current.Content = RootFrame;
+            RootFrame.Navigate(typeof(LoginPage), _splash.ImageLocation);
         }
 
         void SplashScreen_OnResize(Object sender, WindowSizeChangedEventArgs e)

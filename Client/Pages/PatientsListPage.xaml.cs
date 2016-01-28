@@ -15,12 +15,14 @@
         {
             InitializeComponent();
 
-            SetUpPageAnimation();
+            //SetUpPageAnimation();
 
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
 
             PatientViewModel = new PatientViewModel();
             DataContext = PatientViewModel;
+
+            PageHeader.PageName = "Список пациентов";
         }
 
         protected void SetUpPageAnimation()
