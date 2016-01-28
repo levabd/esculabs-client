@@ -39,7 +39,7 @@
             </Grid>
             <Grid Background="#e9e9ea" Height="165">
                 <TextBlock TextWrapping="WrapWholeWords" Width="340" Margin="0,25,0,0">Вы можете добавить пациента с помощью сканера штрих кодов, либо добавить вручную нажав на кнопку ниже</TextBlock>
-                <Button Width="340" HorizontalAlignment="Center" Margin="0,80,0,0" Height="42" Style="{StaticResource AddPatientButton}">
+                <Button x:Name="AddPatientButton" Width="340" HorizontalAlignment="Center" Margin="0,80,0,0" Height="42" Style="{StaticResource AddPatientButton}" Click="AddPatientButton_Click">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="../Assets/Icons/AddPatient.png" Margin="0,0,16,0" Width="26" Height="26"/>
                         <TextBlock Margin="0,2,0,0">Добавить пациента</TextBlock>

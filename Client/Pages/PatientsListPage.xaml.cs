@@ -1,4 +1,6 @@
-﻿namespace Client.Pages
+﻿using Windows.UI.Xaml;
+
+namespace Client.Pages
 {
     using System.Collections.ObjectModel;
     using Windows.UI.Core;
@@ -34,6 +36,13 @@
             theme.DefaultNavigationTransitionInfo = info;
             collection.Add(theme);
             Transitions = collection;
+        }
+
+        private void AddPatientButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            var frame = Window.Current.Content as Frame;
+
+            frame?.Navigate(typeof(AddPatientPage));
         }
     }
 }
