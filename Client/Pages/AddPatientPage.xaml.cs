@@ -34,7 +34,7 @@ namespace Client.Pages
         {
             var collection = new TransitionCollection();
             var theme = new NavigationThemeTransition();
-            var info = new Windows.UI.Xaml.Media.Animation.SlideNavigationTransitionInfo(); 
+            var info = new SlideNavigationTransitionInfo(); 
 
             theme.DefaultNavigationTransitionInfo = info;
             collection.Add(theme);

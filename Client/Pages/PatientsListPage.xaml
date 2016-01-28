@@ -53,23 +53,15 @@
                   Padding="0"
                   ItemsSource="{Binding Patients}" 
                   IsItemClickEnabled="False"
-                  
                   ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                   ScrollViewer.HorizontalScrollMode="Disabled"
                   ScrollViewer.VerticalScrollBarVisibility="Auto"
-                  ScrollViewer.VerticalScrollMode="Auto">
-            
+                  ScrollViewer.VerticalScrollMode="Auto" ItemContainerStyle="{StaticResource PatientCardStyle}">
             <GridView.ItemTemplate>
                 <DataTemplate>
                     <controls:PatientCard Margin="0" Padding="0"/>
                 </DataTemplate>
             </GridView.ItemTemplate>
-            <GridView.ItemContainerStyle>
-                <Style TargetType="GridViewItem">
-                    <Setter Property="Padding" Value="0"/>
-                    <Setter Property="Margin" Value="0,0,0,20"/>
-                </Style>
-            </GridView.ItemContainerStyle>
         </GridView>
 
     </Grid>

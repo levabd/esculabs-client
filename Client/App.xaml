@@ -15,6 +15,7 @@
                         <SolidColorBrush x:Key="ApplicationPageBackgroundThemeBrush" Color="#060622" />
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
+            
             <Style x:Key="BackButtonTemplate" TargetType="Button">
                 <Setter Property="Background" Value="{ThemeResource SystemControlBackgroundBaseLowBrush}"/>
                 <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
@@ -149,6 +150,49 @@
                                 </VisualStateManager.VisualStateGroups>
                                 <ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" Content="{TemplateBinding Content}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Padding="{TemplateBinding Padding}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
                             </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="PatientCardStyle" TargetType="GridViewItem">
+                <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}"/>
+                <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}"/>
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
+                <Setter Property="TabNavigation" Value="Local"/>
+                <Setter Property="IsHoldingEnabled" Value="True"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="Margin" Value="0,0,0,20"/>
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="MinWidth" Value="{ThemeResource GridViewItemMinWidth}"/>
+                <Setter Property="MinHeight" Value="{ThemeResource GridViewItemMinHeight}"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="GridViewItem">
+                            <ListViewItemPresenter CheckBrush="Transparent" 
+                                                   ContentMargin="{TemplateBinding Padding}" 
+                                                   CheckMode="Overlay" 
+                                                   ContentTransitions="{TemplateBinding ContentTransitions}" 
+                                                   CheckBoxBrush="Transparent" 
+                                                   DragForeground="Transparent" 
+                                                   DragOpacity="{ThemeResource ListViewItemDragThemeOpacity}" 
+                                                   DragBackground="Transparent" 
+                                                   DisabledOpacity="{ThemeResource ListViewItemDisabledThemeOpacity}" 
+                                                   FocusBorderBrush="Transparent" 
+                                                   FocusSecondaryBorderBrush="Transparent" 
+                                                   HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                                   PointerOverForeground="Transparent" 
+                                                   PressedBackground="Transparent" 
+                                                   PlaceholderBackground="Transparent" 
+                                                   PointerOverBackground="Transparent"
+                                                   ReorderHintOffset="{ThemeResource GridViewItemReorderHintThemeOffset}" 
+                                                   SelectedPressedBackground="Transparent" 
+                                                   SelectionCheckMarkVisualEnabled="True" 
+                                                   SelectedForeground="Transparent" 
+                                                   SelectedPointerOverBackground="Transparent" 
+                                                   SelectedBackground="Transparent" 
+                                                   VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
