@@ -163,7 +163,7 @@
                 <Setter Property="IsHoldingEnabled" Value="True"/>
                 <Setter Property="HorizontalContentAlignment" Value="Center"/>
                 <Setter Property="VerticalContentAlignment" Value="Center"/>
-                <Setter Property="Margin" Value="0,0,0,20"/>
+                <Setter Property="Margin" Value="0,0,20,20"/>
                 <Setter Property="Padding" Value="0"/>
                 <Setter Property="MinWidth" Value="{ThemeResource GridViewItemMinWidth}"/>
                 <Setter Property="MinHeight" Value="{ThemeResource GridViewItemMinHeight}"/>
@@ -182,14 +182,14 @@
                                                    FocusBorderBrush="Transparent" 
                                                    FocusSecondaryBorderBrush="Transparent" 
                                                    HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
-                                                   PointerOverForeground="Transparent" 
                                                    PressedBackground="Transparent" 
                                                    PlaceholderBackground="Transparent" 
                                                    PointerOverBackground="Transparent"
                                                    ReorderHintOffset="{ThemeResource GridViewItemReorderHintThemeOffset}" 
                                                    SelectedPressedBackground="Transparent" 
                                                    SelectionCheckMarkVisualEnabled="True" 
-                                                   SelectedForeground="Transparent" 
+                                                  
+                                                   
                                                    SelectedPointerOverBackground="Transparent" 
                                                    SelectedBackground="Transparent" 
                                                    VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>

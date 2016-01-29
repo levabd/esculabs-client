@@ -12,9 +12,9 @@ namespace Client.ViewModels
 
     public class PatientViewModel : BaseViewModel
     {
-        private ObservableCollection<Patient> _patients;
+        private ObservableCollection<ExamineViewModel> _patients;
 
-        public ObservableCollection<Patient> Patients
+        public ObservableCollection<ExamineViewModel> Patients
         {
             get { return _patients; }
             set
@@ -32,7 +32,7 @@ namespace Client.ViewModels
 
         public PatientViewModel()
         {
-            Patients = new ObservableCollection<Patient>();
+            Patients = new ObservableCollection<ExamineViewModel>();
             ReloadPatients();
         }
 
@@ -44,7 +44,7 @@ namespace Client.ViewModels
                 var patients = await PatientsRepository.Instance.AllAsync();
                 foreach (var p in patients)
                 {
-                    Patients.Add(p);
+                    Patients.Add(new ExamineViewModel(p));
                 }
             });
         }

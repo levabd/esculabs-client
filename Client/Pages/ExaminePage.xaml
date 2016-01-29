@@ -1,0 +1,93 @@
+﻿<Page
+    x:Class="Client.Pages.ExaminePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Client.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Client.Controls"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:behaviors="using:Cimbalino.Toolkit.Behaviors"
+    xmlns:c="using:Client.Helpers.Converters"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <c:FullNameConverter x:Key="FullNameConverter"/>
+        <c:SensorTypeConverter x:Key="SensorTypeConverter"/>
+        <c:IqrMedConverter x:Key="IqrMedConverter"/>
+    </Page.Resources>
+    <Grid >
+        <controls:PageHeader x:Name="PageHeader"/>
+        <TextBlock HorizontalAlignment="Left" Margin="115,140,0,0" VerticalAlignment="Top" FontWeight="Light" FontSize="34">
+            <interactivity:Interaction.Behaviors>
+                <behaviors:MultiBindingBehavior Converter="{StaticResource FullNameConverter}" PropertyName="Text">
+                    <behaviors:MultiBindingItem Value="{Binding ViewModel.Patient.LastName}" />
+                    <behaviors:MultiBindingItem Value="{Binding ViewModel.Patient.FirstName}" />
+                    <behaviors:MultiBindingItem Value="{Binding ViewModel.Patient.MiddleName}" />
+                </behaviors:MultiBindingBehavior>
+            </interactivity:Interaction.Behaviors>
+        </TextBlock>
+        <Grid Margin="115,200,0,50" HorizontalAlignment="Left" Width="320" RequestedTheme="Light" Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="85"/>
+            </Grid.RowDefinitions>
+            <ScrollViewer Grid.Row="0">
+                <StackPanel Orientation="Vertical" Padding="30,25,30,0" HorizontalAlignment="Left" VerticalAlignment="Top" >
+                    <StackPanel Orientation="Horizontal" Height="40" >
+                        <TextBlock Width="150" Text="Тип датчика:" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="SemiBold" />
+                        <TextBlock Width="186" Text="{Binding ViewModel.SelectedExamine.SensorType, Converter={StaticResource SensorTypeConverter}}" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="Light" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Height="40" >
+                        <TextBlock Width="150" Text="IQR:" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="SemiBold" />
+                        <TextBlock Width="186" Text="{Binding ViewModel.SelectedExamine.Iqr}" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="Light" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Height="40" >
+                        <TextBlock Width="150" Text="MED:" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="SemiBold" />
+                        <TextBlock Width="186" Text="{Binding ViewModel.SelectedExamine.Med}" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="Light" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Height="40" >
+                        <TextBlock Width="150" Text="IQR/MED:" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="SemiBold" />
+                        <TextBlock Width="186" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="Light">
+                            <interactivity:Interaction.Behaviors>
+                                <behaviors:MultiBindingBehavior Converter="{StaticResource IqrMedConverter}" PropertyName="Text">
+                                    <behaviors:MultiBindingItem Value="{Binding ViewModel.SelectedExamine.Iqr}" />
+                                    <behaviors:MultiBindingItem Value="{Binding ViewModel.SelectedExamine.Med}" />
+                                </behaviors:MultiBindingBehavior>
+                            </interactivity:Interaction.Behaviors>
+                        </TextBlock>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Height="20" >
+                        <TextBlock Width="150" Text="Всего сканирований:" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="SemiBold" />
+                        <TextBlock Width="186" Text="12" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="Light" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Height="20" >
+                        <TextBlock Width="150" Text="из них корректных:" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="SemiBold" />
+                        <TextBlock Width="186" Text="10" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="13" FontWeight="Light" />
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+            <Grid Background="#e9e9ea" Grid.Row="1">
+                <Button x:Name="WhiskerPlotButton" Width="280" HorizontalAlignment="Center" Height="42" Style="{StaticResource AddPatientButton}" >
+                    Дисперсия
+                </Button>
+            </Grid>
+            
+        </Grid>
+        <GridView x:Name="MeasuresGrid"
+                  ItemClick="MeasuresGrid_OnItemClick"
+                  Margin="480,200,20,0" 
+                  Padding="0"
+                  ItemsSource="{Binding Images}" 
+                  IsItemClickEnabled="True"
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                  ScrollViewer.HorizontalScrollMode="Disabled"
+                  ScrollViewer.VerticalScrollBarVisibility="Auto"
+                  ScrollViewer.VerticalScrollMode="Auto" ItemContainerStyle="{StaticResource PatientCardStyle}">
+            <GridView.ItemTemplate>
+                <DataTemplate>
+                    <controls:MeasureCard Margin="0" Padding="0"/>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+        </GridView>
+    </Grid>
+</Page>

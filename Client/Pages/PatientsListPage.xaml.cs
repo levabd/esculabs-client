@@ -1,4 +1,6 @@
 ﻿using Windows.UI.Xaml;
+using Client.Models;
+using FibrosisModule.Models;
 
 namespace Client.Pages
 {
@@ -43,6 +45,21 @@ namespace Client.Pages
             var frame = Window.Current.Content as Frame;
 
             frame?.Navigate(typeof(AddPatientPage));
+        }
+
+        private void PatientsList_OnItemClick(object sender, ItemClickEventArgs e)
+        {
+            var vm = e.ClickedItem as ExamineViewModel;
+
+            if (vm == null)
+            {
+                return;
+            }
+
+            vm.SelectedExamine = vm.LastExamine;
+
+            var frame = Window.Current.Content as Frame;
+            frame?.Navigate(typeof(ExaminePage), vm);
         }
     }
 }

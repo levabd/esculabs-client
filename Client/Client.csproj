@@ -100,6 +100,9 @@
     <Compile Include="Controls\ExamineCard.xaml.cs">
       <DependentUpon>ExamineCard.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\MeasureCard.xaml.cs">
+      <DependentUpon>MeasureCard.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\PageHeader.xaml.cs">
       <DependentUpon>PageHeader.xaml</DependentUpon>
     </Compile>
@@ -107,6 +110,11 @@
       <DependentUpon>PatientCard.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Converters\BloodGroupConverter.cs" />
+    <Compile Include="Helpers\Converters\IqrMedConverter.cs" />
+    <Compile Include="Helpers\Converters\SystemStatusConverter.cs" />
+    <Compile Include="Helpers\Converters\ExpertStatusConverter.cs" />
+    <Compile Include="Helpers\Converters\SensorTypeConverter.cs" />
+    <Compile Include="Helpers\Converters\SecToTimeConverter.cs" />
     <Compile Include="Helpers\Converters\FibrosisStageConverter.cs" />
     <Compile Include="Helpers\Converters\FullNameConverter.cs" />
     <Compile Include="Helpers\Converters\ShortenedNameConverter.cs" />
@@ -118,16 +126,26 @@
     </Compile>
     <Compile Include="Migrations\EsculabsContextModelSnapshot.cs" />
     <Compile Include="Models\BaseModel.cs" />
+    <Compile Include="Models\FakeMeasure.cs" />
     <Compile Include="Models\Patient.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Pages\AddPatientPage.xaml.cs">
       <DependentUpon>AddPatientPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ExaminePage.xaml.cs">
+      <DependentUpon>ExaminePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\ExaminesListPage.xaml.cs">
       <DependentUpon>ExaminesListPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\WhiskerPlotPage.xaml.cs">
+      <DependentUpon>WhiskerPlotPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MeasurePage.xaml.cs">
+      <DependentUpon>MeasurePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\PatientsListPage.xaml.cs">
       <DependentUpon>PatientsListPage.xaml</DependentUpon>
@@ -154,7 +172,11 @@
     <Content Include="Assets\EsculabsLogo.png" />
     <Content Include="Assets\Icons\AddPatient.png" />
     <Content Include="Assets\Icons\BackArrow.png" />
+    <Content Include="Assets\Icons\Calendar.png" />
+    <Content Include="Assets\Icons\Clock.png" />
+    <Content Include="Assets\Icons\Ok.png" />
     <Content Include="Assets\Icons\Power.png" />
+    <Content Include="Assets\Icons\Wrong.png" />
     <Content Include="Assets\Measures\1\01after.jpg" />
     <Content Include="Assets\Measures\1\01before.jpg" />
     <Content Include="Assets\Measures\1\02after.jpg" />
@@ -232,6 +254,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\MeasureCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\PageHeader.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -244,6 +270,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\ExaminePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\ExaminesListPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -251,6 +281,14 @@
     <Page Include="Pages\LoginPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\WhiskerPlotPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\MeasurePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\PatientsListPage.xaml">
       <Generator>MSBuild:Compile</Generator>

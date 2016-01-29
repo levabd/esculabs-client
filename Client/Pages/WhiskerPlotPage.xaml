@@ -1,0 +1,17 @@
+﻿<Page
+    x:Class="Client.Pages.WhiskerPlotPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Client.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Client.Controls"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <controls:PageHeader x:Name="PageHeader"/>
+            <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Image Stretch="Uniform" Source="{Binding Image.Processed}"/>
+            </Grid>
+    </Grid>
+</Page>

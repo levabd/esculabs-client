@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Client.Models;
 using Client.Pages;
+using Client.ViewModels;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -39,7 +40,9 @@ namespace Client.Controls
 
             var frame = Window.Current.Content as Frame;
 
-            frame?.Navigate(typeof(ExaminesListPage), button.DataContext as Patient);
+            //var vm = new ExamineViewModel(button.DataContext as Patient);
+
+            frame?.Navigate(typeof(ExaminesListPage), button.DataContext as ExamineViewModel);
         }
     }
 }

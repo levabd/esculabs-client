@@ -7,44 +7,62 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:behaviors="using:Cimbalino.Toolkit.Behaviors"
+    xmlns:c="using:Client.Helpers.Converters"
+    xmlns:cb="using:Cimbalino.Toolkit.Behaviors"
+    xmlns:cc="using:Cimbalino.Toolkit.Converters"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400" Width="770" Height="250">
-
+    <UserControl.Resources>
+        <c:SecToTimeConverter x:Key="SecToTimeConverter"/>
+        <c:FibrosisStageConverter x:Key="FibrosisStageConverter"/>
+        <c:SensorTypeConverter x:Key="SensorTypeConverter"/>
+        <cc:StringFormatConverter x:Key="StringFormatConverter"/>
+    </UserControl.Resources>
     <Grid Background="White" RequestedTheme="Light">
         <StackPanel Orientation="Horizontal">
             <Grid Width="320" HorizontalAlignment="Left" BorderBrush="Gray" BorderThickness="0,0,1,0">
-                <Image Source="{Binding Examine.AfterImage}" VerticalAlignment="Center"/>
+                <Image Source="{Binding SourceImage}" VerticalAlignment="Center"/>
             </Grid>
-            <Grid Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <Grid Width="450">
                 <StackPanel Orientation="Vertical">
-                    <StackPanel Orientation="Horizontal" Height="32" Padding="40,0,0,0" Background="#f2f2f2">
-                        <TextBlock Width="186" Text="Последнее обследование:" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="SemiBold" />
-                        <TextBlock Width="186" x:Name="kjndfg" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="Light" />
+                    <StackPanel Orientation="Horizontal" Height="40" Background="White">
+                        <Grid Width="225" BorderBrush="LightGray" BorderThickness="0,0,1,1">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Image Source="../Assets/Icons/Calendar.png" Width="16" Height="16" Margin="0,0,15,0"/>
+                                <TextBlock Text="{Binding CreatedAt, Converter={StaticResource StringFormatConverter}, ConverterParameter='{}{0:d}'}" Height="18" FontSize="15" FontWeight="Light"/>
+                            </StackPanel>
+                        </Grid>
+                        <Grid Width="225" BorderBrush="LightGray" BorderThickness="0,0,0,1">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Image Source="../Assets/Icons/Clock.png" Width="15" Height="15" Margin="0,0,15,0"/>
+                                <TextBlock Text="{Binding CreatedAt, Converter={StaticResource StringFormatConverter}, ConverterParameter='{}{0:t}'}" Height="18" FontSize="15" FontWeight="Light"/>
+                            </StackPanel>
+                        </Grid>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Height="32" Padding="40,0,0,0" Background="White">
-                        <TextBlock Width="186" Text="Последнее обследование:" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="SemiBold" />
-                        <TextBlock Width="186" x:Name="adfgearg" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="Light" />
+                        <TextBlock Width="186" Text="Длительность:" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="SemiBold" />
+                        <TextBlock Width="186" Text="{Binding Duration, Converter={StaticResource SecToTimeConverter}}" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="Light" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Height="32" Padding="40,0,0,0" Background="#f2f2f2">
-                        <TextBlock Width="186" Text="Последнее обследование:" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="SemiBold" />
-                        <TextBlock Width="186" x:Name="CreatedAt" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="Light" />
+                        <TextBlock Width="186" Text="E:" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="SemiBold" />
+                        <TextBlock Width="186" Text="{Binding Med}"  VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="Light" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Height="32" Padding="40,0,0,0" Background="White">
-                        <TextBlock Width="186" Text="Эластичность:" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="SemiBold" />
-                        <TextBlock Width="186" x:Name="Med" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="Light" />
+                        <TextBlock Width="186" Text="IQR:" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="SemiBold" />
+                        <TextBlock Width="186" Text="{Binding Iqr}" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="Light" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Height="32" Padding="40,0,0,0" Background="#f2f2f2">
+                        <TextBlock Width="186" Text="Количество измерений:" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="SemiBold" />
+                        <TextBlock Width="186" Text="12" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="Light" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Height="32" Padding="40,0,0,0" Background="White">
                         <TextBlock Width="186" Text="Стадия фиброза:" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="SemiBold" />
-                        <TextBlock Width="186" x:Name="Fibrosis" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="Light" />
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Height="32" Padding="40,0,0,0" Background="White">
-                        <TextBlock Width="186" Text="Проверка системой:" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="SemiBold" />
-                        <TextBlock Width="186" x:Name="System" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="Light" />
+                        <TextBlock Width="186" Text="{Binding Med, Converter={StaticResource FibrosisStageConverter}}" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="Light" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Height="32" Padding="40,0,0,0" Background="#f2f2f2">
-                        <TextBlock Width="186" Text="Проверка экспертом:" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="SemiBold" />
-                        <TextBlock Width="186" x:Name="Expert" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="Light" />
+                        <TextBlock Width="186" Text="Тип датчика:" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="SemiBold" />
+                        <TextBlock Width="186" Text="{Binding SensorType, Converter={StaticResource SensorTypeConverter}}" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="Light" />
                     </StackPanel>
             
                 </StackPanel>

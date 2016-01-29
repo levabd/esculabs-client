@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -15,10 +16,8 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
-using Client.Controls;
 using Client.Models;
 using Client.ViewModels;
-using FibrosisModule.Models;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -27,41 +26,40 @@ namespace Client.Pages
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public partial class ExaminesListPage : Page, INotifyPropertyChanged
+    public partial class MeasurePage : Page, INotifyPropertyChanged
     {
-        private ExamineViewModel _viewModel;
+        private FakeMeasure _image;
 
-        public ExamineViewModel ViewModel
+        public FakeMeasure Image
         {
-            get { return _viewModel; }
+            get { return _image; }
             set
             {
-                if (_viewModel == value)
+                if (_image == value)
                 {
                     return;
                 }
 
-                _viewModel = value;
+                _image = value;
                 OnPropertyChanged();
             }
         }
 
-        public ExaminesListPage()
+        public MeasurePage()
         {
-            InitializeComponent();
-
-            DataContext = this;
+            this.InitializeComponent();
 
             SetUpPageAnimation();
 
-            PageHeader.PageName = "Список обследований пациента";
+            DataContext = this;
+            PageHeader.PageName = "Просмотр сканирования";
         }
 
         protected void SetUpPageAnimation()
         {
             var collection = new TransitionCollection();
             var theme = new NavigationThemeTransition();
-            var info = new ContinuumNavigationTransitionInfo();
+            var info = new SlideNavigationTransitionInfo();
 
             theme.DefaultNavigationTransitionInfo = info;
             collection.Add(theme);
@@ -70,7 +68,7 @@ namespace Client.Pages
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            ViewModel = e.Parameter as ExamineViewModel;
+            Image = e.Parameter as FakeMeasure;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -78,21 +76,6 @@ namespace Client.Pages
         private void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        private void ExaminesList_OnItemClick(object sender, ItemClickEventArgs e)
-        {
-            var examine = e.ClickedItem as FibrosisExamine;
-
-            if (examine == null)
-            {
-                return;
-            }
-
-            ViewModel.SelectedExamine = examine;
-
-            var frame = Window.Current.Content as Frame;
-            frame?.Navigate(typeof(ExaminePage), ViewModel);
         }
     }
 }

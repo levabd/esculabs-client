@@ -1,0 +1,27 @@
+﻿<UserControl
+    x:Class="Client.Controls.MeasureCard"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Client.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Width="318"
+    Height="247" Loaded="UserControl_Loaded">
+
+    <Grid Background="White">
+        <Image Width="318" Height="201" VerticalAlignment="Top" Source="{Binding Source}" HorizontalAlignment="Left"/>
+        <Grid x:Name="CorrectGrid" Width="318" Height="46" VerticalAlignment="Bottom" Background="#17d856">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+                <Image Source="../Assets/Icons/Ok.png" Width="20" Height="20" Margin="0,0,15,0"/>
+                <TextBlock Text="Корректно" FontSize="18" FontWeight="Light"/>
+            </StackPanel>
+        </Grid>
+        <Grid x:Name="IncorrectGrid" Width="318" Height="46" VerticalAlignment="Bottom" Background="#c80d0d">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+                <Image Source="../Assets/Icons/Wrong.png" Width="20" Height="20" Margin="0,0,15,0"/>
+                <TextBlock Text="Некорректно" FontSize="18" FontWeight="Light"/>
+            </StackPanel>
+        </Grid>        
+    </Grid>
+</UserControl>

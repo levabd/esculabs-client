@@ -13,7 +13,7 @@
     <Page.Resources>
         <c:FullNameConverter x:Key="FullNameConverter"/>
     </Page.Resources>
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid >
         <controls:PageHeader x:Name="PageHeader"/>
         <TextBlock HorizontalAlignment="Left" Margin="115,140,0,0" Text="Фильтр" VerticalAlignment="Top" FontWeight="Light" FontSize="34"/>
         <Grid Margin="115,200,0,50" HorizontalAlignment="Left" Width="420" RequestedTheme="Light" Background="White">
@@ -37,24 +37,25 @@
         <TextBlock HorizontalAlignment="Left" Margin="625,140,0,0" VerticalAlignment="Top" FontWeight="Light" FontSize="34">
             <interactivity:Interaction.Behaviors>
                 <behaviors:MultiBindingBehavior Converter="{StaticResource FullNameConverter}" PropertyName="Text">
-                    <behaviors:MultiBindingItem Value="{Binding Patient.LastName}" />
-                    <behaviors:MultiBindingItem Value="{Binding Patient.FirstName}" />
-                    <behaviors:MultiBindingItem Value="{Binding Patient.MiddleName}" />
+                    <behaviors:MultiBindingItem Value="{Binding ViewModel.Patient.LastName}" />
+                    <behaviors:MultiBindingItem Value="{Binding ViewModel.Patient.FirstName}" />
+                    <behaviors:MultiBindingItem Value="{Binding ViewModel.Patient.MiddleName}" />
                 </behaviors:MultiBindingBehavior>
             </interactivity:Interaction.Behaviors>
         </TextBlock>
-        <GridView x:Name="PatientsList" 
+        <GridView  
                   Margin="625,200,20,0" 
                   Padding="0"
-                  ItemsSource="{Binding Patients}" 
-                  IsItemClickEnabled="False"
+                  ItemsSource="{Binding ViewModel.Examines}" 
+                  ItemClick="ExaminesList_OnItemClick"
+                  IsItemClickEnabled="True"
                   ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                   ScrollViewer.HorizontalScrollMode="Disabled"
                   ScrollViewer.VerticalScrollBarVisibility="Auto"
                   ScrollViewer.VerticalScrollMode="Auto" ItemContainerStyle="{StaticResource PatientCardStyle}">
             <GridView.ItemTemplate>
                 <DataTemplate>
-                    <controls:PatientCard Margin="0" Padding="0"/>
+                    <controls:ExamineCard Margin="0" Padding="0"/>
                 </DataTemplate>
             </GridView.ItemTemplate>
         </GridView>

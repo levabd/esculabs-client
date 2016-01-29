@@ -12,7 +12,7 @@ namespace Client.Helpers.Converters
     {
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var med = (int) value;
+            var med = (double) value;
 
             if (med == 0)
             {
