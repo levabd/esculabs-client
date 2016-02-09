@@ -25,8 +25,6 @@ namespace Client.Controls
         public PatientCard()
         {
             this.InitializeComponent();
-
-
         }
 
         private void ExaminesListButton_Click(object sender, RoutedEventArgs e)

@@ -1,4 +1,6 @@
-﻿namespace Client.Models
+﻿using System.Collections.Generic;
+
+namespace Client.Models
 {
     using System;
     using System.ComponentModel.DataAnnotations;
@@ -9,7 +11,7 @@
         Female
     }
 
-    public sealed class Patient : BaseModel
+    public class Patient : BaseModel
     {
         private string _iin;
         private string _firstName;
@@ -19,6 +21,7 @@
         private PatientGender _gender;
         private int? _bloodGroup;
         private bool? _rhFactor;
+//        private List<Examine> _examines;
 
         /// <summary>
         /// ИИН
@@ -168,7 +171,9 @@
                 OnPropertyChanged();
             }
         }
-        
+
+        public virtual ICollection<Examine> Examines { get; set; }
+
         //public string BloodGroupString
         //{
         //    get

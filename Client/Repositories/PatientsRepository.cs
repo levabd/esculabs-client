@@ -36,9 +36,9 @@ namespace Client.Repositories
             _db = new EsculabsContext();
         }
 
-        public Task<List<Patient>> AllAsync()
+        public IEnumerable<Patient> GetAll()
         {
-            return _db.Patients.ToListAsync();
+            return _db.Patients.Include(p => p.Examines).ToList();
         }
     }
 }

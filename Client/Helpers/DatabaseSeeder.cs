@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Client.Context;
 using Client.Models;
-using FibrosisModule.Models;
 
 namespace Client.Helpers
 {
@@ -129,6 +128,31 @@ namespace Client.Helpers
                     Password = "VlRsDIOawL69/A3mKXUzrPHAbPV18iE/xzZoL0XXM8YPOTne55uL4zwS4wUC6zKip98FqadSwgHQluQPW2XTiA==",
                     Position = "Разработчик системы",
                     Role = UserRole.Developer
+                }
+            );
+
+            return true;
+        }
+
+        public static bool SeedExamines(EsculabsContext context)
+        {
+            if (context.Examines.Any())
+            {
+                return false;
+            }
+
+            context.Examines.Add(
+                new Examine
+                {
+                    PatientIin = "62623387657",
+                    Duration = 233,
+                    CreatedAt = new DateTime(),
+                    ExpertStatus = ExpertStatus.Confirmed,
+                    FibxSource = "nope",
+                    Iqr = 10,
+                    Med = 5.2,
+                    SensorType = SensorType.Xl,
+                    Valid = true
                 }
             );
 

@@ -67,7 +67,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x64\Debug\</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
     <NoWarn>;2008</NoWarn>
     <DebugType>full</DebugType>
@@ -120,13 +120,15 @@
     <Compile Include="Helpers\Converters\ShortenedNameConverter.cs" />
     <Compile Include="Helpers\DatabaseSeeder.cs" />
     <Compile Include="Helpers\Encryption.cs" />
-    <Compile Include="Migrations\20151222214004_CreateEsculabsTables.cs" />
-    <Compile Include="Migrations\20151222214004_CreateEsculabsTables.designer.cs">
-      <DependentUpon>20151222214004_CreateEsculabsTables.cs</DependentUpon>
+    <Compile Include="Migrations\20160209131957_CreateTables.cs" />
+    <Compile Include="Migrations\20160209131957_CreateTables.designer.cs">
+      <DependentUpon>20160209131957_CreateTables.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\EsculabsContextModelSnapshot.cs" />
     <Compile Include="Models\BaseModel.cs" />
-    <Compile Include="Models\FakeMeasure.cs" />
+    <Compile Include="Models\Examine.cs" />
+    <Compile Include="Models\Measure.cs" />
+    <Compile Include="Models\PatientMetric.cs" />
     <Compile Include="Models\Patient.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Pages\AddPatientPage.xaml.cs">
@@ -298,12 +300,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Modules\Fibrosis\FibrosisModule\FibrosisModule.csproj">
-      <Project>{cb5b7bc0-6693-4672-ae80-537f3984ed92}</Project>
-      <Name>FibrosisModule</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

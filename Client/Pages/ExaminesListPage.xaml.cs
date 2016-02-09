@@ -1,29 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Media.Animation;
-using Windows.UI.Xaml.Navigation;
-using Client.Controls;
-using Client.Models;
-using Client.ViewModels;
-using FibrosisModule.Models;
-
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
-
+﻿
 namespace Client.Pages
 {
+    using System.ComponentModel;
+    using System.Runtime.CompilerServices;
+    using Windows.UI.Xaml;
+    using Windows.UI.Xaml.Controls;
+    using Windows.UI.Xaml.Media.Animation;
+    using Windows.UI.Xaml.Navigation;
+    using ViewModels;
+    using Models;
+
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
@@ -82,7 +68,7 @@ namespace Client.Pages
 
         private void ExaminesList_OnItemClick(object sender, ItemClickEventArgs e)
         {
-            var examine = e.ClickedItem as FibrosisExamine;
+            var examine = e.ClickedItem as Examine;
 
             if (examine == null)
             {

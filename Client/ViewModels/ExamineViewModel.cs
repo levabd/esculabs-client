@@ -9,18 +9,17 @@ using Windows.UI.Core;
 using Cimbalino.Toolkit.Extensions;
 using Client.Models;
 using Client.Repositories;
-using FibrosisModule.Models;
 
 namespace Client.ViewModels
 {
     public class ExamineViewModel : BaseViewModel
     {
         private Patient _patient;
-        private ObservableCollection<FibrosisExamine> _examines;
+        private ObservableCollection<Examine> _examines;
 
-        private FibrosisExamine _selectedExamine ;
+        private Examine _selectedExamine ;
 
-        public ObservableCollection<FibrosisExamine> Examines
+        public ObservableCollection<Examine> Examines
         {
             get { return _examines; }
             set
@@ -52,7 +51,7 @@ namespace Client.ViewModels
             }
         }
 
-        public FibrosisExamine SelectedExamine
+        public Examine SelectedExamine
         {
             get { return _selectedExamine; }
             set
@@ -68,11 +67,11 @@ namespace Client.ViewModels
             }
         }
 
-        public FibrosisExamine LastExamine => Examines.FirstOrDefault();
+        public Examine LastExamine => Examines.FirstOrDefault();
 
-        public ExamineViewModel(Patient patient, FibrosisExamine selectedExamine = null)
+        public ExamineViewModel(Patient patient, Examine selectedExamine = null)
         {
-            Examines = new ObservableCollection<FibrosisExamine>();
+            Examines = new ObservableCollection<Examine>();
             SelectedExamine = selectedExamine;
 
             Patient = patient;
@@ -88,7 +87,7 @@ namespace Client.ViewModels
             {
                 case "831223387948":
                     Examines.Add(
-                        new FibrosisExamine()
+                        new Examine()
                         {
                             CreatedAt = new DateTime(2013, 2, 1, 9, 23, 0),
                             Duration = 224,
@@ -102,9 +101,9 @@ namespace Client.ViewModels
                         });
                     break;
                 case "911001387949":
-                    Examines.AddRange(new List<FibrosisExamine>()
+                    Examines.AddRange(new List<Examine>()
                     {
-                        new FibrosisExamine()
+                        new Examine()
                         {
                             CreatedAt = new DateTime(2014, 12, 14, 10, 1, 0),
                             Duration = 326,
@@ -116,7 +115,7 @@ namespace Client.ViewModels
                             SensorType = SensorType.Medium,
                             SourceImage = "ms-appx:///Assets/Measures/1/02before.jpg"
                         },
-                        new FibrosisExamine()
+                        new Examine()
                         {
                             CreatedAt = new DateTime(2013, 8, 23, 11, 1, 0),
                             Duration = 122,
@@ -128,7 +127,7 @@ namespace Client.ViewModels
                             SensorType = SensorType.Xl,
                             SourceImage = "ms-appx:///Assets/Measures/1/06before.jpg"
                         },
-                        new FibrosisExamine()
+                        new Examine()
                         {
                             CreatedAt = new DateTime(2013, 4, 7, 16, 27, 0),
                             Duration = 248,
@@ -144,7 +143,7 @@ namespace Client.ViewModels
                     break;
                 case "831223387947":
                     Examines.Add(
-                       new FibrosisExamine()
+                       new Examine()
                        {
                            CreatedAt = new DateTime(2013, 12, 11, 13, 56, 0),
                            Duration = 228,

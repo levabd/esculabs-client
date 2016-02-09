@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Client.Helpers.Converters;
 using Client.Models;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
@@ -27,13 +28,17 @@ namespace Client.Controls
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            var image = this.DataContext as FakeMeasure;
+            var measure = DataContext as Measure;
 
-            if (image != null)
+            if (measure == null)
             {
-                CorrectGrid.Visibility = image.Correct ? Visibility.Visible : Visibility.Collapsed;
-                IncorrectGrid.Visibility = image.Correct ? Visibility.Collapsed : Visibility.Visible;
+                return;
             }
+
+            // TODO: Implement correct/incorrect measure statuses
+
+            CorrectGrid.Visibility = Visibility.Visible; //measure.Correct ? Visibility.Visible : Visibility.Collapsed;
+            IncorrectGrid.Visibility = Visibility.Collapsed;  //measure.Correct ? Visibility.Collapsed : Visibility.Visible;
         }
     }
 }

@@ -18,7 +18,6 @@ using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 using Client.Models;
 using Client.ViewModels;
-using FibrosisModule.Models;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -30,10 +29,10 @@ namespace Client.Pages
     public partial class ExaminePage : Page, INotifyPropertyChanged, INotifyPropertyChanging
     {
         private ExamineViewModel _viewModel;
-        private ObservableCollection<FakeMeasure> _images;
+        private ObservableCollection<Measure> _images;
 
 
-        public ObservableCollection<FakeMeasure> Images
+        public ObservableCollection<Measure> Images
         {
             get { return _images; }
             set
@@ -70,81 +69,7 @@ namespace Client.Pages
         {
             this.InitializeComponent();
 
-            Images = new ObservableCollection<FakeMeasure>(new List<FakeMeasure>()
-            {
-                new FakeMeasure()
-                {
-                    Correct = true,
-                    Processed = "ms-appx:///Assets/Measures/1/01before.jpg",
-                    Source = "ms-appx:///Assets/Measures/1/01after.jpg",
-                },
-                new FakeMeasure()
-                {
-                    Correct = true,
-                    Processed = "ms-appx:///Assets/Measures/1/02before.jpg",
-                    Source = "ms-appx:///Assets/Measures/1/02after.jpg",
-                },
-                new FakeMeasure()
-                {
-                    Correct = true,
-                    Processed = "ms-appx:///Assets/Measures/1/03before.jpg",
-                    Source = "ms-appx:///Assets/Measures/1/03after.jpg",
-                },
-                new FakeMeasure()
-                {
-                    Correct = true,
-                    Processed = "ms-appx:///Assets/Measures/1/04before.jpg",
-                    Source = "ms-appx:///Assets/Measures/1/04after.jpg",
-                },
-                new FakeMeasure()
-                {
-                    Correct = false,
-                    Processed = "ms-appx:///Assets/Measures/2/01before.jpg",
-                    Source = "ms-appx:///Assets/Measures/2/01after.jpg",
-                },
-                new FakeMeasure()
-                {
-                    Correct = true,
-                    Processed = "ms-appx:///Assets/Measures/1/10before.jpg",
-                    Source = "ms-appx:///Assets/Measures/1/10after.jpg",
-                },
-                new FakeMeasure()
-                {
-                    Correct = false,
-                    Processed = "ms-appx:///Assets/Measures/2/02before.jpg",
-                    Source = "ms-appx:///Assets/Measures/2/02after.jpg",
-                },
-                new FakeMeasure()
-                {
-                    Correct = true,
-                    Processed = "ms-appx:///Assets/Measures/1/05before.jpg",
-                    Source = "ms-appx:///Assets/Measures/1/05after.jpg",
-                },
-                new FakeMeasure()
-                {
-                    Correct = true,
-                    Processed = "ms-appx:///Assets/Measures/1/06before.jpg",
-                    Source = "ms-appx:///Assets/Measures/1/06after.jpg",
-                },
-                new FakeMeasure()
-                {
-                    Correct = true,
-                    Processed = "ms-appx:///Assets/Measures/1/07before.jpg",
-                    Source = "ms-appx:///Assets/Measures/1/07after.jpg",
-                },
-                new FakeMeasure()
-                {
-                    Correct = true,
-                    Processed = "ms-appx:///Assets/Measures/1/08before.jpg",
-                    Source = "ms-appx:///Assets/Measures/1/08after.jpg",
-                },
-                new FakeMeasure()
-                {
-                    Correct = true,
-                    Processed = "ms-appx:///Assets/Measures/1/09before.jpg",
-                    Source = "ms-appx:///Assets/Measures/1/09after.jpg",
-                },
-            });
+            Images = new ObservableCollection<Measure>(new List<Measure>());
 
             SetUpPageAnimation();
 
@@ -186,7 +111,7 @@ namespace Client.Pages
 
         private void MeasuresGrid_OnItemClick(object sender, ItemClickEventArgs e)
         {
-            var image = e.ClickedItem as FakeMeasure;
+            var image = e.ClickedItem as Measure;
 
             if (image == null)
             {

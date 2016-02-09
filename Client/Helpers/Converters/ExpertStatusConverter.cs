@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Cimbalino.Toolkit.Converters;
-using FibrosisModule.Models;
-
-namespace Client.Helpers.Converters
+﻿namespace Client.Helpers.Converters
 {
+    using System;
+    using System.Globalization;
+    using Cimbalino.Toolkit.Converters;
+    using Models;
+
     class ExpertStatusConverter : ValueConverterBase
     {
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)

@@ -1,9 +1,7 @@
-﻿using FibrosisModule.Models;
-using Microsoft.Data.Entity;
-
-namespace Client.Repositories
+﻿namespace Client.Repositories
 {
     using System.Linq;
+    using System.Data.Common;
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using Models;
@@ -36,5 +34,13 @@ namespace Client.Repositories
         {
             _db = new EsculabsContext();
         }
+
+        public List<Examine> GetPatientExamines(string patientIin)
+        {
+            lock (_db)
+            {
+                return _db.Examines.Where(e => e.PatientIin == patientIin).ToList();
+            }
+        } 
     }
 }

@@ -28,9 +28,9 @@ namespace Client.Pages
     /// </summary>
     public partial class MeasurePage : Page, INotifyPropertyChanged
     {
-        private FakeMeasure _image;
+        private Measure _image;
 
-        public FakeMeasure Image
+        public Measure Image
         {
             get { return _image; }
             set
@@ -68,7 +68,7 @@ namespace Client.Pages
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            Image = e.Parameter as FakeMeasure;
+            Image = e.Parameter as Measure;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
