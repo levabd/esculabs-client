@@ -1,4 +1,8 @@
-﻿using Client.Models;
+﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using Client.Models;
+using Client.Repositories;
 
 namespace Client.Pages
 {
@@ -8,23 +12,38 @@ namespace Client.Pages
     using Windows.UI.Xaml.Media.Animation;
     using ViewModels;
 
-    public partial class PatientsListPage : Page
+    public partial class PatientsListPage : INotifyPropertyChanged
     {
-        public PatientViewModel PatientViewModel { get; set; }
+        private ObservableCollection<PatientViewModel> _patients;
+
+        public ObservableCollection<PatientViewModel> Patients
+        {
+            get { return _patients; }
+            set
+            {
+                if (_patients == value)
+                {
+                    return;
+                }
+
+                _patients = value;
+                OnPropertyChanged();
+            }
+        }
 
         public PatientsListPage()
         {
             InitializeComponent();
 
+            DataContext = this;
+
             SetUpPageAnimation();
-
-            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
-
-            PatientViewModel = new PatientViewModel();
-            DataContext = PatientViewModel;
-
             PageHeader.PageName = "Список пациентов";
+
+            LoadPatients();
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         protected void SetUpPageAnimation()
         {
@@ -35,6 +54,18 @@ namespace Client.Pages
             theme.DefaultNavigationTransitionInfo = info;
             collection.Add(theme);
             Transitions = collection;
+        }
+
+        private void LoadPatients()
+        {
+            Patients = new ObservableCollection<PatientViewModel>();
+
+            var patients = PatientsRepository.Instance.GetAll();
+            foreach (var p in patients)
+            {
+                var vm = new PatientViewModel(p);
+                Patients.Add(vm);
+            }
         }
 
         private void AddPatientButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
@@ -55,6 +86,11 @@ namespace Client.Pages
       
             var frame = Window.Current.Content as Frame;
             frame?.Navigate(typeof(ExaminePage), examine);
+        }
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

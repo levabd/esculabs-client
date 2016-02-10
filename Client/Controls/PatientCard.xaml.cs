@@ -29,18 +29,15 @@ namespace Client.Controls
 
         private void ExaminesListButton_Click(object sender, RoutedEventArgs e)
         {
-            var button = sender as Button;
+            var vm = DataContext as PatientViewModel;
 
-            if (button == null)
+            if (vm == null)
             {
                 return;
             }
 
             var frame = Window.Current.Content as Frame;
-
-            //var vm = new ExamineViewModel(button.DataContext as Patient);
-
-            frame?.Navigate(typeof(ExaminesListPage), button.DataContext as ExamineViewModel);
+            frame?.Navigate(typeof(ExaminesListPage), vm);
         }
     }
 }

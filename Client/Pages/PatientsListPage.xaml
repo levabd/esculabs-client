@@ -51,7 +51,7 @@
         <GridView x:Name="PatientsList" 
                   Margin="625,200,20,0" 
                   Padding="0"
-                  ItemsSource="{Binding FilteredPatients}" 
+                  ItemsSource="{Binding Patients}" 
                   IsItemClickEnabled="True"
                   ItemClick="PatientsList_OnItemClick"
                   ScrollViewer.HorizontalScrollBarVisibility="Disabled"

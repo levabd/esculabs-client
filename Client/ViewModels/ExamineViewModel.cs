@@ -1,39 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.ApplicationModel.Core;
-using Windows.UI.Core;
-using Cimbalino.Toolkit.Extensions;
-using Client.Models;
-using Client.Repositories;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Client.ViewModels
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using Models;
+
     public class ExamineViewModel : BaseViewModel
     {
-        private Patient _patient;
-        private ObservableCollection<Examine> _examines;
+        #region private fields
 
-        private Examine _selectedExamine ;
+        private Patient                 _patient;
+        private int                     _id;
+        private string                  _patientIin;
+        private int                     _physicianId;
+        private SensorType              _sensorType;
+        private double                  _med;
+        private double                  _iqr;
+        private int                     _duration;
+        private byte[]                  _whiskerPlot;
+        private bool                    _valid;
+        private ExpertStatus            _expertStatus;
+        private string                  _fibxSource;
+        private string                  _sourceImage;
+        private string                  _processedImage;
+        private DateTime?               _createdAt;
+        private PatientMetric           _patientMetric;
+        private List<Measure>           _measures;
 
-        public ObservableCollection<Examine> Examines
-        {
-            get { return _examines; }
-            set
-            {
-                if (_examines == value)
-                {
-                    return;
-                }
-
-                OnPropertyChanging();
-                _examines = value;
-                OnPropertyChanged();
-            }
-        }
+        #endregion
 
         public Patient Patient
         {
@@ -45,120 +41,325 @@ namespace Client.ViewModels
                     return;
                 }
 
-                OnPropertyChanging();
                 _patient = value;
                 OnPropertyChanged();
             }
         }
 
-        public Examine SelectedExamine
+        public int Id
         {
-            get { return _selectedExamine; }
+            get { return _id; }
             set
             {
-                if (_selectedExamine == value)
+                if (_id == value)
                 {
                     return;
                 }
 
-                OnPropertyChanging();
-                _selectedExamine = value;
+                _id = value;
                 OnPropertyChanged();
             }
         }
 
-        public Examine LastExamine => Examines.FirstOrDefault();
-
-        public ExamineViewModel(Patient patient, Examine selectedExamine = null)
+        public string SourceImage
         {
-            Examines = new ObservableCollection<Examine>();
-            SelectedExamine = selectedExamine;
+            get { return _sourceImage; }
+            set
+            {
+                if (_sourceImage == value)
+                {
+                    return;
+                }
 
-            Patient = patient;
-
-            ReloadExamines();
+                _sourceImage = value;
+                OnPropertyChanged();
+            }
         }
 
-        private void ReloadExamines()
+        public string ProcessedImage
         {
-            Examines.Clear();
-
-            switch (Patient.Iin)
+            get { return _processedImage; }
+            set
             {
-                case "831223387948":
-                    Examines.Add(
-                        new Examine()
-                        {
-                            CreatedAt = new DateTime(2013, 2, 1, 9, 23, 0),
-                            Duration = 224,
-                            ExpertStatus = ExpertStatus.Pending,
-                            Iqr = 5.2,
-                            PatientIin = "831223387948",
-                            Valid = true,
-                            Med = 12,
-                            SensorType = SensorType.Xl,
-                            SourceImage = "ms-appx:///Assets/Measures/1/01before.jpg"
-                        });
-                    break;
-                case "911001387949":
-                    Examines.AddRange(new List<Examine>()
-                    {
-                        new Examine()
-                        {
-                            CreatedAt = new DateTime(2014, 12, 14, 10, 1, 0),
-                            Duration = 326,
-                            ExpertStatus = ExpertStatus.Pending,
-                            Iqr = 5.8,
-                            PatientIin = "911001387949",
-                            Valid = true,
-                            Med = 14.2,
-                            SensorType = SensorType.Medium,
-                            SourceImage = "ms-appx:///Assets/Measures/1/02before.jpg"
-                        },
-                        new Examine()
-                        {
-                            CreatedAt = new DateTime(2013, 8, 23, 11, 1, 0),
-                            Duration = 122,
-                            ExpertStatus = ExpertStatus.Pending,
-                            Iqr = 6.1,
-                            PatientIin = "911001387949",
-                            Valid = true,
-                            Med = 8,
-                            SensorType = SensorType.Xl,
-                            SourceImage = "ms-appx:///Assets/Measures/1/06before.jpg"
-                        },
-                        new Examine()
-                        {
-                            CreatedAt = new DateTime(2013, 4, 7, 16, 27, 0),
-                            Duration = 248,
-                            ExpertStatus = ExpertStatus.Pending,
-                            Iqr = 4.2,
-                            PatientIin = "911001387949",
-                            Valid = true,
-                            Med = 13,
-                            SensorType = SensorType.Medium,
-                            SourceImage = "ms-appx:///Assets/Measures/1/07before.jpg"
-                        }   
-                    });
-                    break;
-                case "831223387947":
-                    Examines.Add(
-                       new Examine()
-                       {
-                           CreatedAt = new DateTime(2013, 12, 11, 13, 56, 0),
-                           Duration = 228,
-                           ExpertStatus = ExpertStatus.Pending,
-                           Iqr = 8.1,
-                           PatientIin = "831223387947",
-                           Valid = true,
-                           Med = 10,
-                           SensorType = SensorType.Small,
-                           ProcessedImage = "../Assets/Measures/1/08before.jpg"
-                       });
-                    break;
-                default:
-                    break;
+                if (_processedImage == value)
+                {
+                    return;
+                }
+
+                _processedImage = value;
+                OnPropertyChanged();
             }
+        }
+
+        public string PatientIin
+        {
+            get { return _patientIin; }
+            set
+            {
+                if (_patientIin == value)
+                {
+                    return;
+                }
+
+                _patientIin = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public int PhysicianId
+        {
+            get { return _physicianId; }
+            set
+            {
+                if (_physicianId == value)
+                {
+                    return;
+                }
+
+                _physicianId = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public SensorType SensorType
+        {
+            get { return _sensorType; }
+            set
+            {
+                if (_sensorType == value)
+                {
+                    return;
+                }
+
+                _sensorType = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public double Med
+        {
+            get { return _med; }
+            set
+            {
+                if (_med == value)
+                {
+                    return;
+                }
+
+                _med = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public double Iqr
+        {
+            get { return _iqr; }
+            set
+            {
+                if (_iqr == value)
+                {
+                    return;
+                }
+
+                _iqr = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public int Duration
+        {
+            get { return _duration; }
+            set
+            {
+                if (_duration == value)
+                {
+                    return;
+                }
+
+                _duration = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public byte[] WhiskerPlot
+        {
+            get { return _whiskerPlot; }
+            set
+            {
+                if (_whiskerPlot == value)
+                {
+                    return;
+                }
+
+                _whiskerPlot = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool Valid
+        {
+            get { return _valid; }
+            set
+            {
+                if (_valid == value)
+                {
+                    return;
+                }
+
+                _valid = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ExpertStatus ExpertStatus
+        {
+            get { return _expertStatus; }
+            set
+            {
+                if (_expertStatus == value)
+                {
+                    return;
+                }
+
+                _expertStatus = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string FibxSource
+        {
+            get { return _fibxSource; }
+            set
+            {
+                if (_fibxSource == value)
+                {
+                    return;
+                }
+
+                _fibxSource = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public DateTime? CreatedAt
+        {
+            get { return _createdAt; }
+            set
+            {
+                if (_createdAt == value)
+                {
+                    return;
+                }
+
+                _createdAt = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public PatientMetric PatientMetric
+        {
+            get { return _patientMetric; }
+            set
+            {
+                if (_patientMetric == value)
+                {
+                    return;
+                }
+
+                _patientMetric = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public List<Measure> Measures
+        {
+            get { return _measures; }
+            set
+            {
+                if (_measures == value)
+                {
+                    return;
+                }
+
+                _measures = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string FormattedFibrosisStage
+        {
+            get
+            {
+                if (Med == 0)
+                {
+                    return "Нет данных";
+                }
+
+                if (Med > 12.5f)
+                {
+                    return "F4";
+                }
+
+                if (Med >= 9.6f)
+                {
+                    return "F3";
+                }
+
+                if (Med >= 7.3f)
+                {
+                    return "F2";
+                }
+
+                if (Med >= 5.9f)
+                {
+                    return "F1";
+                }
+
+                if (Med >= 1.5f)
+                {
+                    return "F0";
+                }
+
+                return "Отсутствует";
+            }
+        }
+
+        public int? IqrMed
+        {
+            get
+            {
+                try
+                {
+                    return Convert.ToInt32(Math.Round(Iqr / Med * 100));
+                }
+                catch (Exception)
+                {
+                    return null;
+                }
+            }
+        }
+
+        public bool ValidateIqrMed => IqrMed > 30;
+
+        public ExamineViewModel(Examine examine)
+        {
+            Id = examine.Id;
+            CreatedAt = examine.CreatedAt;
+            Duration = examine.Duration;
+            ExpertStatus = examine.ExpertStatus;
+            FibxSource = examine.FibxSource;
+            Iqr = examine.Iqr;
+            Measures = examine.Measures;
+            Med = examine.Med;
+            Patient = examine.Patient;
+            PatientIin = examine.PatientIin;
+            PatientMetric = examine.PatientMetric;
+            PhysicianId = examine.PhysicianId;
+            ProcessedImage = examine.ProcessedImage;
+            SensorType = examine.SensorType;
+            SourceImage = examine.SourceImage;
+            Valid = examine.Valid;
+            WhiskerPlot = examine.WhiskerPlot;
         }
     }
 }

@@ -11,166 +11,53 @@ namespace Client.Models
         Female
     }
 
-    public class Patient : BaseModel
+    public class Patient
     {
-        private string _iin;
-        private string _firstName;
-        private string _middleName;
-        private string _lastName;
-        private DateTime _birthdate;
-        private PatientGender _gender;
-        private int? _bloodGroup;
-        private bool? _rhFactor;
-//        private List<Examine> _examines;
-
         /// <summary>
         /// ИИН
         /// </summary>
         [Key]
-        public string Iin
-        {
-            get { return _iin; }
-            set
-            {
-                if (_iin == value)
-                {
-                    return;
-                }
-
-                _iin = value;
-                OnPropertyChanged();
-            }
-        }
+        public string Iin { get; set; }
 
         /// <summary>
         /// Имя
         /// </summary>
         [Required]
-        public string FirstName
-        {
-            get { return _firstName; }
-            set
-            {
-                if (_firstName == value)
-                {
-                    return;
-                }
-
-                _firstName = value;
-                OnPropertyChanged();
-            }
-        }
+        public string FirstName { get; set; }
+   
 
         /// <summary>
         /// Отчество
         /// </summary>
         [Required]
-        public string MiddleName
-        {
-            get { return _middleName; }
-            set
-            {
-                if (_middleName == value)
-                {
-                    return;
-                }
+        public string MiddleName { get; set; }
 
-                _middleName = value;
-                OnPropertyChanged();
-            }
-        }
-        
         /// <summary>
         /// Фамилия
         /// </summary>
         [Required]
-        public string LastName
-        {
-            get { return _lastName; }
-            set
-            {
-                if (_lastName == value)
-                {
-                    return;
-                }
+        public string LastName { get; set; }
 
-                _lastName = value;
-                OnPropertyChanged();
-            }
-        }
-        
         /// <summary>
         /// Дата рождения
         /// </summary>
         [Required]
-        public DateTime Birthdate
-        {
-            get { return _birthdate; }
-            set
-            {
-                if (_birthdate == value)
-                {
-                    return;
-                }
+        public DateTime Birthdate { get; set; }
 
-                _birthdate = value;
-                OnPropertyChanged();
-            }
-        }
-        
         /// <summary>
         /// Пол
         /// </summary>
-        public PatientGender Gender
-        {
-            get { return _gender; }
-            set
-            {
-                if (_gender == value)
-                {
-                    return;
-                }
-
-                _gender = value;
-                OnPropertyChanged();
-            }
-        }
+        public PatientGender Gender { get; set; }
 
         /// <summary>
         /// Группа крови
         /// </summary>
-        public int? BloodGroup
-        {
-            get { return _bloodGroup; }
-            set
-            {
-                if (_bloodGroup == value)
-                {
-                    return;
-                }
-
-                _bloodGroup = value;
-                OnPropertyChanged();
-            }
-        }
+        public int? BloodGroup { get; set; }
 
         /// <summary>
         /// Резус-фактор
         /// </summary>
-        public bool? RhFactor
-        {
-            get { return _rhFactor; }
-            set
-            {
-                if (_rhFactor == value)
-                {
-                    return;
-                }
-
-                _rhFactor = value;
-                OnPropertyChanged();
-            }
-        }
+        public bool? RhFactor { get; set; }
 
         public virtual ICollection<Examine> Examines { get; set; }
 

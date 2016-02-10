@@ -1,189 +1,221 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
-using System.Threading.Tasks;
-using Windows.ApplicationModel.Core;
-using Windows.UI.Core;
-using Windows.UI.Xaml.Data;
-using Cimbalino.Toolkit.Extensions;
 
 namespace Client.ViewModels
 {
-    using System.Collections.ObjectModel;
-    using Repositories;
+    using System;
+    using System.ComponentModel.DataAnnotations;
     using Models;
 
     public class PatientViewModel : BaseViewModel
     {
-        #region Filter properties
+        private string _iin;
+        private string _firstName;
+        private string _middleName;
+        private string _lastName;
+        private DateTime _birthdate;
+        private PatientGender _gender;
+        private int? _bloodGroup;
+        private bool? _rhFactor;
+        private ObservableCollection<ExamineViewModel> _examines;
 
-        private string _nameFilter;
-        private string _iinFilter;
-        private string _fibrosisStageFilter;
-        private string _stiffnessFilter;
-        private string _expertSatusFilter;
-        private string _systemStatusFilter;
-
-        public string NameFilter
+        public string Iin
         {
-            get { return _nameFilter; }
+            get { return _iin; }
             set
             {
-                if (_nameFilter == value)
+                if (_iin == value)
                 {
                     return;
                 }
 
-                OnPropertyChanging();
-                _nameFilter = value;
+                _iin = value;
                 OnPropertyChanged();
             }
         }
 
-
-        public string IinFilter
+        public string FirstName
         {
-            get { return _iinFilter; }
+            get { return _firstName; }
             set
             {
-                if (_iinFilter == value)
+                if (_firstName == value)
                 {
                     return;
                 }
 
-                OnPropertyChanging();
-                _iinFilter = value;
+                _firstName = value;
                 OnPropertyChanged();
             }
         }
 
-        public string FibrosisStageFilter
+        public string MiddleName
         {
-            get { return _fibrosisStageFilter; }
+            get { return _middleName; }
             set
             {
-                if (_fibrosisStageFilter == value)
+                if (_middleName == value)
                 {
                     return;
                 }
 
-                OnPropertyChanging();
-                _fibrosisStageFilter = value;
+                _middleName = value;
                 OnPropertyChanged();
             }
         }
-
-        public string StiffnessFilter
+        
+        public string LastName
         {
-            get { return _stiffnessFilter; }
+            get { return _lastName; }
             set
             {
-                if (_stiffnessFilter == value)
+                if (_lastName == value)
                 {
                     return;
                 }
 
-                OnPropertyChanging();
-                _stiffnessFilter = value;
+                _lastName = value;
                 OnPropertyChanged();
             }
         }
-
-        public string ExtpertStatusFilter
+        
+        public DateTime Birthdate
         {
-            get { return _expertSatusFilter; }
+            get { return _birthdate; }
             set
             {
-                if (_expertSatusFilter == value)
+                if (_birthdate == value)
                 {
                     return;
                 }
 
-                OnPropertyChanging();
-                _expertSatusFilter = value;
+                _birthdate = value;
                 OnPropertyChanged();
             }
         }
-
-        public string SystemStatusFilter
+        
+        public PatientGender Gender
         {
-            get { return _systemStatusFilter; }
+            get { return _gender; }
             set
             {
-                if (_systemStatusFilter == value)
+                if (_gender == value)
                 {
                     return;
                 }
 
-                OnPropertyChanging();
-                _systemStatusFilter = value;
+                _gender = value;
                 OnPropertyChanged();
             }
         }
 
-        #endregion
-
-        private ObservableCollection<Patient> _patients;
-        private ObservableCollection<Patient> _filteredPatients;
-
-        public ObservableCollection<Patient> Patients
+        public int? BloodGroup
         {
-            get { return _patients; }
+            get { return _bloodGroup; }
             set
             {
-                if (_patients == value)
+                if (_bloodGroup == value)
                 {
                     return;
                 }
 
-                OnPropertyChanging();
-                _patients = value;
+                _bloodGroup = value;
                 OnPropertyChanged();
             }
         }
 
-        public ObservableCollection<Patient> FilteredPatients
+        public bool? RhFactor
         {
-            get { return _filteredPatients; }
+            get { return _rhFactor; }
             set
             {
-                if (_filteredPatients == value)
+                if (_rhFactor == value)
                 {
                     return;
                 }
 
-                OnPropertyChanging();
-                _filteredPatients = value;
+                _rhFactor = value;
                 OnPropertyChanged();
             }
         }
 
-        public PatientViewModel()
+        public ObservableCollection<ExamineViewModel> Examines
         {
-            Patients = new ObservableCollection<Patient>();
-            FilteredPatients = new ObservableCollection<Patient>();
-
-            ReloadPatients();
-        }
-
-        private void RefreshFilter()
-        {
-
-        }
-
-        private void ReloadPatients()
-        {
-            Patients.Clear();
-            FilteredPatients.Clear();
-
-            var patients = PatientsRepository.Instance.GetAll();
-            foreach (var p in patients)
+            get { return _examines; }
+            set
             {
-                Patients.Add(p);
-                FilteredPatients.Add(p);
+                if (_examines == value)
+                {
+                    return;
+                }
+
+                _examines = value;
+                OnPropertyChanged();
+                OnPropertyChanged("LastExamine");
+            }
+        }
+
+        public ExamineViewModel LastExamine => Examines.LastOrDefault();
+
+        public string FormattedFullName => $"{LastName} {FirstName} {MiddleName}";
+
+        public string FormattedInitials => $"{LastName} {FirstName.ToUpper().Substring(0, 1)} {MiddleName.ToUpper().Substring(0, 1)}";
+
+        public string FormattedBloodGroup
+        {
+            get
+            {
+                string group;
+
+                switch (BloodGroup)
+                {
+                    case 1:
+                        group = "o (I)";
+                        break;
+                    case 2:
+                        group = "A (II)";
+                        break;
+                    case 3:
+                        group = "B (III)";
+                        break;
+                    case 4:
+                        group = "AB (IV)";
+                        break;
+                    default:
+                        group = "Нет данных";
+                        break;
+                }
+
+                string rh = "";
+                if (RhFactor.HasValue)
+                {
+                    var t = RhFactor.Value ? "+" : "-";
+                    rh = $" (Rh{t})";
+                }
+
+                return $"{group}{rh}";
+            }
+        }
+
+        public PatientViewModel(Patient patient)
+        {
+            Birthdate = patient.Birthdate;
+            BloodGroup = patient.BloodGroup;
+
+            Examines = new ObservableCollection<ExamineViewModel>();
+            foreach (var examine in patient.Examines)
+            {
+                var vm = new ExamineViewModel(examine);
+                Examines.Add(vm);
             }
 
-           
+            FirstName = patient.FirstName;
+            Gender = patient.Gender;
+            Iin = patient.Iin;
+            LastName = patient.LastName;
+            MiddleName = patient.MiddleName;
+            RhFactor = patient.RhFactor;
         }
     }
 }

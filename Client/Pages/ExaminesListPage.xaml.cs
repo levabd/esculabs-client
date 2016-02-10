@@ -1,4 +1,6 @@
 ﻿
+using System.Collections.ObjectModel;
+
 namespace Client.Pages
 {
     using System.ComponentModel;
@@ -15,19 +17,35 @@ namespace Client.Pages
     /// </summary>
     public partial class ExaminesListPage : Page, INotifyPropertyChanged
     {
-        private ExamineViewModel _viewModel;
+        private ObservableCollection<ExamineViewModel> _examines;
+        private PatientViewModel _patient;
 
-        public ExamineViewModel ViewModel
+        public ObservableCollection<ExamineViewModel> Examines
         {
-            get { return _viewModel; }
+            get { return _examines; }
             set
             {
-                if (_viewModel == value)
+                if (_examines == value)
                 {
                     return;
                 }
 
-                _viewModel = value;
+                _examines = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public PatientViewModel Patient
+        {
+            get { return _patient; }
+            set
+            {
+                if (_patient == value)
+                {
+                    return;
+                }
+
+                _patient = value;
                 OnPropertyChanged();
             }
         }
@@ -39,7 +57,6 @@ namespace Client.Pages
             DataContext = this;
 
             SetUpPageAnimation();
-
             PageHeader.PageName = "Список обследований пациента";
         }
 
@@ -56,7 +73,15 @@ namespace Client.Pages
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            ViewModel = e.Parameter as ExamineViewModel;
+            var patient = e.Parameter as PatientViewModel;
+
+            if (patient == null)
+            {
+                return;
+            }
+
+            Patient = patient;
+            Examines = patient.Examines;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -68,17 +93,15 @@ namespace Client.Pages
 
         private void ExaminesList_OnItemClick(object sender, ItemClickEventArgs e)
         {
-            var examine = e.ClickedItem as Examine;
+            var examine = e.ClickedItem as ExamineViewModel;
 
             if (examine == null)
             {
                 return;
             }
 
-            ViewModel.SelectedExamine = examine;
-
             var frame = Window.Current.Content as Frame;
-            frame?.Navigate(typeof(ExaminePage), ViewModel);
+            frame?.Navigate(typeof(ExaminePage), examine);
         }
     }
 }
