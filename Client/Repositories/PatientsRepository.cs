@@ -40,5 +40,10 @@ namespace Client.Repositories
         {
             return _db.Patients.Include(p => p.Examines).ToList();
         }
+
+        public void SaveChanges()
+        {
+            _db.SaveChanges();
+        }
     }
 }

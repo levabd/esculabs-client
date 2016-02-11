@@ -14,36 +14,31 @@ namespace Client.Pages
 
     public partial class PatientsListPage : INotifyPropertyChanged
     {
-        private ObservableCollection<PatientViewModel> _patients;
+        private PatientViewModel _viewModel;
 
-        public ObservableCollection<PatientViewModel> Patients
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public PatientViewModel ViewModel
         {
-            get { return _patients; }
+            get { return _viewModel; }
             set
             {
-                if (_patients == value)
-                {
-                    return;
-                }
-
-                _patients = value;
+                _viewModel = value;
                 OnPropertyChanged();
             }
         }
-
+        
         public PatientsListPage()
         {
             InitializeComponent();
 
-            DataContext = this;
+            ViewModel = new PatientViewModel();
+            DataContext = ViewModel;
 
             SetUpPageAnimation();
             PageHeader.PageName = "Список пациентов";
-
-            LoadPatients();
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
 
         protected void SetUpPageAnimation()
         {
@@ -54,18 +49,6 @@ namespace Client.Pages
             theme.DefaultNavigationTransitionInfo = info;
             collection.Add(theme);
             Transitions = collection;
-        }
-
-        private void LoadPatients()
-        {
-            Patients = new ObservableCollection<PatientViewModel>();
-
-            var patients = PatientsRepository.Instance.GetAll();
-            foreach (var p in patients)
-            {
-                var vm = new PatientViewModel(p);
-                Patients.Add(vm);
-            }
         }
 
         private void AddPatientButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)

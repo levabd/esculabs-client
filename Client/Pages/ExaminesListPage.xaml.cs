@@ -15,37 +15,21 @@ namespace Client.Pages
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public partial class ExaminesListPage : Page, INotifyPropertyChanged
+    public partial class ExaminesListPage : INotifyPropertyChanged
     {
-        private ObservableCollection<ExamineViewModel> _examines;
-        private PatientViewModel _patient;
+        private ExamineViewModel _viewModel;
 
-        public ObservableCollection<ExamineViewModel> Examines
+        public ExamineViewModel ViewModel
         {
-            get { return _examines; }
+            get { return _viewModel; }
             set
             {
-                if (_examines == value)
+                if (_viewModel == value)
                 {
                     return;
                 }
 
-                _examines = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public PatientViewModel Patient
-        {
-            get { return _patient; }
-            set
-            {
-                if (_patient == value)
-                {
-                    return;
-                }
-
-                _patient = value;
+                _viewModel = value;
                 OnPropertyChanged();
             }
         }
@@ -54,7 +38,7 @@ namespace Client.Pages
         {
             InitializeComponent();
 
-            DataContext = this;
+            DataContext = ViewModel;
 
             SetUpPageAnimation();
             PageHeader.PageName = "Список обследований пациента";
@@ -73,22 +57,14 @@ namespace Client.Pages
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            var patient = e.Parameter as PatientViewModel;
+            var viewModel = e.Parameter as ExamineViewModel;
 
-            if (patient == null)
+            if (viewModel == null)
             {
                 return;
             }
 
-            Patient = patient;
-            Examines = patient.Examines;
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            ViewModel = viewModel;
         }
 
         private void ExaminesList_OnItemClick(object sender, ItemClickEventArgs e)
@@ -102,6 +78,13 @@ namespace Client.Pages
 
             var frame = Window.Current.Content as Frame;
             frame?.Navigate(typeof(ExaminePage), examine);
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

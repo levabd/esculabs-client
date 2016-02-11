@@ -56,7 +56,5 @@ namespace Client.Repositories
                 return null;
             }
         }
-
-
     }
 }

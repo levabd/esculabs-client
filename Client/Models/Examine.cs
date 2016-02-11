@@ -17,35 +17,160 @@ namespace Client.Models
 
     public class Examine : BaseModel
     {
-        public int              Id { get; set; }
+        private int _id;
+        private Patient _patient;
+        private User _user;
+        private string _sensorType;
+        private double _med;
+        private double _iqr;
+        private int _duration;
+        private byte[] _whiskerPlot;
+        private bool _valid;
+        private ExpertStatus _expertStatus;
+        private string _fibxSource;
+        private DateTime? _createdAt;
+        private PatientMetric _patientMetric;
+        private List<Measure> _measures;
+
+        public int Id
+        {
+            get { return _id; }
+            set
+            {
+                _id = value;
+                OnPropertyChanged();
+            }
+        }
 
         [Required]
-        public Patient          Patient { get; set; }
+        public Patient Patient
+        {
+            get { return _patient; }
+            set
+            {
+                _patient = value;
+                OnPropertyChanged();
+            }
+        }
 
-        public User             User { get; set; }
+        public User User
+        {
+            get { return _user; }
+            set
+            {
+                _user = value;
+                OnPropertyChanged();
+            }
+        }
 
-        //public string           PatientIin { get; set; }
+        public string SensorType
+        {
+            get { return _sensorType; }
+            set
+            {
+                _sensorType = value;
+                OnPropertyChanged();
+            }
+        }
 
-        public string           SensorType { get; set; }
+        public double Med
+        {
+            get { return _med; }
+            set
+            {
+                _med = value;
+                OnPropertyChanged();
+            }
+        }
 
-        public double           Med { get; set; }
+        public double Iqr
+        {
+            get { return _iqr; }
+            set
+            {
+                _iqr = value;
+                OnPropertyChanged();
+            }
+        }
 
-        public double           Iqr { get; set; }
+        public int Duration
+        {
+            get { return _duration; }
+            set
+            {
+                _duration = value;
+                OnPropertyChanged();
+            }
+        }
 
-        public int              Duration { get; set; }
+        public byte[] WhiskerPlot
+        {
+            get { return _whiskerPlot; }
+            set
+            {
+                _whiskerPlot = value;
+                OnPropertyChanged();
+            }
+        }
 
-        public byte[]           WhiskerPlot { get; set; }
+        public bool Valid
+        {
+            get { return _valid; }
+            set
+            {
+                _valid = value;
+                OnPropertyChanged();
+            }
+        }
 
-        public bool             Valid { get; set; }
+        public ExpertStatus ExpertStatus
+        {
+            get { return _expertStatus; }
+            set
+            {
+                _expertStatus = value;
+                OnPropertyChanged();
+            }
+        }
 
-        public ExpertStatus     ExpertStatus { get; set; }
+        public string FibxSource
+        {
+            get { return _fibxSource; }
+            set
+            {
+                _fibxSource = value;
+                OnPropertyChanged();
+            }
+        }
 
-        public string           FibxSource { get; set; }
+        public DateTime? CreatedAt
+        {
+            get { return _createdAt; }
+            set
+            {
+                _createdAt = value;
+                OnPropertyChanged();
+            }
+        }
 
-        public DateTime?        CreatedAt { get; set; }
+        public PatientMetric PatientMetric
+        {
+            get { return _patientMetric; }
+            set
+            {
+                _patientMetric = value;
+                OnPropertyChanged();
+            }
+        }
 
-        public PatientMetric    PatientMetric { get; set; }
-
-        public List<Measure>    Measures { get; set; }
+        public List<Measure> Measures
+        {
+            get { return _measures; }
+            set
+            {
+                _measures = value;
+                OnPropertyChanged();
+            }
+        }
     }
 }

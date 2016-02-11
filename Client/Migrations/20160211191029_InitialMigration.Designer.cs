@@ -8,7 +8,7 @@ using Client.Context;
 namespace Client.Migrations
 {
     [DbContext(typeof(EsculabsContext))]
-    [Migration("20160211120732_InitialMigration")]
+    [Migration("20160211191029_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

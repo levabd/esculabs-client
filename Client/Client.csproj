@@ -125,9 +125,9 @@
     <Compile Include="Helpers\DatabaseSeeder.cs" />
     <Compile Include="Helpers\Encryption.cs" />
     <Compile Include="Helpers\FibxImporter.cs" />
-    <Compile Include="Migrations\20160211120732_InitialMigration.cs" />
-    <Compile Include="Migrations\20160211120732_InitialMigration.designer.cs">
-      <DependentUpon>20160211120732_InitialMigration.cs</DependentUpon>
+    <Compile Include="Migrations\20160211191029_InitialMigration.cs" />
+    <Compile Include="Migrations\20160211191029_InitialMigration.designer.cs">
+      <DependentUpon>20160211191029_InitialMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\EsculabsContextModelSnapshot.cs" />
     <Compile Include="Models\BaseModel.cs" />

@@ -1,10 +1,14 @@
-﻿namespace Client.Controls
+﻿
+
+namespace Client.Controls
 {
     using Windows.UI.Xaml;
     using Windows.UI.Xaml.Controls;
     using Helpers;
     using Pages;
+    using Models;
     using ViewModels;
+
 
     public sealed partial class PatientCard : UserControl
     {
@@ -15,20 +19,20 @@
 
         private void ShowExaminesListButton_Click(object sender, RoutedEventArgs e)
         {
-            var vm = DataContext as PatientViewModel;
+            var p = DataContext as Patient;
 
-            if (vm == null)
+            if (p == null)
             {
                 return;
             }
 
             var frame = Window.Current.Content as Frame;
-            frame?.Navigate(typeof(ExaminesListPage), vm);
+            frame?.Navigate(typeof(ExaminesListPage), new ExamineViewModel(p));
         }
 
         private async void AddExamineButton_Click(object sender, RoutedEventArgs e)
         {
-            var importer = new FibxImporter(DataContext as PatientViewModel);
+            var importer = new FibxImporter(DataContext as Patient);
 
             await importer.OpenFile();
         }

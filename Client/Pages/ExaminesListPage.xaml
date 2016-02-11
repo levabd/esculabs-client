@@ -6,7 +6,13 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Client.Controls"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:behaviors="using:Cimbalino.Toolkit.Behaviors"
+    xmlns:c="using:Client.Helpers.Converters"
     mc:Ignorable="d">
+    <Page.Resources>
+        <c:FullNameConverter x:Key="FullNameConverter"/>
+    </Page.Resources>
     <Grid >
         <controls:PageHeader x:Name="PageHeader"/>
         <TextBlock HorizontalAlignment="Left" Margin="115,140,0,0" Text="Фильтр" VerticalAlignment="Top" FontWeight="Light" FontSize="34"/>
@@ -28,7 +34,15 @@
                 </Button>
             </Grid>
         </Grid>
-        <TextBlock HorizontalAlignment="Left" Text="{Binding Patient.FormattedFullName}" Margin="625,140,0,0" VerticalAlignment="Top" FontWeight="Light" FontSize="34"/>
+        <TextBlock HorizontalAlignment="Left" Margin="625,140,0,0" VerticalAlignment="Top" FontWeight="Light" FontSize="34">
+            <interactivity:Interaction.Behaviors>
+                <behaviors:MultiBindingBehavior Converter="{StaticResource FullNameConverter}" PropertyName="Text">
+                    <behaviors:MultiBindingItem Value="{Binding LastName}" />
+                    <behaviors:MultiBindingItem Value="{Binding FirstName}" />
+                    <behaviors:MultiBindingItem Value="{Binding MiddleName}" />
+                </behaviors:MultiBindingBehavior>
+            </interactivity:Interaction.Behaviors>
+        </TextBlock>
         <GridView  
                   Margin="625,200,20,0" 
                   Padding="0"
@@ -47,4 +61,6 @@
         </GridView>
     </Grid>
 </Page>
+
+
 

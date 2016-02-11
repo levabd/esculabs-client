@@ -1,6 +1,7 @@
 ﻿using Windows.Storage.Streams;
 using Windows.UI.Xaml.Media.Imaging;
 using Client.Context;
+using Client.Repositories;
 using Microsoft.Data.Entity;
 
 namespace Client.Helpers
@@ -18,11 +19,11 @@ namespace Client.Helpers
 
     public sealed class FibxImporter
     {
-        private PatientViewModel _patient;
+        private Patient Patient { get; set; }
 
-        public FibxImporter(PatientViewModel patient)
+        public FibxImporter(Patient patient)
         {
-            _patient = patient;
+            Patient = patient;
         }
 
         public async Task<bool> OpenFile()
@@ -120,7 +121,7 @@ namespace Client.Helpers
 
             var examine = new Examine
             {
-                Patient = _patient.Patient,
+                Patient = Patient,
                 PatientMetric = null,
                 FibxSource = fileName,
                 CreatedAt = reportObj.Exam.Date,
@@ -149,14 +150,9 @@ namespace Client.Helpers
             //}
 
 
- //           _patient.SaveChanges();
 
-            //using (var db = new EsculabsContext())
-            //{
-            //    db.Entry(_patient).State = EntityState.Modified;
-            //    _patient.Examines.Add(examine);
-            //    db.SaveChanges();
-            //}
+            Patient.Examines.Add(examine);
+            PatientsRepository.Instance.SaveChanges();
 
             return true;
         }
@@ -164,7 +160,7 @@ namespace Client.Helpers
         private async Task<byte[]> ConvertImagetoByte(StorageFile image)
         {
             IRandomAccessStream fileStream = await image.OpenAsync(FileAccessMode.Read);
-            var reader = new Windows.Storage.Streams.DataReader(fileStream.GetInputStreamAt(0));
+            var reader = new DataReader(fileStream.GetInputStreamAt(0));
             await reader.LoadAsync((uint)fileStream.Size);
 
             byte[] pixels = new byte[fileStream.Size];
