@@ -11,11 +11,12 @@ namespace Client.ViewModels
     {
         #region private fields
 
+        private Examine                 _examine;
         private Patient                 _patient;
+        private User                    _user;
+
         private int                     _id;
-        private string                  _patientIin;
-        private int                     _physicianId;
-        private SensorType              _sensorType;
+        private string                  _sensorType;
         private double                  _med;
         private double                  _iqr;
         private int                     _duration;
@@ -23,13 +24,26 @@ namespace Client.ViewModels
         private bool                    _valid;
         private ExpertStatus            _expertStatus;
         private string                  _fibxSource;
-        private string                  _sourceImage;
-        private string                  _processedImage;
         private DateTime?               _createdAt;
         private PatientMetric           _patientMetric;
         private List<Measure>           _measures;
 
         #endregion
+
+        public Examine Examine
+        {
+            get { return _examine; }
+            set
+            {
+                if (_examine == value)
+                {
+                    return;
+                }
+
+                _examine = value;
+                OnPropertyChanged();
+            }
+        }
 
         public Patient Patient
         {
@@ -42,6 +56,21 @@ namespace Client.ViewModels
                 }
 
                 _patient = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public User User
+        {
+            get { return _user; }
+            set
+            {
+                if (_user == value)
+                {
+                    return;
+                }
+
+                _user = value;
                 OnPropertyChanged();
             }
         }
@@ -61,67 +90,7 @@ namespace Client.ViewModels
             }
         }
 
-        public string SourceImage
-        {
-            get { return _sourceImage; }
-            set
-            {
-                if (_sourceImage == value)
-                {
-                    return;
-                }
-
-                _sourceImage = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public string ProcessedImage
-        {
-            get { return _processedImage; }
-            set
-            {
-                if (_processedImage == value)
-                {
-                    return;
-                }
-
-                _processedImage = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public string PatientIin
-        {
-            get { return _patientIin; }
-            set
-            {
-                if (_patientIin == value)
-                {
-                    return;
-                }
-
-                _patientIin = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public int PhysicianId
-        {
-            get { return _physicianId; }
-            set
-            {
-                if (_physicianId == value)
-                {
-                    return;
-                }
-
-                _physicianId = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public SensorType SensorType
+        public string SensorType
         {
             get { return _sensorType; }
             set
@@ -352,12 +321,10 @@ namespace Client.ViewModels
             Measures = examine.Measures;
             Med = examine.Med;
             Patient = examine.Patient;
-            PatientIin = examine.PatientIin;
+           // PatientIin = examine.PatientIin;
             PatientMetric = examine.PatientMetric;
-            PhysicianId = examine.PhysicianId;
-            ProcessedImage = examine.ProcessedImage;
+           // UserId = examine.UserId;
             SensorType = examine.SensorType;
-            SourceImage = examine.SourceImage;
             Valid = examine.Valid;
             WhiskerPlot = examine.WhiskerPlot;
         }

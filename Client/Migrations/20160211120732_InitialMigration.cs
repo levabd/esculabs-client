@@ -4,7 +4,7 @@ using Microsoft.Data.Entity.Migrations;
 
 namespace Client.Migrations
 {
-    public partial class CreateTables : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -69,12 +69,10 @@ namespace Client.Migrations
                     FibxSource = table.Column<string>(nullable: true),
                     Iqr = table.Column<double>(nullable: false),
                     Med = table.Column<double>(nullable: false),
-                    PatientIin = table.Column<string>(nullable: true),
+                    PatientIin = table.Column<string>(nullable: false),
                     PatientMetricId = table.Column<int>(nullable: true),
-                    PhysicianId = table.Column<int>(nullable: false),
-                    ProcessedImage = table.Column<string>(nullable: true),
-                    SensorType = table.Column<int>(nullable: false),
-                    SourceImage = table.Column<string>(nullable: true),
+                    SensorType = table.Column<string>(nullable: true),
+                    UserId = table.Column<int>(nullable: true),
                     Valid = table.Column<bool>(nullable: false),
                     WhiskerPlot = table.Column<byte[]>(nullable: true)
                 },
@@ -86,11 +84,17 @@ namespace Client.Migrations
                         column: x => x.PatientIin,
                         principalTable: "Patient",
                         principalColumn: "Iin",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Examine_PatientMetric_PatientMetricId",
                         column: x => x.PatientMetricId,
                         principalTable: "PatientMetric",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Examine_User_UserId",
+                        column: x => x.UserId,
+                        principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -102,10 +106,7 @@ namespace Client.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     CreatedAt = table.Column<DateTime>(nullable: true),
                     ExamineId = table.Column<int>(nullable: false),
-                    ResultElasto = table.Column<byte[]>(nullable: true),
                     ResultMerged = table.Column<byte[]>(nullable: true),
-                    ResultModeA = table.Column<byte[]>(nullable: true),
-                    ResultModeM = table.Column<byte[]>(nullable: true),
                     Source = table.Column<byte[]>(nullable: true),
                     Stiffness = table.Column<double>(nullable: false),
                     ValidationElasto = table.Column<int>(nullable: false),
@@ -127,10 +128,10 @@ namespace Client.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable("Measure");
-            migrationBuilder.DropTable("User");
             migrationBuilder.DropTable("Examine");
             migrationBuilder.DropTable("Patient");
             migrationBuilder.DropTable("PatientMetric");
+            migrationBuilder.DropTable("User");
         }
     }
 }

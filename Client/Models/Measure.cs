@@ -1,4 +1,7 @@
-﻿namespace Client.Models
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Client.Models
 {
     using System;
     using System.ComponentModel;
@@ -11,15 +14,12 @@
         private int             _id;
         private byte[]          _source;
         private byte[]          _resultMerged;
-        private byte[]          _resultModeA;
-        private byte[]          _resultModeM;
-        private byte[]          _resultElasto;
         private int             _validationModeA;
         private int             _validationModeM;
         private int             _validationElasto;
         private double          _stiffness;
         private DateTime?       _createdAt;
-        private int             _examineId;
+
         private Examine         _examine;
 
         public int Id
@@ -67,50 +67,6 @@
             }
         }
 
-        public byte[] ResultModeA
-        {
-            get { return _resultModeA; }
-            set
-            {
-                if (_resultModeA == value)
-                {
-                    return;
-                }
-
-                _resultModeA = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public byte[] ResultModeM
-        {
-            get { return _resultModeM; }
-            set
-            {
-                if (_resultModeM == value)
-                {
-                    return;
-                }
-
-                _resultModeM = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public byte[] ResultElasto
-        {
-            get { return _resultElasto; }
-            set
-            {
-                if (_resultElasto == value)
-                {
-                    return;
-                }
-
-                _resultElasto = value;
-                OnPropertyChanged();
-            }
-        }
 
         public int ValidationModeA
         {
@@ -187,21 +143,7 @@
             }
         }
 
-        public int ExamineId
-        {
-            get { return _examineId; }
-            set
-            {
-                if (_examineId == value)
-                {
-                    return;
-                }
-
-                _examineId = value;
-                OnPropertyChanged();
-            }
-        }
-
+        [Required]
         public Examine Examine
         {
             get { return _examine; }

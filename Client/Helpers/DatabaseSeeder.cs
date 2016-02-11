@@ -108,6 +108,8 @@ namespace Client.Helpers
                 }
             );
 
+            context.SaveChanges();
+
             return true;
         }
 
@@ -131,6 +133,8 @@ namespace Client.Helpers
                 }
             );
 
+            context.SaveChanges();
+
             return true;
         }
 
@@ -144,17 +148,19 @@ namespace Client.Helpers
             context.Examines.Add(
                 new Examine
                 {
-                    PatientIin = "62623387657",
+                    Patient = context.Patients.LastOrDefault(),
                     Duration = 233,
                     CreatedAt = new DateTime(),
                     ExpertStatus = ExpertStatus.Confirmed,
                     FibxSource = "nope",
                     Iqr = 10,
                     Med = 5.2,
-                    SensorType = SensorType.Xl,
+                    SensorType = "XL",
                     Valid = true
                 }
             );
+
+            context.SaveChanges();
 
             return true;
         }

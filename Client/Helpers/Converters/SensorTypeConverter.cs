@@ -9,9 +9,17 @@
     {
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var sensorType = value as SensorType?;
+            var sensor = value as string;
 
-            return sensorType?.ToString().ToUpper();
+            switch (sensor)
+            {
+                case "S":
+                    return "Small";
+                case "M":
+                    return "Medium";
+                default:
+                    return sensor;
+            }
         }
 
         public override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

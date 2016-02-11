@@ -32,17 +32,14 @@ namespace Client.Migrations
 
                     b.Property<double>("Med");
 
-                    b.Property<string>("PatientIin");
+                    b.Property<string>("PatientIin")
+                        .IsRequired();
 
                     b.Property<int?>("PatientMetricId");
 
-                    b.Property<int>("PhysicianId");
+                    b.Property<string>("SensorType");
 
-                    b.Property<string>("ProcessedImage");
-
-                    b.Property<int>("SensorType");
-
-                    b.Property<string>("SourceImage");
+                    b.Property<int?>("UserId");
 
                     b.Property<bool>("Valid");
 
@@ -58,15 +55,10 @@ namespace Client.Migrations
 
                     b.Property<DateTime?>("CreatedAt");
 
-                    b.Property<int>("ExamineId");
-
-                    b.Property<byte[]>("ResultElasto");
+                    b.Property<int?>("ExamineId")
+                        .IsRequired();
 
                     b.Property<byte[]>("ResultMerged");
-
-                    b.Property<byte[]>("ResultModeA");
-
-                    b.Property<byte[]>("ResultModeM");
 
                     b.Property<byte[]>("Source");
 
@@ -157,6 +149,10 @@ namespace Client.Migrations
                     b.HasOne("Client.Models.PatientMetric")
                         .WithMany()
                         .HasForeignKey("PatientMetricId");
+
+                    b.HasOne("Client.Models.User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Client.Models.Measure", b =>

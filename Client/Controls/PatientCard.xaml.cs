@@ -1,25 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
-using Client.Models;
-using Client.Pages;
-using Client.ViewModels;
-
-// The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
-
-namespace Client.Controls
+﻿namespace Client.Controls
 {
+    using Windows.UI.Xaml;
+    using Windows.UI.Xaml.Controls;
+    using Helpers;
+    using Pages;
+    using ViewModels;
+
     public sealed partial class PatientCard : UserControl
     {
         public PatientCard()
@@ -27,7 +13,7 @@ namespace Client.Controls
             this.InitializeComponent();
         }
 
-        private void ExaminesListButton_Click(object sender, RoutedEventArgs e)
+        private void ShowExaminesListButton_Click(object sender, RoutedEventArgs e)
         {
             var vm = DataContext as PatientViewModel;
 
@@ -38,6 +24,13 @@ namespace Client.Controls
 
             var frame = Window.Current.Content as Frame;
             frame?.Navigate(typeof(ExaminesListPage), vm);
+        }
+
+        private async void AddExamineButton_Click(object sender, RoutedEventArgs e)
+        {
+            var importer = new FibxImporter(DataContext as PatientViewModel);
+
+            await importer.OpenFile();
         }
     }
 }

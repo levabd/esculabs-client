@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Client.Context;
+using Microsoft.Data.Entity;
 
 namespace Client.ViewModels
 {
@@ -10,6 +12,8 @@ namespace Client.ViewModels
 
     public class PatientViewModel : BaseViewModel
     {
+        private Patient _patient;
+
         private string _iin;
         private string _firstName;
         private string _middleName;
@@ -19,6 +23,21 @@ namespace Client.ViewModels
         private int? _bloodGroup;
         private bool? _rhFactor;
         private ObservableCollection<ExamineViewModel> _examines;
+
+        public Patient Patient
+        {
+            get { return _patient; }
+            set
+            {
+                if (_patient == value)
+                {
+                    return;
+                }
+
+                _patient = value;
+                OnPropertyChanged();
+            }
+        }
 
         public string Iin
         {
@@ -210,12 +229,38 @@ namespace Client.ViewModels
                 Examines.Add(vm);
             }
 
+            Patient = patient;
             FirstName = patient.FirstName;
             Gender = patient.Gender;
             Iin = patient.Iin;
             LastName = patient.LastName;
             MiddleName = patient.MiddleName;
             RhFactor = patient.RhFactor;
+        }
+
+        public void SaveChanges()
+        {
+            using (var db = new EsculabsContext())
+            {
+                db.Entry(Patient).State = EntityState.Modified;
+
+                Patient.Iin = Iin;
+                Patient.FirstName = FirstName;
+                Patient.MiddleName = MiddleName;
+                Patient.LastName = LastName;
+                Patient.RhFactor = RhFactor;
+                Patient.BloodGroup = BloodGroup;
+                Patient.Birthdate = Birthdate;
+                Patient.Gender = Gender;
+
+                foreach (var examineViewModel in Examines)
+                {
+                    
+                }
+                //Patient.Examines = Examines;
+
+                db.SaveChanges();
+            }
         }
     }
 }

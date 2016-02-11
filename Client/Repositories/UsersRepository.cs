@@ -51,12 +51,10 @@ namespace Client.Repositories
                 return _db.Users.FirstOrDefault(x => lowerLogin.Equals(x.Login.ToLower()) 
                         && encryptedPass == x.Password);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                //_log.Error($"Failed authorization result. Username = {login}, Reason: {e.Message}");
+                return null;
             }
-
-            return null;
         }
 
 

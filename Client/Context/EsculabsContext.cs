@@ -22,16 +22,17 @@ namespace Client.Context
         {
             modelBuilder.Entity<Patient>()
                 .HasMany(p => p.Examines)
-                .WithOne(b => b.Patient)
-                .HasForeignKey(p => p.PatientIin);
+                .WithOne(b => b.Patient);
 
             modelBuilder.Entity<Examine>()
                 .HasMany(p => p.Measures)
-                .WithOne(b => b.Examine)
-                .HasForeignKey(p => p.ExamineId);
+                .WithOne(b => b.Examine);
 
             modelBuilder.Entity<Examine>()
                 .HasOne(p => p.PatientMetric);
+
+            modelBuilder.Entity<Examine>()
+                .HasOne(p => p.User);
 
             //    .Property(e => e.Iin)
             //    .IsRequired();

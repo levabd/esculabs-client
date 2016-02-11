@@ -8,13 +8,6 @@ namespace Client.Models
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    public enum SensorType
-    {
-        Small,
-        Medium,
-        Xl
-    }
-
     public enum ExpertStatus
     {
         Pending,
@@ -26,19 +19,14 @@ namespace Client.Models
     {
         public int              Id { get; set; }
 
+        [Required]
         public Patient          Patient { get; set; }
 
-        [ForeignKey("Patient")]
-        public string           PatientIin { get; set; }
+        public User             User { get; set; }
 
-        public string           SourceImage { get; set; }
+        //public string           PatientIin { get; set; }
 
-        public string           ProcessedImage { get; set; }
-
-        [Required]
-        public int              PhysicianId { get; set; }
-
-        public SensorType       SensorType { get; set; }
+        public string           SensorType { get; set; }
 
         public double           Med { get; set; }
 

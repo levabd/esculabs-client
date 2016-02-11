@@ -1,0 +1,1 @@
+MainPackage=E:\Projects\Esculabs\Client\Client\bin\x86\Debug\Client_1.1.0.0_x86_Debug.appx

@@ -117,10 +117,9 @@ namespace Client.Pages
             {
                 db.Database.Migrate();
 
-                if (DatabaseSeeder.SeedPatients(db) || DatabaseSeeder.SeedUsers(db) || DatabaseSeeder.SeedExamines(db))
-                {
-                    db.SaveChanges();
-                }
+                DatabaseSeeder.SeedPatients(db);
+                DatabaseSeeder.SeedUsers(db);
+                DatabaseSeeder.SeedExamines(db);
             }
         }
 

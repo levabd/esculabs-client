@@ -73,8 +73,8 @@
                         <TextBlock Width="186" Text="{Binding LastExamine.ExpertStatus, Converter={StaticResource ExpertStatusConverter}}" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="Light" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Height="32" HorizontalAlignment="Center" Margin="0,17,0,0">
-                        <Button Width="195" Style="{StaticResource AddPatientButton}" Margin="0,0,4,0">Новое обследование</Button>
-                        <Button Width="195" Style="{StaticResource AddPatientButton}" Background="#505084" Click="ExaminesListButton_Click">Список обследований</Button>
+                        <Button Width="195" Style="{StaticResource AddPatientButton}" Margin="0,0,4,0" Click="AddExamineButton_Click">Новое обследование</Button>
+                        <Button Width="195" Style="{StaticResource AddPatientButton}" Background="#505084" Click="ShowExaminesListButton_Click">Список обследований</Button>
                     </StackPanel>
                 </StackPanel>
             </Grid>

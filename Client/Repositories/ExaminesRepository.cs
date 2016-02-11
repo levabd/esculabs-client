@@ -35,12 +35,12 @@
             _db = new EsculabsContext();
         }
 
-        public List<Examine> GetPatientExamines(string patientIin)
-        {
-            lock (_db)
-            {
-                return _db.Examines.Where(e => e.PatientIin == patientIin).ToList();
-            }
-        } 
+        //public List<Examine> GetPatientExamines(string patientIin)
+        //{
+        //    lock (_db)
+        //    {
+        //        return _db.Examines.Where(e => e.PatientIin == patientIin).ToList();
+        //    }
+        //} 
     }
 }

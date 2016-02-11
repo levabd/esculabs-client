@@ -18,6 +18,10 @@
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <PackageCertificateKeyFile>Client_TemporaryKey.pfx</PackageCertificateKeyFile>
     <PackageCertificateThumbprint>6D09F81004BB64D1B68F106AD11298C23CD9D57D</PackageCertificateThumbprint>
+    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+    <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
+    <AppxBundle>Always</AppxBundle>
+    <AppxBundlePlatforms>x86|x64</AppxBundlePlatforms>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -120,9 +124,10 @@
     <Compile Include="Helpers\Converters\ShortenedNameConverter.cs" />
     <Compile Include="Helpers\DatabaseSeeder.cs" />
     <Compile Include="Helpers\Encryption.cs" />
-    <Compile Include="Migrations\20160209131957_CreateTables.cs" />
-    <Compile Include="Migrations\20160209131957_CreateTables.designer.cs">
-      <DependentUpon>20160209131957_CreateTables.cs</DependentUpon>
+    <Compile Include="Helpers\FibxImporter.cs" />
+    <Compile Include="Migrations\20160211120732_InitialMigration.cs" />
+    <Compile Include="Migrations\20160211120732_InitialMigration.designer.cs">
+      <DependentUpon>20160211120732_InitialMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\EsculabsContextModelSnapshot.cs" />
     <Compile Include="Models\BaseModel.cs" />
@@ -131,6 +136,7 @@
     <Compile Include="Models\PatientMetric.cs" />
     <Compile Include="Models\Patient.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\XmlReport.cs" />
     <Compile Include="Pages\AddPatientPage.xaml.cs">
       <DependentUpon>AddPatientPage.xaml</DependentUpon>
     </Compile>

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Client.Models
 {
@@ -59,7 +60,7 @@ namespace Client.Models
         /// </summary>
         public bool? RhFactor { get; set; }
 
-        public virtual ICollection<Examine> Examines { get; set; }
+        public virtual ObservableCollection<Examine> Examines { get; set; }
 
         //public string BloodGroupString
         //{
