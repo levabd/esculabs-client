@@ -17,6 +17,8 @@ namespace Client.Models
 
     public class Patient : BaseModel
     {
+        #region Приватные поля
+
         private string _iin;
         private string _firstName;
         private string _middleName;
@@ -26,6 +28,8 @@ namespace Client.Models
         private int? _bloodGroup;
         private bool? _rhFactor;
         private ObservableCollection<Examine> _examines;
+
+        #endregion
 
         /// <summary>
         /// ИИН
@@ -140,7 +144,7 @@ namespace Client.Models
         /// <summary>
         /// Список обследований пользователя
         /// </summary>
-        public virtual ObservableCollection<Examine> Examines
+        public ObservableCollection<Examine> Examines
         {
             get { return _examines; }
             set
@@ -158,11 +162,6 @@ namespace Client.Models
         /// </summary>
         [NotMapped]
         public Examine LastExamine => Examines?.LastOrDefault();
-
-        private void CollectionChangedMethod(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            OnPropertyChanged("LastExamine");
-        }
 
         //public string BloodGroupString
         //{
@@ -194,6 +193,17 @@ namespace Client.Models
         //        return $"{group} (Rh{rh})";
         //    }
         //}  
-        #endregion      
+
+        #endregion
+            
+        public Patient()
+        {
+            Examines = new ObservableCollection<Examine>();
+        }
+
+        private void CollectionChangedMethod(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            OnPropertyChanged("LastExamine");
+        }
     }
 }

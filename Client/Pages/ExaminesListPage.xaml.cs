@@ -38,8 +38,6 @@ namespace Client.Pages
         {
             InitializeComponent();
 
-            DataContext = ViewModel;
-
             SetUpPageAnimation();
             PageHeader.PageName = "Список обследований пациента";
         }
@@ -65,11 +63,12 @@ namespace Client.Pages
             }
 
             ViewModel = viewModel;
+            DataContext = ViewModel;
         }
 
         private void ExaminesList_OnItemClick(object sender, ItemClickEventArgs e)
         {
-            var examine = e.ClickedItem as ExamineViewModel;
+            var examine = e.ClickedItem as Examine;
 
             if (examine == null)
             {
@@ -85,6 +84,11 @@ namespace Client.Pages
         private void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void AddExamineButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

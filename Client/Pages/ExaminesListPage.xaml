@@ -29,7 +29,7 @@
                 </StackPanel>
             </ScrollViewer>
             <Grid Background="#e9e9ea" Grid.Row="1">
-                <Button x:Name="AddExamineButton" Width="340" HorizontalAlignment="Center" Height="42" Style="{StaticResource AddPatientButton}" >
+                <Button x:Name="AddExamineButton" Width="340" HorizontalAlignment="Center" Height="42" Style="{StaticResource AddPatientButton}" Click="AddExamineButton_Click" >
                     Начать новое обследование
                 </Button>
             </Grid>
@@ -37,9 +37,9 @@
         <TextBlock HorizontalAlignment="Left" Margin="625,140,0,0" VerticalAlignment="Top" FontWeight="Light" FontSize="34">
             <interactivity:Interaction.Behaviors>
                 <behaviors:MultiBindingBehavior Converter="{StaticResource FullNameConverter}" PropertyName="Text">
-                    <behaviors:MultiBindingItem Value="{Binding LastName}" />
-                    <behaviors:MultiBindingItem Value="{Binding FirstName}" />
-                    <behaviors:MultiBindingItem Value="{Binding MiddleName}" />
+                    <behaviors:MultiBindingItem Value="{Binding Patient.LastName}" />
+                    <behaviors:MultiBindingItem Value="{Binding Patient.FirstName}" />
+                    <behaviors:MultiBindingItem Value="{Binding Patient.MiddleName}" />
                 </behaviors:MultiBindingBehavior>
             </interactivity:Interaction.Behaviors>
         </TextBlock>

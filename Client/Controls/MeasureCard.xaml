@@ -5,12 +5,15 @@
     xmlns:local="using:Client.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:c="using:Client.Helpers.Converters"
     mc:Ignorable="d"
     Width="318"
     Height="247" Loaded="UserControl_Loaded">
-
+    <UserControl.Resources>
+        <c:Base64ImageConverter x:Key="Base64ImageConverter"/>
+    </UserControl.Resources>
     <Grid Background="White">
-        <Image Width="318" Height="201" VerticalAlignment="Top" Source="{Binding Source}" HorizontalAlignment="Left"/>
+        <Image Width="318" Height="201" VerticalAlignment="Top" Source="{Binding ProcessedImage, Converter={StaticResource Base64ImageConverter}}" HorizontalAlignment="Left"/>
         <Grid x:Name="CorrectGrid" Width="318" Height="46" VerticalAlignment="Bottom" Background="#17d856">
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
                 <Image Source="../Assets/Icons/Ok.png" Width="20" Height="20" Margin="0,0,15,0"/>

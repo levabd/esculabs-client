@@ -16,12 +16,13 @@
         <c:SecToTimeConverter x:Key="SecToTimeConverter"/>
         <c:FibrosisStageConverter x:Key="FibrosisStageConverter"/>
         <c:SensorTypeConverter x:Key="SensorTypeConverter"/>
+        <c:Base64ImageConverter x:Key="Base64ImageConverter"/>
         <cc:StringFormatConverter x:Key="StringFormatConverter"/>
     </UserControl.Resources>
     <Grid Background="White" RequestedTheme="Light">
         <StackPanel Orientation="Horizontal">
             <Grid Width="320" HorizontalAlignment="Left" BorderBrush="Gray" BorderThickness="0,0,1,0">
-                <Image Source="{Binding SourceImage}" VerticalAlignment="Center"/>
+                <Image Source="{Binding LastMeasure.SourceImage, Converter={StaticResource Base64ImageConverter}}" VerticalAlignment="Center"/>
             </Grid>
             <Grid Width="450">
                 <StackPanel Orientation="Vertical">

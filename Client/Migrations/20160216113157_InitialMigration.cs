@@ -74,7 +74,7 @@ namespace Client.Migrations
                     SensorType = table.Column<string>(nullable: true),
                     UserId = table.Column<int>(nullable: true),
                     Valid = table.Column<bool>(nullable: false),
-                    WhiskerPlot = table.Column<byte[]>(nullable: true)
+                    WhiskerPlotImage = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -106,8 +106,8 @@ namespace Client.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     CreatedAt = table.Column<DateTime>(nullable: true),
                     ExamineId = table.Column<int>(nullable: false),
-                    ResultMerged = table.Column<byte[]>(nullable: true),
-                    Source = table.Column<byte[]>(nullable: true),
+                    ProcessedImage = table.Column<string>(nullable: true),
+                    SourceImage = table.Column<string>(nullable: true),
                     Stiffness = table.Column<double>(nullable: false),
                     ValidationElasto = table.Column<int>(nullable: false),
                     ValidationModeA = table.Column<int>(nullable: false),

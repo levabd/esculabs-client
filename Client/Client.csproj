@@ -113,8 +113,10 @@
     <Compile Include="Controls\PatientCard.xaml.cs">
       <DependentUpon>PatientCard.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\Base64Converter.cs" />
     <Compile Include="Helpers\Converters\BloodGroupConverter.cs" />
     <Compile Include="Helpers\Converters\IqrMedConverter.cs" />
+    <Compile Include="Helpers\Converters\Base64ImageConverter.cs" />
     <Compile Include="Helpers\Converters\SystemStatusConverter.cs" />
     <Compile Include="Helpers\Converters\ExpertStatusConverter.cs" />
     <Compile Include="Helpers\Converters\SensorTypeConverter.cs" />
@@ -125,9 +127,9 @@
     <Compile Include="Helpers\DatabaseSeeder.cs" />
     <Compile Include="Helpers\Encryption.cs" />
     <Compile Include="Helpers\FibxImporter.cs" />
-    <Compile Include="Migrations\20160211191029_InitialMigration.cs" />
-    <Compile Include="Migrations\20160211191029_InitialMigration.designer.cs">
-      <DependentUpon>20160211191029_InitialMigration.cs</DependentUpon>
+    <Compile Include="Migrations\20160216113157_InitialMigration.cs" />
+    <Compile Include="Migrations\20160216113157_InitialMigration.designer.cs">
+      <DependentUpon>20160216113157_InitialMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\EsculabsContextModelSnapshot.cs" />
     <Compile Include="Models\BaseModel.cs" />

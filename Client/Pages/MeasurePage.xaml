@@ -6,21 +6,24 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Client.Controls"
+    xmlns:c="using:Client.Helpers.Converters"
     mc:Ignorable="d">
-
+    <UserControl.Resources>
+        <c:Base64ImageConverter x:Key="Base64ImageConverter"/>
+    </UserControl.Resources>
     <Grid>
         <controls:PageHeader x:Name="PageHeader"/>
         <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
             <Grid Padding="0,0,80,0">
                 <StackPanel Orientation="Vertical">
                     <TextBlock HorizontalAlignment="Center" Text="Оригинальное изображение" Padding="0,0,0,20"/>
-                    <Image Stretch="Uniform" Source="{Binding Image.Processed}"/>
+                    <Image Stretch="Uniform" Source="{Binding SourceImage, Converter={StaticResource Base64ImageConverter}}"/>
                 </StackPanel>
             </Grid>
             <Grid>
                 <StackPanel Orientation="Vertical">
                     <TextBlock HorizontalAlignment="Center" Text="Изображение, обработанное Esculabs" Padding="0,0,0,20"/>
-                    <Image Stretch="Uniform" Source="{Binding Image.Source}"/>
+                    <Image Stretch="Uniform" Source="{Binding ProcessedImage, Converter={StaticResource Base64ImageConverter}}"/>
                 </StackPanel>
             </Grid>            
         </StackPanel>

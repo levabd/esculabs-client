@@ -20,9 +20,9 @@
         <TextBlock HorizontalAlignment="Left" Margin="115,140,0,0" VerticalAlignment="Top" FontWeight="Light" FontSize="34">
             <interactivity:Interaction.Behaviors>
                 <behaviors:MultiBindingBehavior Converter="{StaticResource FullNameConverter}" PropertyName="Text">
-                    <behaviors:MultiBindingItem Value="{Binding ViewModel.Patient.LastName}" />
-                    <behaviors:MultiBindingItem Value="{Binding ViewModel.Patient.FirstName}" />
-                    <behaviors:MultiBindingItem Value="{Binding ViewModel.Patient.MiddleName}" />
+                    <behaviors:MultiBindingItem Value="{Binding Patient.LastName}" />
+                    <behaviors:MultiBindingItem Value="{Binding Patient.FirstName}" />
+                    <behaviors:MultiBindingItem Value="{Binding Patient.MiddleName}" />
                 </behaviors:MultiBindingBehavior>
             </interactivity:Interaction.Behaviors>
         </TextBlock>
@@ -35,23 +35,23 @@
                 <StackPanel Orientation="Vertical" Padding="30,25,30,0" HorizontalAlignment="Left" VerticalAlignment="Top" >
                     <StackPanel Orientation="Horizontal" Height="40" >
                         <TextBlock Width="150" Text="Тип датчика:" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="SemiBold" />
-                        <TextBlock Width="186" Text="{Binding ViewModel.SelectedExamine.SensorType, Converter={StaticResource SensorTypeConverter}}" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="Light" />
+                        <TextBlock Width="186" Text="{Binding SensorType, Converter={StaticResource SensorTypeConverter}}" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="Light" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Height="40" >
                         <TextBlock Width="150" Text="IQR:" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="SemiBold" />
-                        <TextBlock Width="186" Text="{Binding ViewModel.SelectedExamine.Iqr}" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="Light" />
+                        <TextBlock Width="186" Text="{Binding Iqr}" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="Light" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Height="40" >
                         <TextBlock Width="150" Text="MED:" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="SemiBold" />
-                        <TextBlock Width="186" Text="{Binding ViewModel.SelectedExamine.Med}" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="Light" />
+                        <TextBlock Width="186" Text="{Binding Med}" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="Light" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Height="40" >
                         <TextBlock Width="150" Text="IQR/MED:" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="SemiBold" />
                         <TextBlock Width="186" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="Light">
                             <interactivity:Interaction.Behaviors>
                                 <behaviors:MultiBindingBehavior Converter="{StaticResource IqrMedConverter}" PropertyName="Text">
-                                    <behaviors:MultiBindingItem Value="{Binding ViewModel.SelectedExamine.Iqr}" />
-                                    <behaviors:MultiBindingItem Value="{Binding ViewModel.SelectedExamine.Med}" />
+                                    <behaviors:MultiBindingItem Value="{Binding Iqr}" />
+                                    <behaviors:MultiBindingItem Value="{Binding Med}" />
                                 </behaviors:MultiBindingBehavior>
                             </interactivity:Interaction.Behaviors>
                         </TextBlock>
@@ -77,7 +77,7 @@
                   ItemClick="MeasuresGrid_OnItemClick"
                   Margin="480,200,20,0" 
                   Padding="0"
-                  ItemsSource="{Binding Images}" 
+                  ItemsSource="{Binding Measures}" 
                   IsItemClickEnabled="True"
                   ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                   ScrollViewer.HorizontalScrollMode="Disabled"

@@ -43,7 +43,7 @@ namespace Client.Migrations
 
                     b.Property<bool>("Valid");
 
-                    b.Property<byte[]>("WhiskerPlot");
+                    b.Property<string>("WhiskerPlotImage");
 
                     b.HasKey("Id");
                 });
@@ -55,12 +55,11 @@ namespace Client.Migrations
 
                     b.Property<DateTime?>("CreatedAt");
 
-                    b.Property<int?>("ExamineId")
-                        .IsRequired();
+                    b.Property<int>("ExamineId");
 
-                    b.Property<byte[]>("ResultMerged");
+                    b.Property<string>("ProcessedImage");
 
-                    b.Property<byte[]>("Source");
+                    b.Property<string>("SourceImage");
 
                     b.Property<double>("Stiffness");
 

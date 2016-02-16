@@ -1,6 +1,7 @@
 ﻿using Windows.Storage.Streams;
 using Windows.UI.Xaml.Media.Imaging;
 using Client.Context;
+using Client.Helpers.Converters;
 using Client.Repositories;
 using Microsoft.Data.Entity;
 
@@ -119,6 +120,8 @@ namespace Client.Helpers
                 return false;
             }
 
+            var base64Converter = new Base64ImageConverter();
+
             var examine = new Examine
             {
                 Patient = Patient,
@@ -130,44 +133,57 @@ namespace Client.Helpers
                 Iqr = reportObj.Exam.Result.StiffnessIQR,
                 Med = reportObj.Exam.Result.StiffnessMedian,
                 SensorType = reportObj.Exam.ExamType,
-                WhiskerPlot = await ConvertImagetoByte(await fibxFolder.GetFileAsync(reportObj.Exam.Result.WhiskerPlotImageLink)),
+                WhiskerPlotImage = await ImageFileToBase64(await fibxFolder.GetFileAsync(reportObj.Exam.Result.WhiskerPlotImageLink)),
             };
             
-            //foreach (var measure in reportObj.Exam.Measurements.Measures)
-            //{
-            //    var imageFile = await fibxFolder.GetFileAsync(measure.ImageLink);
+            foreach (var m in reportObj.Exam.Measurements.Measures)
+            {
+                var imageFile = await fibxFolder.GetFileAsync(m.ImageLink);
 
-            //    using (IRandomAccessStream fileStream = await imageFile.OpenAsync(Windows.Storage.FileAccessMode.Read))
-            //    {
-            //        var sourceImage = new BitmapImage();
-            //        await sourceImage.SetSourceAsync(fileStream);
+                if (imageFile == null)
+                {
+                    continue;
+                }
 
-            //        // TODO: Обработка sourceImage
-            //        //var prod = new FibroscanImage(sourceImage);
-            //        //m.ResultMerged = ImageToByteArray(prod.Merged);
+                var source = await ImageFileToBase64(imageFile);
 
-            //    }
-            //}
+                /*
+                    
+                    TODO: Обработка изображения
 
+                */
 
+                var measure = new Measure
+                {
+                    CreatedAt = m.Time,
+                    Stiffness = m.Stiffness,
+                    SourceImage = source,
+                    ProcessedImage = source       // TODO: Заменить на обработанное изображение
+                };
 
+                examine.Measures.Add(measure);
+            }
+            
             Patient.Examines.Add(examine);
             PatientsRepository.Instance.SaveChanges();
 
             return true;
         }
 
-        private async Task<byte[]> ConvertImagetoByte(StorageFile image)
+        private async Task<string> ImageFileToBase64(StorageFile imageFile)
         {
-            IRandomAccessStream fileStream = await image.OpenAsync(FileAccessMode.Read);
-            var reader = new DataReader(fileStream.GetInputStreamAt(0));
-            await reader.LoadAsync((uint)fileStream.Size);
+            byte[] fileBytes = null;
+            using (var stream = await imageFile.OpenReadAsync())
+            {
+                fileBytes = new byte[stream.Size];
+                using (var reader = new DataReader(stream))
+                {
+                    await reader.LoadAsync((uint)stream.Size);
+                    reader.ReadBytes(fileBytes);
+                }
+            }
 
-            byte[] pixels = new byte[fileStream.Size];
-
-            reader.ReadBytes(pixels);
-
-            return pixels;
+            return fileBytes.Length > 0 ? Convert.ToBase64String(fileBytes) : null;
         }
     }
 }

@@ -8,7 +8,7 @@ using Client.Context;
 namespace Client.Migrations
 {
     [DbContext(typeof(EsculabsContext))]
-    [Migration("20160211191029_InitialMigration")]
+    [Migration("20160216113157_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -44,7 +44,7 @@ namespace Client.Migrations
 
                     b.Property<bool>("Valid");
 
-                    b.Property<byte[]>("WhiskerPlot");
+                    b.Property<string>("WhiskerPlotImage");
 
                     b.HasKey("Id");
                 });
@@ -56,12 +56,11 @@ namespace Client.Migrations
 
                     b.Property<DateTime?>("CreatedAt");
 
-                    b.Property<int?>("ExamineId")
-                        .IsRequired();
+                    b.Property<int>("ExamineId");
 
-                    b.Property<byte[]>("ResultMerged");
+                    b.Property<string>("ProcessedImage");
 
-                    b.Property<byte[]>("Source");
+                    b.Property<string>("SourceImage");
 
                     b.Property<double>("Stiffness");
 

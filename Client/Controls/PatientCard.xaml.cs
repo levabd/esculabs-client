@@ -1,6 +1,4 @@
-﻿
-
-namespace Client.Controls
+﻿namespace Client.Controls
 {
     using Windows.UI.Xaml;
     using Windows.UI.Xaml.Controls;
@@ -27,7 +25,9 @@ namespace Client.Controls
             }
 
             var frame = Window.Current.Content as Frame;
-            frame?.Navigate(typeof(ExaminesListPage), new ExamineViewModel(p));
+            var vm = new ExamineViewModel(p);
+
+            frame?.Navigate(typeof(ExaminesListPage), vm);
         }
 
         private async void AddExamineButton_Click(object sender, RoutedEventArgs e)

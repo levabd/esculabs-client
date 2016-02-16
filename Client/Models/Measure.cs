@@ -1,5 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Threading.Tasks;
+using Windows.Storage.Streams;
+using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
+using Client.Helpers;
 
 namespace Client.Models
 {
@@ -12,8 +17,8 @@ namespace Client.Models
     public class Measure : INotifyPropertyChanged
     {
         private int             _id;
-        private byte[]          _source;
-        private byte[]          _resultMerged;
+        private string          _sourceImage;
+        private string          _processedImage;
         private int             _validationModeA;
         private int             _validationModeM;
         private int             _validationElasto;
@@ -37,32 +42,33 @@ namespace Client.Models
             }
         }
 
-        public byte[] Source
+        public string SourceImage
         {
-            get { return _source; }
+            get { return _sourceImage; }
             set
             {
-                if (_source == value)
+                if (_sourceImage == value)
                 {
                     return;
                 }
 
-                _source = value;
+                _sourceImage = value;
+
                 OnPropertyChanged();
             }
         }
 
-        public byte[] ResultMerged
+        public string ProcessedImage
         {
-            get { return _resultMerged; }
+            get { return _processedImage; }
             set
             {
-                if (_resultMerged == value)
+                if (_processedImage == value)
                 {
                     return;
                 }
 
-                _resultMerged = value;
+                _processedImage = value;
                 OnPropertyChanged();
             }
         }
@@ -159,9 +165,11 @@ namespace Client.Models
             }
         }
 
-        //public bool IsCorrect => ValidationModeA != VerificationStatus.Incorrect &&
+        [NotMapped]
+        //public bool Correct => ValidationModeA != VerificationStatus.Incorrect &&
         //                         ValidationModeM != VerificationStatus.Incorrect &&
         //                         ValidationElasto != VerificationStatus.Incorrect;
+        public bool Correct => false;
 
         public event PropertyChangedEventHandler PropertyChanged;
 

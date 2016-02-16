@@ -26,54 +26,30 @@ namespace Client.Pages
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public partial class ExaminePage : Page, INotifyPropertyChanged, INotifyPropertyChanging
+    public partial class ExaminePage : INotifyPropertyChanged
     {
-        private ExamineViewModel _viewModel;
-        private ObservableCollection<Measure> _images;
+        private Examine _examine;
 
-
-        public ObservableCollection<Measure> Images
+        public Examine Examine
         {
-            get { return _images; }
+            get { return _examine; }
             set
             {
-                if (_images == value)
+                if (_examine == value)
                 {
                     return;
                 }
 
-                OnPropertyChanging();
-                _images = value;
+                _examine = value;
                 OnPropertyChanged();
             }
         }
-
-        public ExamineViewModel ViewModel
-        {
-            get { return _viewModel; }
-            set
-            {
-                if (_viewModel == value)
-                {
-                    return;
-                }
-
-                _viewModel = value;
-                OnPropertyChanged();
-            }
-        }
-
-
 
         public ExaminePage()
         {
-            this.InitializeComponent();
-
-            Images = new ObservableCollection<Measure>(new List<Measure>());
+            InitializeComponent();
 
             SetUpPageAnimation();
-
-            DataContext = this;
             
             PageHeader.PageName = "Обследование пациента";
         }
@@ -91,22 +67,15 @@ namespace Client.Pages
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            ViewModel = e.Parameter as ExamineViewModel;
+            Examine = e.Parameter as Examine;
+            DataContext = Examine;
         }
-
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        public event PropertyChangingEventHandler PropertyChanging;
-
-        protected virtual void OnPropertyChanging([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanging?.Invoke(this, new PropertyChangingEventArgs(propertyName));
         }
 
         private void MeasuresGrid_OnItemClick(object sender, ItemClickEventArgs e)

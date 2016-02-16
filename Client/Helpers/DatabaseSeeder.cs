@@ -137,32 +137,5 @@ namespace Client.Helpers
 
             return true;
         }
-
-        public static bool SeedExamines(EsculabsContext context)
-        {
-            if (context.Examines.Any())
-            {
-                return false;
-            }
-
-            context.Examines.Add(
-                new Examine
-                {
-                    Patient = context.Patients.LastOrDefault(),
-                    Duration = 233,
-                    CreatedAt = new DateTime(),
-                    ExpertStatus = ExpertStatus.Confirmed,
-                    FibxSource = "nope",
-                    Iqr = 10,
-                    Med = 5.2,
-                    SensorType = "XL",
-                    Valid = true
-                }
-            );
-
-            context.SaveChanges();
-
-            return true;
-        }
     }
 }

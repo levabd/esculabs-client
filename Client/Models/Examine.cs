@@ -1,4 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 
 namespace Client.Models
 {
@@ -17,6 +20,8 @@ namespace Client.Models
 
     public class Examine : BaseModel
     {
+        #region Приватные поля
+
         private int _id;
         private Patient _patient;
         private User _user;
@@ -24,13 +29,15 @@ namespace Client.Models
         private double _med;
         private double _iqr;
         private int _duration;
-        private byte[] _whiskerPlot;
+        private string _whiskerPlotImage;
         private bool _valid;
         private ExpertStatus _expertStatus;
         private string _fibxSource;
         private DateTime? _createdAt;
         private PatientMetric _patientMetric;
-        private List<Measure> _measures;
+        private ObservableCollection<Measure> _measures;
+
+        #endregion
 
         public int Id
         {
@@ -103,12 +110,12 @@ namespace Client.Models
             }
         }
 
-        public byte[] WhiskerPlot
+        public string WhiskerPlotImage
         {
-            get { return _whiskerPlot; }
+            get { return _whiskerPlotImage; }
             set
             {
-                _whiskerPlot = value;
+                _whiskerPlotImage = value;
                 OnPropertyChanged();
             }
         }
@@ -163,14 +170,32 @@ namespace Client.Models
             }
         }
 
-        public List<Measure> Measures
+        public ObservableCollection<Measure> Measures
         {
             get { return _measures; }
             set
             {
                 _measures = value;
                 OnPropertyChanged();
+                _measures.CollectionChanged += CollectionChangedMethod;
             }
+        }
+
+        #region Вычисляемые поля
+
+        [NotMapped]
+        public Measure LastMeasure => Measures?.LastOrDefault();
+
+        #endregion
+
+        public Examine()
+        {
+            Measures = new ObservableCollection<Measure>();
+        }
+
+        private void CollectionChangedMethod(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            OnPropertyChanged("LastMeasure");
         }
     }
 }

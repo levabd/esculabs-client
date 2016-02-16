@@ -28,19 +28,19 @@ namespace Client.Pages
     /// </summary>
     public partial class MeasurePage : Page, INotifyPropertyChanged
     {
-        private Measure _image;
+        private Measure _measure;
 
-        public Measure Image
+        public Measure Measure
         {
-            get { return _image; }
+            get { return _measure; }
             set
             {
-                if (_image == value)
+                if (_measure == value)
                 {
                     return;
                 }
 
-                _image = value;
+                _measure = value;
                 OnPropertyChanged();
             }
         }
@@ -51,7 +51,7 @@ namespace Client.Pages
 
             SetUpPageAnimation();
 
-            DataContext = this;
+            
             PageHeader.PageName = "Просмотр сканирования";
         }
 
@@ -68,7 +68,8 @@ namespace Client.Pages
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            Image = e.Parameter as Measure;
+            Measure = e.Parameter as Measure;
+            DataContext = Measure;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

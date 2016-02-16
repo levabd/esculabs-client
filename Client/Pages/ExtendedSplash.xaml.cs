@@ -119,7 +119,6 @@ namespace Client.Pages
 
                 DatabaseSeeder.SeedPatients(db);
                 DatabaseSeeder.SeedUsers(db);
-                DatabaseSeeder.SeedExamines(db);
             }
         }
 

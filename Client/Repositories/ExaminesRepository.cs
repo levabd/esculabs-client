@@ -1,4 +1,6 @@
-﻿namespace Client.Repositories
+﻿using Microsoft.Data.Entity;
+
+namespace Client.Repositories
 {
     using System.Linq;
     using System.Data.Common;
@@ -35,12 +37,12 @@
             _db = new EsculabsContext();
         }
 
-        //public List<Examine> GetPatientExamines(string patientIin)
-        //{
-        //    lock (_db)
-        //    {
-        //        return _db.Examines.Where(e => e.PatientIin == patientIin).ToList();
-        //    }
-        //} 
+        public List<Examine> GetPatientExamines(Patient patient)
+        {
+            lock (_db)
+            {
+                return _db.Examines.Where(e => e.Patient.Iin == patient.Iin).Include(e => e.Measures).ToList();
+            }
+        } 
     }
 }

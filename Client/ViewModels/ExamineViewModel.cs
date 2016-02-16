@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations.Schema;
+using Client.Repositories;
 
 namespace Client.ViewModels
 {
@@ -8,9 +9,8 @@ namespace Client.ViewModels
     using System.ComponentModel.DataAnnotations;
     using Models;
 
-    public class ExamineViewModel : BaseViewModel
+    public sealed class ExamineViewModel : BaseViewModel
     {
-
         private ObservableCollection<Examine> _examines;
         private Patient _patient;
 
@@ -37,7 +37,10 @@ namespace Client.ViewModels
         public ExamineViewModel(Patient patient)
         {
             Patient = patient;
-            Examines = Patient.Examines;
+
+            var examines = new ObservableCollection<Examine>(ExaminesRepository.Instance.GetPatientExamines(Patient));
+
+            Examines = examines;
         }
 
         /*

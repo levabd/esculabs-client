@@ -35,10 +35,8 @@ namespace Client.Controls
                 return;
             }
 
-            // TODO: Implement correct/incorrect measure statuses
-
-            CorrectGrid.Visibility = Visibility.Visible; //measure.Correct ? Visibility.Visible : Visibility.Collapsed;
-            IncorrectGrid.Visibility = Visibility.Collapsed;  //measure.Correct ? Visibility.Collapsed : Visibility.Visible;
+            CorrectGrid.Visibility = measure.Correct ? Visibility.Visible : Visibility.Collapsed;
+            IncorrectGrid.Visibility = measure.Correct ? Visibility.Collapsed : Visibility.Visible;
         }
     }
 }

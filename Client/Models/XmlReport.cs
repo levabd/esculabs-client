@@ -28,9 +28,22 @@ namespace Client.Models
 
     public sealed class XmlMeasurement
     {
+        private string      _imageLink;
+
         public DateTime     Time;
         public double       Stiffness;
-        public string       ImageLink;
+
+        public string ImageLink
+        {
+            get
+            {
+                return _imageLink.Replace("/", "\\"); 
+            }
+            set
+            {
+                _imageLink = value;
+            }
+        }
     }
 
     public sealed class XmlResult
