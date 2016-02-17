@@ -15,7 +15,28 @@
                         <SolidColorBrush x:Key="ApplicationPageBackgroundThemeBrush" Color="#060622" />
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
-            
+
+            <DataTemplate x:Key="CorrectStatusDataTemplate">
+                <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                    <BitmapIcon UriSource="ms-appx:///Assets/Icons/Ok.png" Width="20" Height="20" Foreground="#30c80d"/>
+                    <TextBlock Text="Некорректно" FontSize="13" FontWeight="Light" Foreground="#30c80d" />
+                </StackPanel>
+            </DataTemplate>
+
+            <DataTemplate x:Key="IncorrectStatusDataTemplate">
+                <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                    <BitmapIcon UriSource="ms-appx:///Assets/Icons/Wrong.png" Width="20" Height="20" Foreground="#cf2b2b"/>
+                    <TextBlock Text="Некорректно" FontSize="13" FontWeight="Light" Foreground="#cf2b2b"/>
+                </StackPanel>
+            </DataTemplate>
+
+            <DataTemplate x:Key="PendingStatusDataTemplate">
+                <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                    <Image Source="../Assets/Icons/Ok.png" Width="20" Height="20" Margin="0,0,15,0"/>
+                    <TextBlock Text="Некорректно" FontSize="13" FontWeight="Light" Foreground="#30c80d" />
+                </StackPanel>
+            </DataTemplate>
+
             <Style x:Key="BackButtonTemplate" TargetType="Button">
                 <Setter Property="Background" Value="{ThemeResource SystemControlBackgroundBaseLowBrush}"/>
                 <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}"/>

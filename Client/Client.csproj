@@ -125,6 +125,7 @@
     <Compile Include="Helpers\Converters\FullNameConverter.cs" />
     <Compile Include="Helpers\Converters\ShortenedNameConverter.cs" />
     <Compile Include="Helpers\DatabaseSeeder.cs" />
+    <Compile Include="Helpers\DataTemplateSelectors\StatusDataTemplateSelector.cs" />
     <Compile Include="Helpers\Encryption.cs" />
     <Compile Include="Helpers\FibxImporter.cs" />
     <Compile Include="Migrations\20160216113157_InitialMigration.cs" />
@@ -185,6 +186,7 @@
     <Content Include="Assets\Icons\Calendar.png" />
     <Content Include="Assets\Icons\Clock.png" />
     <Content Include="Assets\Icons\Ok.png" />
+    <Content Include="Assets\Icons\Pending.png" />
     <Content Include="Assets\Icons\Power.png" />
     <Content Include="Assets\Icons\Wrong.png" />
     <Content Include="Assets\Measures\1\01after.jpg" />

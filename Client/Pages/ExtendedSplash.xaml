@@ -26,7 +26,7 @@
         </Storyboard>
     </Page.Resources>
     <Grid Background="#060622">
-        <Image x:Name="SplashBackground" Source="ms-appx:///Assets/SplashScreenBackground.jpg" Opacity="0" ImageOpened="SplashBackground_OnImageOpened"/>
+        <Image x:Name="SplashBackground" Source="ms-appx:///Assets/SplashScreenBackground.jpg" Opacity="0" Loaded="SplashBackground_OnImageOpened"/>
         <Image x:Name="BlurredSplashBackground" Source="ms-appx:///Assets/DarkBackground.jpg" Opacity="0"/>
         <Canvas x:Name="LoadingControls">
             <Image x:Name="SplashImage" Source="ms-appx:///Assets/SplashScreen.png"/>

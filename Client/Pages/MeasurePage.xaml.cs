@@ -50,7 +50,6 @@ namespace Client.Pages
             this.InitializeComponent();
 
             SetUpPageAnimation();
-
             
             PageHeader.PageName = "Просмотр сканирования";
         }
