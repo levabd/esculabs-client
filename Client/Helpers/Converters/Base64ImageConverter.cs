@@ -47,22 +47,5 @@ namespace Client.Helpers.Converters
         {
             throw new NotImplementedException();
         }
-
-
-        private async Task<ImageSource> FromBase64(string base64)
-        {
-            // read stream
-            var bytes = System.Convert.FromBase64String(base64);
-            var image = bytes.AsBuffer().AsStream().AsRandomAccessStream();
-
-            // decode image
-            var decoder = await BitmapDecoder.CreateAsync(image);
-            image.Seek(0);
-
-            // create bitmap
-            var output = new WriteableBitmap((int) decoder.PixelHeight, (int) decoder.PixelWidth);
-            await output.SetSourceAsync(image);
-            return output;
-        }
     }
 }

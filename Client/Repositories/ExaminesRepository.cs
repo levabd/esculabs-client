@@ -41,7 +41,15 @@ namespace Client.Repositories
         {
             lock (_db)
             {
-                return _db.Examines.Where(e => e.Patient.Iin == patient.Iin).Include(e => e.Measures).ToList();
+                return _db.Examines.Where(e => e.Patient.Iin == patient.Iin).OrderByDescending(e => e.CreatedAt).Include(e => e.Measures).ToList();
+            }
+        }
+
+        public Examine Find(int id)
+        {
+            lock (_db)
+            {
+                return _db.Examines.Where(e => e.Id == id).Include(e => e.Measures).FirstOrDefault();
             }
         } 
     }

@@ -161,7 +161,7 @@ namespace Client.Models
         /// Последнее обследование пользователя
         /// </summary>
         [NotMapped]
-        public Examine LastExamine => Examines?.LastOrDefault();
+        public Examine LastExamine => Examines?.OrderByDescending(e => e.CreatedAt).FirstOrDefault();
 
         //public string BloodGroupString
         //{

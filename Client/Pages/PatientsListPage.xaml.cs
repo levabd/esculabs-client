@@ -60,15 +60,15 @@ namespace Client.Pages
 
         private void PatientsList_OnItemClick(object sender, ItemClickEventArgs e)
         {
-            var examine = e.ClickedItem as Examine;
+            var patient = e.ClickedItem as Patient;
 
-            if (examine == null)
+            if (patient?.LastExamine == null)
             {
                 return;
             }
       
             var frame = Window.Current.Content as Frame;
-            frame?.Navigate(typeof(ExaminePage), examine);
+            frame?.Navigate(typeof(ExaminePage), ExaminesRepository.Instance.Find(patient.LastExamine.Id));
         }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
