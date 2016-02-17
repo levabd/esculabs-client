@@ -77,13 +77,13 @@
                         <TextBlock Width="186" Text="Проверка системой:" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="SemiBold" />
                         <!--<TextBlock Width="186" Text="{Binding LastExamine.Valid, Converter={StaticResource SystemStatusConverter}}" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="Light" />-->
                         <Grid Width="186" VerticalAlignment="Center">
-                            <ContentPresenter Content="{Binding LastExamine.Valid}" ContentTemplateSelector="{StaticResource StatusDataTemplateSelector}" />
+                            <ContentControl Content="{Binding LastExamine.Valid}" ContentTemplateSelector="{StaticResource StatusDataTemplateSelector}" />
                         </Grid>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Height="32" Padding="40,0,0,0" Background="#f2f2f2">
                         <TextBlock Width="186" Text="Проверка экспертом:" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="SemiBold" />
                         <Grid Width="186" VerticalAlignment="Center">
-                            <ContentPresenter Content="{Binding LastExamine.ExpertStatus, Converter={StaticResource ExpertStatusConverter}}" ContentTemplateSelector="{StaticResource StatusDataTemplateSelector}" />
+                            <ContentControl Content="{Binding LastExamine.ExpertStatus}" ContentTemplateSelector="{StaticResource StatusDataTemplateSelector}" />
                         </Grid>
                         <!--<TextBlock Width="186" Text="{Binding LastExamine.ExpertStatus, Converter={StaticResource ExpertStatusConverter}}" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="Light" />-->
                     </StackPanel>
