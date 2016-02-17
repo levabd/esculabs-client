@@ -19,7 +19,7 @@
             <DataTemplate x:Key="CorrectStatusDataTemplate">
                 <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
                     <BitmapIcon UriSource="ms-appx:///Assets/Icons/Ok.png" Width="20" Height="20" Margin="0,0,10,0" Foreground="#30c80d"/>
-                    <TextBlock Text="Некорректно" FontSize="13" FontWeight="Light" Foreground="#30c80d" />
+                    <TextBlock Text="Корректно" FontSize="13" FontWeight="Light" Foreground="#30c80d" />
                 </StackPanel>
             </DataTemplate>
 
@@ -33,7 +33,7 @@
             <DataTemplate x:Key="PendingStatusDataTemplate">
                 <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
                     <BitmapIcon UriSource="ms-appx:///Assets/Icons/Pending.png" Width="14" Height="18" Margin="0,0,10,0" Foreground="#30c80d"/>
-                    <TextBlock Text="Некорректно" FontSize="13" FontWeight="Light" Foreground="#30c80d" />
+                    <TextBlock Text="На рассмотрении" FontSize="13" FontWeight="Light" Foreground="#30c80d" />
                 </StackPanel>
             </DataTemplate>
 
