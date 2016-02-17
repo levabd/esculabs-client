@@ -80,7 +80,20 @@ namespace Client.Pages
 
         private void MeasuresGrid_OnItemClick(object sender, ItemClickEventArgs e)
         {
-            var image = e.ClickedItem as Measure;
+            var measure = e.ClickedItem as Measure;
+
+            if (measure == null)
+            {
+                return;
+            }
+
+            var frame = Window.Current.Content as Frame;
+            frame?.Navigate(typeof(MeasurePage), measure);
+        }
+
+        private void WhiskerPlotButton_Click(object sender, RoutedEventArgs e)
+        {
+            var image = (DataContext as Examine)?.WhiskerPlotImage;
 
             if (image == null)
             {
@@ -88,7 +101,7 @@ namespace Client.Pages
             }
 
             var frame = Window.Current.Content as Frame;
-            frame?.Navigate(typeof(MeasurePage), image);
+            frame?.Navigate(typeof(WhiskerPlotPage), image);
         }
     }
 }

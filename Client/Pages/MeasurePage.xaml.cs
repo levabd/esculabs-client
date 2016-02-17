@@ -26,11 +26,11 @@ namespace Client.Pages
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public partial class MeasurePage : Page, INotifyPropertyChanged
+    public partial class MeasurePage : INotifyPropertyChanged
     {
         private Measure _measure;
 
-        public Measure Measure
+        public Measure MeasureModel
         {
             get { return _measure; }
             set
@@ -59,7 +59,7 @@ namespace Client.Pages
         {
             var collection = new TransitionCollection();
             var theme = new NavigationThemeTransition();
-            var info = new SlideNavigationTransitionInfo();
+            var info = new DrillInNavigationTransitionInfo();
 
             theme.DefaultNavigationTransitionInfo = info;
             collection.Add(theme);
@@ -68,8 +68,8 @@ namespace Client.Pages
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            Measure = e.Parameter as Measure;
-            DataContext = Measure;
+            MeasureModel = e.Parameter as Measure;
+            DataContext = MeasureModel;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

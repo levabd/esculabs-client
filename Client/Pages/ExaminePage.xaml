@@ -67,9 +67,7 @@
                 </StackPanel>
             </ScrollViewer>
             <Grid Background="#e9e9ea" Grid.Row="1">
-                <Button x:Name="WhiskerPlotButton" Width="280" HorizontalAlignment="Center" Height="42" Style="{StaticResource AddPatientButton}" >
-                    Дисперсия
-                </Button>
+                <Button Content="Дисперсия" Width="280" HorizontalAlignment="Center" Height="42" Style="{StaticResource AddPatientButton}" Click="WhiskerPlotButton_Click"/>
             </Grid>
             
         </Grid>

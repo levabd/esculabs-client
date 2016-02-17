@@ -6,12 +6,15 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Client.Controls"
+    xmlns:c="using:Client.Helpers.Converters"
     mc:Ignorable="d">
-
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <UserControl.Resources>
+        <c:Base64ImageConverter x:Key="Base64ImageConverter"/>
+    </UserControl.Resources>
+    <Grid>
         <controls:PageHeader x:Name="PageHeader"/>
-            <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
-                <Image Stretch="Uniform" Source="{Binding Image.Processed}"/>
-            </Grid>
+        <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Image Stretch="Uniform" Source="{Binding WhiskerPlotImage, Converter={StaticResource Base64ImageConverter}}"/>
+        </Grid>
     </Grid>
 </Page>
