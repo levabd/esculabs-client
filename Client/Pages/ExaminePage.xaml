@@ -58,11 +58,11 @@
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Height="20" >
                         <TextBlock Width="150" Text="Всего сканирований:" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="SemiBold" />
-                        <TextBlock Width="186" Text="12" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="Light" />
+                        <TextBlock Width="186" Text="{Binding MeasuresCount}" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="Light" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Height="20" >
                         <TextBlock Width="150" Text="из них корректных:" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontWeight="SemiBold" />
-                        <TextBlock Width="186" Text="10" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="13" FontWeight="Light" />
+                        <TextBlock Width="186" Text="{Binding CorrectMeasuresCount}" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="13" FontWeight="Light" />
                     </StackPanel>
                 </StackPanel>
             </ScrollViewer>

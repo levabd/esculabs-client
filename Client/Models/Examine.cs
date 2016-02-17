@@ -186,6 +186,12 @@ namespace Client.Models
         [NotMapped]
         public Measure LastMeasure => Measures?.LastOrDefault();
 
+        [NotMapped]
+        public int? MeasuresCount => Measures?.Count;
+
+        [NotMapped]
+        public int? CorrectMeasuresCount => Measures?.Count(m => m.Correct);
+
         #endregion
 
         public Examine()
@@ -196,6 +202,8 @@ namespace Client.Models
         private void CollectionChangedMethod(object sender, NotifyCollectionChangedEventArgs e)
         {
             OnPropertyChanged("LastMeasure");
+            OnPropertyChanged("MeasuresCount");
+            OnPropertyChanged("CorrectMeasuresCount");
         }
     }
 }
