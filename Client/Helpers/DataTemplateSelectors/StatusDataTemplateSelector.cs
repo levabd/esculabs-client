@@ -1,12 +1,13 @@
-﻿using System;
-using System.Globalization;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Cimbalino.Toolkit.Converters;
-using Client.Models;
-
-namespace Client.Helpers.DataTemplateSelectors
+﻿namespace Client.Helpers.DataTemplateSelectors
 {
+    using Windows.UI.Xaml;
+    using Windows.UI.Xaml.Controls;
+    using Models;
+
+    /// <summary>
+    /// DataTemplateSelector для статуса проверки системой и экспертом.
+    /// Шаблоны находятся в App.xaml
+    /// </summary>
     public class StatusDataTemplateSelector : DataTemplateSelector
     {
         protected override DataTemplate SelectTemplateCore(object item, DependencyObject container)
@@ -16,25 +17,22 @@ namespace Client.Helpers.DataTemplateSelectors
                 return null;
             }
 
-            if (item is ExpertStatus)
+            // Статус "корректно"
+            if ((item is ExpertStatus && (ExpertStatus) item == ExpertStatus.Confirmed) || (item is bool && (bool) item))
             {
-                switch ((ExpertStatus)item)
-                {
-                    case ExpertStatus.Confirmed:
-                        return Application.Current.Resources["CorrectStatusDataTemplate"] as DataTemplate;
-                    case ExpertStatus.Unconfirmed:
-                        return Application.Current.Resources["IncorrectStatusDataTemplate"] as DataTemplate;
-                    case ExpertStatus.Pending:
-                        return Application.Current.Resources["PendingStatusDataTemplate"] as DataTemplate;
-                }
-
+                return Application.Current.Resources["CorrectStatusDataTemplate"] as DataTemplate;
             }
 
-            if (item is bool)
+            // Статус "некорректно"
+            if ((item is ExpertStatus && (ExpertStatus) item == ExpertStatus.Unconfirmed) || (item is bool && !(bool) item))
             {
-                return (bool)item
-                    ? Application.Current.Resources["CorrectStatusDataTemplate"] as DataTemplate
-                    : Application.Current.Resources["IncorrectStatusDataTemplate"] as DataTemplate;
+                return Application.Current.Resources["IncorrectStatusDataTemplate"] as DataTemplate;
+            }
+
+            // Статус "на рассмотрении" для статуса проверки экспертом
+            if (item is ExpertStatus && (ExpertStatus) item == ExpertStatus.Pending)
+            {
+                return Application.Current.Resources["PendingStatusDataTemplate"] as DataTemplate;
             }
 
             return null;

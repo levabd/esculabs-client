@@ -19,21 +19,23 @@
             <DataTemplate x:Key="CorrectStatusDataTemplate">
                 <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
                     <BitmapIcon UriSource="ms-appx:///Assets/Icons/Ok.png" Width="20" Height="20" Margin="0,0,10,0" Foreground="#30c80d"/>
-                    <TextBlock Text="Корректно" FontSize="13" FontWeight="Light" Foreground="#30c80d" />
+                    <TextBlock Text="корректно" FontSize="13" FontWeight="Light" Foreground="#30c80d" />
                 </StackPanel>
             </DataTemplate>
 
             <DataTemplate x:Key="IncorrectStatusDataTemplate">
                 <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
                     <BitmapIcon UriSource="ms-appx:///Assets/Icons/Wrong.png" Width="20" Height="20" Margin="0,0,10,0" Foreground="#cf2b2b"/>
-                    <TextBlock Text="Некорректно" FontSize="13" FontWeight="Light" Foreground="#cf2b2b"/>
+                    <TextBlock Text="некорректно" FontSize="13" FontWeight="Light" Foreground="#cf2b2b"/>
                 </StackPanel>
             </DataTemplate>
 
             <DataTemplate x:Key="PendingStatusDataTemplate">
                 <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
-                    <BitmapIcon UriSource="ms-appx:///Assets/Icons/Pending.png" Width="14" Height="18" Margin="0,0,10,0" Foreground="#30c80d"/>
-                    <TextBlock Text="На рассмотрении" FontSize="13" FontWeight="Light" Foreground="#30c80d" />
+                    <Canvas Width="20" Height="20" Margin="0,0,10,0">
+                        <BitmapIcon UriSource="ms-appx:///Assets/Icons/Pending.png" Width="14" Height="18" Margin="3,0,0,0" Foreground="#30c80d"/>
+                    </Canvas>
+                    <TextBlock Text="на рассмотрении" FontSize="13" FontWeight="Light"/>
                 </StackPanel>
             </DataTemplate>
 
