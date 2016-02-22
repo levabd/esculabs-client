@@ -17,23 +17,24 @@
             </Grid.RowDefinitions>
             <ScrollViewer Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Left" >
                 <StackPanel Orientation="Vertical" Padding="30,25,30,0" HorizontalAlignment="Left" VerticalAlignment="Top" >
-                    <TextBox x:Name="NameFilterTextBox" Text="{Binding NameFilter, Mode=TwoWay}" Header="ФИО" Margin="0,0,0,10"/>
-                    <TextBox x:Name="IinFilterTextBox" Text="{Binding IinFilter, Mode=TwoWay}" Header="ИИН" Margin="0,0,0,10"/>
-                    <ComboBox x:Name="FilterModuleComboBox" Header="Модуль" Width="360" Margin="0,0,0,10">
+                    <TextBox Text="{Binding NameFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="ФИО" Margin="0,0,0,10"/>
+                    <TextBox Text="{Binding IinFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="ИИН" Margin="0,0,0,10"/>
+                    <ComboBox Header="Модуль" Width="360" Margin="0,0,0,10">
                         <ComboBoxItem Content="Фибросканирование" IsSelected="True" />
                     </ComboBox>
 
-                    <TextBox x:Name="FibrosisStageFilterTextBox" Text="{Binding FibrosisStageFilter, Mode=TwoWay}" Header="Стадия фиброза" Margin="0,0,0,10"/>
-                    <TextBox x:Name="MedianFilterTextBox" Text="{Binding StiffnessFilter, Mode=TwoWay}" Header="Эластичность (E)" Margin="0,0,0,10"/>
-                    <ComboBox x:Name="SystemStatusFilterComboBox" Header="Статус проверки системой" Width="360" Margin="0,0,0,10">
+                    <TextBox Text="{Binding FibrosisStageFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="Стадия фиброза" Margin="0,0,0,10"/>
+                    <TextBox Text="{Binding StiffnessFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="Эластичность (E)" Margin="0,0,0,10"/>
+                    <ComboBox Header="Статус проверки системой" Width="360" Margin="0,0,0,10" SelectedItem="{Binding SystemStatusFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                         <ComboBoxItem IsSelected="True" Content="любой"/>
-                        <ComboBoxItem x:Name="SystemCorrect" Content="Корректно"/>
-                        <ComboBoxItem x:Name="SystemIncorrect" Content="Некорректно"/>
+                        <ComboBoxItem Content="Корректно"/>
+                        <ComboBoxItem Content="Некорректно"/>
                     </ComboBox>
-                    <ComboBox x:Name="ExpertStatusFilterComboBox" Header="Статус проверки экспертом" Width="360" Margin="0,0,0,10">
+                    <ComboBox Header="Статус проверки экспертом" Width="360" Margin="0,0,0,10" SelectedItem="{Binding ExpertStatusFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                         <ComboBoxItem IsSelected="True" Content="любой"/>
-                        <ComboBoxItem x:Name="ExpertCorrect" Content="Корректно"/>
-                        <ComboBoxItem  x:Name="ExpertIncorrect" Content="Некорректно"/>
+                        <ComboBoxItem Content="Корректно"/>
+                        <ComboBoxItem Content="Некорректно"/>
+                        <ComboBoxItem Content="На рассмотрении"/>
                     </ComboBox>
                 </StackPanel>
             </ScrollViewer>
@@ -51,7 +52,7 @@
         <GridView x:Name="PatientsList" 
                   Margin="625,200,20,0" 
                   Padding="0"
-                  ItemsSource="{Binding Patients}" 
+                  ItemsSource="{Binding FilteredPatients}" 
                   IsItemClickEnabled="True"
                   ItemClick="PatientsList_OnItemClick"
                   ScrollViewer.HorizontalScrollBarVisibility="Disabled"

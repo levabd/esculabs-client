@@ -192,6 +192,47 @@ namespace Client.Models
         [NotMapped]
         public int? CorrectMeasuresCount => Measures?.Count(m => m.Correct);
 
+        [NotMapped]
+        public string FibrosisStage 
+        {
+            get
+            {
+                var med = Med;
+
+                if (med == 0)
+                {
+                    return "Нет данных";
+                }
+
+                if (med > 12.5f)
+                {
+                    return "F4";
+                }
+
+                if (med >= 9.6f)
+                {
+                    return "F3";
+                }
+
+                if (med >= 7.3f)
+                {
+                    return "F2";
+                }
+
+                if (med >= 5.9f)
+                {
+                    return "F1";
+                }
+
+                if (med >= 1.5f)
+                {
+                    return "F0";
+                }
+
+                return "Отсутствует";
+            }
+        }
+
         #endregion
 
         public Examine()

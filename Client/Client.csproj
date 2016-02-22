@@ -115,6 +115,7 @@
     </Compile>
     <Compile Include="Helpers\Base64Converter.cs" />
     <Compile Include="Helpers\Converters\BloodGroupConverter.cs" />
+    <Compile Include="Helpers\Converters\DateConverter.cs" />
     <Compile Include="Helpers\Converters\IqrMedConverter.cs" />
     <Compile Include="Helpers\Converters\Base64ImageConverter.cs" />
     <Compile Include="Helpers\Converters\SystemStatusConverter.cs" />
@@ -168,7 +169,6 @@
     <Compile Include="Repositories\ExaminesRepository.cs" />
     <Compile Include="Repositories\PatientsRepository.cs" />
     <Compile Include="Repositories\UsersRepository.cs" />
-    <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\ExamineViewModel.cs" />
     <Compile Include="ViewModels\PatientViewModel.cs" />
   </ItemGroup>

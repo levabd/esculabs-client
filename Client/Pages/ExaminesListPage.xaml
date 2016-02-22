@@ -12,6 +12,7 @@
     mc:Ignorable="d">
     <Page.Resources>
         <c:FullNameConverter x:Key="FullNameConverter"/>
+        <c:DateConverter x:Key="DateConverter"/>
     </Page.Resources>
     <Grid >
         <controls:PageHeader x:Name="PageHeader"/>
@@ -23,9 +24,9 @@
             </Grid.RowDefinitions>
             <ScrollViewer Grid.Row="0">
                 <StackPanel Orientation="Vertical" Padding="30,25,30,0" HorizontalAlignment="Left" VerticalAlignment="Top" >
-                    <DatePicker x:Name="DateFromFilterDatePicker" Header="Дата от" Margin="0,0,0,25"/>
-                    <DatePicker x:Name="DateToFilterDatePicker" Header="Дата до" Margin="0,0,0,25"/>
-                    <TextBox x:Name="StiffnesFilterTextBox" Header="Эластичность (E)" Margin="0,0,0,25"/>
+                    <DatePicker Date="{Binding DateFromFilter,  Mode=TwoWay}" Header="Дата от" Margin="0,0,0,25"/>
+                    <DatePicker Date="{Binding DateToFilter,  Mode=TwoWay}" Header="Дата до" Margin="0,0,0,25"/>
+                    <TextBox Text="{Binding StiffnessFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="Эластичность (E)" Margin="0,0,0,25"/>
                 </StackPanel>
             </ScrollViewer>
             <Grid Background="#e9e9ea" Grid.Row="1">
@@ -46,7 +47,7 @@
         <GridView  
                   Margin="625,200,20,0" 
                   Padding="0"
-                  ItemsSource="{Binding Examines}" 
+                  ItemsSource="{Binding FilteredExamines}" 
                   ItemClick="ExaminesList_OnItemClick"
                   IsItemClickEnabled="True"
                   ScrollViewer.HorizontalScrollBarVisibility="Disabled"
