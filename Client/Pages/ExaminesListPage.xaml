@@ -12,7 +12,6 @@
     mc:Ignorable="d">
     <Page.Resources>
         <c:FullNameConverter x:Key="FullNameConverter"/>
-        <c:DateConverter x:Key="DateConverter"/>
     </Page.Resources>
     <Grid >
         <controls:PageHeader x:Name="PageHeader"/>
