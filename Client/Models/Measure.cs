@@ -166,10 +166,8 @@ namespace Client.Models
         }
 
         [NotMapped]
-        //public bool Correct => ValidationModeA != VerificationStatus.Incorrect &&
-        //                         ValidationModeM != VerificationStatus.Incorrect &&
-        //                         ValidationElasto != VerificationStatus.Incorrect;
-        public bool Correct => false;
+        public bool Correct => ValidationModeA == 1 && ValidationModeM == 1 && ValidationElasto == 1;
+        //public bool Correct => false;
 
         public event PropertyChangedEventHandler PropertyChanged;
 

@@ -14,7 +14,7 @@
     <Grid>
         <controls:PageHeader x:Name="PageHeader"/>
         <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
-            <Image Stretch="Uniform" Source="{Binding WhiskerPlotImage, Converter={StaticResource Base64ImageConverter}}"/>
+            <Image Stretch="Uniform" MaxHeight="600" MaxWidth="600" Source="{Binding WhiskerPlotImage, Converter={StaticResource Base64ImageConverter}}"/>
         </Grid>
     </Grid>
 </Page>
